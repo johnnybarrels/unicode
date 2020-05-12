@@ -1,0 +1,84 @@
+body {
+  font-family: 'DM Sans', sans-serif;
+}
+
+.login-items > div{
+  /* border: 2px solid white; */
+}
+
+.login-items h1{
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+  font-weight: 100;
+  font-size: 2.5rem;
+  line-height: 4rem;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-top: 80px;
+}
+
+.login-form {
+  height: 650px;
+  width: 400px;
+  border-radius: 5px;
+}
+
+.login-form .btn{
+  width: 100px;
+}
+
+#sign-in-title {
+  font-size: 2.6rem;
+  font-weight: bold;
+  padding-top: 80px;
+}
+
+#main-logo {
+  height: 280px;
+}
+
+#login-inputs {
+  max-width: 75%;
+  margin-top: 70px;
+}
+
+#login-btn {
+  font-family: 'Lato', sans-serif;
+  font-weight: bold;
+  color: white;
+  height: 55px;
+  width: 100%;
+  margin-top: 50px;
+  border-radius: 30px;
+  background-image: linear-gradient(to right, rgba(208,134,233,0.8), #7D64D9);
+  border: none;
+}
+
+#sign-up {
+  margin-top: 90px;
+  font-size: 13px;
+  color: #8593A5;
+}
+
+#sign-up a {
+  color: #6C757D
+}
+
+.empty-150 {
+  height: 120px;
+}
+
+@media (min-width: 200px) {
+  body {
+    background-image: url(../img/pink-purple-rot-90.png);
+    background-color: #323A45;
+    background-repeat: no-repeat;
+  }
+}
+@media (min-width: 992px) {
+  body {
+    background-image: url(../img/pink-purple-small.png);
+    background-color: #323A45;
+    background-repeat: no-repeat;
+  }
+}
