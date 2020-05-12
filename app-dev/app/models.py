@@ -62,6 +62,5 @@ class Question(db.Model):
     def __repr__(self):
         return f'<Question {self.body}>'
 
-# TODO: Create the rest of the tables (classes)
-#   eg. 'Course' and 'Test'
+
 
