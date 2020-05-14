@@ -14,9 +14,9 @@ CourseName = Data_Structures_and_Algorithms
 ----------------------------------
 
 Course_ID  = CITS1001
-CourseName = Software_Enginnering_with_Java
+CourseName = Software_Engineering_with_Java
 
 ----------------------------------
 
 Course_ID  = CITS4403
-CourseName = Computationa_Modelling
+CourseName = Computational_Modelling
