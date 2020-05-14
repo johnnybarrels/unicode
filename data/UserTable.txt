@@ -1,0 +1,232 @@
+
+UserTable:
+
+----------------------------------
+
+ID         = 01
+UserEmail  = tim.french@agile.com
+UserName   = tim_french01
+Password   = pswdtim01
+FirstName  = Tim
+LastName   = French
+IsAdmin    = yes
+Course_ID  = ALL*
+
+----------------------------------
+
+ID         = 02
+UserEmail  = max.sutton@example.com
+UserName   = max_sutton02
+Password   = pswdmax02
+FirstName  = Max
+LastName   = Sutton
+IsAdmin    = no
+Course_ID  = CITS1401
+
+----------------------------------
+ID         = 03
+UserEmail  = jerry.cox@example.com
+UserName   = jerry_cox03
+Password   = pswdjerry03
+FirstName  = Jerry
+LastName   = Cox
+IsAdmin    = no
+Course_ID  = CITS1401
+
+----------------------------------
+
+ID         = 04
+UserEmail  = landon.dean@example.com
+UserName   = landon_dean
+Password   = pswdlandon04
+FirstName  = Landon
+LastName   = Dean
+IsAdmin    = No
+Course_ID  = CITS1401
+
+----------------------------------
+
+ID         = 05
+UserEmail  = ronald.vasquez@example.com
+UserName   = ronald_vasquez05
+Password   = pswdronald05
+FirstName  = Ronald
+LastName   = Vasquez
+IsAdmin    = no
+Course_ID  = CITS1401
+
+----------------------------------
+
+ID         = 06
+UserEmail  = joann.rose@example.com
+UserName   = joann_rose06
+Password   = pswdjoann06
+FirstName  = Joanne
+LastName   = Rose
+IsAdmin    = no
+Course_ID  = CITS1401
+
+----------------------------------
+
+ID         = 07
+UserEmail  = ryan.griffin@example.com
+UserName   = ryan_griffin07
+Password   = pswdryan07
+FirstName  = Ryan
+LastName   = Griffin
+IsAdmin    = no
+Course_ID  = CITS2200
+
+----------------------------------
+
+ID         = 08
+UserEmail  = andrea.gonzales@example.com
+UserName   = andrea_gonzalez08
+Password   = pswdandrea08
+FirstName  = Andrea
+LastName   = Gonzalez
+IsAdmin    = no
+Course_ID  = CITS2200
+
+----------------------------------
+
+ID         = 09
+UserEmail  = glen.robertson@example.com
+UserName   = glen_robertson09
+Password   = pswdrobertson09
+FirstName  = Glen
+LastName   = Robertson
+IsAdmin    = no
+Course_ID  = CITS2200
+
+----------------------------------
+
+ID         = 10
+UserEmail  = don.long@example.com
+UserName   = don_long10
+Password   = pswdon10
+FirstName  = Don
+LastName   = Long
+IsAdmin    = no
+Course_ID  = CITS2200
+
+----------------------------------
+
+ID         = 11
+UserEmail  = monica.lawrence@example.com
+UserName   = monica_lawrence11
+Password   = pswdmonica11
+FirstName  = Monica
+LastName   = Lawrence
+IsAdmin    = no
+Course_ID  = CITS2200
+
+----------------------------------
+
+ID         = 12
+UserEmail  = robin.porter@example.com
+UserName   = robin_porter12
+Password   = pswdrobin12
+FirstName  = Robin
+LastName   = Porter
+IsAdmin    = no
+Course_ID  = CITS1001
+
+----------------------------------
+
+ID         = 13
+UserEmail  = isabel.prescott@example.com
+UserName   = isabel_prescott13
+Password   = pswdisabel13
+FirstName  = Isabel
+LastName   = Prescott
+IsAdmin    = no
+Course_ID  = CITS1001
+
+----------------------------------
+
+ID         = 14
+UserEmail  = victor.richardson@example.com
+UserName   = victor_richardson14
+Password   = pswdvictor14
+FirstName  = Victor
+LastName   = Richardson
+IsAdmin    = no
+Course_ID  = CITS1001
+
+----------------------------------
+
+ID         = 15
+UserEmail  = jennifer.boyd@example.com
+UserName   = jennifer_boyd15
+Password   = pswdjennifer15
+Firstname  = Jennifer
+LastName   = Boyd
+IsAdmin    = no
+Course_ID  = CITS1001
+
+----------------------------------
+
+ID         = 16
+UserEmail  = lawrence.chavez@example.com
+UserName   = lawrence_chavez16
+Password   = pswdlawrence16
+FirstName  = Lawrence
+LastName   = Chavez
+IsAdmin    = no
+Course_ID  = CITS1001
+
+----------------------------------
+
+ID         = 17
+UserEmail  = tamara.kuhn@example.com
+UserName   = tamara_kuhn17
+Password   = pswdtamara17
+FirstName  = Tamara
+LastName   = Kuhn
+IsAdmin    = no
+Course_ID  = CITS4403
+
+----------------------------------
+
+ID         = 18
+UserEmail  = ray.torres@example.com
+UserName   = ray_torres18
+Password   = pswdray18
+FirstName  = Ray
+LastName   = Torres
+IsAdmin    = no
+Course_ID  = CITS4403
+
+----------------------------------
+
+ID         = 19
+UserEmail  = brad.palmer@example.com
+UserName   = brad_palmer19
+Password   = pswdbrad19
+FirstName  = Brad
+LastName   = Palmer
+IsAdmin    = no
+Course_ID  = CITS4403
+
+----------------------------------
+
+ID         = 20
+UserEmail  = mike.bailey@example.com
+UserName   = mike_bailey20
+Password   = pswdmike20
+FirstName  = Mike
+LastName   = Bailey
+IsAdmin    = no
+Course_ID  = CITS4403
+
+----------------------------------
+
+ID         = 21
+UserEmail  = kim.newman@example.com
+UserName   = kim_newman21
+Password   = pswdkim21
+Firstname  = Kim
+LastName   = Newman
+IsAdmin    = no
+Course_ID  = CITS4403

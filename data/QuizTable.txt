@@ -1,0 +1,28 @@
+
+QuizTable:
+
+----------------------------------
+
+Quiz_ID        = 00001
+QuizName       = Final_Exam
+(fk)Course_ID  = CITS1401
+
+----------------------------------
+
+Quiz_ID        = 00002
+QuizName       = Final_Exam
+(fk)Course_ID  = CITS2200
+
+----------------------------------
+
+Quiz_ID        = 00003
+QuizName       = Final_Exam
+(fk)Course_ID  = CITS1001
+
+----------------------------------
+
+Quiz_ID        = 00004
+QuizName       = Final_Exam
+(fk)Course_ID  = CITS4403
+
+----------------------------------

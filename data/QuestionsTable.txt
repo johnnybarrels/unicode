@@ -1,0 +1,92 @@
+QuestionsTable:
+
+--------------------------------------------------------------
+
+Question_ID    = 001
+Question       = What would be the output of this function?
+
+		def firstRepeatedChar(str):
+
+		    h = {}
+		    
+		    for ch in str:
+    		        if ch in h:
+        	            return ch
+			else:
+			    h[ch] = 0
+
+		    return'\0'
+
+		print(firstRepeatedChar("practice")
+
+Answer         = c
+(fk)Quiz_ID    = 00001
+Marks          = 20
+
+------------------------------------------------------------
+
+Question_ID    = 002
+Question       = Consider the following rather impenetrable (but correct) Python code, taken from a function. What does method os.path.exists do?
+
+		if os.path.exists(f):
+		    return [c for c in open(f, 'r').read().split('\n') if c != " "]
+
+Answer         = Test if file exists
+(fk)Quiz_ID    = 00001
+Marks          = 20
+
+------------------------------------------------------------
+
+Question_ID    = 003
+Question       = What would be the output of this function?
+
+		# Function to count total set bits 
+		def bitsoncount(x): 
+		    return bin(x).count('1') 
+		
+		# Function to find the count of numbers 
+		def find_count(arr, k) : 
+
+		    ans = 0
+	            for i in arr: 
+
+		        x = bitsoncount(i) 
+
+		        if (x % k == 0) : 
+			    ans += 1
+		    return ans 
+
+		# Driver code 
+		arr = [ 12, 345, 2, 68, 7896 ] 
+		K = 2
+		print(find_count(arr, K)) 
+
+
+Answer         = 3
+(fk)Quiz_ID    = 00001
+Marks          = 20
+
+-----------------------------------------------------------
+
+Question_ID    = 004
+Question       = What is called when a function is defined inside a class?
+Answer         = Method
+(fk)Quiz_ID    = 00001
+Marks          = 10
+
+-----------------------------------------------------------
+
+Question_ID    = 005
+Question       = What is the output of the following program
+
+		i = 0
+		while i < 3:
+		    print i
+		else:
+		    print 0
+
+Answer         = 0120
+(fk)Quiz_ID    = 00001
+Marks          = 10
+
+
