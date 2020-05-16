@@ -1,10 +1,10 @@
 
 :root {
+  --unicode-main-text-colour: #8593A5;
   --unicode-dark-grey: #323A45;
   --unicode-mid-grey1: #6C757D;
-  --unicode-mid-grey2: #8593A5;
   --unicode-mid-grey3: #98A6AC;
-  --unicode-off-white: #F9FAFD;
+  --unicode-pale: #F9FAFD;
   --unicode-pale-purple: #DEDFFC;
   --unicode-purple: #727DF5;
   --unicode-yellow: #FFBC00;
@@ -13,20 +13,24 @@
   --unicode-blue: #39B0D1;
 }
 
+html, body {
+  min-height: 100% !important;
+  height: 100%;
+}
 
 body {
 	font-family: 'Avenir Next', Avenir, 'Helvetica Neue', 'Lato', 'Segoe UI', Helvetica, Arial, sans-serif;
-	margin: 0;
-	color: var(--main-txt-colour);
-	background: var(--main-bg-colour);
-	background-color: #F9FAFD;
+  margin: 0;
+  color: var(--unicode-main-text-colour);
+	background-color: var(--unicode-pale);
 	-webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 .sidenav {
 	height: 100%;
-	width: 385px;
+  width: 23%;
+  min-width: 318px;
 	position: fixed;
 	z-index: 1;
 	top: 0;
@@ -37,9 +41,9 @@ body {
 }
 	
 .sidenav a {
-	padding-bottom: 30px;
+	padding-top: 30px;
 	text-decoration: none;
-	font-family: 'Cabin';
+	font-family: 'Cabin', sans-serif;
 	font-size: 16px;
 	line-height: 19px;
 	color: #8593A5;
@@ -50,11 +54,7 @@ body {
 	color: #FFFFFF;
 }
 
-#logo-horiz {
-  z-index: 1
-}
-
-a.nav-parent {
+.nav-parent {
 	padding-top: 50px;
 	letter-spacing: 2px;
 	text-transform: uppercase;
@@ -62,18 +62,27 @@ a.nav-parent {
 }
 
 a.nav-child {
-	margin-left: 10px;
+  margin-left: 10px;
+  font-weight: 500;
+  letter-spacing: 1px;
 }
 
-#arrow {
+#nav-indicator {
 	float: right;
-	margin-right: 5px;
+  margin-right: 5px;
+  line-height: 19px;
+}
+
+#new-course {
+  /* padding-bottom: 0px; */
+  display: inline;
 }
 
 .topbar {
+  position: sticky;
 	top: 0;
 	background-color: #FFFFFF;
-  margin-left: 385px;
+  margin-left: 23%;
 	height: 60px;
 	overflow: hidden;
 	display: block;
@@ -97,12 +106,29 @@ a.nav-child {
 }
 
 .content-container {
-  margin-left: 385px;
+  margin-left: 23%;
+  margin-right: 0;
+  z-index: 1;
   /* border: 2px solid black; */
 }
 
 .portal-msg {
   font-family: 'Cabin', sans-serif;
   text-align: center;
-  color: ;
+  color: var(--unicode-mid-grey2);
+}
+
+.purple-btn {
+  background-color: var(--unicode-purple);
+  color: white;
+  font-weight: 600;
+}
+
+a .purple-btn:hover {
+  background-color: #8790F5;
+  color: white;
+}
+
+.FUCK *{
+  /* border: 2px solid black; */
 }

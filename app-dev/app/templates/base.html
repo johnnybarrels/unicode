@@ -30,6 +30,9 @@
   <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;500&family=Quicksand:wght@400&display=swap"
     rel="stylesheet">
 
+  <!-- Material Darker icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
   <!-- FontAwesome icons -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 
@@ -44,14 +47,19 @@
   <div class="sidenav">
     <img id="logo-horiz" src="{{ url_for('static', filename='img/UniCode-colour-horiz.png') }}" alt="Logo"
       style="width:80%; display: block; margin-left: auto; margin-right: auto">
-    <a class="nav-parent" href="#">Courses
-      <i class="fas fa-plus-circle"></i>
-    </a>
+    <div class="nav-parent">Courses
+      <a id="new-course" href="#">
+        <i id="nav-indicator" class="fas fa-plus-circle"></i>
+      </a>
+    </div>
     <!-- Placeholders until can get from database -->
-    <a class="nav-child" href="#">Introduction to Python <span id="arrow">></span></a>
-    <a class="nav-child" href="#">Data Structures & Algorithms <span id="arrow">></span></a>
-    <a class="nav-child" href="#">Software Engineering in Java <span id="arrow">></span></a>
-    <a class="nav-parent" href="#">Results</a>
+    <a class="nav-child" href="#">Introduction to Python <span id="nav-indicator"
+        class="material-icons">chevron_right</span></a>
+    <a class="nav-child" href="#">Data Structures & Algorithms
+      <span id="nav-indicator" class="material-icons">chevron_right</span></a>
+    <a class="nav-child" href="#">Software Engineering in Java <span id="nav-indicator"
+        class="material-icons">chevron_right</span></a>
+    <div class="nav-parent mt-4">Results</div>
   </div>
 
   <div class="topbar">
@@ -62,7 +70,7 @@
     </p>
   </div>
 
-  <div class="content-container row container p-3">
+  <div class="content-container h-100 p-5">
     {% block content %} {% endblock %}
   </div>
 
