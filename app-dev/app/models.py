@@ -1,6 +1,32 @@
 from app import db
 
 
+class Result(db.Model):
+
+    result_id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, nullable = False)
+    test_id = db.Column(db.Integer, nullable = False)
+    score = db.Column(db.Integer)
+    marked_yesno = db.Column(db.Integer)
+
+    def __repr__(self):
+        return '<User %r %r %r>' % self.result_id
+
+"""
+CREATE TABLE result(
+    result_id integer NOT NULL,
+    user_id integer,
+    test_id integer,
+    score integer,
+    marked_yesno integer,
+    PRIMARY KEY(result_id),
+    FOREIGN KEY(user_id) REFERENCES user(user_id)
+    ON DELETE SET NULL ON UPDATE NO ACTION,
+    FOREIGN KEY(test_id) REFERENCES test(test_id)
+    ON DELETE CASCADE ON UPDATE NO ACTION
+);
+"""
+
 # This is where we build our relational database
 class User(db.Model):
 
