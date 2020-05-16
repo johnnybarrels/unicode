@@ -19,4 +19,4 @@ CourseName = Software_Enginnering_with_Java
 ----------------------------------
 
 Course_ID  = CITS4403
-CourseName = Computationa_Modelling
+CourseName = Computational_Modelling
