@@ -1,4 +1,19 @@
 
+:root {
+  --unicode-dark-grey: #323A45;
+  --unicode-mid-grey1: #6C757D;
+  --unicode-mid-grey2: #8593A5;
+  --unicode-mid-grey3: #98A6AC;
+  --unicode-off-white: #F9FAFD;
+  --unicode-pale-purple: #DEDFFC;
+  --unicode-purple: #727DF5;
+  --unicode-yellow: #FFBC00;
+  --unicode-red: #F95C7C;
+  --unicode-green: #0BCF97;
+  --unicode-blue: #39B0D1;
+}
+
+
 body {
 	font-family: 'Avenir Next', Avenir, 'Helvetica Neue', 'Lato', 'Segoe UI', Helvetica, Arial, sans-serif;
 	margin: 0;
@@ -6,12 +21,12 @@ body {
 	background: var(--main-bg-colour);
 	background-color: #F9FAFD;
 	-webkit-font-smoothing: antialiased;
-  	-moz-osx-font-smoothing: grayscale;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .sidenav {
 	height: 100%;
-	width: 23%;
+	width: 385px;
 	position: fixed;
 	z-index: 1;
 	top: 0;
@@ -35,6 +50,10 @@ body {
 	color: #FFFFFF;
 }
 
+#logo-horiz {
+  z-index: 1
+}
+
 a.nav-parent {
 	padding-top: 50px;
 	letter-spacing: 2px;
@@ -54,18 +73,16 @@ a.nav-child {
 .topbar {
 	top: 0;
 	background-color: #FFFFFF;
-	left: 23%;
+  margin-left: 385px;
 	height: 60px;
 	overflow: hidden;
-	position: fixed;
-	width: 77%;
 	display: block;
 	padding-right: 25px;
 }
 
 #username {
 	text-align: right;
-	color: #8593A5;
+  color: #8593A5;
 	font-family: 'Cabin';
 	font-size: 16px;
 	line-height: 60px;
@@ -77,4 +94,15 @@ a.nav-child {
 
 .fa-plus-circle {
 	float: right;
+}
+
+.content-container {
+  margin-left: 385px;
+  /* border: 2px solid black; */
+}
+
+.portal-msg {
+  font-family: 'Cabin', sans-serif;
+  text-align: center;
+  color: ;
 }
