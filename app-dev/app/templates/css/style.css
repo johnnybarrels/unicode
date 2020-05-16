@@ -4,6 +4,7 @@ body {
 	margin: 0;
 	color: var(--main-txt-colour);
 	background: var(--main-bg-colour);
+	background-color: #F9FAFD;
 	-webkit-font-smoothing: antialiased;
   	-moz-osx-font-smoothing: grayscale;
 }
@@ -17,10 +18,10 @@ body {
 	left: 0;
 	background-color: #323A45;
 	overflow-x: hidden;
-	padding: 100px 20px 0px 30px;
-  }
+	padding: 20px 20px 0px 30px;
+}
 	
-  .sidenav a {
+.sidenav a {
 	padding-bottom: 30px;
 	text-decoration: none;
 	font-family: 'Cabin';
@@ -28,31 +29,30 @@ body {
 	line-height: 19px;
 	color: #8593A5;
 	display: block;
-  }
-  
-  .sidenav a:hover {
+}
+
+.sidenav a:hover {
 	color: #FFFFFF;
-  }
-  
-  a.nav-parent {
-	padding-top: 30px;
+}
+
+a.nav-parent {
+	padding-top: 50px;
 	letter-spacing: 2px;
 	text-transform: uppercase;
 	font-weight: bold;
-  
-  }
-  
-  a.nav-child {
+}
+
+a.nav-child {
 	margin-left: 10px;
-  }
-  
-  #arrow {
-	  float: right;
-	  margin-right: 5px;
-  }
-  
-  
-  .topbar {
+}
+
+#arrow {
+	float: right;
+	margin-right: 5px;
+}
+
+.topbar {
+	top: 0;
 	background-color: #FFFFFF;
 	left: 23%;
 	height: 60px;
@@ -61,21 +61,20 @@ body {
 	width: 77%;
 	display: block;
 	padding-right: 25px;
-  }
-  
-  #username {
+}
+
+#username {
 	text-align: right;
 	color: #8593A5;
 	font-family: 'Cabin';
 	font-size: 16px;
 	line-height: 60px;
-  }
-  
-  .fas {
+}
+
+.fas {
 	margin-left: 10px;
-  }
-  
-  .fa-plus-circle {
+}
+
+.fa-plus-circle {
 	float: right;
-  }
-  
+}
