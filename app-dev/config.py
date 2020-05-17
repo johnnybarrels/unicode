@@ -13,3 +13,4 @@ class Config:
 
     SQLALCHEMY_ECHO = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
+    
