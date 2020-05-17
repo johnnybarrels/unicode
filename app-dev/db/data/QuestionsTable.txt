@@ -23,6 +23,7 @@ Question_Content    =
 Answer         = c
 (fk)Quiz_ID    = 00001
 Marks          = 20
+Question_Group = output
 
 ------------------------------------------------------------
 
@@ -36,6 +37,7 @@ Question_Content    =
 Answer         = Test if file exists
 (fk)Quiz_ID    = 00001
 Marks          = 20
+Question_Group = short-answer
 
 ------------------------------------------------------------
 
@@ -68,6 +70,7 @@ Question_Content    =
 Answer         = 3
 (fk)Quiz_ID    = 00001
 Marks          = 20
+Question_Group = output
 
 -----------------------------------------------------------
 
@@ -76,6 +79,7 @@ Question       = What is called when a function is defined inside a class?
 Answer         = Method
 (fk)Quiz_ID    = 00001
 Marks          = 10
+Question_Group = short-answer
 
 -----------------------------------------------------------
 
@@ -89,8 +93,15 @@ Question_Content    =
 		            else:
 		                print 0
 
+<<<<<<< HEAD:data/QuestionsTable.txt
 Answer              = 0120
 (fk)Quiz_ID         = 00001
 Marks               = 10
 
+=======
+Answer         = 0120
+(fk)Quiz_ID    = 00001
+Marks          = 10
+Question_Group = output
+>>>>>>> 36e59aba435ad9a3528dd05f3a213726de208743:app-dev/db/data/QuestionsTable.txt
 

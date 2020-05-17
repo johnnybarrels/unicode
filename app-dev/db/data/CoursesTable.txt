@@ -19,4 +19,8 @@ CourseName = Software_Enginnering_with_Java
 ----------------------------------
 
 Course_ID  = CITS4403
+<<<<<<< HEAD:app-dev/db/data/CoursesTable.txt
+CourseName = Computationa_Modelling
+=======
 CourseName = Computational_Modelling
+>>>>>>> cesar:data/CoursesTable.txt

@@ -3,14 +3,9 @@ from app import app
 from app.forms import LoginForm
 
 
-@app.route('/')
-@app.route('/index')
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 def index():
-    return render_template('index.html', title='Home')
-
-
-@app.route('/login', methods=['GET', 'POST'])
-def login():
     form = LoginForm()
 
     if form.validate_on_submit():
@@ -18,4 +13,10 @@ def login():
             f'Login requested for user {form.email.data}')
         return redirect('/index')
 
-    return render_template('login.html', title='Sign in', form=form)
+    return render_template('index.html', form=form)
+
+
+@app.route('/admin')
+def admin_portal():
+
+    return render_template('admin.html')
