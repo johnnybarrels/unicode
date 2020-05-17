@@ -1,22 +1,31 @@
-from flask import render_template, flash, redirect
+from flask import render_template, flash, redirect, url_for
 from app import app
 from app.forms import LoginForm
+from app.models import User
+from flask_login import current_user, login_user
+from app.controllers import UserController
 
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
-def index():
-    form = LoginForm()
+def login():
+    if not current_user.is_authenticated:  # if they're not already logged in
+        return UserController.login()
 
-    if form.validate_on_submit():
-        flash(
-            f'Login requested for user {form.email.data}')
-        return redirect('/index')
+    else:  # if they ARE already logged in
+        return UserController.show_portal()
 
-    return render_template('index.html', form=form)
+
+@app.route('/logout')
+def logout():
+    return UserController.logout()
 
 
 @app.route('/admin')
 def admin_portal():
+    return render_template('admin.html', title='Admin Portal')
 
-    return render_template('admin.html')
+
+@app.route('/student')
+def student_portal():
+    return render_template('student.html', title='Student Portal')
