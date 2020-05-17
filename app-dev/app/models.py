@@ -36,7 +36,7 @@ class User(db.Model):
     def __repr__(self):   
         return '<User: {}>'.format(self.email)
  
-class Course(db.model):
+class Course(db.Model):
     course_id = db.Column(db.Integer, primary_key=True, nullable=False)
     course_name = db.Column(db.String(64))
     tests = db.relationship('Test', backref='course', lazy=True)
@@ -44,10 +44,10 @@ class Course(db.model):
     def __repr__(self):
         return '<Course: {}>'.format(self.course_name)
 
-class Test(db.model):
+class Test(db.Model):
     test_id = db.Column(db.Integer, primary_key=True, nullable=False)
     test_name = db.Column(db.String(64), nullable=False)
-    course_id = db.Column(db.Integer, db.ForeignKey(course.course_id))
+    course_id = db.Column(db.Integer, db.ForeignKey(Course.course_id))
     questions = db.relationship('Question', backref='test', lazy=True)
 
     def __repr__(self):
