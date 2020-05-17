@@ -1,4 +1,3 @@
-from app import routes, models
 from flask import Flask
 from config import Config
 from flask_sqlalchemy import SQLAlchemy
@@ -13,3 +12,5 @@ def create_app():
 
     with app.app_context():
         init_db()
+
+from app import routes, models
