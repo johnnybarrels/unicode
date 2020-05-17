@@ -1,6 +1,59 @@
 from app import db
 
 
+class Result(db.Model):
+
+    result_id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.user_id'), nullable = False)
+    test_id = db.Column(db.Integer, db.ForeignKey('test.test_id'), nullable = False)
+    score = db.Column(db.Integer)
+    marked_yesno = db.Column(db.Integer)
+
+    def __repr__(self):
+        return '<Result {result}, User {user}, Test {test}, Score {score}>, Marked? {marked}'.format(result = self.result_id, user = self.user_id, test = self.test_id, score = self.score,             marked = self.marked_yesno)
+
+
+class Question(db.Model):
+    question_id = db.Column(db.Integer, primary_key=True, nullable=False)
+    question_string = db.Column(db.String(256), nullable=False)
+    answer = db.Column(db.String(256), nullable=False)
+    test_id = db.Column(db.Integer, db.ForeignKey('test.test_id'))
+    mark_alloc = db.Column(db.Integer)
+    question_group = db.Column(db.Integer)
+
+    def __repr__(self):
+        return '<Question: {}>'.format(self.question_string)
+
+class User(db.Model):
+    user_id = db.Column(db.Integer, primary_key=True, nullable=False)
+    email = db.Column(db.String(64))
+    password_hash = db.Column(db.String(32))
+    first_name = db.Column(db.String(32))
+    last_name = db.Column(db.String(32))
+    admin_yesno = db.Column(db.Integer)
+    user_courses = db.relationship('Course', backref='enrolment', lazy=True)
+
+    def __repr__(self):   
+        return '<User: {}>'.format(self.email)
+ 
+class Course(db.model):
+    course_id = db.Column(db.Integer, primary_key=True, nullable=False)
+    course_name = db.Column(db.String(64))
+    tests = db.relationship('Test', backref='course', lazy=True)
+    
+    def __repr__(self):
+        return '<Course: {}>'.format(self.course_name)
+
+class Test(db.model):
+    test_id = db.Column(db.Integer, primary_key=True, nullable=False)
+    test_name = db.Column(db.String(64), nullable=False)
+    course_id = db.Column(db.Integer, db.ForeignKey(course.course_id))
+    questions = db.relationship('Question', backref='test', lazy=True)
+
+    def __repr__(self):
+        return '<Test: {}>'.format(self.test_name)
+
+"""---------------------------------------------------------------------------------
 # This is where we build our relational database
 class User(db.Model):
 
@@ -19,7 +72,6 @@ class User(db.Model):
 
 
 class Course(db.Model):
-
     # Initialising basic course info
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(128), index=True, unique=True)
@@ -61,6 +113,4 @@ class Question(db.Model):
     # Printing out which Course is current
     def __repr__(self):
         return f'<Question {self.body}>'
-
-
-
+---------------------------------------------------------------------------------------"""
