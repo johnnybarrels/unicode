@@ -2,15 +2,22 @@ from app import db
 from flask_login import UserMixin
 
 
+enrolments = db.Table('enrolments',
+    db.Column('user_id', db.Integer, db.ForeignKey('users.user_id'), primary_key=True),
+    db.Column('course_id', db.Integer, db.ForeignKey('courses.course_id'), primary_key=True)
+)
+
+
 class User(UserMixin, db.Model):
     __tablename__ = 'users'
     user_id = db.Column(db.Integer, primary_key=True, nullable=False)
-    email = db.Column(db.String(64))
+    email = db.Column(db.String(64), index=True, unique=True)
     password_hash = db.Column(db.String(32))
     first_name = db.Column(db.String(32))
     last_name = db.Column(db.String(32))
     is_admin = db.Column(db.Boolean, nullable=False)
-    user_courses = db.relationship('Course', backref='enrolment', lazy=True)
+    courses = db.relationship('Course', secondary=enrolments, lazy='subquery',
+                              backref=db.backref('users', lazy=True))
 
     def __repr__(self):   
         return '<User: {}>'.format(self.email)
@@ -20,6 +27,7 @@ class Course(db.Model):
     __tablename__ = 'courses'
     course_id = db.Column(db.Integer, primary_key=True, nullable=False)
     course_name = db.Column(db.String(64))
+    # admin_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     tests = db.relationship('Test', backref='course', lazy=True)
 
     def __repr__(self):
