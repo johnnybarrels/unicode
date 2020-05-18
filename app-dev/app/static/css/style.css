@@ -135,6 +135,14 @@ a .purple-btn:hover {
   color: white;
 }
 
-.FUCK *{
-  /* border: 2px solid black; */
+.page-heading {
+  font-family: 'Cabin';
+  font-size: 18px;
+  color: var(--unicode-mid-grey1);
+  text-align: start;
+}
+
+.test {
+  height: 150px;
+  background-color: #FFFFFF;
 }

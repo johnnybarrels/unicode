@@ -63,7 +63,7 @@
 
       {% if current_user.courses %}
         {% for course in current_user.courses %}
-          <a class="nav-child" href="{{ course.id }}">{{ course.course_name }}<span id="nav-indicator"
+          <a class="nav-child" href="cits{{ course.id }}">{{ course.course_name }}<span id="nav-indicator"
             class="material-icons">chevron_right</span></a>
         {% endfor %}
       {% endif %}

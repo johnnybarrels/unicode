@@ -29,3 +29,8 @@ def admin_portal():
 @app.route('/student')
 def student_portal():
     return render_template('student.html', title='Student Portal')
+
+
+@app.route('/cits5504')
+def cits5504():
+    return render_template('cits5504.html', title="Agile Web Development")
