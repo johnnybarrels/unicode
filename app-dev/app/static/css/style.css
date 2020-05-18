@@ -25,6 +25,29 @@ body {
 	background-color: var(--unicode-pale);
 	-webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+}
+
+body > *:not(.sidenav):not(.topbar) {
+
+  -webkit-transition: 0.3s -webkit-filter linear;
+  -o-transition: 0.3s -o-filter linear;
+  -moz-transition: 0.3 -moz-filter linear;
+  -ms-transition: 0.3 -moz-filter linear;
+}
+
+body.active > *:not(.sidenav):not(.topbar) {
+  -webkit-filter: blur(3px);
+  -webkit-transition: 0.3s -webkit-filter linear;
+
+  -o-filter: blur(3px);
+  -o-transition: 0.3s -o-filter linear;
+
+  -moz-filter: blur(3px);
+  -moz-transition: 0.3 -moz-filter linear;
+
+  -ms-filter: blur(3px);
+  -ms-transition: 0.3 -moz-filter linear;
 }
 
 .sidenav {
@@ -111,9 +134,25 @@ a.nav-child {
 
 .content-container {
   margin-right: 0;
+  height: 100%;
   z-index: 1;
   /* border: 2px solid black; */
+  background-color: var(--unicode-pale);
+  transition: background-color 0.5s linear;
 }
+
+
+.create-test {
+    background-color: white;
+    width: 40%;
+    height: 60%;
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    /*transform: translate(-50%, -50%);*/
+    display:none;
+}
+
 
 .portal-msg {
   text-align: center;
@@ -149,6 +188,12 @@ a .purple-btn:hover {
   background-color: white;
   margin: 0 auto;
   padding: 15px 15px;
+    
+  transition: background-color 0.5s linear;
+}
+
+.test.active {
+  background-color: rgb(0, 0, 0, 0.3);
 }
 
 .unit-details {

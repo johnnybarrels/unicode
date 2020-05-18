@@ -39,6 +39,7 @@
   <!-- Our own js and css -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <script src="{{ url_for('static', filename='js/unicode.js') }}"></script>
+  <script src="{{ url_for('static', filename='js/createTestPopup.js') }}"></script>
 </head>
 
 <body>
@@ -73,11 +74,10 @@
       <!-- <i class="fas fa-chevron-circle-down"></i> -->
     </p>
   </div>
-
+  
   <div class="content-container h-100 p-5">
     {% block content %} {% endblock %}
   </div>
-
 
   <!-- <hr> -->
   <!-- {% with messages = get_flashed_messages() %}
