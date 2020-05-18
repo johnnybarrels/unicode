@@ -1,10 +1,12 @@
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for, session
 from app import app
 from app.forms import LoginForm
-from app.models import User
-from flask_login import current_user, login_user
-from app.controllers import UserController
+from app.models import User, Course, Test, Result
+from flask_login import current_user, login_user, login_required
+from app.controllers import UserController  # , CourseController
 
+
+# session.permanent = True  # Allow control over session timeouts
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
@@ -31,6 +33,12 @@ def student_portal():
     return render_template('student.html', title='Student Portal')
 
 
-@app.route('/cits5504')
-def cits5504():
-    return render_template('cits5504.html', title="Agile Web Development")
+@app.route('/admin/<course_id>')
+@login_required
+def course_view(course_id):
+    course = Course.query.filter_by(id=course_id).first()
+    tests = Test.query.filter_by(course_id=course_id)
+    return render_template('admin-course.html', course=course, tests=tests)
+    # return CourseController().show_tests()
+
+# @app.route('/')

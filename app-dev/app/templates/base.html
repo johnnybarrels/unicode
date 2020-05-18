@@ -38,7 +38,7 @@
 
   <!-- Our own js and css -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-  <!-- <script src="js/main.js"></script> -->
+  <script src="{{ url_for('static', filename='js/unicode.js') }}"></script>
 </head>
 
 <body>
@@ -48,9 +48,11 @@
     <img id="logo-horiz" src="{{ url_for('static', filename='img/UniCode-colour-horiz.png') }}" alt="Logo"
       style="width:80%; display: block; margin-left: auto; margin-right: auto">
     <div class="nav-parent">Courses
+      {% if current_user.is_admin %}
       <a id="new-course" href="#">
         <i id="nav-indicator" class="fas fa-plus-circle"></i>
       </a>
+      {% endif %}
     </div>
     <!-- Placeholders until can get from database -->
     <!-- <a class="nav-child" href="#">Introduction to Python <span id="nav-indicator"
@@ -61,12 +63,12 @@
         class="material-icons">chevron_right</span></a> -->
 
 
-      {% if current_user.courses %}
-        {% for course in current_user.courses %}
-          <a class="nav-child" href="cits{{ course.id }}">{{ course.course_name }}<span id="nav-indicator"
-            class="material-icons">chevron_right</span></a>
-        {% endfor %}
-      {% endif %}
+    {% if current_user.courses %}
+    {% for course in current_user.courses %}
+    <a class="nav-child" href="{{ url_for('course_view', course_id=course.id) }}">{{ course.name }}<span
+        id="nav-indicator" class="material-icons">chevron_right</span></a>
+    {% endfor %}
+    {% endif %}
 
     <div class="nav-parent mt-4">Results</div>
   </div>
@@ -74,7 +76,8 @@
   <div class="topbar">
     <p id="username">
       {{ current_user.first_name }} {{ current_user.last_name }}
-      <a id="logout-icon" href="{{ (url_for('logout')) }}" style="color: #8593A5;"><i class="fas fa-sign-out-alt"></i></a>
+      <a id="logout-icon" href="{{ (url_for('logout')) }}" style="color: #8593A5;"><i
+          class="fas fa-sign-out-alt"></i></a>
       <!-- <i class="fas fa-chevron-circle-down"></i> -->
     </p>
   </div>

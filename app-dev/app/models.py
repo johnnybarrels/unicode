@@ -23,7 +23,7 @@ class User(UserMixin, db.Model):
     last_name = db.Column(db.String(32))
     is_admin = db.Column(db.Boolean, nullable=False)
     courses = db.relationship('Course', secondary=enrolments, lazy='subquery',
-                              backref=db.backref('users', lazy=True))
+                               backref=db.backref('users', lazy=True))
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -38,23 +38,24 @@ class User(UserMixin, db.Model):
 class Course(db.Model):
     __tablename__ = 'courses'
     id = db.Column(db.Integer, primary_key=True, nullable=False)
-    course_name = db.Column(db.String(64))
+    name = db.Column(db.String(64))
+    course_code = db.Column(db.String(32))
     # admin_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     tests = db.relationship('Test', backref='course', lazy=True)
 
     def __repr__(self):
-        return f'<Course: {self.course_name}>'
+        return f'<Course: {self.name}>'
 
 
 class Test(db.Model):
     __tablename__ = 'tests'
     id = db.Column(db.Integer, primary_key=True, nullable=False)
-    test_name = db.Column(db.String(64), nullable=False)
+    name = db.Column(db.String(64), nullable=False)
     course_id = db.Column(db.Integer, db.ForeignKey('courses.id'))
     questions = db.relationship('Question', backref='test', lazy=True)
 
     def __repr__(self):
-        return f'<Test: {self.test_name}>'
+        return f'<Test: {self.name}>'
 
 
 class Question(db.Model):
