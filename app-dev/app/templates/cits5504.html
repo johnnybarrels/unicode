@@ -1,0 +1,57 @@
+<head>
+  <style>
+    .page-heading {
+      font-family: 'Cabin';
+      font-size: 18px;
+      color: var(--unicode-mid-grey1);
+      text-align: start;
+      line-height: 22px;
+    }
+
+    .all-tests {
+      padding: 20px 40px;
+    }
+
+    .test {
+      height: 150px;
+      background-color: #FFFFFF;
+      margin: 0 auto;
+      padding: 15px 15px;
+    }
+
+    .unit-details {
+      font-family: 'Cabin';
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    .test-name {
+      font-family: 'Cabin';
+      font-size: 18px;
+    }
+
+    .fa-caret-square-down {
+      color: var(--unicode-pale-purple);
+      float: right;
+      font-size: 25px;
+    }
+  </style>
+</head>
+
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="page-heading">Tests</h1>
+<div class="row all-tests h-100">
+  
+  <div class="test col-3">
+    <i class="fas fa-caret-square-down"></i>
+    <h2 class="unit-details">CITS3403<br>Agile Web Development</h2>
+    <h3 class="test-name">2020 Final Exam</h3>
+  </div>
+  <div class="test col-3">Text 2</div>
+  <div class="test col-3">Text 3</div>
+
+</div>
+
+{% endblock %}
