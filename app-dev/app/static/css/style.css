@@ -30,7 +30,7 @@ body {
 .sidenav {
 	height: 100%;
   width: 23%;
-  min-width: 318px;
+  min-width: 275px;
 	position: fixed;
 	z-index: 1;
 	top: 0;
@@ -110,7 +110,6 @@ a.nav-child {
 }
 
 .content-container {
-  margin-left: 23%;
   margin-right: 0;
   z-index: 1;
   /* border: 2px solid black; */
