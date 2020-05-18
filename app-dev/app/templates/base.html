@@ -6,13 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   {% if title %}
-  <title>{{ title }} - app-name</title>
+  <title>{{ title }} - UniCode</title>
   {% else %}
-  <title>Welcome to app-name</title>
+  <title>Unicode</title>
   {% endif %}
 
-  <!-- Favicon (need to make) -->
-  <!-- <link rel="shortcut icon" href="favicon.ico"> -->
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
 
   <!-- Bootstrap -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
@@ -30,40 +30,62 @@
   <link href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;500&family=Quicksand:wght@400&display=swap"
     rel="stylesheet">
 
+  <!-- Material Darker icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
   <!-- FontAwesome icons -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 
   <!-- Our own js and css -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <!-- <script src="js/main.js"></script> -->
 </head>
 
 <body>
 
-  <!-- Navbar -->
+  <!-- SideBar -->
   <div class="sidenav">
-    <img src="UniCode-white-horiz.svg" alt="Logo" style="width:80%; display: block; margin-left: auto; margin-right: auto">
-      <a class="nav-parent" href="#">Courses
-        <i class="fas fa-plus-circle"></i>
+    <img id="logo-horiz" src="{{ url_for('static', filename='img/UniCode-colour-horiz.png') }}" alt="Logo"
+      style="width:80%; display: block; margin-left: auto; margin-right: auto">
+    <div class="nav-parent">Courses
+      <a id="new-course" href="#">
+        <i id="nav-indicator" class="fas fa-plus-circle"></i>
       </a>
-      <!-- Placeholders until can get from database -->
-      <a class="nav-child" href="#">Introduction to Python <span id="arrow">></span></a>
-      <a class="nav-child" href="#">Data Structures & Algorithms <span id="arrow">></span></a>
-      <a class="nav-child" href="#">Software Engineering in Java <span id="arrow">></span></a>
-      <a class="nav-parent" href="#">Results</a>
+    </div>
+    <!-- Placeholders until can get from database -->
+    <!-- <a class="nav-child" href="#">Introduction to Python <span id="nav-indicator"
+        class="material-icons">chevron_right</span></a>
+    <a class="nav-child" href="#">Data Structures & Algorithms
+      <span id="nav-indicator" class="material-icons">chevron_right</span></a>
+    <a class="nav-child" href="#">Software Engineering in Java <span id="nav-indicator"
+        class="material-icons">chevron_right</span></a> -->
+
+
+      {% if current_user.courses %}
+        {% for course in current_user.courses %}
+          <a class="nav-child" href="{{ course.id }}">{{ course.course_name }}<span id="nav-indicator"
+            class="material-icons">chevron_right</span></a>
+        {% endfor %}
+      {% endif %}
+
+    <div class="nav-parent mt-4">Results</div>
   </div>
 
   <div class="topbar">
     <p id="username">
-      <!-- Placeholder until can get from database -->
-      User name
-      <i class="fas fa-chevron-circle-down"></i>
+      {{ current_user.first_name }} {{ current_user.last_name }}
+      <a id="logout-icon" href="{{ (url_for('logout')) }}" style="color: #8593A5;"><i class="fas fa-sign-out-alt"></i></a>
+      <!-- <i class="fas fa-chevron-circle-down"></i> -->
     </p>
   </div>
 
+  <div class="content-container h-100 p-5">
+    {% block content %} {% endblock %}
+  </div>
 
-  <hr>
-  {% with messages = get_flashed_messages() %}
+
+  <!-- <hr> -->
+  <!-- {% with messages = get_flashed_messages() %}
   {% if messages %}
   <ul>
     {% for msg in messages %}
@@ -71,12 +93,8 @@
     {% endfor %}
   </ul>
   {% endif %}
-  {% endwith %}
+  {% endwith %} -->
 
-  <div class="container">
-    <!-- Page gets 'shunted' here -->
-    {% block content %} {% endblock %}
-  </div>
 
 </body>
 
