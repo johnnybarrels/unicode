@@ -1,7 +1,10 @@
-$(window).on('load', function () {
+$(window).ready( function () {
     let sideNavWidth = $('.sidenav').css('width');
     $('.content-container').css('margin-left', sideNavWidth);
 
-    // Doesn't work on resize
+    $(window).on('resize', function() {
+        let sideNavWidth = $('.sidenav').css('width');
+        $('.content-container').css('margin-left', sideNavWidth);
+    });
 }
-)
+);
