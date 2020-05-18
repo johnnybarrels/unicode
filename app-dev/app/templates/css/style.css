@@ -1,9 +1,0 @@
-
-body {
-	font-family: 'Avenir Next', Avenir, 'Helvetica Neue', 'Lato', 'Segoe UI', Helvetica, Arial, sans-serif;
-	margin: 0;
-	color: var(--main-txt-colour);
-	background: var(--main-bg-colour);
-	-webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
