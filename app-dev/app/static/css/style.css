@@ -39,7 +39,7 @@ body {
 	overflow-x: hidden;
 	padding: 20px 20px 0px 30px;
 }
-	
+
 .sidenav a {
 	padding-top: 30px;
 	text-decoration: none;
@@ -80,6 +80,7 @@ a.nav-child {
 
 .topbar {
   position: sticky;
+  position: -webkit-sticky; /* Safari */
 	top: 0;
 	background-color: #FFFFFF;
   margin-left: 23%;
@@ -89,12 +90,17 @@ a.nav-child {
 	padding-right: 25px;
 }
 
+
 #username {
 	text-align: right;
   color: #8593A5;
 	font-family: 'Cabin';
 	font-size: 16px;
 	line-height: 60px;
+}
+
+#logout-icon {
+  color: #8593A5;
 }
 
 .fas {

@@ -53,20 +53,29 @@
       </a>
     </div>
     <!-- Placeholders until can get from database -->
-    <a class="nav-child" href="#">Introduction to Python <span id="nav-indicator"
+    <!-- <a class="nav-child" href="#">Introduction to Python <span id="nav-indicator"
         class="material-icons">chevron_right</span></a>
     <a class="nav-child" href="#">Data Structures & Algorithms
       <span id="nav-indicator" class="material-icons">chevron_right</span></a>
     <a class="nav-child" href="#">Software Engineering in Java <span id="nav-indicator"
-        class="material-icons">chevron_right</span></a>
+        class="material-icons">chevron_right</span></a> -->
+
+
+      {% if current_user.courses %}
+        {% for course in current_user.courses %}
+          <a class="nav-child" href="{{ course.id }}">{{ course.course_name }}<span id="nav-indicator"
+            class="material-icons">chevron_right</span></a>
+        {% endfor %}
+      {% endif %}
+
     <div class="nav-parent mt-4">Results</div>
   </div>
 
   <div class="topbar">
     <p id="username">
-      <!-- Placeholder until can get from database -->
-      User name
-      <i class="fas fa-chevron-circle-down"></i>
+      {{ current_user.first_name }} {{ current_user.last_name }}
+      <a id="logout-icon" href="{{ (url_for('logout')) }}" style="color: #8593A5;"><i class="fas fa-sign-out-alt"></i></a>
+      <!-- <i class="fas fa-chevron-circle-down"></i> -->
     </p>
   </div>
 

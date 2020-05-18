@@ -15,5 +15,7 @@ c1401 = Course(id=1401, course_name='Intro to Python')
 
 u1.courses.append(c1401)
 u2.courses.append(c5504)
+u2.courses.append(c1401)
+
 
 db.session.add_all([u1, u2])
