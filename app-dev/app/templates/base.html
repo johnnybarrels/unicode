@@ -44,11 +44,34 @@
 </head>
 
 <body>
+  <!-- Modal -->
+  <div class="modal fade" id="new-course-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+          <h3 class="modal-title">Create a Course</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        <div class="modal-body">
+          <div class="form-group mb-5">
+            <h4 class="modal-subheading">Course Name</h4>
+            <input type="text" class="form-control" id="course-name-input" 
+                placeholder="e.g. Agile Web Development">
+          </div>
+          <div class="form-group">
+            <h4 class="modal-subheading">Course Code</h4>
+            <input type="text" class="form-control" id="course-code-input" 
+                placeholder="e.g. CITS3403">
+          </div>
+          <button id="create-test-btn" class="btn purple-btn">Create Course</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <!-- SideBar -->
   <div class="sidenav">
-    <img id="logo-horiz" src="{{ url_for('static', filename='img/UniCode-colour-horiz.png') }}" alt="Logo"
-      style="width:80%; display: block; margin-left: auto; margin-right: auto">
+    <img id="logo-horiz" src="{{ url_for('static', filename='img/UniCode-colour-horiz.png') }}" alt="UniCode logo">
     <div class="nav-parent">Courses
       {% if current_user.is_admin %}
       <a id="new-course" href="#">
@@ -56,6 +79,8 @@
       </a>
       {% endif %}
     </div>
+
+      
 
     {% if current_user.courses %}
     {% for course in current_user.courses %}

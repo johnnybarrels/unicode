@@ -1,6 +1,30 @@
 {% extends "base.html" %}
 
 {% block content %}
+  <!-- Modal -->
+  <div class="modal fade" id="new-test-modal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+          <h3 class="modal-title">Create a Test</h3>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        <div class="modal-body">
+          <div class="form-group mb-5">
+            <h4 class="modal-subheading">Test Name</h4>
+            <input type="text" class="form-control" id="course-name-input" 
+                placeholder="e.g. Mid-Semester Exam">
+          </div>
+          <div class="form-group">
+            <h4 class="modal-subheading">IDKKKK WHAT HERE</h4>
+            <input type="text" class="form-control" id="course-code-input" 
+                placeholder="e.g. idk??">
+          </div>
+          <button id="create-test-btn" class="btn purple-btn">Create Test</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <div class="row mx-2">
   <h1 class="page-heading">Tests</h1>
