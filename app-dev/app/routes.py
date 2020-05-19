@@ -3,7 +3,7 @@ from app import app
 from app.forms import LoginForm
 from app.models import User, Course, Test, Result
 from flask_login import current_user, login_user, login_required, LoginManager
-from app.controllers import UserController  # , CourseController
+from app.controllers import UserController, CourseController
 
 # session.permanent = True  # Allow control over session timeouts
 
@@ -11,7 +11,6 @@ from app.controllers import UserController  # , CourseController
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
 def login():
-    print('~~~~ routes login() called')
     if not current_user.is_authenticated:  # if they're not already logged in
         return UserController.login()
 
@@ -46,3 +45,9 @@ def course_view(course_id):
     tests = Test.query.filter_by(course_id=course_id)
     return render_template('admin-course.html', course=course, tests=tests)
     # return CourseController().show_tests()
+
+
+@app.route('/admin/newcourse')
+@login_required
+def create_course():
+    return CourseController.create_course()

@@ -102,7 +102,7 @@ a.nav-child {
   line-height: 19px;
 }
 
-#new-course {
+#new-course-btn {
   /* padding-bottom: 0px; */
   display: inline;
 }
@@ -236,7 +236,8 @@ a:hover {
 }
 
 #option-menu { 
-  visibility: hidden;
+  /* visibility: hidden; */
+  display: none;
   flex-direction: column;
   overflow: hidden;
   padding-left: 0px;
