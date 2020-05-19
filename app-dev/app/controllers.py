@@ -10,7 +10,7 @@ from werkzeug.urls import url_parse
 class UserController():
 
     def login():
-
+        print('~~~~~~~ login() function called')
         form = LoginForm()
         if form.validate_on_submit():  # POST request (user clicks on Login button)
             # Check that user is in db and that password is correct
@@ -26,7 +26,7 @@ class UserController():
             if not next_page or url_parse(next_page).netloc != '':
                 return redirect(url_for('login'))
 
-            return redirect(next_page)
+            # return redirect(next_page)
 
             if user.is_admin:
                 return redirect(url_for('admin_portal'))
@@ -48,11 +48,20 @@ class UserController():
         return redirect(url_for('login'))
 
     def register():
+
         form = RegistrationForm()
 
         if form.validate_on_submit():
+
             user = User(first_name=form.first_name.data,
                         last_name=form.last_name.data, email=form.email.data)
+
+            # If submitted email is already in db
+            if User.query.filter_by(email=user.email).first() is not None:
+
+                flash('Email is already registered')
+                return redirect(url_for('register'))
+
             user.set_password(form.password.data)
 
             db.session.add(user)
@@ -60,7 +69,7 @@ class UserController():
 
             flash("You have registered")
 
-            return redirect(url_for('index'))
+            return redirect(url_for('login'))
 
         return render_template('register.html', title="Register", form=form)
 
