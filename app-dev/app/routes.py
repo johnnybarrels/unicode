@@ -2,7 +2,7 @@ from flask import render_template, flash, redirect, url_for, session
 from app import app
 from app.forms import LoginForm
 from app.models import User, Course, Test, Result
-from flask_login import current_user, login_user, login_required
+from flask_login import current_user, login_user, login_required, LoginManager
 from app.controllers import UserController  # , CourseController
 
 
@@ -42,3 +42,7 @@ def course_view(course_id):
     # return CourseController().show_tests()
 
 # @app.route('/')
+
+@app.route('/register', methods=['GET','POST'])
+def register():
+  return UserController.register()
