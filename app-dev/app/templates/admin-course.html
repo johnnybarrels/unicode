@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="page-heading">Tests</h1>
+<div class="row all-tests">
+  {% for test in tests %}
+  <div class="test col-2 col-md-3 mb-5">
+    <i class="fas fa-caret-square-down"></i>
+    <h2 class="unit-details">{{ course.course_code }}<br>{{ course.name }}</h2>
+    <h3 class="test-name">{{ test.name }}</h3>
+  </div>
+  <div class='col'></div>
+
+  {% endfor %}
+</div>
+
+{% endblock %}

@@ -19,18 +19,41 @@ html, body {
 }
 
 body {
-	font-family: 'Avenir Next', Avenir, 'Helvetica Neue', 'Lato', 'Segoe UI', Helvetica, Arial, sans-serif;
+	font-family: 'Cabin', sans-serif;
   margin: 0;
   color: var(--unicode-main-text-colour);
 	background-color: var(--unicode-pale);
 	-webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+}
+
+body > *:not(.sidenav):not(.topbar) {
+
+  -webkit-transition: 0.3s -webkit-filter linear;
+  -o-transition: 0.3s -o-filter linear;
+  -moz-transition: 0.3 -moz-filter linear;
+  -ms-transition: 0.3 -moz-filter linear;
+}
+
+body.active > *:not(.sidenav):not(.topbar) {
+  -webkit-filter: blur(3px);
+  -webkit-transition: 0.3s -webkit-filter linear;
+
+  -o-filter: blur(3px);
+  -o-transition: 0.3s -o-filter linear;
+
+  -moz-filter: blur(3px);
+  -moz-transition: 0.3 -moz-filter linear;
+
+  -ms-filter: blur(3px);
+  -ms-transition: 0.3 -moz-filter linear;
 }
 
 .sidenav {
 	height: 100%;
   width: 23%;
-  min-width: 318px;
+  min-width: 275px;
 	position: fixed;
 	z-index: 1;
 	top: 0;
@@ -39,11 +62,10 @@ body {
 	overflow-x: hidden;
 	padding: 20px 20px 0px 30px;
 }
-	
+
 .sidenav a {
 	padding-top: 30px;
 	text-decoration: none;
-	font-family: 'Cabin', sans-serif;
 	font-size: 16px;
 	line-height: 19px;
 	color: #8593A5;
@@ -80,6 +102,7 @@ a.nav-child {
 
 .topbar {
   position: sticky;
+  position: -webkit-sticky; /* Safari */
 	top: 0;
 	background-color: #FFFFFF;
   margin-left: 23%;
@@ -89,12 +112,16 @@ a.nav-child {
 	padding-right: 25px;
 }
 
+
 #username {
 	text-align: right;
   color: #8593A5;
-	font-family: 'Cabin';
 	font-size: 16px;
 	line-height: 60px;
+}
+
+#logout-icon {
+  color: #8593A5;
 }
 
 .fas {
@@ -106,14 +133,28 @@ a.nav-child {
 }
 
 .content-container {
-  margin-left: 23%;
   margin-right: 0;
+  height: 100%;
   z-index: 1;
   /* border: 2px solid black; */
+  background-color: var(--unicode-pale);
+  transition: background-color 0.5s linear;
 }
 
+
+.create-test {
+    background-color: white;
+    width: 40%;
+    height: 60%;
+    position: absolute;
+    top: 50%;
+    left: 60%;
+    /*transform: translate(-50%, -50%);*/
+    display:none;
+}
+
+
 .portal-msg {
-  font-family: 'Cabin', sans-serif;
   text-align: center;
   color: var(--unicode-mid-grey2);
 }
@@ -129,6 +170,43 @@ a .purple-btn:hover {
   color: white;
 }
 
-.FUCK *{
-  /* border: 2px solid black; */
+
+/* Course view specific styles */
+.page-heading {
+  font-size: 18px;
+  color: var(--unicode-mid-grey1);
+  text-align: start;
+  line-height: 38px;
+}
+
+.all-tests {
+  padding: 20px 40px;
+}
+
+.test {
+  height: 150px;
+  background-color: white;
+  margin: 0 auto;
+  padding: 15px 15px;
+    
+  transition: background-color 0.5s linear;
+}
+
+.test.active {
+  background-color: rgb(0, 0, 0, 0.3);
+}
+
+.unit-details {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.test-name {
+  font-size: 18px;
+}
+
+.fa-caret-square-down {
+  color: var(--unicode-pale-purple);
+  float: right;
+  font-size: 25px;
 }
