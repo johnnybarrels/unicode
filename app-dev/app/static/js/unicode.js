@@ -35,3 +35,7 @@ $("document").ready(function(){
         $("#new-test-modal").modal("show");
     });
 });
+
+$(document).ready(function() {
+    $(".dropdown-toggle").dropdown();
+});
