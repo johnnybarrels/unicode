@@ -2,8 +2,9 @@ QuestionsTable:
 
 --------------------------------------------------------------
 
-Question_ID    = 001
-Question       = What would be the output of this function?
+Question_ID         = 001
+Question_Title      = What would be the output of this function?
+Question_Content    =
 
 		def firstRepeatedChar(str):
 
@@ -26,8 +27,9 @@ Question_Group = output
 
 ------------------------------------------------------------
 
-Question_ID    = 002
-Question       = Consider the following rather impenetrable (but correct) Python code, taken from a function. What does method os.path.exists do?
+Question_ID         = 002
+Question_Title      = Consider the following rather impenetrable (but correct) Python code, taken from a function. What does method os.path.exists do?
+Question_Content    =
 
 		if os.path.exists(f):
 		    return [c for c in open(f, 'r').read().split('\n') if c != " "]
@@ -39,8 +41,9 @@ Question_Group = short-answer
 
 ------------------------------------------------------------
 
-Question_ID    = 003
-Question       = What would be the output of this function?
+Question_ID         = 003
+Question_Title      = What would be the output of this function?
+Question_Content    =
 
 		# Function to count total set bits 
 		def bitsoncount(x): 
@@ -80,17 +83,25 @@ Question_Group = short-answer
 
 -----------------------------------------------------------
 
-Question_ID    = 005
-Question       = What is the output of the following program
+Question_ID         = 005
+Question_Title      = What is the output of the following program
+Question_Content    =
 
-		i = 0
-		while i < 3:
-		    print i
-		else:
-		    print 0
+		            i = 0
+		            while i < 3:
+		                print i
+		            else:
+		                print 0
 
+<<<<<<< HEAD:data/QuestionsTable.txt
+Answer              = 0120
+(fk)Quiz_ID         = 00001
+Marks               = 10
+
+=======
 Answer         = 0120
 (fk)Quiz_ID    = 00001
 Marks          = 10
 Question_Group = output
+>>>>>>> 36e59aba435ad9a3528dd05f3a213726de208743:app-dev/db/data/QuestionsTable.txt
 

@@ -1,11 +1,12 @@
 from app import db, login
-from flask_login import UserMixin
+from flask_login import UserMixin, LoginManager
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
+
 
 
 enrolments = db.Table('enrolments',
@@ -19,9 +20,9 @@ class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     email = db.Column(db.String(64), index=True, unique=True)
     password_hash = db.Column(db.String(32))
-    first_name = db.Column(db.String(32))
-    last_name = db.Column(db.String(32))
-    is_admin = db.Column(db.Boolean, nullable=False)
+    first_name = db.Column(db.String(32) , index=True)
+    last_name = db.Column(db.String(32), index=True)
+    is_admin = db.Column(db.Boolean, nullable=False, default = False)
     courses = db.relationship('Course', secondary=enrolments, lazy='subquery',
                                backref=db.backref('users', lazy=True))
 

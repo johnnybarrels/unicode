@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
 from flask_login import current_user, login_user, logout_user, login_required
-from app.forms import LoginForm
+from app.forms import LoginForm, RegistrationForm
 from app.models import User, Course, Test, Question, Result
 from flask import request
 from werkzeug.urls import url_parse
@@ -46,6 +46,23 @@ class UserController():
     def logout():
         logout_user()
         return redirect(url_for('login'))
+
+    def register():
+        form = RegistrationForm()
+
+        if form.validate_on_submit():
+            user = User(first_name=form.first_name.data,
+                        last_name=form.last_name.data, email=form.email.data)
+            user.set_password(form.password.data)
+
+            db.session.add(user)
+            db.session.commit()
+
+            flash("You have registered")
+
+            return redirect(url_for('index'))
+
+        return render_template('register.html', title="Register", form=form)
 
 
 class CourseController():
