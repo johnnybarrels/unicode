@@ -177,6 +177,7 @@ a .purple-btn:hover {
   color: var(--unicode-mid-grey1);
   text-align: start;
   line-height: 38px;
+  margin-bottom: 0;
 }
 
 .all-tests {
@@ -185,9 +186,12 @@ a .purple-btn:hover {
 
 .test {
   height: 150px;
-  background-color: white;
-  margin: 0 auto;
-  padding: 15px 15px;
+  width: 100%;
+  min-width: 180px;
+  background-color: #FFFFFF;
+  /* margin: 0 2.5%; */
+  /* margin: 0 auto; -> nicer for responsive */
+  /* padding: 15px 15px; */
     
   transition: background-color 0.5s linear;
 }
@@ -205,8 +209,89 @@ a .purple-btn:hover {
   font-size: 18px;
 }
 
-.fa-caret-square-down {
+.fa-caret-square-down, .fa-caret-square-right, .fa-times {
   color: var(--unicode-pale-purple);
   float: right;
   font-size: 25px;
+}
+
+/* .fa-caret-square-up {
+  float: left;
+  padding-right: 10px; 
+} */
+
+#new-test-btn {
+  min-width: 120px;
+  position: absolute; 
+  right: 5%;
+}
+
+a {
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+#test-link:hover {
+  color: #727DF5;
+}
+
+#option-menu { 
+  visibility: hidden;
+  flex-direction: column;
+  overflow: hidden;
+  padding-left: 0px;
+  background-color: #FFFFFF;
+  border: 1px solid var(--unicode-mid-grey3);
+  border-radius: 2px;
+  list-style: none;
+  padding: 2px 2px;
+  width: 150px;
+  text-align: start;
+}
+
+#option-title {
+  text-transform: uppercase;
+  font-size: 17px;
+  font-weight: bold;
+  padding: 5px 5px;
+}
+
+.option-item {
+  font-family: 'Open Sans';
+  font-size: 16px;
+  margin: 0;
+  padding-left: 0px;
+  text-align: start;
+  padding: 5px 5px;
+  border-top: 1px solid #DEDFFC;
+}
+
+.option-item:hover {
+  background-color: var(--unicode-purple);
+  color: #FFFFFF;
+}
+
+.wrapper {
+  position: relative;
+  width: 28%;
+  min-width: 180px;
+  margin: 0 2.5%;
+}
+
+.options {
+  position: absolute;
+  top: 40px;
+  left: 84%;
+
+  /* top: 8px;
+  left: 100%; */
+  z-index: 999;
+}
+
+.option-item .fas {
+  margin-right: 8px;
 }
