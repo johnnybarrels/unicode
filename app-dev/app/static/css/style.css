@@ -247,7 +247,8 @@ a:hover {
 }
 
 #option-menu { 
-  visibility: hidden;
+  /* visibility: hidden; */
+  display: none;
   flex-direction: column;
   overflow: hidden;
   padding-left: 0px;
