@@ -54,7 +54,8 @@ class UserController():
         if form.validate_on_submit():
 
             user = User(first_name=form.first_name.data,
-                        last_name=form.last_name.data, email=form.email.data)
+                        last_name=form.last_name.data, email=form.email.data,
+                        is_admin=1)
 
             # If submitted email is already in db
             if User.query.filter_by(email=user.email).first() is not None:
@@ -80,7 +81,7 @@ class CourseController():
         tests = Test.query.filter_by()
 
     def create_course():
-        
+
         current_user.courses.append(course)
 
     def edit_course():
