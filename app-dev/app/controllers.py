@@ -10,7 +10,7 @@ from werkzeug.urls import url_parse
 class UserController():
 
     def login():
-        print('~~~~~~~ login() function called')
+
         form = LoginForm()
         if form.validate_on_submit():  # POST request (user clicks on Login button)
             # Check that user is in db and that password is correct
@@ -80,7 +80,8 @@ class CourseController():
         tests = Test.query.filter_by()
 
     def create_course():
-        pass
+        
+        current_user.courses.append(course)
 
     def edit_course():
         pass

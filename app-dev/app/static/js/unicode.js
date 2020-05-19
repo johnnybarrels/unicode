@@ -14,29 +14,13 @@ $(window).ready(function () {
     //     document.getElementById("option-menu").style.visibility = "hidden";
     // });
 
-    $(".fa-plus-circle").click(function () {
+
+    $("#new-course-btn").click(function () {
         $("#new-course-modal").modal("show");
     });
+
     $("#new-test-btn").click(function () {
         $("#new-test-modal").modal("show");
     });
 }
 );
-
-
-// $(document).ready(function () {
-
-// });
-
-// $("document").ready(function () {
-
-// });
-
-
-// $("document").ready(function () {
-
-// });
-
-// $("document").ready(function () {
-
-// });

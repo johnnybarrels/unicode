@@ -20,3 +20,10 @@ class RegistrationForm(FlaskForm):
     password_again = PasswordField('Password', validators=[
                                    DataRequired(), EqualTo('password')])
     submit = SubmitField('REGISTER')
+
+
+class NewCourseForm(FlaskForm):
+
+    course_name = StringField('Course Name', validators=[DataRequired()])
+    course_code = StringField('Course Code', validators=[DataRequired()])
+    submit = SubmitField('Create Course')
