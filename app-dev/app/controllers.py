@@ -41,7 +41,6 @@ class UserController():
         return redirect(url_for('login'))
 
     def register():
-
         form = RegistrationForm()
 
         if form.validate_on_submit():
