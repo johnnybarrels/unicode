@@ -11,10 +11,13 @@ $(window).ready( function () {
 
 
 $("document").ready(function(){
-    $("#option-btn").click(function(){
-        // document.getElementById("lala").style.backgroundColor="pink";
-        document.getElementById("options").style.display="visible";
-        document.getElementById("option-menu").style.display="visible";
-        $("li").toggle("slow");
+    $(".fa-caret-square-down").click(function(){
+            document.getElementById("option-menu").style.visibility="visible";
     });
   });
+
+$("document").ready(function(){
+    $(".fa-times").click(function(){ 
+        document.getElementById("option-menu").style.visibility="hidden";
+    });
+});

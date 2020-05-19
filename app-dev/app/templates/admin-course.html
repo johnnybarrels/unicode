@@ -10,32 +10,33 @@
   {% for test in tests %}
   <!-- <div class="test col-2 col-md-3 mb-5"> -->
   <div class="wrapper">
-    <div id="lala" class="test mb-5 p-3">
+    <div class="test mb-5 p-3">
       <i id="option-btn" class="fas fa-caret-square-down"></i>
       <a id="test-link" href=#>
         <h2 class="unit-details">{{ course.course_code }}<br>{{ course.name }}</h2>
         <h3 class="test-name">{{ test.name }}</h3>
       </a>
     </div>
-    <div class="option-stuff">
-      <ul id="options">
+    <div class="options">
+      <ul id="option-menu">
         <li id="option-title">
-          <i class="fas fa-caret-square-up"></i>
+          <i id="option-btn-close" class="fas fa-times"></i>
+          
           Options
         </li>
-        <li>
+        <li class="option-item">
           <i class="fas fa-font"></i>
           <a href=#>Rename test</a>
         </li>
-        <li id="option-menu">
+        <li class="option-item">
           <i class="fas fa-pen"></i>
           <a href=#>Edit test</a>
         </li>
-        <li id="option-menu">
-          <i class="far fa-clone"></i>
+        <li class="option-item">
+          <i class="fas fa-clone"></i>
           <a href=#>Make copy</a>
         </li>
-        <li>
+        <li class="option-item">
           <i class="fas fa-trash"></i>
           <a href=#>Delete test</a>
         </li>
