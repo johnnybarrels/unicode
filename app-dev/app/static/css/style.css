@@ -186,10 +186,10 @@ a .purple-btn:hover {
 
 .test {
   height: 150px;
-  width: 28%;
+  width: 100%;
   min-width: 180px;
   background-color: #FFFFFF;
-  margin: 0 2.5%;
+  /* margin: 0 2.5%; */
   /* margin: 0 auto; -> nicer for responsive */
   /* padding: 15px 15px; */
     
@@ -209,11 +209,16 @@ a .purple-btn:hover {
   font-size: 18px;
 }
 
-.fa-caret-square-down {
+.fa-caret-square-down, .fa-caret-square-right, .fa-times {
   color: var(--unicode-pale-purple);
   float: right;
   font-size: 25px;
 }
+
+/* .fa-caret-square-up {
+  float: left;
+  padding-right: 10px; 
+} */
 
 #new-test-btn {
   min-width: 120px;
@@ -234,38 +239,59 @@ a:hover {
   color: #727DF5;
 }
 
-#options { 
-  /* display: none; */
+#option-menu { 
+  visibility: hidden;
   flex-direction: column;
-  width: 100vw;
   overflow: hidden;
   padding-left: 0px;
-  position: relative;
-  left: 100px;
+  background-color: #FFFFFF;
+  border: 1px solid var(--unicode-mid-grey3);
+  border-radius: 2px;
+  list-style: none;
+  padding: 2px 2px;
+  width: 150px;
+  text-align: start;
 }
 
 #option-title {
   text-transform: uppercase;
   font-size: 17px;
   font-weight: bold;
+  padding: 5px 5px;
 }
 
-#option-menu {
+.option-item {
   font-family: 'Open Sans';
   font-size: 16px;
   margin: 0;
   padding-left: 0px;
   text-align: start;
-  list-style: none;
-  /* display: none; */
+  padding: 5px 5px;
+  border-top: 1px solid #DEDFFC;
+}
+
+.option-item:hover {
+  background-color: var(--unicode-purple);
+  color: #FFFFFF;
 }
 
 .wrapper {
   position: relative;
+  width: 28%;
+  min-width: 180px;
+  margin: 0 2.5%;
 }
 
-.option-stuff {
+.options {
   position: absolute;
-  top: 50px;
-  left: 50px;
+  top: 40px;
+  left: 84%;
+
+  /* top: 8px;
+  left: 100%; */
+  z-index: 999;
+}
+
+.option-item .fas {
+  margin-right: 8px;
 }

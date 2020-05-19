@@ -1,5 +1,5 @@
 from app import db, login
-from flask_login import UserMixin
+from flask_login import UserMixin, LoginManager
 from werkzeug.security import generate_password_hash, check_password_hash
 
 
@@ -9,9 +9,11 @@ def load_user(id):
 
 
 enrolments = db.Table('enrolments',
-    db.Column('user_id', db.Integer, db.ForeignKey('users.id'), primary_key=True),
-    db.Column('course_id', db.Integer, db.ForeignKey('courses.id'), primary_key=True)
-)
+                      db.Column('user_id', db.Integer, db.ForeignKey(
+                          'users.id'), primary_key=True),
+                      db.Column('course_id', db.Integer, db.ForeignKey(
+                          'courses.id'), primary_key=True)
+                      )
 
 
 class User(UserMixin, db.Model):
@@ -21,9 +23,9 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(32))
     first_name = db.Column(db.String(32))
     last_name = db.Column(db.String(32))
-    is_admin = db.Column(db.Boolean, nullable=False)
+    is_admin = db.Column(db.Boolean, nullable=False, default=False)
     courses = db.relationship('Course', secondary=enrolments, lazy='subquery',
-                               backref=db.backref('users', lazy=True))
+                              backref=db.backref('users', lazy=True))
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
@@ -40,7 +42,6 @@ class Course(db.Model):
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     name = db.Column(db.String(64))
     course_code = db.Column(db.String(32))
-    # admin_id = db.Column(db.Integer, db.ForeignKey('users.user_id'))
     tests = db.relationship('Test', backref='course', lazy=True)
 
     def __repr__(self):
@@ -72,13 +73,12 @@ class Question(db.Model):
 
 
 class Result(db.Model):
-    __tablename__ = 'results' 
+    __tablename__ = 'results'
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable = False)
-    test_id = db.Column(db.Integer, db.ForeignKey('tests.id'), nullable = False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    test_id = db.Column(db.Integer, db.ForeignKey('tests.id'), nullable=False)
     score = db.Column(db.Integer)
     is_marked = db.Column(db.Boolean, nullable=False)
 
     def __repr__(self):
         return f'<Result {self.result_id}, User{self.user_id}, Test {self.test_id}, Score: {self.score}, Marked? {self.is_marked}'
-

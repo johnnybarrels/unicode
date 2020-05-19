@@ -59,6 +59,8 @@ body {
   margin-top: 90px;
   font-size: 13px;
   color: #8593A5;
+  position: absolute;
+  bottom: 0;
 }
 
 #sign-up a {
