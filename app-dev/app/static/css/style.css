@@ -177,6 +177,7 @@ a .purple-btn:hover {
   color: var(--unicode-mid-grey1);
   text-align: start;
   line-height: 38px;
+  margin-bottom: 0;
 }
 
 .all-tests {
@@ -185,9 +186,12 @@ a .purple-btn:hover {
 
 .test {
   height: 150px;
-  background-color: white;
-  margin: 0 auto;
-  padding: 15px 15px;
+  width: 28%;
+  min-width: 180px;
+  background-color: #FFFFFF;
+  margin: 0 2.5%;
+  /* margin: 0 auto; -> nicer for responsive */
+  /* padding: 15px 15px; */
     
   transition: background-color 0.5s linear;
 }
@@ -209,4 +213,59 @@ a .purple-btn:hover {
   color: var(--unicode-pale-purple);
   float: right;
   font-size: 25px;
+}
+
+#new-test-btn {
+  min-width: 120px;
+  position: absolute; 
+  right: 5%;
+}
+
+a {
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+#test-link:hover {
+  color: #727DF5;
+}
+
+#options { 
+  /* display: none; */
+  flex-direction: column;
+  width: 100vw;
+  overflow: hidden;
+  padding-left: 0px;
+  position: relative;
+  left: 100px;
+}
+
+#option-title {
+  text-transform: uppercase;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+#option-menu {
+  font-family: 'Open Sans';
+  font-size: 16px;
+  margin: 0;
+  padding-left: 0px;
+  text-align: start;
+  list-style: none;
+  /* display: none; */
+}
+
+.wrapper {
+  position: relative;
+}
+
+.option-stuff {
+  position: absolute;
+  top: 50px;
+  left: 50px;
 }
