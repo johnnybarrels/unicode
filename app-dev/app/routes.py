@@ -2,8 +2,8 @@ from flask import render_template, flash, redirect, url_for, session
 from app import app
 from app.forms import LoginForm
 from app.models import User, Course, Test, Result
-from flask_login import current_user, login_user, login_required
 from app.controllers import UserController  # , CourseController
+from flask_login import current_user, login_user, login_required
 
 
 # session.permanent = True  # Allow control over session timeouts
