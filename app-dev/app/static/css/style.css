@@ -76,6 +76,13 @@ body.active > *:not(.sidenav):not(.topbar) {
 	color: #FFFFFF;
 }
 
+#logo-horiz {
+  width:80%; 
+  display: block; 
+  margin-left: auto; 
+  margin-right: auto
+}
+
 .nav-parent {
 	padding-top: 50px;
 	letter-spacing: 2px;
@@ -294,4 +301,47 @@ a:hover {
 
 .option-item .fas {
   margin-right: 8px;
+}
+
+.modal {
+  position: absolute;
+  z-index: 99999;   
+}
+
+.modal-content {
+  width: 570px;
+  height: 485px;
+  border-radius: 6px;
+  padding: 15px 15px; 
+}
+
+.modal-title {
+  font-family: 'DM Sans';
+  font-size: 54px;
+  font-weight: bold;
+  line-height: 70px;
+  color: var(--unicode-mid-grey1);
+  text-align: center;
+  margin: 15px 0 40px 0;
+}
+
+.modal-subheading {
+  font-family: 'Roboto';
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 21px;
+  color: var(--unicode-mid-grey1);
+}
+
+.close {
+  position: absolute; 
+  right: 3%;
+  /* top: 0; */
+  padding: 5px 5px;
+}
+
+#create-test-btn {
+  border-radius: 7px;
+  width: 40%;
+  margin: 40px 30% 0 30%;
 }

@@ -21,3 +21,17 @@ $("document").ready(function(){
         document.getElementById("option-menu").style.visibility="hidden";
     });
 });
+
+
+
+$("document").ready(function(){
+    $(".fa-plus-circle").click(function(){ 
+        $("#new-course-modal").modal("show");
+    });
+});
+
+$("document").ready(function(){
+    $("#new-test-btn").click(function(){ 
+        $("#new-test-modal").modal("show");
+    });
+});
