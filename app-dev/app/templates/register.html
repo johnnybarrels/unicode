@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>UniCode</title>
 
-  <link rel="shortcut icon" href="favicon.ico">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
 
   <!-- Bootstrap -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
@@ -41,21 +41,26 @@
       </div>
       <div class="col-lg-4 justify-content-center mt-5 mt-lg-0">
 
-        <form class="login-form mx-auto text-center" style="background-color: white" method="POST" action="/">
+        <form class="login-form mx-auto text-center" style="background-color: white" method="POST" action="">
           {{ form.hidden_tag() }}
           <p id="sign-in-title">Register</p>
           <div class="my-4">
-            <button class="btn btn-dark mx-1">Admin</button>
-            <button class="btn btn-dark mx-1">Student</button>
+            {% with messages = get_flashed_messages() %}
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+            {% endwith %}
+            <!-- <button class="btn btn-dark mx-1">Admin</button>
+            <button class="btn btn-dark mx-1">Student</button> -->
           </div>
           <div id="login-inputs" class="mx-auto">
 
             <div class="form-group mb-3">
-                {{ form.first_name(class_="form-control", placeholder='First Name') }}
+              {{ form.first_name(class_="form-control", placeholder='First Name') }}
             </div>
 
             <div class="form-group mb-3">
-                {{ form.last_name(class_="form-control", placeholder='Last Name') }}
+              {{ form.last_name(class_="form-control", placeholder='Last Name') }}
             </div>
 
             <div class="form-group mb-3">
@@ -67,11 +72,11 @@
             </div>
 
             <div class="form-group mb-1">
-                {{ form.password_again(class_="form-control", placeholder='Repeat Password') }}
-              </div>
+              {{ form.password_again(class_="form-control", placeholder='Repeat Password') }}
+            </div>
 
-            {{ form.submit(id="login-btn", class_="btn btn-light")}}
-            <p id="sign-up"> Already Register? <a href="/index"><b>Log in</b></a> </p>
+            {{ form.submit(id="login-btn", class_="btn btn-light") }}
+            <p id="sign-up"> Already registered? <a href="/index"><b>Log In</b></a> </p>
           </div>
         </form>
 
