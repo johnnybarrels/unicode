@@ -1,4 +1,4 @@
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for, request
 from app import app, db
 from flask_login import current_user, login_user, logout_user, login_required
 from app.forms import LoginForm
@@ -18,17 +18,24 @@ class UserController():
             if user is None or not user.check_password(form.password.data):
                 flash('Invalid username or password')
                 return redirect(url_for('login'))
-            
+
             login_user(user)
+
+            # Handling the case where a user who is not logged in requests a specific page
+            next_page = request.args.get('next')
+            if not next_page or url_parse(next_page).netloc != '':
+                return redirect(url_for('login'))
+
+            return redirect(next_page)
 
             if user.is_admin:
                 return redirect(url_for('admin_portal'))
             else:
                 # return render_template('student.html')
                 return redirect(url_for('student_portal'))
-        
-        else:  # for GET request (browser loading page)
-            return render_template('index.html', form=form)
+
+        # for GET request (browser loading page)
+        return render_template('index.html', form=form)
 
     def show_portal():
         if current_user.is_admin:
@@ -39,7 +46,6 @@ class UserController():
     def logout():
         logout_user()
         return redirect(url_for('login'))
-
 
 
 class CourseController():
@@ -58,10 +64,3 @@ class CourseController():
 
     def rename_course():
         pass
-
-
-
-
-
-
-
