@@ -2,5 +2,71 @@
 
 {% block content %}
 <!-- Put stuff here -->
-<h1>EDITING A TEST</h1>
+<div class="row mx-2">
+  <h1 class="page-heading">{{ course.name }} - {{ test.name }}</h1>
+</div>
+
+<div class="row new-question my-3">
+
+  <nav id="question-nav" class="w-100 mt-3 mx-3">
+    <div class="nav nav-pills" id="nav-tab" role="tablist">
+      {% for question in questions %}
+      <a class="nav-item nav-link" id="question-{{ loop.index }}-tab" data-toggle="tab"
+        href="#question-{{ loop.index }}" role="tab" aria-controls="question-{{ loop.index }}"
+        aria-selected="false">Question
+        {{ loop.index }}</a>
+      {% endfor %}
+
+      <a class="nav-item nav-link dropdown dropdown-toggle" id="nav-add-tab" data-toggle="dropdown" href=""
+        role="button" aria-haspopup="true" aria-expanded="false" aria-selected="false">Add
+        <!-- <i class="fas fa-plus"></i> -->
+      </a>
+      <div class="dropdown-menu">
+        <a class="dropdown-item option-item" href="#">What is the output?</a>
+        <a class="dropdown-item option-item" href="#">Multiple choice</a>
+        <a class="dropdown-item option-item" href="#">Write some code</a>
+      </div>
+    </div>
+  </nav>
+
+  <p></p>
+
+  <div class="tab-content w-100 mt-0" id="nav-tabContent">
+    {% for question in questions %}
+    <div class="tab-pane fade" id="question-{{ loop.index }}" role="tabpanel"
+      aria-labelledby="question-{{ loop.index }}-tab">
+
+      <form id="question-form" method="POST" action="">
+        {{ form.hidden_tag() }}
+
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group mb-5">
+              <h4 class="modal-subheading">{{ form.description.label }}</h4>
+              {{ form.description }}
+            </div>
+            <div class="form-group mb-5">
+              <h4 class="modal-subheading">{{ form.solution.label }}</h4>
+              {{ form.solution }}
+            </div>
+            <div class="form-group mb-5">
+              <h4 class="modal-subheading">{{ form.mark_alloc.label }}</h4>
+              {{ form.mark_alloc }}
+            </div>
+            {{ form.save }}
+
+            {{ form.delete }}
+          </div>
+
+          <div class="col-6">
+            {{ form.code_string }}
+          </div>
+        </div>
+      </form>
+
+    </div>
+    {% endfor %}
+
+  </div>
+</div>
 {% endblock %}

@@ -122,13 +122,13 @@ a.nav-child {
 
 #username {
 	text-align: right;
-  color: #8593A5;
+  color: var(--unicode-main-text-colour);
 	font-size: 16px;
 	line-height: 60px;
 }
 
 #logout-icon {
-  color: #8593A5;
+  color: var(--unicode-main-text-colour);
 }
 
 .fas {
@@ -141,7 +141,7 @@ a.nav-child {
 
 .content-container {
   margin-right: 0;
-  height: 100%;
+  height: 92%;
   z-index: 1;
   /* border: 2px solid black; */
   background-color: var(--unicode-pale);
@@ -233,7 +233,7 @@ a:hover {
 }
 
 #test-link:hover {
-  color: #727DF5;
+  color: var(--unicode-purple);
 }
 
 #option-menu { 
@@ -316,7 +316,7 @@ a:hover {
   margin: 15px 0 40px 0;
 }
 
-.modal-subheading {
+.subheading,.modal-subheading {
   font-family: 'Roboto';
   font-weight: bold;
   font-size: 18px;
@@ -335,4 +335,33 @@ a:hover {
   border-radius: 7px;
   width: 40%;
   margin: 40px 30% 0 30%;
+}
+
+/* Admin New Question specific styles*/
+.new-question {
+  background-color: white;
+  border-radius: 10px;
+}
+
+#question-nav {
+  height: 42px;
+}
+
+.nav-item.nav-link{
+  background-color: var(--unicode-pale-purple);
+  color: white;
+  margin: 0 4px;
+  font-weight: 500;
+}
+.nav-item.nav-link.active {
+  background-color: var(--unicode-purple);
+}
+
+.new-question {
+  border: 2px solid black;
+  height: 95%;
+}
+
+.new-question .col-6 {
+  border: 2px solid black;
 }

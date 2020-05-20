@@ -1,8 +1,8 @@
-"""reinitialise db
+"""db initialisation
 
-Revision ID: d527dfd3cede
+Revision ID: 0168b9736a76
 Revises: 
-Create Date: 2020-05-19 00:40:52.880174
+Create Date: 2020-05-20 18:16:20.247750
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'd527dfd3cede'
+revision = '0168b9736a76'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -51,10 +51,15 @@ def upgrade():
     op.create_table('questions',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('question_string', sa.String(length=256), nullable=False),
-    sa.Column('answer', sa.String(length=256), nullable=False),
+    sa.Column('code_string', sa.String(length=1024), nullable=True),
+    sa.Column('answer', sa.String(length=256), nullable=True),
+    sa.Column('mcq_1', sa.String(length=128), nullable=True),
+    sa.Column('mcq_2', sa.String(length=128), nullable=True),
+    sa.Column('mcq_3', sa.String(length=128), nullable=True),
+    sa.Column('mcq_4', sa.String(length=128), nullable=True),
     sa.Column('test_id', sa.Integer(), nullable=True),
-    sa.Column('mark_alloc', sa.Integer(), nullable=True),
-    sa.Column('question_group', sa.Integer(), nullable=True),
+    sa.Column('mark_alloc', sa.Integer(), nullable=False),
+    sa.Column('question_type', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['test_id'], ['tests.id'], ),
     sa.PrimaryKeyConstraint('id')
     )

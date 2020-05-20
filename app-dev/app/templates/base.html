@@ -84,7 +84,6 @@
     </div>
 
 
-
     {% if current_user.courses %}
     {% for course in current_user.courses %}
     <a class="nav-child" href="{{ url_for('course_view', course_id=course.id) }}">{{ course.name }}<span
@@ -104,7 +103,7 @@
     </p>
   </div>
 
-  <div class="content-container h-100 p-5">
+  <div class="content-container p-5">
     {% block content %} {% endblock %}
   </div>
 
