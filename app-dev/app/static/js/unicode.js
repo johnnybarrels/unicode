@@ -22,5 +22,8 @@ $(window).ready(function () {
     $("#new-test-btn").click(function () {
         $("#new-test-modal").modal("show");
     });
+
+    $(".dropdown-toggle").dropdown();
+
 }
 );

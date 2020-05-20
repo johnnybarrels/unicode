@@ -193,10 +193,10 @@ a .purple-btn:hover {
 
 .test {
   height: 150px;
-  width: 100%;
+  width: 28%;
   min-width: 180px;
   background-color: #FFFFFF;
-  /* margin: 0 2.5%; */
+  margin: 0 2.5%;
   /* margin: 0 auto; -> nicer for responsive */
   /* padding: 15px 15px; */
     
@@ -215,17 +215,6 @@ a .purple-btn:hover {
 .test-name {
   font-size: 18px;
 }
-
-.fa-caret-square-down, .fa-caret-square-right, .fa-times {
-  color: var(--unicode-pale-purple);
-  float: right;
-  font-size: 25px;
-}
-
-/* .fa-caret-square-up {
-  float: left;
-  padding-right: 10px; 
-} */
 
 #new-test-btn {
   min-width: 120px;
@@ -266,6 +255,8 @@ a:hover {
   font-size: 17px;
   font-weight: bold;
   padding: 5px 5px;
+  color: var(--unicode-main-text-colour);
+  text-align: center;
 }
 
 .option-item {
@@ -275,7 +266,8 @@ a:hover {
   padding-left: 0px;
   text-align: start;
   padding: 5px 5px;
-  border-top: 1px solid #DEDFFC;
+  border-top: 1.5px solid #DEDFFC;
+  color: var(--unicode-main-text-colour);
 }
 
 .option-item:hover {
@@ -283,27 +275,23 @@ a:hover {
   color: #FFFFFF;
 }
 
-.wrapper {
-  position: relative;
-  width: 28%;
-  min-width: 180px;
-  margin: 0 2.5%;
+#option-btn {
+  background-color: var(--unicode-pale-purple);
+  border: none;
+  float: right;
+  height: 30px;
+  width: 30px;
 }
 
-.options {
-  position: absolute;
-  top: 40px;
-  left: 84%;
-
-  /* top: 8px;
-  left: 100%; */
-  z-index: 999;
+#option-btn:focus {
+  box-shadow: none;
 }
 
 .option-item .fas {
   margin-right: 8px;
 }
 
+/* Modals */
 .modal {
   position: absolute;
   z-index: 99999;   
@@ -341,7 +329,7 @@ a:hover {
   padding: 5px 5px;
 }
 
-#create-test-btn {
+#create-btn {
   border-radius: 7px;
   width: 40%;
   margin: 40px 30% 0 30%;
