@@ -81,8 +81,18 @@ class CourseController():
         tests = Test.query.filter_by()
 
     def create_course():
-
-        current_user.courses.append(course)
+        form = NewCourseForm()
+        
+        if form.validate_on_submit():
+            course = Course()
+            course.name = form.course_name.data
+            course.course_code = form.course_code.data
+            
+            db.session.add()
+            db.session.commit()
+        
+            return redirect(url_for('admin_portal'))
+        return redirect(url_for('admin_portal'))
 
     def edit_course():
         pass
@@ -92,3 +102,10 @@ class CourseController():
 
     def rename_course():
         pass
+"""
+class TestController():
+
+    def create_test():
+        form = NewTestForm()
+        pass
+"""

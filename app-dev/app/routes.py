@@ -1,6 +1,6 @@
-from flask import render_template, flash, redirect, url_for, session
-from app import app
-from app.forms import LoginForm
+from flask import render_template, flash, redirect, url_for, session, jsonify
+from app import app, db
+from app.forms import LoginForm, NewTestForm, NewCourseForm
 from app.models import User, Course, Test, Result
 from flask_login import current_user, login_user, login_required, LoginManager
 from app.controllers import UserController, CourseController
@@ -38,14 +38,62 @@ def student_portal():
     return render_template('student.html', title='Student Portal')
 
 
-@app.route('/admin/<course_id>')
+@app.route('/admin/<course_id>', methods=['GET', 'POST'])
 @login_required
 def course_view(course_id):
     course = Course.query.filter_by(id=course_id).first()
     tests = Test.query.filter_by(course_id=course_id)
-    return render_template('admin-course.html', course=course, tests=tests)
+    form = NewTestForm()
+    return render_template('admin-course.html', course=course, tests=tests, form=form)
     # return CourseController().show_tests()
 
+"""
+@app.route('/admin/createcourse', methods=['GET', 'POST'])
+@login_required
+def create_course():
+
+    form = NewCourseForm()
+    
+    if form.validate_on_submit():
+        course = Course()
+        course.name = form.course_name.data
+        course.course_code = form.course_code.data
+        
+        db.session.add()
+        db.session.commit()
+    
+        return redirect(url_for('admin_portal'))
+    return redirect(url_for('admin_portal'))
+"""
+
+@app.route('/admin/<course_id>/createtest', methods=['POST'])
+@login_required
+def create_test(course_id):
+    form = NewTestForm()
+    course = Course.query.filter_by(id = course_id).first()
+    tests = Test.query.filter_by(course_id=course_id)
+    if form.validate_on_submit():
+        test = Test()
+        test.name = form.test_name.data
+        test.course_id = course.id
+
+        db.session.add(test)
+        db.session.commit()
+        
+        return redirect(url_for('course_view', course_id=course.id))
+
+    # TODO: proper input validation - diff return values? flash something? done on frontend?    
+    return redirect(url_for('course_view', course_id=course.id))
+
+@app.route('/admin/<course_id>/deletetest', methods=['GET'])
+@login_required
+def delete_test(course_id, test_id):
+    test  = Test.query.filter_by(test_id=test_id).first()
+
+    db.session.delete(test)
+    db.session.commit()  
+ 
+    return redirect(url_for('course_view', course_id=course.id))
 
 @app.route('/admin/newcourse')
 @login_required

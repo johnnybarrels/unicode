@@ -2,6 +2,7 @@
 
 {% block content %}
 <!-- Modal -->
+<!--<script src="{{ url_for('static', filename='js/newTestForm.js') }}"></script>-->
 <div class="modal fade" id="new-test-modal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -10,15 +11,14 @@
         <span aria-hidden="true">&times;</span>
       </button>
       <div class="modal-body">
-        <div class="form-group mb-5">
-          <h4 class="modal-subheading">Test Name</h4>
-          <input type="text" class="form-control" id="course-name-input" placeholder="e.g. Mid-Semester Exam">
-        </div>
-        <div class="form-group">
-          <h4 class="modal-subheading">IDKKKK WHAT HERE</h4>
-          <input type="text" class="form-control" id="course-code-input" placeholder="e.g. idk??">
-        </div>
-        <button id="create-test-btn" class="btn purple-btn">Create Test</button>
+          <form id="createTestForm" action="{{ url_for("create_test", course_id=course.id) }}" method='post' name='create_test'>
+            {{ form.hidden_tag() }}
+            <div class="form-group mb-5">
+              <h4 class="modal-subheading">Test Name</h4>
+              {{ form.test_name(class="form-control", placeholder="Test Name") }}
+            </div>
+            {{ form.submit(id="create-test-btn", class="btn btn-light") }}
+          </form>  
       </div>
     </div>
   </div>

@@ -53,15 +53,18 @@
           <span aria-hidden="true">&times;</span>
         </button>
         <div class="modal-body">
-          <div class="form-group mb-5">
-            <h4 class="modal-subheading">Course Name</h4>
-            <input type="text" class="form-control" id="course-name-input" placeholder="e.g. Agile Web Development">
-          </div>
-          <div class="form-group">
-            <h4 class="modal-subheading">Course Code</h4>
-            <input type="text" class="form-control" id="course-code-input" placeholder="e.g. CITS3403">
-          </div>
-          <button id="create-test-btn" class="btn purple-btn">Create Course</button>
+          <form id="createCourseForm" action="{{ url_for("create_course") }}" method='post' name='create_course'>
+              {{ form.hidden_tag() }}
+              <div class="form-group mb-5">
+                <h4 class="modal-subheading">Course Name</h4>
+                {{ form.course_name( class="form_control", placeholder="Course Name") }} 
+              </div>
+              <div class="form-group">
+                <h4 class="modal-subheading">Course Code</h4>
+                {{ form.course_code( class="form_control", placeholder="Course Code") }} 
+              </div>
+              {{ form.submit(id="create-course-btn", class="btn btn-light") }} 
+          </form>
         </div>
       </div>
     </div>

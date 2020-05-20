@@ -27,3 +27,7 @@ class NewCourseForm(FlaskForm):
     course_name = StringField('Course Name', validators=[DataRequired()])
     course_code = StringField('Course Code', validators=[DataRequired()])
     submit = SubmitField('Create Course')
+
+class NewTestForm(FlaskForm):
+    test_name = StringField('Test Name', validators=[DataRequired()])
+    submit = SubmitField('Create Test')

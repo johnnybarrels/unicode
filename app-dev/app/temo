@@ -1,0 +1,4 @@
+
+              {{ form.hidden_tag() }}
+                {{ form.course_name( class="form_control", placeholder="Course Name") }} 
+              {{ form.submit(id="create-course-btn", class="btn btn-light") }} 
