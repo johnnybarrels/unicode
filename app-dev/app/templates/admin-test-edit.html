@@ -6,32 +6,33 @@
   <h1 class="page-heading">{{ course.name }} - {{ test.name }}</h1>
 </div>
 
-<div class="row new-question my-3">
-
-  <nav id="question-nav" class="w-100 mt-3 mx-3">
-    <div class="nav nav-pills" id="nav-tab" role="tablist">
+<div class="container new-question my-3">
+  <div id="question-nav" class="row mt-3 mx-1">
+    <div id="nav-tab" class="nav nav-pills" role="tablist">
       {% for question in questions %}
       <a class="nav-item nav-link" id="question-{{ loop.index }}-tab" data-toggle="tab"
         href="#question-{{ loop.index }}" role="tab" aria-controls="question-{{ loop.index }}"
         aria-selected="false">Question
-        {{ loop.index }}</a>
+        {{ loop.index }}
+      </a>
       {% endfor %}
 
-      <a class="nav-item nav-link dropdown dropdown-toggle" id="nav-add-tab" data-toggle="dropdown" href=""
+      <a class="nav-item nav-link dropdown dropdown-toggle caret-off" id="nav-add-tab" data-toggle="dropdown" href=""
         role="button" aria-haspopup="true" aria-expanded="false" aria-selected="false">Add
-        <!-- <i class="fas fa-plus"></i> -->
+        <i class="fas fa-plus"></i>
       </a>
+
+ 
+
       <div class="dropdown-menu">
         <a class="dropdown-item option-item" href="#">What is the output?</a>
         <a class="dropdown-item option-item" href="#">Multiple choice</a>
         <a class="dropdown-item option-item" href="#">Write some code</a>
       </div>
     </div>
-  </nav>
+  </div>
 
-  <p></p>
-
-  <div class="tab-content w-100 mt-0" id="nav-tabContent">
+  <div class="tab-content m-4" id="nav-tabContent">
     {% for question in questions %}
     <div class="tab-pane fade" id="question-{{ loop.index }}" role="tabpanel"
       aria-labelledby="question-{{ loop.index }}-tab">
@@ -41,25 +42,41 @@
 
         <div class="row">
           <div class="col-6">
-            <div class="form-group mb-5">
-              <h4 class="modal-subheading">{{ form.description.label }}</h4>
-              {{ form.description }}
+            <div class="form-group mb-4">
+              <h4 class="subheading">{{ form.description.label }}</h4>
+              {{ form.description(id="question-form", class="form-control", placeholder="What is the output of this code?") }}
             </div>
-            <div class="form-group mb-5">
-              <h4 class="modal-subheading">{{ form.solution.label }}</h4>
-              {{ form.solution }}
+            <div class="form-group mb-4">
+              <h4 class="subheading">{{ form.solution.label }}</h4>
+              {{ form.solution(class="form-control", placeholder="120.0") }}
             </div>
-            <div class="form-group mb-5">
-              <h4 class="modal-subheading">{{ form.mark_alloc.label }}</h4>
-              {{ form.mark_alloc }}
+            <div class="form-group mb-4">
+              <h4 class="subheading">{{ form.mark_alloc.label }}</h4>
+              {{ form.mark_alloc(class="form-control", placeholder="6") }}
             </div>
-            {{ form.save }}
-
-            {{ form.delete }}
+            <div class="row mt-5"></div>
+              {{ form.save(class="btn purple-btn") }}
+              {{ form.delete(class="btn purple-btn") }}
+            
           </div>
 
-          <div class="col-6">
-            {{ form.code_string }}
+
+          <div class="col-6 editor-container">
+            <!-- <div id="editor"> -->
+              {{ form.code_string(id="editor", 
+              placeholder="
+              def my_func(x):
+              if x==1:
+              ETC") }}
+              <!-- def myfunc(arr):
+        for i in arr:
+            if i >= 3:
+               print('yo')
+            elif i >= 500:
+               continue
+        return arr.extend([n for n in arr[::-1]])
+            } -->
+          <!-- </div> -->
           </div>
         </div>
       </form>
@@ -68,5 +85,7 @@
     {% endfor %}
 
   </div>
+
 </div>
+
 {% endblock %}

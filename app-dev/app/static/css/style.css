@@ -104,7 +104,14 @@ a.nav-child {
 
 #new-course-btn {
   /* padding-bottom: 0px; */
-  display: inline;
+  display: inline; 
+}
+
+#new-course-icon {
+  /* padding-bottom: 0px; */
+  position: absolute; 
+  margin-right: 5px;
+  right: 5%;
 }
 
 .topbar {
@@ -129,6 +136,10 @@ a.nav-child {
 
 #logout-icon {
   color: var(--unicode-main-text-colour);
+}
+
+.fa-sign-out-alt:hover {
+  color: var(--unicode-blue);
 }
 
 .fas {
@@ -317,12 +328,16 @@ a:hover {
   margin: 15px 0 40px 0;
 }
 
-.subheading,.modal-subheading {
+.subheading, .modal-subheading {
   font-family: 'Roboto';
   font-weight: bold;
   font-size: 18px;
   line-height: 21px;
   color: var(--unicode-mid-grey1);
+}
+
+.subheading {
+  margin-bottom: 0px;
 }
 
 .close {
@@ -342,10 +357,15 @@ a:hover {
 .new-question {
   background-color: white;
   border-radius: 10px;
+  height: 95%;
+  border: 2px solid black;
 }
 
-#question-nav {
-  height: 42px;
+.caret-off::before {
+  display: none;
+}
+.caret-off::after {
+  display: none;
 }
 
 .nav-item.nav-link{
@@ -358,13 +378,27 @@ a:hover {
   background-color: var(--unicode-purple);
 }
 
-.new-question {
-  border: 2px solid black;
-  height: 95%;
+#question-form {
+  height: 150px;
 }
 
-.new-question .col-6 {
-  border: 2px solid black;
+/* ACE Code Editor */
+#editor {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  font-family: Menlo;
+  font-size: 15px;
+}
+
+.editor-container {
+  position: relative;
+}
+
+.side-panel {
+  background-color: #2A2B30;
+  color: #cecece;
+  border-radius: 5px;
 }
 
 #edit-test-btns {
