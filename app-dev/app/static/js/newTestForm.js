@@ -1,14 +1,12 @@
 $(document).ready( function() {
     console.log('hello');
-    $('#create-test-btn').click( function(event) {
+    $('#create-course-btn').click( function(event) {
         event.preventDefault();
-        let url = "{{ url_for('create_test', course_id=course.id) }}";
-        console.log(url);
-        alert(url);
+        let url = "{{ url_for('create_course') }}";
         $.get(url, function(data) {
-            $.post(url, data=$('#createTestForm').serialize(), function(data) {
+            $.post(url, data=$('#createCourseForm').serialize(), function(data) {
                 if (data.status == 'ok') {
-                    $('#new-test-modal').modal('hide');
+                    $('#new-course-modal').modal('hide');
                     location.reload();  
                 } else {
                     console.log('failed');
