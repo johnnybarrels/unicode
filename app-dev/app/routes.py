@@ -94,8 +94,9 @@ def create_course():
 @app.route('/admin/<course_id>/<test_id>')
 @login_required
 def test_view(course_id, test_id):
-    # test = Test.query.filter_by(id=test_id).first()
-    return render_template('admin-test-view.html')
+    course = Course.query.filter_by(id=course_id).first()
+    test = Test.query.filter_by(course_id=course_id).first()
+    return render_template('admin-test-view.html', course=course, test=test)
 
 
 @app.route('/admin/<course_id>/<test_id>/edit')
