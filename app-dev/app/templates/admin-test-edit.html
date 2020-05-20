@@ -6,8 +6,8 @@
   <h1 class="page-heading">{{ course.name }} - {{ test.name }}</h1>
 </div>
 
-<div class="container new-question my-3">
-  <div id="question-nav" class="row mt-3 mx-1">
+<div class="container new-question my-3 py-3">
+  <div id="question-nav" class="row mx-1">
     <div id="nav-tab" class="nav nav-pills" role="tablist">
       {% for question in questions %}
       <a class="nav-item nav-link" id="question-{{ loop.index }}-tab" data-toggle="tab"
