@@ -71,22 +71,6 @@ def create_course():
 @app.route('/admin/<course_id>/createtest', methods=['POST'])
 @login_required
 def create_test(course_id):
-    # form = NewTestForm()
-    # course = Course.query.filter_by(id = course_id).first()
-    # tests = Test.query.filter_by(course_id=course_id)
-    # if form.validate_on_submit():
-    #     test = Test()
-    #     test.name = form.test_name.data
-    #     test.course_id = course.id
-
-    #     db.session.add(test)
-    #     db.session.commit()
-
-    #     return redirect(url_for('course_view', course_id=course.id))
-
-    # # TODO: proper input validation - diff return values? flash something? done on frontend?
-    # return redirect(url_for('course_view', course_id=course.id))
-
     return CourseController.create_test(course_id)
 
 
@@ -105,3 +89,15 @@ def delete_test(course_id, test_id):
 @login_required
 def create_course():
     return CourseController.create_course()
+
+
+@app.route('/admin/<course_id>/<test_id>')
+@login_required
+def test_view(course_id, test_id):
+    # test = Test.query.filter_by(id=test_id).first()
+    return render_template('admin-test-view.html')
+
+
+@app.route('/admin/<course_id>/<test_id>/edit')
+def edit_test(course_id, test_id):
+    return render_template('admin-test-edit.html')

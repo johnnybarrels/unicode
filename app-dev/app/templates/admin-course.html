@@ -46,7 +46,7 @@
         </li>
         <li class="option-item">
           <i class="fas fa-pen"></i>
-          <a href=#>Edit test</a>
+          <a href="{{ url_for('edit_test', course_id=course.id, test_id=test.id) }}">Edit test</a>
         </li>
         <li class="option-item">
           <i class="fas fa-clone"></i>
@@ -58,7 +58,7 @@
         </li>
       </ul>
     </div>
-    <a id="test-link" href=#>
+    <a id="test-link" href="{{ url_for('test_view', course_id=course.id, test_id=test.id) }}">
       <h2 class="unit-details">{{ course.course_code }}<br>{{ course.name }}</h2>
       <h3 class="test-name">{{ test.name }}</h3>
     </a>
