@@ -40,21 +40,29 @@
       </button>
       <ul class="dropdown-menu">
         <li id="option-title">Options</li>
+        <a href=#>
+          <li class="option-item">
+            <i class="fas fa-font"></i>
+            Rename test
+          </li>
+        </a>
+        <a href="{{ url_for('edit_test', course_id=course.id, test_id=test.id) }}">
+          <li class="option-item">
+            <i class="fas fa-pen"></i>
+            Edit test
+          </li>
+        </a>
+        <a href=#>
         <li class="option-item">
-          <i class="fas fa-font"></i>
-          <a href=#>Rename test</a>
-        </li>
+            <i class="fas fa-clone"></i>
+            Make copy
+          </li>
+        </a>
         <li class="option-item">
-          <i class="fas fa-pen"></i>
-          <a href="{{ url_for('edit_test', course_id=course.id, test_id=test.id) }}">Edit test</a>
-        </li>
-        <li class="option-item">
-          <i class="fas fa-clone"></i>
-          <a href=#>Make copy</a>
-        </li>
-        <li class="option-item">
-          <i class="fas fa-trash"></i>
-          <a href="{{ url_for('delete_test', course_id=course.id, test_id=test.id) }}">Delete test</a>
+          <a href="{{ url_for('delete_test', course_id=course.id, test_id=test.id) }}">
+            <i class="fas fa-trash"></i>
+            Delete test
+          </a>
         </li>
       </ul>
     </div>

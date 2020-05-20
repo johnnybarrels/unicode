@@ -183,7 +183,7 @@ a .purple-btn:hover {
   font-size: 18px;
   color: var(--unicode-mid-grey1);
   text-align: start;
-  line-height: 38px;
+  line-height: 35px;
   margin-bottom: 0;
 }
 
@@ -218,9 +218,10 @@ a .purple-btn:hover {
 }
 
 #new-test-btn {
-  min-width: 120px;
+  min-width: 110px;
   position: absolute; 
   right: 5%;
+  font-size: 14px;
 }
 
 a {
@@ -364,4 +365,38 @@ a:hover {
 
 .new-question .col-6 {
   border: 2px solid black;
+}
+
+#edit-test-btns {
+  position: absolute; 
+  right: 5%;
+}
+
+.edit-test-btn {
+  margin-left: 8px;
+  font-size: 14px;
+}
+
+.edit-test-btn .fas {
+  margin: 0 10px 0 0;
+}
+
+.test-results {
+  height: 170px;
+  width: 170px;
+  background-color: #FFFFFF;
+  margin: 0 auto;
+}
+
+.result {
+  display: block;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  height: 100%;
+  margin-top: 30px;
+}
+
+.results-graph {
+  background-color: #FFFFFF;
 }
