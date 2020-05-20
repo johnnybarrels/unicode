@@ -30,7 +30,8 @@ def register():
 
 @app.route('/admin')
 def admin_portal():
-    return render_template('admin.html', title='Admin Portal')
+    course_form = NewCourseForm()
+    return render_template('admin.html', title='Admin Portal', course_form=course_form)
 
 
 @app.route('/student')
@@ -44,7 +45,8 @@ def course_view(course_id):
     course = Course.query.filter_by(id=course_id).first()
     tests = Test.query.filter_by(course_id=course_id)
     form = NewTestForm()
-    return render_template('admin-course.html', course=course, tests=tests, form=form)
+    course_form = NewCourseForm()
+    return render_template('admin-course.html', course_form = course_form, course=course, tests=tests, form=form)
     # return CourseController().show_tests()
 
 """
@@ -95,7 +97,8 @@ def delete_test(course_id, test_id):
  
     return redirect(url_for('course_view', course_id=course.id))
 
-@app.route('/admin/newcourse')
+@app.route('/admin/newcourse', methods=['POST'])
 @login_required
 def create_course():
+    print('hello')
     return CourseController.create_course()

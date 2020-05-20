@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
 from flask_login import current_user, login_user, logout_user, login_required
-from app.forms import LoginForm, RegistrationForm
+from app.forms import LoginForm, RegistrationForm, NewCourseForm
 from app.models import User, Course, Test, Question, Result
 from flask import request
 from werkzeug.urls import url_parse
@@ -10,7 +10,7 @@ from werkzeug.urls import url_parse
 class UserController():
 
     def login():
-
+        
         form = LoginForm()
         if form.validate_on_submit():  # POST request (user clicks on Login button)
             # Check that user is in db and that password is correct
@@ -22,9 +22,9 @@ class UserController():
             login_user(user)
 
             # Handling the case where a user who is not logged in requests a specific page
-            next_page = request.args.get('next')
-            if not next_page or url_parse(next_page).netloc != '':
-                return redirect(url_for('login'))
+            #next_page = request.args.get('next')
+            #if not next_page or url_parse(next_page).netloc != '':
+            #    return redirect(url_for('login'))
 
             # return redirect(next_page)
 
@@ -39,7 +39,8 @@ class UserController():
 
     def show_portal():
         if current_user.is_admin:
-            return render_template('admin.html')
+            course_form = NewCourseForm()
+            return render_template('admin.html', course_form = course_form)
         else:
             return render_template('student.html')
 
@@ -81,18 +82,19 @@ class CourseController():
         tests = Test.query.filter_by()
 
     def create_course():
-        form = NewCourseForm()
-        
-        if form.validate_on_submit():
+        course_form = NewCourseForm()
+        if course_form.validate_on_submit():
             course = Course()
-            course.name = form.course_name.data
-            course.course_code = form.course_code.data
+            course.name = course_form.course_name.data
+            course.course_code = course_form.course_code.data
             
-            db.session.add()
+            db.session.add(course)
+            current_user.courses.append(course)
             db.session.commit()
-        
+
+            
             return redirect(url_for('admin_portal'))
-        return redirect(url_for('admin_portal'))
+        return redirect(url_for('admin_portal', course_form=course_form))
 
     def edit_course():
         pass
