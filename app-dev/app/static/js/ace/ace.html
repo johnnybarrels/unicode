@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>ACE in Action</title>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+
+  <style type="text/css" media="screen">
+    #editor {
+      width: 100%;
+      height: 100%;
+      border-radius: 5px;
+      font-family: Menlo;
+      font-size: 15px;
+    }
+
+    .editor-container {
+      position: relative;
+    }
+
+    .side-panel {
+      background-color: #2A2B30;
+      color: #cecece;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="row" style="height: 500px; margin-top: 150px">
+      <div class="col py-3 side-panel">
+        <h3>Question 1</h3>
+        <p>Write a Python function that.....</p>
+
+      </div>
+      <div class="col-6 editor-container">
+        <div id="editor">def myfunc(arr):
+    for i in arr:
+        if i >= 3:
+           print('yo')
+        elif i >= 500:
+           continue
+    return arr.extend([n for n in arr[::-1]])
+}</div>
+      </div>
+      <div class="col py-3 side-panel"></div>
+    </div>
+  </div>
+
+  <script src="js/ace.js" type="text/javascript" charset="utf-8"></script>
+  <script>
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/tomorrow_night_eighties");
+    editor.session.setMode("ace/mode/python");
+  </script>
+</body>
+
+</html>
