@@ -45,6 +45,7 @@
 
 <body>
   <!-- Modal -->
+  {% if current_user.is_admin %}
   <div class="modal fade" id="new-course-modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -53,22 +54,23 @@
           <span aria-hidden="true">&times;</span>
         </button>
         <div class="modal-body">
-          <form id="createCourseForm" action="{{ url_for("create_course") }}" method='post' name='create_course'>
-              {{ form.hidden_tag() }}
-              <div class="form-group mb-5">
-                <h4 class="modal-subheading">Course Name</h4>
-                {{ form.course_name( class="form_control", placeholder="Course Name") }} 
-              </div>
-              <div class="form-group">
-                <h4 class="modal-subheading">Course Code</h4>
-                {{ form.course_code( class="form_control", placeholder="Course Code") }} 
-              </div>
-              {{ form.submit(id="create-course-btn", class="btn btn-light") }} 
+          <form id="createCourseForm" action="{{ url_for('create_course') }}" method="post" name="create_course">
+
+            <div class="form-group mb-5">
+              <h4 class="modal-subheading">Course Name</h4>
+
+            </div>
+            <div class="form-group">
+              <h4 class="modal-subheading">Course Code</h4>
+
+            </div>
+
           </form>
         </div>
       </div>
     </div>
   </div>
+  {% endif %}
 
   <!-- SideBar -->
   <div class="sidenav">

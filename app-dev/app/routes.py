@@ -47,6 +47,7 @@ def course_view(course_id):
     return render_template('admin-course.html', course=course, tests=tests, form=form)
     # return CourseController().show_tests()
 
+
 """
 @app.route('/admin/createcourse', methods=['GET', 'POST'])
 @login_required
@@ -66,34 +67,39 @@ def create_course():
     return redirect(url_for('admin_portal'))
 """
 
+
 @app.route('/admin/<course_id>/createtest', methods=['POST'])
 @login_required
 def create_test(course_id):
-    form = NewTestForm()
-    course = Course.query.filter_by(id = course_id).first()
-    tests = Test.query.filter_by(course_id=course_id)
-    if form.validate_on_submit():
-        test = Test()
-        test.name = form.test_name.data
-        test.course_id = course.id
+    # form = NewTestForm()
+    # course = Course.query.filter_by(id = course_id).first()
+    # tests = Test.query.filter_by(course_id=course_id)
+    # if form.validate_on_submit():
+    #     test = Test()
+    #     test.name = form.test_name.data
+    #     test.course_id = course.id
 
-        db.session.add(test)
-        db.session.commit()
-        
-        return redirect(url_for('course_view', course_id=course.id))
+    #     db.session.add(test)
+    #     db.session.commit()
 
-    # TODO: proper input validation - diff return values? flash something? done on frontend?    
-    return redirect(url_for('course_view', course_id=course.id))
+    #     return redirect(url_for('course_view', course_id=course.id))
 
-@app.route('/admin/<course_id>/deletetest', methods=['GET'])
+    # # TODO: proper input validation - diff return values? flash something? done on frontend?
+    # return redirect(url_for('course_view', course_id=course.id))
+
+    return CourseController.create_test(course_id)
+
+
+@app.route('/admin/<course_id>/deletetest/<test_id>', methods=['GET'])
 @login_required
 def delete_test(course_id, test_id):
-    test  = Test.query.filter_by(test_id=test_id).first()
+    test = Test.query.filter_by(id=test_id).first()
 
     db.session.delete(test)
-    db.session.commit()  
- 
-    return redirect(url_for('course_view', course_id=course.id))
+    db.session.commit()
+
+    return redirect(url_for('course_view', course_id=course_id))
+
 
 @app.route('/admin/newcourse')
 @login_required

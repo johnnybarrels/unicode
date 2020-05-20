@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
 from flask_login import current_user, login_user, logout_user, login_required
-from app.forms import LoginForm, RegistrationForm
+from app.forms import LoginForm, RegistrationForm, NewTestForm, NewCourseForm
 from app.models import User, Course, Test, Question, Result
 from flask import request
 from werkzeug.urls import url_parse
@@ -22,9 +22,9 @@ class UserController():
             login_user(user)
 
             # Handling the case where a user who is not logged in requests a specific page
-            next_page = request.args.get('next')
-            if not next_page or url_parse(next_page).netloc != '':
-                return redirect(url_for('login'))
+            # next_page = request.args.get('next')
+            # if not next_page or url_parse(next_page).netloc != '':
+            #     return redirect(url_for('login'))
 
             # return redirect(next_page)
 
@@ -80,19 +80,37 @@ class CourseController():
     def get_tests():
         tests = Test.query.filter_by()
 
+    def create_test(course_id):
+        form = NewTestForm()
+        course = Course.query.filter_by(id=course_id).first()
+        tests = Test.query.filter_by(course_id=course_id)
+        if form.validate_on_submit():
+            test = Test()
+            test.name = form.test_name.data
+            test.course_id = course.id
+
+            db.session.add(test)
+            db.session.commit()
+
+            return redirect(url_for('course_view', course_id=course.id))
+
+        # TODO: proper input validation - diff return values? flash something? done on frontend?
+        return redirect(url_for('course_view', course_id=course.id))
+
     def create_course():
         form = NewCourseForm()
-        
+        return form
+
         if form.validate_on_submit():
             course = Course()
             course.name = form.course_name.data
             course.course_code = form.course_code.data
-            
+
             db.session.add()
             db.session.commit()
-        
-            return redirect(url_for('admin_portal'))
-        return redirect(url_for('admin_portal'))
+
+            return redirect(url_for('course_view'))
+        return redirect(url_for('admin_portal', form=form))
 
     def edit_course():
         pass
@@ -102,6 +120,8 @@ class CourseController():
 
     def rename_course():
         pass
+
+
 """
 class TestController():
 
