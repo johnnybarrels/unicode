@@ -55,4 +55,3 @@ def load_data():
                   question_string="""Write a Python function that takes a string as input, and returns the count of all the 'double vowels', that is: two consecutive vowels (eg. 'ou', 'oo', 'Ai').\n\nThe input string can contain any ASCII character.""")
 
     db.session.add_all([u1, u2, t1, t2, t3, t4, q1, q2, q3])
-load_data()

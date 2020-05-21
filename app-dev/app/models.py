@@ -24,7 +24,7 @@ class User(UserMixin, db.Model):
     first_name = db.Column(db.String(32))
     last_name = db.Column(db.String(32))
     is_admin = db.Column(db.Boolean, nullable=False, default=True)
-    student_id = db.Column(db.Integer, index=True)
+    # student_id = db.Column(db.Integer, index=True)
     courses = db.relationship('Course', secondary=enrolments, lazy='subquery',
                               backref=db.backref('users', lazy=True))
 
