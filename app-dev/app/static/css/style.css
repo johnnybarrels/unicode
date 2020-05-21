@@ -188,6 +188,11 @@ a .purple-btn:hover {
   color: white;
 }
 
+.delete-btn {
+  background-color: var(--unicode-red);
+  color: white;
+  font-weight: 600;
+}
 
 /* Course view specific styles */
 .page-heading {
@@ -377,7 +382,7 @@ a:hover {
   background-color: var(--unicode-purple);
 }
 
-#question-form {
+#question-description {
   height: 150px;
 }
 
