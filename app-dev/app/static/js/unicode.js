@@ -27,6 +27,10 @@ $(window).ready(function () {
         $("#new-test-modal").modal("show");
     });
 
+    $("#manage-students-btn").click(function () {
+        $("#manage-students-modal").modal("show");
+    });
+
     $(".dropdown-toggle").dropdown();
 
 
