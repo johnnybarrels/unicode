@@ -31,17 +31,7 @@ def load_data():
     t4 = Test(id=4, name='2020 Mid sem', course_id=2)
 
     q1 = Question(id=1, question_string='What is the output of this function?',
-                  code_string='''
-                    def func(s):
-                        l = [c for c in s[::-1]]
-
-                        for i in range(0, len(l), 2):
-                            if l[i].islower():
-                                l[i] = l[i].upper()
-
-                        return ''.join(l)
-
-                    print(func("Practice Question"))
+                  code_string='''def func(s):\n\tl = [c for c in s[::-1]]\n\t\tfor i in range(0, len(l), 2):\n\tif l[i].islower():\n\tl[i] = l[i].upper()\n\treturn ''.join(l)\nprint(func("Practice Question"))
                   ''', answer='NoItSeUQ eCiTcArP', test_id=1, mark_alloc=5,
                   question_type=1)
 
@@ -62,10 +52,6 @@ def load_data():
                   mcq_3='float', mcq_4='bool')
 
     q3 = Question(id=3, question_type=3, test_id=1, mark_alloc=8,
-                  question_string="""
-                  Write a Python function that takes a string as input, and returns the count of all the 'double vowels', that is: two consecutive vowels (eg. 'ou', 'oo', 'Ai').
+                  question_string="""Write a Python function that takes a string as input, and returns the count of all the 'double vowels', that is: two consecutive vowels (eg. 'ou', 'oo', 'Ai').\n\nThe input string can contain any ASCII character.""")
 
-                  The input string can contain any ASCII character.
-                  """)
-    print(123)
     db.session.add_all([u1, u2, t1, t2, t3, t4, q1, q2, q3])
