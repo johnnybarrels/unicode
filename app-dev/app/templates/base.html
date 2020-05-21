@@ -37,6 +37,9 @@
   <!-- FontAwesome icons -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 
+  <!-- ACE Code Editor -->
+  <script src="{{ url_for('static', filename='js/ace/ace.js') }}" type="text/javascript" charset="utf-8"></script>
+
   <!-- Our own js and css -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <script src="{{ url_for('static', filename='js/unicode.js') }}"></script>
@@ -75,14 +78,20 @@
   <!-- SideBar -->
   <div class="sidenav">
     <img id="logo-horiz" src="{{ url_for('static', filename='img/UniCode-colour-horiz.png') }}" alt="UniCode logo">
-    <div class="nav-parent">Courses
+    <div class="nav-parent">
       {% if current_user.is_admin %}
-      <a id="new-course-btn" href="#">
+      <div class="row">
+      <a href="{{ url_for('admin_portal') }}">Courses</a>
+      
+      <a id="new-course-icon" href="#">
         <i id="nav-indicator" class="fas fa-plus-circle"></i>
       </a>
-      {% endif %}
     </div>
-
+      {% else %}
+      <a href="{{ url_for('student_portal') }}">Courses</a>
+      {% endif %}
+ 
+    </div>
 
 
     {% if current_user.courses %}
@@ -100,11 +109,10 @@
       {{ current_user.first_name }} {{ current_user.last_name }}
       <a id="logout-icon" href="{{ (url_for('logout')) }}" style="color: #8593A5;"><i
           class="fas fa-sign-out-alt"></i></a>
-      <!-- <i class="fas fa-chevron-circle-down"></i> -->
     </p>
   </div>
 
-  <div class="content-container h-100 p-5">
+  <div class="content-container p-5">
     {% block content %} {% endblock %}
   </div>
 

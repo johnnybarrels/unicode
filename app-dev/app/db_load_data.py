@@ -1,5 +1,5 @@
 from app import db
-from app.models import User, Course, Test, Result
+from app.models import User, Course, Test, Question, Result
 from werkzeug.security import generate_password_hash
 
 
@@ -29,4 +29,42 @@ def load_data():
 
     t4 = Test(id=4, name='2020 Mid sem', course_id=2)
 
-    db.session.add_all([u1, u2, t1, t2, t3, t4])
+    q1 = Question(id=1, question_string='What is the output of this function?',
+                  code_string='''
+                    def func(s):
+                        l = [c for c in s[::-1]]
+
+                        for i in range(0, len(l), 2):
+                            if l[i].islower():
+                                l[i] = l[i].upper()
+
+                        return ''.join(l)
+
+                    print(func("Practice Question"))
+                  ''', answer='NoItSeUQ eCiTcArP', test_id=1, mark_alloc=5,
+                  question_type=1)
+
+    q2 = Question(id=2, question_string='What data type is output from this code?',
+                  code_string='''
+                    def func2(x):
+
+                        if x == 1:
+                            return 1
+                        else:
+                            return (x * func2(x - 1))
+
+
+                        print(func2(5.0))
+
+                  ''', answer='float', test_id=1, mark_alloc=3,
+                  question_type=2, mcq_1='int', mcq_2='str',
+                  mcq_3='float', mcq_4='bool')
+
+    q3 = Question(id=3, question_type=3, test_id=1, mark_alloc=8,
+                  question_string="""
+                  Write a Python function that takes a string as input, and returns the count of all the 'double vowels', that is: two consecutive vowels (eg. 'ou', 'oo', 'Ai').
+
+                  The input string can contain any ASCII character.
+                  """)
+
+    db.session.add_all([u1, u2, t1, t2, t3, t4, q1, q2, q3])

@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for, session, jsonify
 from app import app, db
-from app.forms import LoginForm, NewTestForm, NewCourseForm
-from app.models import User, Course, Test, Result
+from app.forms import LoginForm, NewTestForm, NewCourseForm, QuestionForm
+from app.models import User, Course, Question, Test, Result
 from flask_login import current_user, login_user, login_required, LoginManager
 from app.controllers import UserController, CourseController
 
@@ -100,5 +100,13 @@ def test_view(course_id, test_id):
 
 
 @app.route('/admin/<course_id>/<test_id>/edit')
+@login_required
 def edit_test(course_id, test_id):
-    return render_template('admin-test-edit.html')
+    course = Course.query.filter_by(id=course_id).first()
+    test = Test.query.filter_by(course_id=course_id).first()
+    questions = Question.query.filter_by(test_id=test.id).all()
+    q_len = len(questions)
+    form = QuestionForm()
+    return render_template('admin-test-edit.html', course=course,
+                           test=test, questions=questions,
+                           q_len=q_len, form=form)

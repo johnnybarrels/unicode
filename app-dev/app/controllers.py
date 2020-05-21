@@ -39,7 +39,8 @@ class UserController():
 
     def show_portal():
         if current_user.is_admin:
-            return render_template('admin.html')
+            course_form = NewCourseForm()
+            return render_template('admin.html', course_form=course_form)
         else:
             return render_template('student.html')
 
