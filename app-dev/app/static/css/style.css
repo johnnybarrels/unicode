@@ -102,6 +102,17 @@ a.nav-child {
   line-height: 19px;
 }
 
+.footer {
+  font-size: 11px;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 23%;
+  /* color: white; */
+  text-align: center;
+  padding: 0 30px;
+}
+
 #new-course-btn {
   /* padding-bottom: 0px; */
   display: inline; 
@@ -216,7 +227,7 @@ a .purple-btn:hover {
   margin: 0 2.5%;
   /* margin: 0 auto; -> nicer for responsive */
   /* padding: 15px 15px; */
-    
+  position: relative;
   transition: background-color 0.5s linear;
 }
 
@@ -245,18 +256,6 @@ a .purple-btn:hover {
   right: 15%;
   font-size: 14px;
 }
-
-/* #student-list {
-  font-family: 'Open Sans';
-  font-size: 16px;
-  margin: 0;
-  padding-left: 0px;
-  text-align: start;
-  padding: 5px 5px;
-  border-top: 1.5px solid #DEDFFC;
-  color: var(--unicode-main-text-colour);
-} */
-
 
 #student-list {
   width: 90%;
@@ -287,6 +286,11 @@ a .purple-btn:hover {
 
 #add-student {
   width: 280px;
+}
+
+#make-live {
+  position: absolute;
+  bottom: 5px;
 }
 
 a {

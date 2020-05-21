@@ -104,12 +104,6 @@
             Edit test
           </li>
         </a>
-        <a href=#>
-        <li class="option-item">
-          <i class="fas fa-clock"></i>
-            Make live
-          </li>
-        </a>
         <li class="option-item">
           <a href="{{ url_for('delete_test', course_id=course.id, test_id=test.id) }}">
             <i class="fas fa-trash"></i>
@@ -122,6 +116,12 @@
       <h2 class="unit-details">{{ course.course_code }}<br>{{ course.name }}</h2>
       <h3 class="test-name">{{ test.name }}</h3>
     </a>
+    <div id="make-live" class="row m-1">
+      <div class="custom-control custom-switch">
+        <input type="checkbox" class="custom-control-input" id="live-switch">
+        <label class="custom-control-label" for="live-switch">Make live</label>
+      </div>    
+    </div>
   </div>
 
 
