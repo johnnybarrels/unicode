@@ -27,3 +27,10 @@ $(window).ready(function () {
 
 }
 );
+
+// ACE Code Editor
+var editor = ace.edit("editor");
+// editor.setTheme("{{ url_for('static', filename='js/ace/theme/tomorrow_night_eighties') }}");
+// editor.session.setMode("{{ url_for('static', filename='js/ace/theme/tomorrow_night_eighties') }}ace/mode/python");
+editor.setTheme("ace/theme/tomorrow_night_eighties");
+editor.session.setMode("ace/mode/python");

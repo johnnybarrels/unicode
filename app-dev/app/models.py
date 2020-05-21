@@ -63,10 +63,16 @@ class Question(db.Model):
     __tablename__ = 'questions'
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     question_string = db.Column(db.String(256), nullable=False)
-    answer = db.Column(db.String(256), nullable=False)
+    code_string = db.Column(db.String(1024))
+    answer = db.Column(db.String(256))
+    mcq_1 = db.Column(db.String(128))
+    mcq_2 = db.Column(db.String(128))
+    mcq_3 = db.Column(db.String(128))
+    mcq_4 = db.Column(db.String(128))
     test_id = db.Column(db.Integer, db.ForeignKey('tests.id'))
-    mark_alloc = db.Column(db.Integer)
-    question_group = db.Column(db.Integer)
+    mark_alloc = db.Column(db.Integer, nullable=False)
+    # 1 = Output, 2 = MCQ, 3 = Write code
+    question_type = db.Column(db.Integer, nullable=False, default=1)
 
     def __repr__(self):
         return f'<Question: {self.question_string}>'
