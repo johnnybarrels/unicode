@@ -1,3 +1,4 @@
+
 from app import db
 from app.models import User, Course, Test, Question, Result
 from werkzeug.security import generate_password_hash
@@ -66,5 +67,6 @@ def load_data():
 
                   The input string can contain any ASCII character.
                   """)
-
+    print(123)
     db.session.add_all([u1, u2, t1, t2, t3, t4, q1, q2, q3])
+load_data()

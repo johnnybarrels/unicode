@@ -30,7 +30,8 @@ def register():
 
 @app.route('/admin')
 def admin_portal():
-    return render_template('admin.html', title='Admin Portal')
+    course_form = NewCourseForm()
+    return render_template('admin.html', title='Admin Portal', course_form=course_form)
 
 
 @app.route('/student')
@@ -44,7 +45,8 @@ def course_view(course_id):
     course = Course.query.filter_by(id=course_id).first()
     tests = Test.query.filter_by(course_id=course_id)
     form = NewTestForm()
-    return render_template('admin-course.html', course=course, tests=tests, form=form)
+    course_form = NewCourseForm()
+    return render_template('admin-course.html', course_form=course_form, course=course, tests=tests, form=form)
     # return CourseController().show_tests()
 
 
@@ -85,20 +87,30 @@ def delete_test(course_id, test_id):
     return redirect(url_for('course_view', course_id=course_id))
 
 
-@app.route('/admin/newcourse')
+@app.route('/admin/newcourse', methods=['POST'])
 @login_required
 def create_course():
+    print('hello')
     return CourseController.create_course()
 
 
 @app.route('/admin/<course_id>/<test_id>')
 @login_required
 def test_view(course_id, test_id):
+    course_form = NewCourseForm()
     course = Course.query.filter_by(id=course_id).first()
     test = Test.query.filter_by(course_id=course_id).first()
-    return render_template('admin-test-view.html', course=course, test=test)
+    return render_template('admin-test-view.html', course_form=course_form, course=course, test=test)
 
+@app.route('/admin/<course_id>/<test_id>/createquestion')
+@login_required
+def create_question(course_id, test_id):
+    create_question_form = NewQuestionForm()
+    course = Course.query.filter_by(id=course_id).first()
+    test = Test.query.filter_by(course_id=course_id).first()
 
+    return 1
+    
 @app.route('/admin/<course_id>/<test_id>/edit')
 @login_required
 def edit_test(course_id, test_id):
@@ -107,6 +119,8 @@ def edit_test(course_id, test_id):
     questions = Question.query.filter_by(test_id=test.id).all()
     q_len = len(questions)
     form = QuestionForm()
+    course_form = NewCourseForm()
     return render_template('admin-test-edit.html', course=course,
                            test=test, questions=questions,
-                           q_len=q_len, form=form)
+                           q_len=q_len, form=form,
+                           course_form=course_form)

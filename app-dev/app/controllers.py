@@ -10,7 +10,7 @@ from werkzeug.urls import url_parse
 class UserController():
 
     def login():
-
+        
         form = LoginForm()
         if form.validate_on_submit():  # POST request (user clicks on Login button)
             # Check that user is in db and that password is correct
@@ -99,19 +99,19 @@ class CourseController():
         return redirect(url_for('course_view', course_id=course.id))
 
     def create_course():
-        form = NewCourseForm()
-        return form
-
-        if form.validate_on_submit():
+        course_form = NewCourseForm()
+        if course_form.validate_on_submit():
             course = Course()
-            course.name = form.course_name.data
-            course.course_code = form.course_code.data
-
-            db.session.add()
+            course.name = course_form.course_name.data
+            course.course_code = course_form.course_code.data
+            
+            db.session.add(course)
+            current_user.courses.append(course)
             db.session.commit()
 
-            return redirect(url_for('course_view'))
-        return redirect(url_for('admin_portal', form=form))
+            
+            return redirect(url_for('admin_portal'))
+        return redirect(url_for('admin_portal', course_form=course_form))
 
     def edit_course():
         pass
