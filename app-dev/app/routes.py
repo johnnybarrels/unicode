@@ -30,7 +30,8 @@ def register():
 
 @app.route('/admin')
 def admin_portal():
-    return render_template('admin.html', title='Admin Portal')
+    course_form = NewCourseForm()
+    return render_template('admin.html', title='Admin Portal', course_form=course_form)
 
 
 @app.route('/student')
@@ -44,7 +45,9 @@ def course_view(course_id):
     course = Course.query.filter_by(id=course_id).first()
     tests = Test.query.filter_by(course_id=course_id)
     form = NewTestForm()
-    return render_template('admin-course.html', course=course, tests=tests, form=form)
+    course_form = NewCourseForm()
+    return render_template('admin-course.html', course=course, tests=tests,
+                           course_form=course_form, form=form)
     # return CourseController().show_tests()
 
 
@@ -95,18 +98,58 @@ def create_course():
 @login_required
 def test_view(course_id, test_id):
     course = Course.query.filter_by(id=course_id).first()
-    test = Test.query.filter_by(course_id=course_id).first()
-    return render_template('admin-test-view.html', course=course, test=test)
+    test = Test.query.filter_by(id=test_id).first()
+    course_form = NewCourseForm()
+    return render_template('admin-test-view.html', course=course,
+                           course_form=course_form, test=test)
 
 
 @app.route('/admin/<course_id>/<test_id>/edit')
 @login_required
 def edit_test(course_id, test_id):
     course = Course.query.filter_by(id=course_id).first()
-    test = Test.query.filter_by(course_id=course_id).first()
+    test = Test.query.filter_by(id=test_id).first()
     questions = Question.query.filter_by(test_id=test.id).all()
-    q_len = len(questions)
     form = QuestionForm()
+    course_form = NewCourseForm()
     return render_template('admin-test-edit.html', course=course,
                            test=test, questions=questions,
-                           q_len=q_len, form=form)
+                           form=form, course_form=course_form)
+
+
+@app.route('/admin/<course_id>/<test_id>/newquestion', methods=['GET', 'POST'])
+@login_required
+def new_question(course_id, test_id):
+    # course = Course.query.filter_by(id=course_id).first()
+    # test = Test.query.filter_by(id=test_id).first()
+    form = QuestionForm()
+
+    if form.validate_on_submit():
+        print('~~~~~ question form validated')
+        q = Question()
+
+        q.test_id = test_id
+        q.question_type = int(form.question_type.data)
+        q.question_string = form.description.data
+        q.code_string = form.code_string.data
+        q.mcq_1 = form.mcq_1.data
+        q.mcq_2 = form.mcq_2.data
+        q.mcq_3 = form.mcq_3.data
+        q.mcq_4 = form.mcq_4.data
+        q.answer = form.solution.data
+        q.mark_alloc = form.mark_alloc.data
+        
+        # if q.question_type == 1:
+        #     q.answer = form.solution.data
+
+        # elif q.question_type == 2:
+        #     q.answer = form.solution.data
+        #     q.mcq_1 = form.mcq_1.data
+        #     q.mcq_2 = form.mcq_2.data
+        #     q.mcq_3 = form.mcq_3.data
+        #     q.mcq_4 = form.mcq_4.data
+
+        db.session.add(q)
+        db.session.commit()
+
+    return redirect(url_for('edit_test', course_id=course_id, test_id=test_id))

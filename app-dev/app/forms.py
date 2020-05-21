@@ -1,7 +1,7 @@
 from wtforms.validators import DataRequired, Email, ValidationError, EqualTo
 from wtforms.fields.html5 import EmailField
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, IntegerField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, IntegerField, HiddenField
 
 
 class LoginForm(FlaskForm):
@@ -36,12 +36,13 @@ class NewTestForm(FlaskForm):
 
 class QuestionForm(FlaskForm):
     description = TextAreaField('Description', validators=[DataRequired()])
-    code_string = TextAreaField('Code')
+    code_string = HiddenField('Code')
     solution = StringField('Solution')
     mcq_1 = StringField('MCQ Option 1')
     mcq_2 = StringField('MCQ Option 2')
     mcq_3 = StringField('MCQ Option 3')
     mcq_4 = StringField('MCQ Option 4')
     mark_alloc = IntegerField('Allocated mark', validators=[DataRequired()])
+    question_type = HiddenField('Question Type', validators=[DataRequired()])
     save = SubmitField('Save')
     delete = SubmitField('Delete')
