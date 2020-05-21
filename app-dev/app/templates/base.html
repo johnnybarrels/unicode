@@ -1,40 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
+<head> <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  {% if title %}
-  <title>{{ title }} - UniCode</title>
+  {% if title %} <title>{{ title }} - UniCode</title>
   {% else %}
   <title>Unicode</title>
-  {% endif %}
-
+  {% endif %} 
   <!-- Favicon -->
   <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
-
-  <!-- Bootstrap -->
+<!-- Bootstrap -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <!-- jQuery --> <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
   <!-- Bootstrap js -->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script> 
   <!-- Bootstrap js bundle -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
-
-  <!-- Google fonts -->
+<!-- Google fonts -->
   <link
     href="https://fonts.googleapis.com/css2?family=Cabin:wght@400;500&family=DM+Sans:wght@400;700&family=Lato:wght@300;400;700&family=Montserrat:wght@300;400;500&family=Roboto:wght@300;400;500&display=swap&family=Open+Sans&display=swap"
-    rel="stylesheet">
-
+    rel="stylesheet"> 
   <!-- Material Darker icons -->
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-  <!-- FontAwesome icons -->
+<!-- FontAwesome icons -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
 
   <!-- ACE Code Editor -->
@@ -43,9 +34,8 @@
   <!-- Our own js and css -->
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
   <script src="{{ url_for('static', filename='js/unicode.js') }}"></script>
-  <!-- <script src="{{ url_for('static', filename='js/createTestPopup.js') }}"></script> -->
-</head>
-
+  <!--<script src="{{ url_for('static', filename='js/newTestForm.js') }}"></script>-->
+</head> 
 <body>
   <!-- Modal -->
   {% if current_user.is_admin %}
@@ -106,8 +96,7 @@
   </div>
 
   <div class="topbar">
-    <p id="username">
-      {{ current_user.first_name }} {{ current_user.last_name }}
+    <p id="username">{{ current_user.first_name }} {{ current_user.last_name }}
       <a id="logout-icon" href="{{ (url_for('logout')) }}" style="color: #8593A5;"><i
           class="fas fa-sign-out-alt"></i></a>
     </p>

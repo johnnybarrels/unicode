@@ -88,20 +88,31 @@ def delete_test(course_id, test_id):
     return redirect(url_for('course_view', course_id=course_id))
 
 
-@app.route('/admin/newcourse')
+@app.route('/admin/newcourse', methods=['POST'])
 @login_required
 def create_course():
+    print('hello')
     return CourseController.create_course()
 
 
 @app.route('/admin/<course_id>/<test_id>')
 @login_required
 def test_view(course_id, test_id):
+    course_form = NewCourseForm()
     course = Course.query.filter_by(id=course_id).first()
     test = Test.query.filter_by(id=test_id).first()
     course_form = NewCourseForm()
     return render_template('admin-test-view.html', course=course,
                            course_form=course_form, test=test)
+
+@app.route('/admin/<course_id>/<test_id>/createquestion')
+@login_required
+def create_question(course_id, test_id):
+    create_question_form = QuestionForm()
+    course = Course.query.filter_by(id=course_id).first()
+    test = Test.query.filter_by(course_id=course_id).first()
+
+    return 1
 
 
 @app.route('/admin/<course_id>/<test_id>/edit')
