@@ -105,8 +105,7 @@
   </div>
 
   <div class="topbar">
-    <p id="username">
-      {{ current_user.first_name }} {{ current_user.last_name }}
+    <p id="username">{{ current_user.first_name }} {{ current_user.last_name }}
       <a id="logout-icon" href="{{ (url_for('logout')) }}" style="color: #8593A5;"><i
           class="fas fa-sign-out-alt"></i></a>
     </p>
