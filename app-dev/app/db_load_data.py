@@ -69,4 +69,3 @@ def load_data():
                   """)
     print(123)
     db.session.add_all([u1, u2, t1, t2, t3, t4, q1, q2, q3])
-load_data()
