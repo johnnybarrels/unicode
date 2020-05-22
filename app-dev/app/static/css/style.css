@@ -344,6 +344,7 @@ a:hover {
 .option-item:hover {
   background-color: var(--unicode-purple);
   color: #FFFFFF;
+  cursor: pointer;
 }
 
 #option-btn {

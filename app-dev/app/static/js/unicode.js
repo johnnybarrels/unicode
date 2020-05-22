@@ -33,7 +33,6 @@ $(window).ready(function () {
 
     $(".dropdown-toggle").dropdown();
 
-
     $('#mcq-option-1').click(function () {
         $("#new-question-mcq")
     });
@@ -82,4 +81,6 @@ function newQuestionSelector(qType) {
 //         $('#new-question-solution').hide()
 //     };
 // })
+
+
 

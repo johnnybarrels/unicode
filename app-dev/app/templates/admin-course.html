@@ -104,11 +104,18 @@
             Edit test
           </li>
         </a>
-        <li class="option-item">
-          <a href="{{ url_for('delete_test', course_id=course.id, test_id=test.id) }}">
+        <li class="option-item" onclick="deletePrompt()">
+          <!-- <a href="{{ url_for('delete_test', course_id=course.id, test_id=test.id) }}"> -->
             <i class="fas fa-trash"></i>
             Delete test
-          </a>
+          <!-- </a> -->
+          <script>
+            function deletePrompt () {
+              if (confirm("Are you sure you want to delete?")) {
+                location.href = '{{ url_for('delete_test', course_id=course.id, test_id=test.id) }}';
+              } 
+            }
+          </script>
         </li>
       </ul>
     </div>
