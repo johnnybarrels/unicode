@@ -25,7 +25,7 @@
     </div>
   </div>
 
-  <div class="tab-content m-4" id="nav-tabContent">
+  <div class="tab-content m-3" id="nav-tabContent">
     {% for question in questions %}
     <div class="tab-pane fade" id="question-{{ loop.index }}" role="tabpanel"
       aria-labelledby="question-{{ loop.index }}-tab">
@@ -33,22 +33,36 @@
       <form id="question-form" method="POST" action="">
         {{ form.hidden_tag() }}
 
-        <div class="row">
+        <div id="question-content" class="row">
           <div class="col-6">
             <div class="form-group q-description-{{ loop.index }} mb-4">
               <h4 class="subheading">{{ form.description.label }}</h4>
-              {{ form.description(id="question-description", class="form-control", style="resize: none;") }}
+              {% if question.question_type == 1 %}
+                {{ form.description(id="question-description-one", class="form-control", style="resize: none;") }}
+              {% elif question.question_type == 2%}
+                {{ form.description(id="question-description-two", class="form-control", style="resize: none;") }}
+              {% else %}
+                {{ form.description(id="question-description-three", class="form-control", style="resize: none;") }}
+              {% endif %}
               <script>
                 $('.q-description-{{ loop.index }} > textarea').html('{{ question.question_string }}')
               </script>
             </div>
+            
             {% if question.question_type == 2 %}
             <div class="form-group mb-4">
               <h4 class="subheading">Multiple Choice Options</h4>
-              {{ form.mcq_1(class="form-control mb-1", value=question.mcq_1) }}
-              {{ form.mcq_2(class="form-control mb-1", value=question.mcq_2) }}
-              {{ form.mcq_3(class="form-control mb-1", value=question.mcq_3) }}
-              {{ form.mcq_4(class="form-control", value=question.mcq_4) }}
+              <div class="row">
+                <div class="col-6">
+                  {{ form.mcq_1(class="form-control mb-1", value=question.mcq_1) }}
+                  {{ form.mcq_2(class="form-control mb-1", value=question.mcq_2) }}
+                </div>
+                <div class="col-6">
+                  {{ form.mcq_3(class="form-control mb-1", value=question.mcq_3) }}
+                  {{ form.mcq_4(class="form-control", value=question.mcq_4) }}
+                </div>
+              </div>
+              
             </div>
             {% endif %}
             {% if question.question_type in [1, 2] %}
@@ -83,18 +97,21 @@
 
     <div class="tab-pane fade" id="new-question" role="tabpanel" aria-labelledby="nav-add-tab">
 
-      <div class="btn-group btn-group-toggle" data-toggle="buttons">
-        <label class="btn btn-secondary active">
-          <input type="radio" name="options" id="mcq-option-1" autocomplete="off" checked
-            onchange="newQuestionSelector(1)"> Output
-        </label>
-        <label class="btn btn-secondary">
-          <input type="radio" name="options" id="mcq-option-2" autocomplete="off" onchange="newQuestionSelector(2)"> MCQ
-        </label>
-        <label class="btn btn-secondary">
-          <input type="radio" name="options" id="mcq-option-3" autocomplete="off" onchange="newQuestionSelector(3)">
-          Code
-        </label>
+      <div class="row mb-3 mx-0">
+        <h4 id="q-type" class="subheading justify-content-center">Question type </h4>
+        <div class="btn-group-toggle mx-3" data-toggle="buttons">
+          <label class="btn btn-primary active question-type-btn">
+            <input type="radio" name="options" id="mcq-option-1" autocomplete="off" checked
+              onchange="newQuestionSelector(1)"> Output
+          </label>
+          <label class="btn question-type-btn">
+            <input type="radio" name="options" id="mcq-option-2" autocomplete="off" onchange="newQuestionSelector(2)"> MCQ
+          </label>
+          <label class="btn question-type-btn">
+            <input type="radio" name="options" id="mcq-option-3" autocomplete="off" onchange="newQuestionSelector(3)">
+            Code
+          </label>
+        </div>
       </div>
 
       <form id="new-question-form" method="POST"
@@ -112,10 +129,16 @@
 
             <div id="new-question-mcq" class="form-group mb-4" style="display: none;">
               <h4 class="subheading">Multiple Choice Options</h4>
-              {{ form.mcq_1(class="form-control mb-1", placeholder='a)') }}
-              {{ form.mcq_2(class="form-control mb-1", placeholder='b)') }}
-              {{ form.mcq_3(class="form-control mb-1", placeholder='c)') }}
-              {{ form.mcq_4(class="form-control", placeholder='d)') }}
+              <div class="row">
+                <div class="col-6">
+                  {{ form.mcq_1(class="form-control mb-1", placeholder='a)') }}
+                  {{ form.mcq_2(class="form-control mb-1", placeholder='b)') }}
+                </div>
+                <div class="col-6">
+                  {{ form.mcq_3(class="form-control mb-1", placeholder='c)') }}
+                  {{ form.mcq_4(class="form-control", placeholder='d)') }}
+                </div>
+              </div>
             </div>
 
             <div id="new-question-solution" class="form-group mb-4">

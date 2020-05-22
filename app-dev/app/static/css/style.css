@@ -108,7 +108,6 @@ a.nav-child {
   left: 0;
   bottom: 0;
   width: 23%;
-  /* color: white; */
   text-align: center;
   padding: 0 30px;
 }
@@ -172,14 +171,14 @@ a.nav-child {
 
 
 .create-test {
-    background-color: white;
-    width: 40%;
-    height: 60%;
-    position: absolute;
-    top: 50%;
-    left: 60%;
-    /*transform: translate(-50%, -50%);*/
-    display:none;
+  background-color: white;
+  width: 40%;
+  height: 60%;
+  position: absolute;
+  top: 50%;
+  left: 60%;
+  /*transform: translate(-50%, -50%);*/
+  display:none;
 }
 
 
@@ -306,21 +305,6 @@ a:hover {
   color: var(--unicode-purple);
 }
 
-#option-menu { 
-  /* visibility: hidden; */
-  display: none;
-  flex-direction: column;
-  overflow: hidden;
-  padding-left: 0px;
-  background-color: #FFFFFF;
-  border: 1px solid var(--unicode-mid-grey3);
-  border-radius: 2px;
-  list-style: none;
-  padding: 2px 2px;
-  width: 150px;
-  text-align: start;
-}
-
 #option-title {
   text-transform: uppercase;
   font-size: 17px;
@@ -402,7 +386,6 @@ a:hover {
 .close {
   position: absolute; 
   right: 3%;
-  /* top: 0; */
   padding: 5px 5px;
 }
 
@@ -417,6 +400,7 @@ a:hover {
   background-color: white;
   border-radius: 10px;
   height: 95%;
+  position: relative;
 }
 
 .caret-off::before {
@@ -436,9 +420,59 @@ a:hover {
   background-color: var(--unicode-purple);
 }
 
-#question-description {
+.question-type-btn {
+  background-color: var(--unicode-pale-purple);
+  margin-right: 5px;
+  border-radius: 4px;
+  width: 88px;
+  border: none;
+  color: #FFFFFF;
+}
+
+.question-type-btn:hover, 
+.question-type-btn:active, 
+.question-type-btn:focus, 
+.question-type-btn:focus:active,
+.btn.active {
+  background-color: var(--unicode-purple);
+  color: #FFFFFF;
+} 
+
+.btn-primary:not(:disabled):not(.disabled).active, 
+.show>.btn-primary.dropdown-toggle {
+  background-color: var(--unicode-purple);
+}
+
+#q-type {
+  line-height: 38px;
+}
+
+#question-description-one {
+  height: 190px;
+}
+
+#question-description-three {
+  height: 280px;
+}
+
+#add-question-description-one {
   height: 150px;
 }
+
+#add-question-description-three {
+  height: 190px;
+}
+
+.tab-content {
+  position: relative;
+  height: 90%;
+}
+
+#question-content {
+  position: relative;
+  height: 90%;
+}
+
 
 /* ACE Code Editor */
 #editor {
