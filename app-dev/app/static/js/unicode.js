@@ -27,8 +27,11 @@ $(window).ready(function () {
         $("#new-test-modal").modal("show");
     });
 
-    $(".dropdown-toggle").dropdown();
+    $("#manage-students-btn").click(function () {
+        $("#manage-students-modal").modal("show");
+    });
 
+    $(".dropdown-toggle").dropdown();
 
     $('#mcq-option-1').click(function () {
         $("#new-question-mcq")
@@ -78,4 +81,6 @@ function newQuestionSelector(qType) {
 //         $('#new-question-solution').hide()
 //     };
 // })
+
+
 

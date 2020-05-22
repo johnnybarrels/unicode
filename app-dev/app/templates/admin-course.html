@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<!-- Modal -->
+<!-- Modal for new test -->
 <!--<script src="{{ url_for('static', filename='js/newTestForm.js') }}"></script>-->
 <div class="modal fade" id="new-test-modal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -25,9 +25,61 @@
   </div>
 </div>
 
+<!-- Modal for manage students -->
+<div class="modal fade" id="manage-students-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <h3 class="modal-title">Manage Students</h3>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="modal-body">
+        <form class="form-inline">
+          <div class="form-group mb-5">
+            <label for="add-student" class="form-label modal-subheading mr-2">Add a student</label>
+            <input type="text" id="add-student" class="form-control" placeholder="Student number">
+          </div>
+        </form>
+
+        <h4 class="modal-subheading">Enrolled students</h4>
+        <table id="student-list" class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Student ID</th>
+              <th scope="col">Delete</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- add functionality to populate with students in course -->
+            <tr>
+              <td>student.name</td>
+              <td>student.id</td>
+              <td><a href=#><i class="fas fa-times"></i></a></td>
+            </tr>
+            <!-- Delete section below when get db working -->
+            <tr>
+              <td>student.name</td>
+              <td>student.id</td>
+              <td><a href=#><i class="fas fa-times"></i></a></td>
+            </tr>
+            <tr>
+              <td>student.name</td>
+              <td>student.id</td>
+              <td><a href=#><i class="fas fa-times"></i></a></td>
+            </tr>
+            <!-- Delete section above when get db working -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="row mx-2">
   <h1 class="page-heading">Tests</h1>
-  <button id="new-test-btn" class="btn purple-btn">New Test <i id="option-btn-close" class="fas fa-plus"></i></button>
+  <button id="new-test-btn" class="btn purple-btn">New Test <i class="fas fa-plus"></i></button>
+  <button id="manage-students-btn" class="btn purple-btn">Manage students <i class="fas fa-users"></i></button>
 </div>
 
 <div class="row all-tests mt-3">
@@ -52,17 +104,16 @@
             Edit test
           </li>
         </a>
-        <a href=#>
-        <li class="option-item">
-          <i class="fas fa-clock"></i>
-            Make live
-          </li>
-        </a>
-        <li class="option-item">
-          <a href="{{ url_for('delete_test', course_id=course.id, test_id=test.id) }}">
+        <li class="option-item" onclick="deletePrompt()">
             <i class="fas fa-trash"></i>
             Delete test
-          </a>
+          <script>
+            function deletePrompt () {
+              if (confirm("Are you sure you want to delete?")) {
+                location.href = '{{ url_for('delete_test', course_id=course.id, test_id=test.id) }}';
+              } 
+            }
+          </script>
         </li>
       </ul>
     </div>
@@ -70,6 +121,12 @@
       <h2 class="unit-details">{{ course.course_code }}<br>{{ course.name }}</h2>
       <h3 class="test-name">{{ test.name }}</h3>
     </a>
+    <div id="make-live" class="row m-1">
+      <div class="custom-control custom-switch">
+        <input type="checkbox" class="custom-control-input" id="live-switch">
+        <label class="custom-control-label" for="live-switch">Make live</label>
+      </div>    
+    </div>
   </div>
 
 
