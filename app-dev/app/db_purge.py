@@ -1,11 +1,9 @@
 from app import db
-from app.models import User, Course
 
-users = User.query.all()
-for u in users:
-    db.session.delete(u)
 
-courses = Course.query.all()
-for c in courses:
-    db.session.delete(c)
-    
+def clear_data(session):
+    meta = db.metadata
+    for table in reversed(meta.sorted_tables):
+        print(f'Clear table {table}')
+        session.execute(table.delete())
+    session.commit()

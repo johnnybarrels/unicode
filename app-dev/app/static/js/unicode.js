@@ -36,14 +36,6 @@ $(window).ready(function () {
     $('#mcq-option-1').click(function () {
         $("#new-question-mcq")
     });
-
-    // ACE Code Editor
-    var editor;
-    $('.editor').each(function (index) {
-        editor = ace.edit(this);
-        editor.setTheme("ace/theme/tomorrow_night_eighties");
-        editor.session.setMode("ace/mode/python");
-    });
 });
 
 function newQuestionSelector(qType) {

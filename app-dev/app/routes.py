@@ -105,15 +105,6 @@ def test_view(course_id, test_id):
     return render_template('admin-test-view.html', course=course,
                            course_form=course_form, test=test)
 
-@app.route('/admin/<course_id>/<test_id>/createquestion')
-@login_required
-def create_question(course_id, test_id):
-    create_question_form = QuestionForm()
-    course = Course.query.filter_by(id=course_id).first()
-    test = Test.query.filter_by(course_id=course_id).first()
-
-    return 1
-
 
 @app.route('/admin/<course_id>/<test_id>/edit')
 @login_required
@@ -122,17 +113,30 @@ def edit_test(course_id, test_id):
     test = Test.query.filter_by(id=test_id).first()
     questions = Question.query.filter_by(test_id=test.id).all()
     form = QuestionForm()
+
+    # if form.delete.data:
+    #     return redirect(url_for('delete_question', course_id=course_id,
+    #                             test_id=test_id))
+
     course_form = NewCourseForm()
     return render_template('admin-test-edit.html', course=course,
                            test=test, questions=questions,
                            form=form, course_form=course_form)
 
+@app.route('/admin/<course_id>/<test_id>/deletequestion/<question_id>', methods=['GET'])
+@login_required
+def delete_question(course_id, test_id, question_id):
+    q = Question.query.filter_by(id=question_id).first()
+
+    db.session.delete(q)
+    db.session.commit()
+
+    return redirect(url_for('edit_test', course_id=course_id, test_id=test_id))
+
 
 @app.route('/admin/<course_id>/<test_id>/newquestion', methods=['GET', 'POST'])
 @login_required
 def new_question(course_id, test_id):
-    # course = Course.query.filter_by(id=course_id).first()
-    # test = Test.query.filter_by(id=test_id).first()
     form = QuestionForm()
 
     if form.validate_on_submit():
@@ -149,18 +153,11 @@ def new_question(course_id, test_id):
         q.mcq_4 = form.mcq_4.data
         q.answer = form.solution.data
         q.mark_alloc = form.mark_alloc.data
-        
-        # if q.question_type == 1:
-        #     q.answer = form.solution.data
-
-        # elif q.question_type == 2:
-        #     q.answer = form.solution.data
-        #     q.mcq_1 = form.mcq_1.data
-        #     q.mcq_2 = form.mcq_2.data
-        #     q.mcq_3 = form.mcq_3.data
-        #     q.mcq_4 = form.mcq_4.data
 
         db.session.add(q)
         db.session.commit()
 
     return redirect(url_for('edit_test', course_id=course_id, test_id=test_id))
+
+
+

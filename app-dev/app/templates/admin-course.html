@@ -2,7 +2,6 @@
 
 {% block content %}
 <!-- Modal for new test -->
-<!--<script src="{{ url_for('static', filename='js/newTestForm.js') }}"></script>-->
 <div class="modal fade" id="new-test-modal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -110,7 +109,7 @@
           <script>
             function deletePrompt () {
               if (confirm("Are you sure you want to delete?")) {
-                location.href = '{{ url_for('delete_test', course_id=course.id, test_id=test.id) }}';
+                location.href = "{{ url_for('delete_test', course_id=course.id, test_id=test.id) }}";
               } 
             }
           </script>
