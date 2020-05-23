@@ -164,3 +164,7 @@ def new_question(course_id, test_id):
         db.session.commit()
 
     return redirect(url_for('edit_test', course_id=course_id, test_id=test_id))
+
+@app.route('/add_student', methods=['GET', 'POST'])
+def addStudent():
+    return CourseController.addStudent()

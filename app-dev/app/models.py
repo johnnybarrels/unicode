@@ -23,12 +23,8 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(32))
     first_name = db.Column(db.String(32))
     last_name = db.Column(db.String(32))
-<<<<<<< HEAD
-    is_admin = db.Column(db.Boolean, nullable=False, default=0)
-=======
+    student_number = db.Column(db.Integer)
     is_admin = db.Column(db.Boolean, nullable=False, default=True)
-    # student_id = db.Column(db.Integer, index=True)
->>>>>>> 73b4fc52e60bd98bd5d133ce05e56d60071d4494
     courses = db.relationship('Course', secondary=enrolments, lazy='subquery',
                               backref=db.backref('users', lazy=True))
 

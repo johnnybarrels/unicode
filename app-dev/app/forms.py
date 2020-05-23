@@ -17,8 +17,7 @@ class RegistrationForm(FlaskForm):
     last_name = StringField('last name', validators=[DataRequired()])
     email = EmailField('email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
-    password_again = PasswordField('Password', validators=[
-                                   DataRequired(), EqualTo('password')])
+    password_again = PasswordField('Password', validators=[DataRequired(), EqualTo('password')])
     submit = SubmitField('REGISTER')
 
 
@@ -46,3 +45,8 @@ class QuestionForm(FlaskForm):
     question_type = HiddenField('Question Type', validators=[DataRequired()])
     save = SubmitField('Save')
     delete = SubmitField('Delete')
+    
+class AddNewStudentForm(FlaskForm):
+    student_number =StringField('student_number', validators=[DataRequired(), Email()])
+    course_id = StringField('course_id')
+    submit = SubmitField('Add Student to Course')

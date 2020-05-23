@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
 from flask_login import current_user, login_user, logout_user, login_required
-from app.forms import LoginForm, RegistrationForm, NewTestForm, NewCourseForm
+from app.forms import LoginForm, RegistrationForm, NewTestForm, NewCourseForm, AddNewStudentForm
 from app.models import User, Course, Test, Question, Result
 from flask import request
 from werkzeug.urls import url_parse
@@ -75,6 +75,7 @@ class UserController():
 
         return render_template('register.html', title="Register", form=form)
 
+    
 
 class CourseController():
 
@@ -113,6 +114,23 @@ class CourseController():
             return redirect(url_for('admin_portal'))
         return redirect(url_for('admin_portal', course_form=course_form))
 
+    def addStudent():
+        add_form = AddNewStudentForm()
+        print('validationnottrue')
+        print(add_form.errors)
+        if add_form.validate_on_submit()== False:
+            print(add_form.errors)
+            print('validationtrue')
+            course = Course(course_id=2)     
+            student_reg = User(student_number=add_form.student_number.data)
+            user = User.query.filter_by(student_number=student_reg).first()
+            user.course.append(course)
+            db.session.commit()
+            flash("You have registered")
+            return redirect(url_for('register'))  
+             
+        return render_template('add_student.html', title="add student", add_form=add_form)
+        
     def edit_course():
         pass
 
