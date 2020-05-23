@@ -30,7 +30,7 @@
     <div class="tab-pane fade" id="question-{{ loop.index }}" role="tabpanel"
       aria-labelledby="question-{{ loop.index }}-tab">
 
-      <form id="question-form" method="POST" action="">
+      <form id="question-form" method="POST" action="{{ url_for('edit_question', question_id=question.id, course_id=course.id, test_id=test.id) }}">
         {{ form.csrf_token() }}
 
         <div id="question-content" class="row">
