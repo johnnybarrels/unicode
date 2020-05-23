@@ -204,6 +204,16 @@ a .purple-btn:hover {
   font-weight: 600;
 }
 
+.admin-btns {
+  position: absolute;
+  right: 0;
+  font-size: 14px;
+}
+
+#new-test-btn {
+  margin-right: 5px;
+}
+
 /* Course view specific styles */
 .page-heading {
   font-size: 18px;
@@ -243,19 +253,6 @@ a .purple-btn:hover {
   font-size: 18px;
 }
 
-#new-test-btn {
-  min-width: 110px;
-  position: absolute; 
-  right: 5%;
-  font-size: 14px;
-}
-
-#manage-students-btn {
-  position: absolute;
-  right: 15%;
-  font-size: 14px;
-}
-
 #student-list {
   width: 90%;
   margin: 0 auto;
@@ -284,7 +281,8 @@ a .purple-btn:hover {
 }
 
 #add-student {
-  width: 280px;
+  width: 234px;
+  margin-right: 5px;
 }
 
 #make-live {
@@ -533,4 +531,10 @@ a:hover {
 
 .results-graph {
   background-color: #FFFFFF;
+}
+
+#submit-test {
+  position: absolute;
+  bottom: 5px;
+  right: 0;
 }

@@ -154,5 +154,10 @@ def new_question(course_id, test_id):
 
     return redirect(url_for('edit_test', course_id=course_id, test_id=test_id))
 
-
-
+@app.route('/student/<course_id>/<test_id>/taketest')
+@login_required
+def take_test(course_id, test_id):
+    course = Course.query.filter_by(id=course_id).first()
+    test = Test.query.filter_by(id=test_id).first()
+    questions = Question.query.filter_by(test_id=test.id).all()
+    return render_template('take-test.html', course=course, test=test, questions=questions)
