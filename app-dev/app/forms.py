@@ -2,7 +2,7 @@ from wtforms.validators import DataRequired, Email, ValidationError, EqualTo
 from wtforms.fields.html5 import EmailField
 from wtforms.widgets import HTMLString
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, IntegerField, HiddenField, Field
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, IntegerField, HiddenField, RadioField, Field
 
 
 class LoginForm(FlaskForm):
@@ -53,6 +53,13 @@ class QuestionForm(FlaskForm):
     save = SubmitField('Save')
     delete = SubmitField('Delete')
 
+
 class AddStudentToCourseForm(FlaskForm):
     student_email = StringField('Student Email', validators=[DataRequired()])
     submit = SubmitField('Add Student')
+
+
+class QuestionSubmissionForm(FlaskForm):
+    output_q_answer = StringField('Output Question Answer')
+    mcq_answer = HiddenField('MCQ Answer')
+    code_answer = TextAreaField('Code Answer')

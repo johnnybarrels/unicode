@@ -10,8 +10,8 @@
         <span aria-hidden="true">&times;</span>
       </button>
       <div class="modal-body">
-        <form id="RenameTestForm" action="{{ url_for('rename_test', test_id=test.id, course_id=course.id) }}" method="post"
-          name="create_test">
+        <form id="RenameTestForm" action="{{ url_for('rename_test', test_id=test.id, course_id=course.id) }}"
+          method="post" name="create_test">
           {{ rename_test_form.hidden_tag() }}
           <div class="form-group mb-5">
             <h4 class="modal-subheading">New Test Name</h4>
@@ -25,103 +25,103 @@
 </div>
 
 <div class="row mx-2">
-    <h1 class="page-heading">{{ course.name }} - {{ test.name }}</h1>
-    <div id="edit-test-btns">
-        <a href="{{ url_for('edit_test', course_id=course.id, test_id=test.id) }}" class="btn purple-btn edit-test-btn">
-            <i class="fas fa-pen"></i>
-            Edit Test
-        </a>
-        <a id="rename-test-btn" href="#" class="btn purple-btn edit-test-btn">
-            <i class="fas fa-font"></i>
-            Rename Test
-        </a>
-        <button class="btn purple-btn edit-test-btn" onclick="deletePrompt()">
-            <i class="fas fa-trash"></i>
-            Delete test
-            <script>
-                function deletePrompt () {
-                  if (confirm("Are you sure you want to delete the test?")) {
-                    location.href = '{{ url_for('delete_test', course_id=course.id, test_id=test.id) }}';
-                  } 
-                }
-              </script>
-        </button>
-    </div>
+  <h1 class="page-heading">{{ course.name }} - {{ test.name }}</h1>
+  <div id="edit-test-btns">
+    <a href="{{ url_for('edit_test', course_id=course.id, test_id=test.id) }}" class="btn purple-btn edit-test-btn">
+      <i class="fas fa-pen"></i>
+      Edit Test
+    </a>
+    <a id="rename-test-btn" href="#" class="btn purple-btn edit-test-btn">
+      <i class="fas fa-font"></i>
+      Rename Test
+    </a>
+    <button class="btn purple-btn edit-test-btn" onclick="deletePrompt()">
+      <i class="fas fa-trash"></i>
+      Delete test
+      <script>
+        function deletePrompt() {
+          if (confirm("Are you sure you want to delete the test?")) {
+            location.href = "{{ url_for('delete_test', course_id=course.id, test_id=test.id) }}";
+          }
+        }
+      </script>
+    </button>
+  </div>
 </div>
 
-{# if results #}
+{% if results %}
 <!-- Dashboard for if there are test results -->
 <div class="dashboard mx-5">
-    <div class="row my-5">
-        <div class="test-results p-3">
-            Students completed
-            <span class="result">5 of 11</span>
-        </div>
-        <div class="test-results p-3">
-            Test average
-            <span class="result">78%</span>
-        </div>
-        <div class="test-results p-3">
-            Min mark
-            <span class="result">57%</span>
-        </div>
-        <div class="test-results p-3">
-            Max mark
-            <span class="result">89%</span>
-        </div>
+  <div class="row my-5">
+    <div class="test-results p-3">
+      Students completed
+      <span class="result">5 of 11</span>
     </div>
+    <div class="test-results p-3">
+      Test average
+      <span class="result">78%</span>
+    </div>
+    <div class="test-results p-3">
+      Min mark
+      <span class="result">57%</span>
+    </div>
+    <div class="test-results p-3">
+      Max mark
+      <span class="result">89%</span>
+    </div>
+  </div>
 
-    <div class="student-tests row p-4">
-        <h4 class="subheading">Mark tests</h4>
-        <table id="student-list" class="table table-hover">
-            <thead>
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">See test</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- add functionality to populate with students in course -->
-              <tr>
-                <td>student.name</td>
-                <td><button class="btn purple-btn">See test</button></td>
-              </tr>
-              <!-- Delete section below when get db working -->
-              <tr>
-                <td>student.name</td>
-                <td><button class="btn purple-btn">See test</button></td>
-              </tr>
-              <tr>
-                <td>student.name</td>
-                <td><button class="btn purple-btn">See test</button></td>
-              </tr>
-              <tr>
-                <td>student.name</td>
-                <td><button class="btn purple-btn">See test</button></td>
-              </tr>
-              <tr>
-                <td>student.name</td>
-                <td><button class="btn purple-btn">See test</button></td>
-              </tr>
-              <tr>
-                <td>student.name</td>
-                <td><button class="btn purple-btn">See test</button></td>
-              </tr>
-              <!-- Delete section above when get db working -->
-            </tbody>
-          </table>
-    </div>
+  <div class="student-tests row p-4">
+    <h4 class="subheading">Mark tests</h4>
+    <table id="student-list" class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">See test</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- add functionality to populate with students in course -->
+        <tr>
+          <td>student.name</td>
+          <td><button class="btn purple-btn">See test</button></td>
+        </tr>
+        <!-- Delete section below when get db working -->
+        <tr>
+          <td>student.name</td>
+          <td><button class="btn purple-btn">See test</button></td>
+        </tr>
+        <tr>
+          <td>student.name</td>
+          <td><button class="btn purple-btn">See test</button></td>
+        </tr>
+        <tr>
+          <td>student.name</td>
+          <td><button class="btn purple-btn">See test</button></td>
+        </tr>
+        <tr>
+          <td>student.name</td>
+          <td><button class="btn purple-btn">See test</button></td>
+        </tr>
+        <tr>
+          <td>student.name</td>
+          <td><button class="btn purple-btn">See test</button></td>
+        </tr>
+        <!-- Delete section above when get db working -->
+      </tbody>
+    </table>
+  </div>
 </div>
-{# else #}
+{% else %}
 <!-- No students have taken test -->
 <div id="no-test-taken" class="row h-100">
-    <div class="col"></div>
-    <div class="col-6 my-auto text-center">
-      <h1 class="portal-msg">NO ONE HAS TAKEN
-        YOUR TEST YET</h1>
-    </div>
-    <div class="col"></div>
+  <div class="col"></div>
+  <div class="col-6 my-auto text-center">
+    <h1 class="portal-msg">NO ONE HAS TAKEN
+      YOUR TEST YET</h1>
+  </div>
+  <div class="col"></div>
 </div>
-{# endif #}
+{% endif %}
 
 {% endblock %}

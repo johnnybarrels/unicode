@@ -14,7 +14,7 @@ $(window).ready(function () {
     //     document.getElementById("option-menu").style.visibility = "hidden";
     // });
 
-
+    // Modal button assignments
     $("#new-course-btn").click(function () {
         $("#new-course-modal").modal("show");
     });
@@ -39,41 +39,41 @@ $(window).ready(function () {
         $("#help-modal").modal("show");
     });
 
+    // Admin test dropdown
     $(".dropdown-toggle").dropdown();
 
-    // $('#mcq-option-1').click(function () {
-    //     $("#new-question-mcq")
-    // });
+    // Always making the first nav tab and pane active on load
+    $('.nav-item').first().addClass('active');
+    $('.tab-pane').first().addClass('active show');
 
-    // $('#make-live').on('change', function () {
-        
-    //     alert("YOOO") } );
-
-    // $('#make-live').each(function () {
-    //     $(this).on('change', function () {
-    //         alert("YOOO")
-    //     });
-
-    // });
 });
 
+// Admin new question type selector
 function newQuestionSelector(qType) {
     if (qType == 1) {
         $('#new-question-mcq').hide();
         $('#new-question-solution').show();
-        $('#question-type').attr('value', 1)
+        $('#question-type').attr('value', 1);
+        $('#new-question-form #question-description').css('height', '190px');
     }
     else if (qType == 2) {
         $('#new-question-mcq').show();
         $('#new-question-solution').show();
-        $('#question-type').attr('value', 2)
+        $('#question-type').attr('value', 2);
+        $('#new-question-form #question-description').css('height', '130px');
     }
     else if (qType == 3) {
         $('#new-question-mcq').hide();
         $('#new-question-solution').hide();
-        $('#question-type').attr('value', 3)
+        $('#question-type').attr('value', 3);
+        $('#new-question-form #question-description').css('height', '280px');
     }
 };
+
+// Test MCQ radio button selectiong recording -- NOT WORKING
+function insertValueToHidden(selection) {
+    $('#mcq_answer').attr('value', selection)
+}
 
 // $('nav-add-tab').click(function () {
 //     if ($('#mcq-option-1').hasClass('active')) {

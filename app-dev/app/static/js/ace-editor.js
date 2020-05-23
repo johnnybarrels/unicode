@@ -1,9 +1,10 @@
 
 // ACE Code Editor
 
-  // find each text area marked to have an editor
-$('.code-editor').each(function() {
+// Find each text area marked to have a code editor
+$('.code-editor').each(function () {
     var textarea = $(this);
+    var editorID = textarea.attr('id');
     var mode = textarea.data('editor');
     // create the editor div
     var div = $('<div>', {
@@ -23,10 +24,31 @@ $('.code-editor').each(function() {
     session.setTabSize(4);
     session.setUseSoftTabs(true);
     session.setUseWrapMode(true);
-    // update the text area before submitting the form
-    textarea.closest('form').submit(function() {
-        textarea.val(editor.getSession().getValue());
-    });
+
+    editor.setOptions({
+        fontFamily: 'Menlo, Consolas, Monaco, monospace',
+        fontSize: '15px'
+    })
+
+    if (editorID == 'static-editor') {
+        editor.setReadOnly(true);
+        editor.container.style.pointerEvents = "none"
+        editor.renderer.$cursorLayer.element.style.opacity = 0
+        editor.renderer.setStyle("disabled", true)
+        // editor.blur()
+        editor.setOptions({
+            highlightActiveLine: false,
+            highlightGutterLine: false,
+            showFoldWidgets: false
+        })
+
+
+    } else {
+        // update the text area before submitting the form
+        textarea.closest('form').submit(function () {
+            textarea.val(editor.getSession().getValue());
+        });
+    }
 });
 
     // Old ACE method:

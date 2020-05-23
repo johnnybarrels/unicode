@@ -62,7 +62,8 @@ class UserController():
             return render_template('admin-course.html', add_student_form=add_student_form,           rename_test_form=rename_test_form, course_users=course_users, course_form=course_form, new_test_form=new_test_form, course=course, tests=tests)
 
         else:
-            return render_template('student-course.html', course=course, tests=tests)
+            live_tests = [test for test in tests if test.is_live]
+            return render_template('student-course.html', course=course, tests=live_tests)
 
     def logout():
         logout_user()
@@ -76,7 +77,7 @@ class UserController():
 
             user = User(first_name=form.first_name.data,
                         last_name=form.last_name.data, email=form.email.data,
-                        is_admin=1)
+                        is_admin=0)
 
             # If submitted email is already in db
             if User.query.filter_by(email=user.email).first() is not None:
@@ -90,6 +91,7 @@ class UserController():
             db.session.commit()
 
             flash("You have registered")
+            flash("Please log in below")
 
             return redirect(url_for('login'))
 

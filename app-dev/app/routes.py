@@ -1,6 +1,6 @@
 from flask import render_template, flash, redirect, url_for, session, jsonify
 from app import app, db
-from app.forms import LoginForm, NewTestForm, NewCourseForm, QuestionForm, RenameTestForm
+from app.forms import LoginForm, NewTestForm, NewCourseForm, QuestionForm, RenameTestForm, QuestionSubmissionForm
 from app.models import User, Course, Question, Test, Result
 from flask_login import current_user, login_user, login_required, LoginManager
 from app.controllers import UserController, CourseController
@@ -45,14 +45,17 @@ def course_view(course_id):
     return UserController.course_view(course_id)
 
     # return CourseController().show_tests()
+
+
 @app.route('/course_view/<course_id>/addstudent', methods=['POST'])
 @login_required
 def add_student_course(course_id):
     return CourseController.add_student(course_id)
 
+
 @app.route('/course_view/<course_id>/removestudent/<student_id>', methods=['POST'])
 def remove_student_course(course_id, student_id):
-    return CourseController.remove_student(course_id, student_id) 
+    return CourseController.remove_student(course_id, student_id)
 
 
 """
@@ -107,7 +110,7 @@ def test_view(course_id, test_id):
     course_form = NewCourseForm()
     results = Result.query.filter_by(test_id=test.id).all()
     rename_test_form = RenameTestForm()
-    
+
     return render_template('admin-test-view.html', course=course,
                            course_form=course_form, test=test,
                            rename_test_form=rename_test_form,
@@ -212,7 +215,6 @@ def new_question(course_id, test_id):
     form = QuestionForm()
 
     if form.validate_on_submit():
-        print('~~~~~ question form validated')
         q = Question()
         q.test_id = test_id
         q.question_type = int(form.question_type.data)
@@ -237,4 +239,7 @@ def take_test(course_id, test_id):
     course = Course.query.filter_by(id=course_id).first()
     test = Test.query.filter_by(id=test_id).first()
     questions = Question.query.filter_by(test_id=test.id).all()
-    return render_template('take-test.html', course=course, test=test, questions=questions)
+
+    form = QuestionSubmissionForm()
+
+    return render_template('take-test.html', course=course, test=test, questions=questions, form=form)

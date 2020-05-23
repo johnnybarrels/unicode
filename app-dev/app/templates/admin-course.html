@@ -24,7 +24,7 @@
   </div>
 </div>
 
-<!-- Modal for manage students -->
+<!-- Modal for student management -->
 <div class="modal fade" id="manage-students-modal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -33,36 +33,41 @@
         <span aria-hidden="true">&times;</span>
       </button>
       <div class="modal-body">
-        <form  id="course-add-student-form" action="{{ url_for('add_student_course', course_id=course.id ) }}" method="post" name="add_student">
+        <form id="course-add-student-form" action="{{ url_for('add_student_course', course_id=course.id ) }}"
+          method="post" name="add_student">
           {{ add_student_form.hidden_tag() }}
           <div class="form-group mb-5">
-                <label for="add-student" class="form-label modal-subheading mr-2">Add a student</label>
-                {{ add_student_form.student_email(class="form-control", placeholder="Student email") }}
-                {{ add_student_form.submit(class="btn purple-btn") }}
+            <label for="add-student" class="form-label modal-subheading mr-2">Add a student</label>
+            {{ add_student_form.student_email(class="form-control", placeholder="Student email") }}
+            {{ add_student_form.submit(class="btn purple-btn") }}
           </div>
         </form>
-        
+
         <h4 class="modal-subheading">Enrolled students</h4>
         <table id="student-list" class="table table-hover">
           <thead>
-                <tr>
-                  <th scope="col">Name</th>
-                  <th scope="col">Surname</th>
-                  <th scope="col">Email</th>
-                  <th scope="col"></th>
-                </tr>
+            <tr>
+              <th scope="col">Name</th>
+              <th scope="col">Surname</th>
+              <th scope="col">Email</th>
+              <th scope="col"></th>
+            </tr>
           </thead>
           <tbody>
             <!-- add functionality to populate with students in course -->
             {% for enrolment in course_users %}
+            {% if not enrolment.is_admin %}
             <tr>
               <td>{{ enrolment.first_name }}</td>
               <td>{{ enrolment.last_name }}</td>
               <td>{{ enrolment.email }}</td>
-              <form id="course-remove-student-form" action="{{ url_for('remove_student_course', course_id=course.id, student_id=enrolment.id) }}" method="POST"> 
+              <form id="course-remove-student-form"
+                action="{{ url_for('remove_student_course', course_id=course.id, student_id=enrolment.id) }}"
+                method="POST">
                 <td><a><button type="submit" class="fas fa-times"></button></a></td>
               </form>
             </tr>
+            {% endif %}
             {% endfor %}
           </tbody>
         </table>
@@ -71,6 +76,7 @@
   </div>
 </div>
 
+<!-- Page heading -->
 <div class="row mx-2">
   <h1 class="page-heading">Tests</h1>
   <div class="admin-btns mr-5">

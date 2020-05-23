@@ -36,7 +36,8 @@ class User(UserMixin, db.Model):
 
     def get_users(course_id):
         course = Course.query.filter_by(id=course_id).first()
-        course_enrolments = User.query.join(enrolments).join(Course).filter((enrolments.c.course_id == course.id)).all()
+        course_enrolments = User.query.join(enrolments).join(
+            Course).filter((enrolments.c.course_id == course.id)).all()
         return course_enrolments
 
     def __repr__(self):

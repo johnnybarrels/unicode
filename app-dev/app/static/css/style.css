@@ -204,7 +204,7 @@ a .purple-btn:hover {
   font-weight: 600;
 }
 
-.admin-btns {
+.admin-btns, .test-submit-btns {
   position: absolute;
   right: 0;
   font-size: 14px;
@@ -424,7 +424,7 @@ a:hover {
   position: relative;
 }
 
-#question-form, #question-content{
+#question-form, #question-content, #test-form {
   height: 100%;
 }
 
@@ -489,6 +489,10 @@ a:hover {
   height: 280px;
 }
 
+#new-question-form #question-description {
+  height: 190px;
+}
+
 #add-question-description-one {
   height: 150px;
 }
@@ -522,8 +526,6 @@ a:hover {
   width: 300px;
   height: 600px;
 }
-
-
 
 .editor-container {
   position: relative;
@@ -596,6 +598,12 @@ a:hover {
   height: 400px;
 }
 
+.test-submit-btn {
+  background-color: var(--unicode-red);
+  color: white;
+  font-weight: bold;
+}
+
 .result {
   display: block;
   font-size: 30px;
@@ -607,12 +615,6 @@ a:hover {
 
 .results-graph {
   background-color: #FFFFFF;
-}
-
-#submit-test {
-  position: absolute;
-  bottom: 5px;
-  right: 0;
 }
 
 #help {
