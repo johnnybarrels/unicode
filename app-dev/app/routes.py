@@ -138,11 +138,10 @@ def new_question(course_id, test_id):
     if form.validate_on_submit():
         print('~~~~~ question form validated')
         q = Question()
-
         q.test_id = test_id
         q.question_type = int(form.question_type.data)
-        q.question_string = form.description.data
-        q.code_string = form.code_string.data
+        q.question_string = repr(form.description.data.encode())[2:-1]
+        q.code_string = repr(form.code_string.data.encode())[2:-1]
         q.mcq_1 = form.mcq_1.data
         q.mcq_2 = form.mcq_2.data
         q.mcq_3 = form.mcq_3.data
