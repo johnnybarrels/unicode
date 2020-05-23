@@ -27,7 +27,7 @@
 
   <div class="tab-content m-3" id="nav-tabContent">
     {% for question in questions %}
-    <div class="tab-pane fade" id="question-{{ loop.index }}" role="tabpanel"
+    <div class="tab-pane fade h-100" id="question-{{ loop.index }}" role="tabpanel"
       aria-labelledby="question-{{ loop.index }}-tab">
 
       <form id="question-form" method="POST" action="">
@@ -39,7 +39,7 @@
               <h4 class="subheading">{{ form.description.label }}</h4>
               {% if question.question_type == 1 %}
               {{ form.description(id="question-description-one", class="form-control", style="resize: none;") }}
-              {% elif question.question_type == 2%}
+              {% elif question.question_type == 2 %}
               {{ form.description(id="question-description-two", class="form-control", style="resize: none;") }}
               {% else %}
               {{ form.description(id="question-description-three", class="form-control", style="resize: none;") }}
@@ -75,9 +75,11 @@
               <h4 class="subheading">{{ form.mark_alloc.label }}</h4>
               {{ form.mark_alloc(class="form-control", value=question.mark_alloc) }}
             </div>
-            <div class="row mt-5"></div>
+            <!-- <div class="row mt-5"></div> -->
+            <div class="question-btns">
             {{ form.save(class="btn purple-btn") }}
             {{ form.delete(class="btn delete-btn") }}
+            </div>
             <!-- <button class="btn delete-btn" onclick="deletePrompt()">Delete</button>
             <script>
               function deletePrompt () {
@@ -95,10 +97,15 @@
             <!-- CHANGE THIS TO BE ACTUAL ACE EDITOR -->
             {{ form.code_string(id="editor", class="editor code-editor", **{"data-editor": "python"}) }}
             
+            {% if question.code_string %}
             <script>
               $('.q-code-editor-{{ loop.index }} > textarea').html('{{ question.code_string }}')
             </script>
-            
+            {% else %}
+            <script>
+              $('.q-code-editor-{{ loop.index }} > textarea').html('# Write some code here =)')
+            </script>
+            {% endif %}
             <!-- </div> -->
           </div>
         </div>
@@ -106,7 +113,7 @@
     </div>
     {% endfor %}
 
-    <div class="tab-pane fade" id="new-question" role="tabpanel" aria-labelledby="nav-add-tab">
+    <div class="tab-pane fade h-100" id="new-question" role="tabpanel" aria-labelledby="nav-add-tab">
 
       <div class="row mb-3 mx-0">
         <h4 id="q-type" class="subheading justify-content-center">Question type </h4>
@@ -134,7 +141,7 @@
         <!-- Hidden fields -->
         {{ form.question_type(id="question-type") }}
         
-        <div class="row">
+        <div class="row h-100">
           <div class="col-6">
             <div class="form-group mb-4">
               <h4 class="subheading">{{ form.description.label }}</h4>
@@ -164,9 +171,11 @@
               <h4 class="subheading">{{ form.mark_alloc.label }}</h4>
               {{ form.mark_alloc(class="form-control", placeholder='Please provide an integer mark value (eg. 5, 10)') }}
             </div>
-            <div class="row mt-5"></div>
+            <!-- <div class="row mt-5"></div> -->
+            <div class="question-btns">
             {{ form.save(class="btn purple-btn") }}
             <button class="btn delete-btn">Clear</button>
+          </div>
             {# form.delete(class="btn delete-btn") #}
 
           </div>

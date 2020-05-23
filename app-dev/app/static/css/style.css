@@ -403,6 +403,19 @@ a:hover {
   position: relative;
 }
 
+#question-form, #question-content{
+  height: 100%;
+}
+
+#new-question-form {
+  height: 92%;
+}
+
+.question-btns {
+  position: absolute;
+  bottom: 0px;
+}
+
 .caret-off::before {
   display: none;
 }
@@ -468,10 +481,10 @@ a:hover {
   height: 90%;
 }
 
-#question-content {
+/* #question-content {
   position: relative;
   height: 90%;
-}
+} */
 
 
 /* ACE Code Editor */
