@@ -2,6 +2,8 @@
   <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/logos/logo.png?token=ANBLRDVBHRIKZUAMVJAVQTS62H4KI"  width="300" height="200" title="FVCproductions" alt="Unicode_logo">
 </p>
 
+
+
 ---
 
 > # **CITS3403/CITS5504 - Agile Web Development — Final Project**
@@ -10,8 +12,7 @@
 
 | **Johnny Barrett** | **Ivy Bui** | **Jesse Carter** | **Cesar Gonzalez** |
 | :---: |:---:| :---:|:---:|
-| [![FVCproductions](https://avatars1.githubusercontent.com/u/4284691?v=3&s=200)](http://fvcproductions.com)    | [![FVCproductions](https://avatars1.githubusercontent.com/u/4284691?v=3&s=200)](http://fvcproductions.com) | [![FVCproductions](https://avatars1.githubusercontent.com/u/4284691?v=3&s=200)](http://fvcproductions.com)  |[![FVCproductions](https://avatars1.githubusercontent.com/u/4284691?v=3&s=200)](http://fvcproductions.com)  |
-
+| -     | -   | -    | -   |
 --- 
 
 ## Table of Contents
@@ -19,7 +20,7 @@
 - [Motivation](#motivation)
 - [Description](#description)
 - [Design Process](#design-process) 
-- [How it works](#how-it-works)
+- [How to Use](#how-to-use)
 - [How to Install from localhost](#how-to-install-from-localhost)
 - [License](#license)
 
@@ -30,7 +31,6 @@
 One of the biggest challenges faced by Computer Science and Data Science student is the ability to demostrate our coding skills by completing coding test using pen and paper, at the same time, not able to practice on a real life coding platform that provides a more realistic experience when preparing for exams and to improve our coding skills. 
 
 For this reason we decided to develop **Unicode**, so that professors as well as student can improve the learning experience when it comes to learn how to code.
-
 
 ## **Description**
 
@@ -43,8 +43,6 @@ For this reason we decided to develop **Unicode**, so that professors as well as
 - **_Write a code_**: Based on the instruction and descriptions provided by the teacherk the student can type down the corresping line of code to achieve the results requested( manual marking)
 
 Another important functionality of **Unicode** is the ability of the admin to organize create tests by course and assign students to different courses. Also, the admin can decide when to enble test to be live(ready to take) for all students enroll in the course.
-
---- 
 
 ## **Design Process**
 
@@ -63,7 +61,7 @@ We decided to use MVC(model view controller) Arquitecture for our project. The *
 | 7 | `Admin` | I want to active and deactive tests | 10 |
 | 8 | `Admin` | I want to be able to manually mark tests | 4 |
 | 9 | `Admin` | I want to see my student's results of my tests/courses | 5 |
-| 10 | `Admin` | I want to be able to display the solutios to my students after the test | 6 |
+| 10 | `Admin` | I want to be able to display the solutions to my students after the test | 6 |
 | 11 | `Admin` | I want to be able to allocate marks to each  question | 3 |
 | 12 | `Student` | I want to be able to take the test assigned to me | 7 |
 | 13 | `Student` | I want to be able to see my marks, and how they compare to the rest of the class | 8 |
@@ -100,32 +98,68 @@ We decided to use MVC(model view controller) Arquitecture for our project. The *
   <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/Color_Palette.png?token=ANBLRDSBFD5S4ITZ3B7XB3262JGD2"  width="500" height="400" title="FVCproductions" alt="color">
 </p>
 
----
 
-## **How it Works**
+## **How to Use**
 
-> ### For Admin(Teachers) Profile
+> ### For Admin(Teachers) Profile:
 
-- **Teacher**
-    - Login using email address and password
-    - *_Create a new course_*: 
-      - Click on `CREATE A NEW COURSE`
-      - Type Course Name
-      - Type Course Code
+Login using email address and password
+  - *_Create a New Course_*: 
+    - Click on `CREATE A NEW COURSE` or "+" icon next to Course
+    - Type Course Name
+    - Type Course Code
+    - Click `Create Course`
+  
       
-    - *_Create a new Test_*: 
-      - Click on `CREATE A NEW TEST`
-      - Type Test name 
-      _
-      
+  - *_Create a New Test_*: 
+    - Select the Course on the right panel
+    - Click on `New Test`
+    - Type Test name
+    - Click `Create Test`
+    - Click on the new created test
+      - (Optional) Click on dropdown to rename, delete or edit test
+    - Click on`Edit Test`
+    - Click on `Add +` to add a new question
+    - Select the type of questions (*Output, MCQ or Write a code*)
+    - Type the Question on the `Description` field
+    - Type `Solution`
+    - Type the `Allocated mark` for the question
+    - Click `Save` (or `Clear` to restart the questions)
+    - Once finishing creating the questions, click the course name on the righ panel
+    - Click `Not Live` to make sure test live
     
-    - Login using email address and password
+  - *_Add Students to Course_*:
+      - Once on the Course View, Click `Manage students`
+      - Type the Student number
+      
+  - *_Marking Test_*:
+      - Pending
+      
+  - *_Publish Test Results_*:
+      - Pending
 
----
+> ### For Students Profile:
+
+**New user**
+  - *_Registration_*: 
+    - Click on `Sign up`
+    - Fill up registration form 
+    - Click `Register`
+    
+**Existing user**
+
+Login using email address and password
+
+  - *_Taking Test_*: 
+    - Click on Course
+    - Select the test to take
+    - Once test completed Select `Submit`
+    
+  - *_View Results_*: 
+    - Pending
+
 
 ## **How to Install from localhost**
-
----
 
 ## License
 
