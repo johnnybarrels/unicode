@@ -107,13 +107,13 @@
           </li>
         </a>
         <li class="option-item" onclick="deletePrompt()">
-            <i class="fas fa-trash"></i>
-            Delete test
+          <i class="fas fa-trash"></i>
+          Delete test
           <script>
-            function deletePrompt () {
+            function deletePrompt() {
               if (confirm("Are you sure you want to delete?")) {
                 location.href = "{{ url_for('delete_test', course_id=course.id, test_id=test.id) }}";
-              } 
+              }
             }
           </script>
         </li>
@@ -123,14 +123,17 @@
       <h2 class="unit-details">{{ course.course_code }}<br>{{ course.name }}</h2>
       <h3 class="test-name">{{ test.name }}</h3>
     </a>
-    <div id="make-live" class="row m-1">
-      <div class="custom-control custom-switch">
-        <input type="checkbox" class="custom-control-input" id="live-switch">
-        <label class="custom-control-label" for="live-switch">Make live</label>
-      </div>    
+
+    <div id="make-live">
+      <form action="{{ url_for('toggle_live', course_id=course.id, test_id=test.id) }}" method="POST">
+        {% if test.is_live %}
+        <input type="submit" class="btn btn-live" value="Live">
+        {% else %}
+        <input type="submit" class="btn btn-not-live" value="Not Live">
+        {% endif %}
+      </form>
     </div>
   </div>
-
 
   {% endfor %}
 </div>

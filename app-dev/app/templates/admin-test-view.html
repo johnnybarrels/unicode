@@ -2,6 +2,28 @@
 
 {% block content %}
 
+<div class="modal fade" id="rename-test-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <h3 class="modal-title">Rename Test</h3>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="modal-body">
+        <form id="RenameTestForm" action="{{ url_for('rename_test', test_id=test.id, course_id=course.id) }}" method="post"
+          name="create_test">
+          {{ rename_test_form.hidden_tag() }}
+          <div class="form-group mb-5">
+            <h4 class="modal-subheading">New Test Name</h4>
+            {{ rename_test_form.new_test_name(class="form-control", placeholder="New Test Name") }}
+          </div>
+          {{ rename_test_form.submit(id="rename-test-submit", class="btn purple-btn") }}
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="row mx-2">
     <h1 class="page-heading">{{ course.name }} - {{ test.name }}</h1>
     <div id="edit-test-btns">
@@ -9,7 +31,7 @@
             <i class="fas fa-pen"></i>
             Edit Test
         </a>
-        <a href=# class="btn purple-btn edit-test-btn">
+        <a id="rename-test-btn" href="#" class="btn purple-btn edit-test-btn">
             <i class="fas fa-font"></i>
             Rename Test
         </a>

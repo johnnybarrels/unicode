@@ -287,7 +287,17 @@ a .purple-btn:hover {
 
 #make-live {
   position: absolute;
-  bottom: 5px;
+  bottom: 15px;
+}
+
+.btn-live {
+  background-color: var(--unicode-red);
+  color: white;
+}
+
+.btn-not-live {
+  border-color: var(--unicode-red);
+  color: var(--unicode-red)
 }
 
 a {

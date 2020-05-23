@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
 from flask_login import current_user, login_user, logout_user, login_required
-from app.forms import LoginForm, RegistrationForm, NewTestForm, NewCourseForm
+from app.forms import LoginForm, RegistrationForm, NewTestForm, NewCourseForm, RenameTestForm
 from app.models import User, Course, Test, Question, Result
 from flask import request
 from werkzeug.urls import url_parse
@@ -51,9 +51,10 @@ class UserController():
         print(tests) 
         form = NewTestForm()
         course_form = NewCourseForm()
+        rename_test_form = RenameTestForm()
         
         if current_user.is_admin:
-            return render_template('admin-course.html', course_form=course_form, form=form, course=course, tests=tests)
+            return render_template('admin-course.html', course_form=course_form, form=form, course=course, tests=tests, rename_test_form=rename_test_form)
         else:
             return render_template('student-course.html', course=course, tests=tests)
 
