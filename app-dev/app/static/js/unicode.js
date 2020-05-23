@@ -27,6 +27,10 @@ $(window).ready(function () {
         $("#new-test-modal").modal("show");
     });
 
+    $("#rename-test-btn").click(function () {
+        $("#rename-test-modal").modal("show")
+    })
+
     $("#manage-students-btn").click(function () {
         $("#manage-students-modal").modal("show");
     });
@@ -37,9 +41,20 @@ $(window).ready(function () {
 
     $(".dropdown-toggle").dropdown();
 
-    $('#mcq-option-1').click(function () {
-        $("#new-question-mcq")
-    });
+    // $('#mcq-option-1').click(function () {
+    //     $("#new-question-mcq")
+    // });
+
+    // $('#make-live').on('change', function () {
+        
+    //     alert("YOOO") } );
+
+    // $('#make-live').each(function () {
+    //     $(this).on('change', function () {
+    //         alert("YOOO")
+    //     });
+
+    // });
 });
 
 function newQuestionSelector(qType) {

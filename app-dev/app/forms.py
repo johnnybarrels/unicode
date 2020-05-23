@@ -35,6 +35,11 @@ class NewTestForm(FlaskForm):
     submit = SubmitField('Create Test')
 
 
+class RenameTestForm(FlaskForm):
+    new_test_name = StringField('New Test Name', validators=[DataRequired()])
+    submit = SubmitField('Save')
+
+
 class QuestionForm(FlaskForm):
     description = TextAreaField('Description', validators=[DataRequired()])
     code_string = TextAreaField('Code')
@@ -48,4 +53,6 @@ class QuestionForm(FlaskForm):
     save = SubmitField('Save')
     delete = SubmitField('Delete')
 
-
+class AddStudentToCourseForm(FlaskForm):
+    student_email = StringField('Student Email', validators=[DataRequired()])
+    submit = SubmitField('Add Student')

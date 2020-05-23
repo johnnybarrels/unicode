@@ -31,9 +31,9 @@ def load_data():
     u2.courses.append(c5504)
     u2.courses.append(c1401)
 
-    t1 = Test(id=1, name='2020 Final Exam', course_id=1)
+    t1 = Test(id=1, name='2020 Final Exam', course_id=1, is_live=True)
 
-    t2 = Test(id=2, name='2020 Mid sem DRAFT', course_id=1)
+    t2 = Test(id=2, name='2020 Mid sem DRAFT', course_id=1, is_live=False)
 
     t3 = Test(id=3, name='2020 Final Exam DRAFT', course_id=2)
 
@@ -45,18 +45,7 @@ def load_data():
                   question_type=1)
 
     q2 = Question(id=2, question_string='What data type is output from this code?',
-                  code_string='''
-                    def func2(x):
-
-                        if x == 1:
-                            return 1
-                        else:
-                            return (x * func2(x - 1))
-
-
-                        print(func2(5.0))
-
-                  ''', answer='float', test_id=1, mark_alloc=3,
+                  code_string=r"def func2(x):\n\tif x == 1:\n\t\treturn 1\n\telse:\n\t\treturn (x * func2(x - 1))\n\n\nprint(func2(5.0))", answer='float', test_id=1, mark_alloc=3,
                   question_type=2, mcq_1='int', mcq_2='str',
                   mcq_3='float', mcq_4='bool')
 
