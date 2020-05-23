@@ -98,8 +98,10 @@ def test_view(course_id, test_id):
     course = Course.query.filter_by(id=course_id).first()
     test = Test.query.filter_by(id=test_id).first()
     course_form = NewCourseForm()
+    results = Result.query.filter_by(test_id=test.id).all()
+
     return render_template('admin-test-view.html', course=course,
-                           course_form=course_form, test=test)
+                           course_form=course_form, test=test, results=results)
 
 
 @app.route('/admin/<course_id>/<test_id>/edit', methods=['GET'])
