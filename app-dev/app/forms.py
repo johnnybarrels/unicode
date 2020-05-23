@@ -53,4 +53,6 @@ class QuestionForm(FlaskForm):
     save = SubmitField('Save')
     delete = SubmitField('Delete')
 
-
+class AddStudentToCourseForm(FlaskForm):
+    student_email = StringField('Student Email', validators=[DataRequired()])
+    submit = SubmitField('Add Student')

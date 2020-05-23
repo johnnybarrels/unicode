@@ -34,6 +34,11 @@ class User(UserMixin, db.Model):
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
 
+    def get_users(course_id):
+        course = Course.query.filter_by(id=course_id).first()
+        course_enrolments = User.query.join(enrolments).join(Course).filter((enrolments.c.course_id == course.id)).all()
+        return course_enrolments
+
     def __repr__(self):
         return f'<User: {self.email}>'
 

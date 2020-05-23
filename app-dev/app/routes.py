@@ -45,6 +45,14 @@ def course_view(course_id):
     return UserController.course_view(course_id)
 
     # return CourseController().show_tests()
+@app.route('/course_view/<course_id>/addstudent', methods=['POST'])
+@login_required
+def add_student_course(course_id):
+    return CourseController.add_student(course_id)
+
+@app.route('/course_view/<course_id>/removestudent/<student_id>', methods=['POST'])
+def remove_student_course(course_id, student_id):
+    return CourseController.remove_student(course_id, student_id) 
 
 
 """
