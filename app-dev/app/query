@@ -1,0 +1,2 @@
+
+User.query.join(enrolments).join(course).filter((enrolments.user_id == user.id) & (enrolments.course_id == course.id)).all()
