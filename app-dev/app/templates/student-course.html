@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row mx-2">
+  <h1 class="page-heading">Tests</h1>
+  <button id="new-test-btn" class="btn purple-btn">New Test <i class="fas fa-plus"></i></button>
+  <button id="manage-students-btn" class="btn purple-btn">Manage students <i class="fas fa-users"></i></button>
+</div>
+
+<div class="row all-tests mt-3">
+  {% for test in tests %}
+  <div class="test mb-5 p-3">
+    <a id="test-link" href="{{ url_for('test_view', course_id=course.id, test_id=test.id) }}">
+      <h2 class="unit-details">{{ course.course_code }}<br>{{ course.name }}</h2>
+      <h3 class="test-name">{{ test.name }}</h3>
+    </a>
+  </div>
+
+  {% endfor %}
+</div>
+
+{% endblock %}

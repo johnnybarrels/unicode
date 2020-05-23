@@ -39,15 +39,11 @@ def student_portal():
     return render_template('student.html', title='Student Portal')
 
 
-@app.route('/admin/<course_id>', methods=['GET', 'POST'])
+@app.route('/course_view/<course_id>', methods=['GET'])
 @login_required
 def course_view(course_id):
-    course = Course.query.filter_by(id=course_id).first()
-    tests = Test.query.filter_by(course_id=course_id)
-    form = NewTestForm()
-    course_form = NewCourseForm()
-    return render_template('admin-course.html', course=course, tests=tests,
-                           course_form=course_form, form=form)
+    return UserController.course_view(course_id) 
+    
     # return CourseController().show_tests()
 
 

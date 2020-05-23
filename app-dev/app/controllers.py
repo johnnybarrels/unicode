@@ -44,6 +44,20 @@ class UserController():
         else:
             return render_template('student.html')
 
+    def course_view(course_id):
+        course = Course.query.filter_by(id=course_id).first()
+        tests = Test.query.filter_by(course_id=course_id)
+        print(course)
+        print(tests) 
+        form = NewTestForm()
+        course_form = NewCourseForm()
+        
+        if current_user.is_admin:
+            return render_template('admin-course.html', course_form=course_form, form=form, course=course, tests=tests)
+        else:
+            return render_template('student-course.html', course=course, tests=tests)
+
+
     def logout():
         logout_user()
         return redirect(url_for('login'))
