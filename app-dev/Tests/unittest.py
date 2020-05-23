@@ -29,5 +29,8 @@ class UserModelTest(unittest.TestCase):
         self.assertFalse(u.check_password('pwd'))
         self.assertTrue(u.check_password('pwd2'))
 
+    def test_test_creation(sef):
+        
+
 if __name__=='__main__':
     unittest.main(verbosity=2)
