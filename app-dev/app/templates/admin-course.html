@@ -123,12 +123,10 @@
       <h2 class="unit-details">{{ course.course_code }}<br>{{ course.name }}</h2>
       <h3 class="test-name">{{ test.name }}</h3>
     </a>
-    <div id="make-live" class="row m-1">
-      <div class="custom-control custom-switch">
-        <input type="checkbox" class="custom-control-input" id="live-switch">
-        <label class="custom-control-label" for="live-switch">Make live</label>
-      </div>    
-    </div>
+    <div id="make-live" class="m-1 custom-control custom-switch">
+      <input type="checkbox" class="custom-control-input" id="live-switch-{{ loop.index }}">
+      <label class="custom-control-label" for="live-switch-{{ loop.index }}">Make live</label>
+  </div>
   </div>
 
 

@@ -31,6 +31,10 @@ $(window).ready(function () {
         $("#manage-students-modal").modal("show");
     });
 
+    $("#help").click(function () {
+        $("#help-modal").modal("show");
+    });
+
     $(".dropdown-toggle").dropdown();
 
     $('#mcq-option-1').click(function () {

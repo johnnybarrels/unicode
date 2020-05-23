@@ -8,12 +8,14 @@
 
 <div class="row all-tests mt-3">
   {% for test in tests %}
+  <!-- if islive -->
   <div class="test mb-5 p-3">
     <a id="test-link" href="{{ url_for('take_test', course_id=course.id, test_id=test.id) }}">
       <h2 class="unit-details">{{ course.course_code }}<br>{{ course.name }}</h2>
       <h3 class="test-name">{{ test.name }}</h3>
     </a>
   </div>
+  <!-- endif -->
 
   {% endfor %}
 </div>

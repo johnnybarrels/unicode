@@ -104,10 +104,10 @@ a.nav-child {
 
 .footer {
   font-size: 11px;
-  position: fixed;
+  position: absolute;
   left: 0;
   bottom: 0;
-  width: 23%;
+  /* width: 23%; */
   text-align: center;
   padding: 0 30px;
 }
@@ -357,6 +357,7 @@ a:hover {
   height: 485px;
   border-radius: 6px;
   padding: 15px 15px; 
+  margin: 0 auto;
 }
 
 .modal-title {
@@ -550,4 +551,21 @@ a:hover {
   position: absolute;
   bottom: 5px;
   right: 0;
+}
+
+#help {
+  letter-spacing: 2px;
+	text-transform: uppercase;
+  font-weight: bold;
+  cursor: pointer;
+  width: 60px;
+}
+
+#help-modal-content {
+  width: 800px;
+  height: 600px;
+}
+
+#help-modal-body {
+  overflow-y: scroll;
 }
