@@ -39,15 +39,11 @@ def student_portal():
     return render_template('student.html', title='Student Portal')
 
 
-@app.route('/admin/<course_id>', methods=['GET', 'POST'])
+@app.route('/course_view/<course_id>', methods=['GET'])
 @login_required
 def course_view(course_id):
-    course = Course.query.filter_by(id=course_id).first()
-    tests = Test.query.filter_by(course_id=course_id)
-    form = NewTestForm()
-    course_form = NewCourseForm()
-    return render_template('admin-course.html', course=course, tests=tests,
-                           course_form=course_form, form=form)
+    return UserController.course_view(course_id) 
+    
     # return CourseController().show_tests()
 
 
@@ -106,7 +102,7 @@ def test_view(course_id, test_id):
                            course_form=course_form, test=test)
 
 
-@app.route('/admin/<course_id>/<test_id>/edit')
+@app.route('/admin/<course_id>/<test_id>/edit', methods=['GET'])
 @login_required
 def edit_test(course_id, test_id):
     course = Course.query.filter_by(id=course_id).first()
@@ -114,16 +110,53 @@ def edit_test(course_id, test_id):
     questions = Question.query.filter_by(test_id=test.id).all()
     form = QuestionForm()
 
-    # if form.delete.data:
-    #     return redirect(url_for('delete_question', course_id=course_id,
-    #                             test_id=test_id))
 
     course_form = NewCourseForm()
     return render_template('admin-test-edit.html', course=course,
                            test=test, questions=questions,
                            form=form, course_form=course_form)
 
-@app.route('/admin/<course_id>/<test_id>/deletequestion/<question_id>', methods=['GET'])
+@app.route('/admin/<course_id>/<test_id>/edit_question/<question_id>', methods=['POST'])
+@login_required
+def edit_question(course_id, test_id, question_id):
+    course = Course.query.filter_by(id=course_id).first()
+    test = Test.query.filter_by(id=test_id).first()
+    question = Question.query.filter_by(id=question_id).first()
+    form = QuestionForm()
+
+
+    if form.delete.data:
+        db.session.delete(question)
+        db.session.commit()
+  
+        return redirect(url_for('edit_test', course_id=course_id,
+                                 test_id=test_id))
+
+    print(question_id)
+    print(question.question_type)
+    print(question.question_string)
+    print(question.mark_alloc)
+
+    if form.validate_on_submit():
+        if form.save.data:
+            question.test_id = test_id
+            question.question_type = int(form.question_type.data)
+            question.question_string = repr(form.description.data.encode())[2:-1]
+            question.code_string = repr(form.code_string.data.encode())[2:-1]
+            question.mcq_1 = form.mcq_1.data
+            question.mcq_2 = form.mcq_2.data
+            question.mcq_3 = form.mcq_3.data
+            question.mcq_4 = form.mcq_4.data
+            question.answer = form.solution.data
+            question.mark_alloc = form.mark_alloc.data
+            db.session.commit()
+            
+            return redirect(url_for('edit_test', course_id=course_id,
+                                     test_id=test_id))
+        
+        
+
+@app.route('/admin/<course_id>/<test_id>/deletequestion/<question_id>', methods=['POST'])
 @login_required
 def delete_question(course_id, test_id, question_id):
     q = Question.query.filter_by(id=question_id).first()
@@ -134,7 +167,7 @@ def delete_question(course_id, test_id, question_id):
     return redirect(url_for('edit_test', course_id=course_id, test_id=test_id))
 
 
-@app.route('/admin/<course_id>/<test_id>/newquestion', methods=['GET', 'POST'])
+@app.route('/admin/<course_id>/<test_id>/newquestion', methods=['POST'])
 @login_required
 def new_question(course_id, test_id):
     form = QuestionForm()
@@ -142,11 +175,10 @@ def new_question(course_id, test_id):
     if form.validate_on_submit():
         print('~~~~~ question form validated')
         q = Question()
-
         q.test_id = test_id
         q.question_type = int(form.question_type.data)
-        q.question_string = form.description.data
-        q.code_string = form.code_string.data
+        q.question_string = repr(form.description.data.encode())[2:-1]
+        q.code_string = repr(form.code_string.data.encode())[2:-1]
         q.mcq_1 = form.mcq_1.data
         q.mcq_2 = form.mcq_2.data
         q.mcq_3 = form.mcq_3.data
@@ -159,5 +191,10 @@ def new_question(course_id, test_id):
 
     return redirect(url_for('edit_test', course_id=course_id, test_id=test_id))
 
-
-
+@app.route('/student/<course_id>/<test_id>/taketest')
+@login_required
+def take_test(course_id, test_id):
+    course = Course.query.filter_by(id=course_id).first()
+    test = Test.query.filter_by(id=test_id).first()
+    questions = Question.query.filter_by(test_id=test.id).all()
+    return render_template('take-test.html', course=course, test=test, questions=questions)

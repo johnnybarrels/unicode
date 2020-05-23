@@ -1,6 +1,10 @@
 # VS Code stuff
 # .vscode/
 
+# db stuff
+app-dev/migrations/
+app-dev/db/unicode.db
+
 # macOS stuff
 .DS_Store
 
