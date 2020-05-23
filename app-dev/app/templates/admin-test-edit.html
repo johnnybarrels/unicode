@@ -89,16 +89,15 @@
 
           </div>
 
-          <div class="col-6 editor-container">
+          <div class="col-6 q-code-editor-{{ loop.index }}">
             <!-- <div id="editor" class="editor code-editor"> -->
 
             <!-- CHANGE THIS TO BE ACTUAL ACE EDITOR -->
-            <textarea class="form-control" style="height: 100%; width: 100%; resize: none">
-              {% if question.code_string %}
-              {{ question.code_string }}
-              {% else %} # Write your code here =)
-              {% endif %}
-            </textarea>
+            {{ form.code_string(id="editor", class="editor code-editor", **{"data-editor": "python"}) }}
+            
+            <script>
+              $('.q-code-editor-{{ loop.index }} > textarea').html('{{ question.code_string }}')
+            </script>
             
             <!-- </div> -->
           </div>
