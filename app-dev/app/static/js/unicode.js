@@ -27,19 +27,14 @@ $(window).ready(function () {
         $("#new-test-modal").modal("show");
     });
 
-    $(".dropdown-toggle").dropdown();
+    $("#manage-students-btn").click(function () {
+        $("#manage-students-modal").modal("show");
+    });
 
+    $(".dropdown-toggle").dropdown();
 
     $('#mcq-option-1').click(function () {
         $("#new-question-mcq")
-    });
-
-    // ACE Code Editor
-    var editor;
-    $('.editor').each(function (index) {
-        editor = ace.edit(this);
-        editor.setTheme("ace/theme/tomorrow_night_eighties");
-        editor.session.setMode("ace/mode/python");
     });
 });
 
@@ -78,4 +73,6 @@ function newQuestionSelector(qType) {
 //         $('#new-question-solution').hide()
 //     };
 // })
+
+
 

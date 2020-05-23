@@ -13,10 +13,17 @@
             <i class="fas fa-font"></i>
             Rename Test
         </a>
-        <a href="{{ url_for('delete_test', course_id=course.id, test_id=test.id) }}" class="btn purple-btn edit-test-btn">
+        <button class="btn purple-btn edit-test-btn" onclick="deletePrompt()">
             <i class="fas fa-trash"></i>
             Delete test
-        </a>
+            <script>
+                function deletePrompt () {
+                  if (confirm("Are you sure you want to delete the test?")) {
+                    location.href = '{{ url_for('delete_test', course_id=course.id, test_id=test.id) }}';
+                  } 
+                }
+              </script>
+        </button>
     </div>
 </div>
 

@@ -3,13 +3,25 @@ from app.models import User, Course, Test, Question, Result
 from werkzeug.security import generate_password_hash
 
 
+def clear_data():
+
+    meta = db.metadata
+    for table in reversed(meta.sorted_tables):
+        print(f'Clear table {table}')
+        db.session.execute(table.delete())
+    db.session.commit()
+
+
 def load_data():
-    u1 = User(id=25, email='student@test.com', first_name='Student', last_name='Test', password_hash=generate_password_hash('password'), student_number=1111,is_admin=0)
+
+    u1 = User(id=25, email='student@test.com', first_name='Student', last_name='Test',
+              password_hash=generate_password_hash('password'),
+              is_admin=0)
 
     u2 = User(id=10, email='admin@test.com', first_name='Admin', last_name='Test',
               password_hash=generate_password_hash('password'),
               is_admin=1)
-              
+
     c5504 = Course(id=1, course_code='CITS5504',
                    name='Agile Web Development')
 
@@ -52,4 +64,9 @@ def load_data():
                   question_string="""Write a Python function that takes a string as input, and returns the count of all the 'double vowels', that is: two consecutive vowels (eg. 'ou', 'oo', 'Ai').\n\nThe input string can contain any ASCII character.""")
 
     db.session.add_all([u1, u2, t1, t2, t3, t4, q1, q2, q3])
+    db.session.commit()
 
+
+def purge_and_load():
+    clear_data()
+    load_data()
