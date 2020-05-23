@@ -46,13 +46,5 @@ class QuestionForm(FlaskForm):
     question_type = HiddenField('Question Type', default=1, validators=[DataRequired()])
     save = SubmitField('Save')
     delete = SubmitField('Delete')
-<<<<<<< HEAD
-    
-class AddNewStudentForm(FlaskForm):
-    student_number =StringField('student_number', validators=[DataRequired(), Email()])
-    course_id = StringField('course_id')
-    submit = SubmitField('Add Student to Course')
-=======
 
 
->>>>>>> 8ab38fee1b102e4660aed88aff5cb65c614740c5

@@ -6,7 +6,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
-
+  
 
 enrolments = db.Table('enrolments',
                       db.Column('user_id', db.Integer, db.ForeignKey(

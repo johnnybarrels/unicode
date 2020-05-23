@@ -159,11 +159,5 @@ def new_question(course_id, test_id):
 
     return redirect(url_for('edit_test', course_id=course_id, test_id=test_id))
 
-<<<<<<< HEAD
-@app.route('/add_student', methods=['GET', 'POST'])
-def addStudent():
-    return CourseController.addStudent()
-=======
 
 
->>>>>>> 8ab38fee1b102e4660aed88aff5cb65c614740c5
