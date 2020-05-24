@@ -12,19 +12,19 @@
       <div class="modal-body">
         <form id="createTestForm" action="{{ url_for('create_test', course_id=course.id) }}" method="post"
           name="create_test">
-          {{ form.hidden_tag() }}
+          {{ new_test_form.hidden_tag() }}
           <div class="form-group mb-5">
             <h4 class="modal-subheading">Test Name</h4>
-            {{ form.test_name(class="form-control", placeholder="Test Name") }}
+            {{ new_test_form.test_name(class="form-control", placeholder="Test Name") }}
           </div>
-          {{ form.submit(id="create-test-btn", class="btn purple-btn") }}
+          {{ new_test_form.submit(id="create-test-btn", class="btn purple-btn") }}
         </form>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Modal for manage students -->
+<!-- Modal for student management -->
 <div class="modal fade" id="manage-students-modal" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -33,11 +33,13 @@
         <span aria-hidden="true">&times;</span>
       </button>
       <div class="modal-body">
-        <form class="form-inline">
+        <form id="course-add-student-form" action="{{ url_for('add_student_course', course_id=course.id ) }}"
+          method="post" name="add_student">
+          {{ add_student_form.hidden_tag() }}
           <div class="form-group mb-5">
             <label for="add-student" class="form-label modal-subheading mr-2">Add a student</label>
-            <input type="text" id="add-student" class="form-control" placeholder="Student number">
-            <button class="btn purple-btn">Add</button>
+            {{ add_student_form.student_email(class="form-control", placeholder="Student email") }}
+            {{ add_student_form.submit(class="btn purple-btn") }}
           </div>
         </form>
 
@@ -46,29 +48,27 @@
           <thead>
             <tr>
               <th scope="col">Name</th>
-              <th scope="col">Student ID</th>
-              <th scope="col">Delete</th>
+              <th scope="col">Surname</th>
+              <th scope="col">Email</th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
             <!-- add functionality to populate with students in course -->
+            {% for enrolment in course_users %}
+            {% if not enrolment.is_admin %}
             <tr>
-              <td>student.name</td>
-              <td>student.id</td>
-              <td><a href=#><i class="fas fa-times"></i></a></td>
+              <td>{{ enrolment.first_name }}</td>
+              <td>{{ enrolment.last_name }}</td>
+              <td>{{ enrolment.email }}</td>
+              <form id="course-remove-student-form"
+                action="{{ url_for('remove_student_course', course_id=course.id, student_id=enrolment.id) }}"
+                method="POST">
+                <td><a><button type="submit" class="fas fa-times"></button></a></td>
+              </form>
             </tr>
-            <!-- Delete section below when get db working -->
-            <tr>
-              <td>student.name</td>
-              <td>student.id</td>
-              <td><a href=#><i class="fas fa-times"></i></a></td>
-            </tr>
-            <tr>
-              <td>student.name</td>
-              <td>student.id</td>
-              <td><a href=#><i class="fas fa-times"></i></a></td>
-            </tr>
-            <!-- Delete section above when get db working -->
+            {% endif %}
+            {% endfor %}
           </tbody>
         </table>
       </div>
@@ -76,6 +76,7 @@
   </div>
 </div>
 
+<!-- Page heading -->
 <div class="row mx-2">
   <h1 class="page-heading">Tests</h1>
   <div class="admin-btns mr-5">
@@ -107,13 +108,13 @@
           </li>
         </a>
         <li class="option-item" onclick="deletePrompt()">
-            <i class="fas fa-trash"></i>
-            Delete test
+          <i class="fas fa-trash"></i>
+          Delete test
           <script>
-            function deletePrompt () {
+            function deletePrompt() {
               if (confirm("Are you sure you want to delete?")) {
                 location.href = "{{ url_for('delete_test', course_id=course.id, test_id=test.id) }}";
-              } 
+              }
             }
           </script>
         </li>
@@ -123,14 +124,17 @@
       <h2 class="unit-details">{{ course.course_code }}<br>{{ course.name }}</h2>
       <h3 class="test-name">{{ test.name }}</h3>
     </a>
-    <div id="make-live" class="row m-1">
-      <div class="custom-control custom-switch">
-        <input type="checkbox" class="custom-control-input" id="live-switch">
-        <label class="custom-control-label" for="live-switch">Make live</label>
-      </div>    
+
+    <div id="make-live">
+      <form action="{{ url_for('toggle_live', course_id=course.id, test_id=test.id) }}" method="POST">
+        {% if test.is_live %}
+        <input type="submit" class="btn btn-live" value="Live">
+        {% else %}
+        <input type="submit" class="btn btn-not-live" value="Not Live">
+        {% endif %}
+      </form>
     </div>
   </div>
-
 
   {% endfor %}
 </div>

@@ -23,8 +23,13 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(32))
     first_name = db.Column(db.String(32))
     last_name = db.Column(db.String(32))
+<<<<<<< HEAD
     student_number = db.Column(db.Integer)
     is_admin = db.Column(db.Boolean, nullable=False, default=True)
+=======
+    is_admin = db.Column(db.Boolean, nullable=False, default=False)
+    # student_id = db.Column(db.Integer, index=True)
+>>>>>>> 4a97f925c01c46de09bfd0b327af26ca262ed828
     courses = db.relationship('Course', secondary=enrolments, lazy='subquery',
                               backref=db.backref('users', lazy=True))
 
@@ -33,6 +38,12 @@ class User(UserMixin, db.Model):
 
     def check_password(self, password):
         return check_password_hash(self.password_hash, password)
+
+    def get_users(course_id):
+        course = Course.query.filter_by(id=course_id).first()
+        course_enrolments = User.query.join(enrolments).join(
+            Course).filter((enrolments.c.course_id == course.id)).all()
+        return course_enrolments
 
     def __repr__(self):
         return f'<User: {self.email}>'
@@ -53,6 +64,7 @@ class Test(db.Model):
     __tablename__ = 'tests'
     id = db.Column(db.Integer, primary_key=True, nullable=False)
     name = db.Column(db.String(64), nullable=False)
+    is_live = db.Column(db.Boolean, nullable=False, default=False)
     course_id = db.Column(db.Integer, db.ForeignKey('courses.id'))
     questions = db.relationship('Question', backref='test', lazy=True)
 

@@ -1,16 +1,18 @@
+from werkzeug.urls import url_parse
+from flask import request
+from app.models import User, Course, Test, Question, Result, enrolments
+from app.forms import LoginForm, RegistrationForm, NewTestForm, NewCourseForm, AddStudentToCourseForm
+from app.models import User, Course, Test, Question, Result
+from app.forms import LoginForm, RegistrationForm, NewTestForm, NewCourseForm, RenameTestForm
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
 from flask_login import current_user, login_user, logout_user, login_required
-from app.forms import LoginForm, RegistrationForm, NewTestForm, NewCourseForm
-from app.models import User, Course, Test, Question, Result
-from flask import request
-from werkzeug.urls import url_parse
 
 
 class UserController():
 
     def login():
-        
+
         form = LoginForm()
         if form.validate_on_submit():  # POST request (user clicks on Login button)
             # Check that user is in db and that password is correct
@@ -47,16 +49,21 @@ class UserController():
     def course_view(course_id):
         course = Course.query.filter_by(id=course_id).first()
         tests = Test.query.filter_by(course_id=course_id)
-        print(course)
-        print(tests) 
-        form = NewTestForm()
-        course_form = NewCourseForm()
-        
-        if current_user.is_admin:
-            return render_template('admin-course.html', course_form=course_form, form=form, course=course, tests=tests)
-        else:
-            return render_template('student-course.html', course=course, tests=tests)
 
+        form = NewTestForm()
+        rename_test_form = RenameTestForm()
+        course_users = User.get_users(course_id)
+
+        new_test_form = NewTestForm()
+        course_form = NewCourseForm()
+        add_student_form = AddStudentToCourseForm()
+
+        if current_user.is_admin:
+            return render_template('admin-course.html', add_student_form=add_student_form,           rename_test_form=rename_test_form, course_users=course_users, course_form=course_form, new_test_form=new_test_form, course=course, tests=tests)
+
+        else:
+            live_tests = [test for test in tests if test.is_live]
+            return render_template('student-course.html', course=course, tests=live_tests)
 
     def logout():
         logout_user()
@@ -70,7 +77,7 @@ class UserController():
 
             user = User(first_name=form.first_name.data,
                         last_name=form.last_name.data, email=form.email.data,
-                        is_admin=1)
+                        is_admin=0)
 
             # If submitted email is already in db
             if User.query.filter_by(email=user.email).first() is not None:
@@ -84,6 +91,7 @@ class UserController():
             db.session.commit()
 
             flash("You have registered")
+            flash("Please log in below")
 
             return redirect(url_for('login'))
 
@@ -115,19 +123,49 @@ class CourseController():
 
     def create_course():
         course_form = NewCourseForm()
+
         if course_form.validate_on_submit():
             course = Course()
             course.name = course_form.course_name.data
             course.course_code = course_form.course_code.data
-            
+
             db.session.add(course)
             current_user.courses.append(course)
             db.session.commit()
 
-            
             return redirect(url_for('admin_portal'))
         return redirect(url_for('admin_portal', course_form=course_form))
+<<<<<<< HEAD
         
+=======
+
+    def add_student(course_id):
+        add_student_form = AddStudentToCourseForm()
+        course = Course.query.filter_by(id=course_id).first()
+        if add_student_form.validate_on_submit():
+            student_email = add_student_form.student_email.data
+            student = User.query.filter_by(email=student_email).first()
+            if student:
+                student.courses.append(course)
+                db.session.commit()
+
+            return redirect(url_for('course_view', course_id=course_id))
+
+        return redirect(url_for('course_view', course_id=course_id))
+
+    def remove_student(course_id, student_id):
+        course = Course.query.filter_by(id=course_id).first()
+        student = User.query.filter_by(id=student_id).first()
+
+        if student:
+            student.courses.remove(course)
+            db.session.commit()
+
+            return redirect(url_for('course_view', course_id=course_id))
+
+        return redirect(url_for('course_view', course_id=course_id))
+
+>>>>>>> 4a97f925c01c46de09bfd0b327af26ca262ed828
     def edit_course():
         pass
 

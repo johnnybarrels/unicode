@@ -4,11 +4,15 @@
 <!-- Show test if haven't taken test OR show "test already taken" OR show results -->
 <div class="row mx-2">
   <h1 class="page-heading">{{ course.name }} - {{ test.name }}</h1>
+  <div class="test-submit-btns mr-5">
+    <button id="submit-test" class="btn test-submit-btn">Submit test<i
+        class="fas fa-arrow-alt-circle-right"></i></button>
+  </div>
 </div>
 
 <div class="container new-question my-3 py-3">
   <div id="question-nav" class="row mx-1">
-    <div id="nav-tab" class="nav nav-pills" role="tablist">
+    <div id="take-test-nav-tab" class="nav nav-pills" role="tablist">
       {% for question in questions %}
       <a class="nav-item nav-link" id="question-{{ loop.index }}-tab" data-toggle="tab"
         href="#question-{{ loop.index }}" role="tab" aria-controls="question-{{ loop.index }}"
@@ -19,58 +23,72 @@
     </div>
   </div>
 
-    <div class="tab-content m-3" id="nav-tabContent">
-        {% for question in questions %}
-        <div class="tab-pane fade" id="question-{{ loop.index }}" role="tabpanel"
-        aria-labelledby="question-{{ loop.index }}-tab">
+  <div class="tab-content m-3" id="nav-tabContent">
+    {% for question in questions %}
+    <div class="tab-pane fade h-100" id="question-{{ loop.index }}" role="tabpanel"
+      aria-labelledby="question-{{ loop.index }}-tab">
 
-            <form id="test-form" method="POST" action="">
+      <form id="test-form" method="POST" action="">
+        {{ form.hidden_tag() }}
 
-                <div id="question-content" class="row">
-                    <div class="col-6">
-                        <div class="form-group q-description-{{ loop.index }} mb-4">
-                            <h4 class="subheading">Question</h4>
-                            {{ question.question_string }}
-                        </div>
+        <div id="question-content" class="row">
+          <div class="col-6">
+            <div class="form-group q-description-{{ loop.index }} mb-4">
+              <h4 class="subheading">Question</h4>
+              {{ question.question_string }}
+            </div>
 
-                        <div class="form-group mb-4">
-                        {% if question.question_type == 2 %}
-                            <h4 class="subheading">Select one option</h4>
-                            <input type="radio" id="mcq-1" name="mcq" value="mcq1">
-                            <label for="mcq1">{{ question.mcq_1 }}</label><br>
-                            <input type="radio" id="mcq2" name="mcq" value="mcq2">
-                            <label for="mcq2">{{ question.mcq_2 }}</label><br>
-                            <input type="radio" id="mcq3" name="mcq" value="mcq3">
-                            <label for="mcq3">{{ question.mcq_3 }}</label><br>
-                            <input type="radio" id="mcq4" name="mcq" value="mcq4">
-                            <label for="mcq4">{{ question.mcq_4 }}</label>
-                        {% else %}
-                            <h4 class="subheading">Answer</h4>
-                            <textarea class="form-control" rows="10" style="resize: none;" placeholder="Your answer here"></textarea>
-                        {% endif %}
-                        </div>
+            <div class="form-group mb-4">
+              {% if question.question_type == 2 %}
+              <h4 class="subheading mb-2">Select one option</h4>
+              <ol type="a">
+                {% for mcq in [question.mcq_1, question.mcq_2, question.mcq_3, question.mcq_4] %}
+                {% if mcq %}
+                <li>
+                  <!-- This isn't working yet -->
+                  <input type="radio" id="mcq-{{ loop.index }}" class="mcq-radio ml-2" name="mcq"
+                    onchange='insertValueToHidden("{{ mcq }}")'>
+                  <label for="mcq-{{ loop.index }}" class="ml-2">{{ mcq }}</label>
+                </li>
+                {% endif %}
+                {% endfor %}
+              </ol>
+              {% else %}
+              <h4 class="subheading">Answer</h4>
+              <textarea class="form-control" rows="10" style="resize: none;"
+                placeholder="Write your answer here"></textarea>
+              {% endif %}
+            </div>
 
-                        <div class="form-btns">
-                            <button class="btn purple-btn">Save solution</button>
-                        </div>
-                    </div>
-                
-                    <div class="col-6 q-code-editor-{{ loop.index }}">
-                        {% if question.question_type == 3 %}
-                            <p>Editable code editor in form</p>                   
-                        {% else %}
-                            <p>Fixed code editor for q type 1 and 2</p>
-                        {% endif %}
-                    </div>
-                
-                </div>
-                <button id="submit-test" class="btn purple-btn">Submit test</button>
-            </form>
+            <div class="question-btns">
+              <button class="btn purple-btn">Save answer</button>
+            </div>
+          </div>
+
+          <div class="col-6 q-code-editor-{{ loop.index }}">
+            {% if question.question_type == 3 %}
+            {{ form.code_answer(id="editor", class="editor code-editor", **{"data-editor": "python"}) }}
+
+            {% else %}
+            {{ form.code_answer(id="static-editor", class="editor code-editor", **{"data-editor": "python"}) }}
+            {% if question.code_string %}
+            <script>
+              $('.q-code-editor-{{ loop.index }} #static-editor').html('{{ question.code_string }}')
+            </script>
+            {% else %}
+            <script>
+              $('.q-code-editor-{{ loop.index }} #static-editor').html('# Looks like your teacher forgot to write their code here!')
+            </script>
+            {% endif %}
+            {% endif %}
+          </div>
+
         </div>
-        {% endfor %}
+      </form>
     </div>
+    {% endfor %}
+  </div>
 
 </div>
 
 {% endblock %}
-
