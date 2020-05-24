@@ -77,13 +77,30 @@ class Question(db.Model):
     mcq_2 = db.Column(db.String(128))
     mcq_3 = db.Column(db.String(128))
     mcq_4 = db.Column(db.String(128))
+    mcq_answer = db.Column(db.String(8))
     test_id = db.Column(db.Integer, db.ForeignKey('tests.id'))
     mark_alloc = db.Column(db.Integer, nullable=False)
     # 1 = Output, 2 = MCQ, 3 = Write code
     question_type = db.Column(db.Integer, nullable=False, default=1)
 
+    def get_mcq_options(self):
+        return [self.mcq_1, self.mcq_2, self.mcq_3, self.mcq_4]
+
     def __repr__(self):
         return f'<Question: {self.question_string}>'
+
+
+class Submission(db.Model):
+    __tablename__ = 'submission'
+    id = db.Column(db.Integer, primary_key=True, nullable=False)
+    output_sub = db.Column(db.String(128))
+    mcq_sub = db.Column(db.String(8))
+    code_sub = db.Column(db.String(1024))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    question_id = db.Column(db.Integer, db.ForeignKey('questions.id'))
+
+    def __repr__(self):
+        return f'<Submission: User ID: {self.user_id}, Question ID: {self.question_id}'
 
 
 class Result(db.Model):

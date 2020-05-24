@@ -46,19 +46,39 @@ $(window).ready(function () {
     $('.nav-item').first().addClass('active');
     $('.tab-pane').first().addClass('active show');
 
+    // function returnToPreviousPage() {
+    //     window.history.back();
+    // }
+
+    // $('#createCourseForm').submit(function () {
+    //     if (confirm("Are you sure?" == false)) {
+    //         returnToPreviousPage()
+    //     }
+    // });
+
 });
+
+// function confirmForm() {
+//     if (!confirm("Are you sure?")) {
+//         return false
+//     }
+// }
 
 // Admin new question type selector
 function newQuestionSelector(qType) {
     if (qType == 1) {
         $('#new-question-mcq').hide();
         $('#new-question-solution').show();
+        $('#solution-textbox').show();
+        $('#solution-mcq').hide()
         $('#question-type').attr('value', 1);
         $('#new-question-form #question-description').css('height', '190px');
     }
     else if (qType == 2) {
         $('#new-question-mcq').show();
         $('#new-question-solution').show();
+        $('#solution-textbox').hide();
+        $('#solution-mcq').show()
         $('#question-type').attr('value', 2);
         $('#new-question-form #question-description').css('height', '130px');
     }
@@ -70,9 +90,21 @@ function newQuestionSelector(qType) {
     }
 };
 
-// Test MCQ radio button selectiong recording -- NOT WORKING
-function insertValueToHidden(selection) {
-    $('#mcq_answer').attr('value', selection)
+// Test MCQ radio button selection recording
+function insertValueToHidden(num) {
+    if (num == 1) {
+        $('#mcq-answer').attr('value', 'a')
+    }
+    else if (num == 2) {
+        $('#mcq-answer').attr('value', 'b')
+    }
+    else if (num == 3) {
+        $('#mcq-answer').attr('value', 'c')
+    }
+    else if (num == 4) {
+        $('#mcq-answer').attr('value', 'd')
+    };
+    // $('#mcq_answer').attr('value', selection)
 }
 
 // $('nav-add-tab').click(function () {

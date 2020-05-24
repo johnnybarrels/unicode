@@ -593,6 +593,12 @@ a:hover {
   }
 }
 
+#static-description {
+  resize: none;
+  background-color: white;
+  border: none;
+}
+
 .student-tests {
   background-color: #FFFFFF;
   height: 400px;

@@ -28,47 +28,50 @@
     <div class="tab-pane fade h-100" id="question-{{ loop.index }}" role="tabpanel"
       aria-labelledby="question-{{ loop.index }}-tab">
 
-      <form id="test-form" method="POST" action="">
-        {{ form.hidden_tag() }}
+      <form id="test-form" method="POST"
+        action="{{ url_for('new_submission', course_id=course.id, test_id=test.id, question_id=question.id) }}">
+        {{ form.csrf_token() }}
 
         <div id="question-content" class="row">
-          <div class="col-6">
+          <div class="col-5">
             <div class="form-group q-description-{{ loop.index }} mb-4">
-              <h4 class="subheading">Question</h4>
-              {{ question.question_string }}
+              <h4 class="subheading mb-2">Question</h4>
+              {{ form.description(id="static-description", class="form-control") }}
+              <script>
+                $('.q-description-{{ loop.index }} #static-description').html('{{ question.question_string }}').attr('disabled', 'disabled');
+              </script>
             </div>
 
             <div class="form-group mb-4">
-              {% if question.question_type == 2 %}
+              {% if question.question_type == 1 %}
+              <h4 class="subheading mb-2">Answer</h4>
+              {{ form.output_answer(class="form-control", style="", placeholder="Write your answer here") }}
+              </ol>
+              {% elif question.question_type == 2 %}
+              {{ form.mcq_answer(id="mcq-answer") }}
               <h4 class="subheading mb-2">Select one option</h4>
               <ol type="a">
                 {% for mcq in [question.mcq_1, question.mcq_2, question.mcq_3, question.mcq_4] %}
                 {% if mcq %}
                 <li>
-                  <!-- This isn't working yet -->
                   <input type="radio" id="mcq-{{ loop.index }}" class="mcq-radio ml-2" name="mcq"
-                    onchange='insertValueToHidden("{{ mcq }}")'>
+                    onchange='insertValueToHidden("{{ loop.index }}")'>
                   <label for="mcq-{{ loop.index }}" class="ml-2">{{ mcq }}</label>
                 </li>
                 {% endif %}
                 {% endfor %}
-              </ol>
-              {% else %}
-              <h4 class="subheading">Answer</h4>
-              <textarea class="form-control" rows="10" style="resize: none;"
-                placeholder="Write your answer here"></textarea>
-              {% endif %}
+                {% endif %}
             </div>
+
 
             <div class="question-btns">
               <button class="btn purple-btn">Save answer</button>
             </div>
           </div>
 
-          <div class="col-6 q-code-editor-{{ loop.index }}">
+          <div class="col-7 q-code-editor-{{ loop.index }}">
             {% if question.question_type == 3 %}
             {{ form.code_answer(id="editor", class="editor code-editor", **{"data-editor": "python"}) }}
-
             {% else %}
             {{ form.code_answer(id="static-editor", class="editor code-editor", **{"data-editor": "python"}) }}
             {% if question.code_string %}

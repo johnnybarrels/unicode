@@ -1,7 +1,7 @@
 from flask import render_template, flash, redirect, url_for, session, jsonify
 from app import app, db
 from app.forms import LoginForm, NewTestForm, NewCourseForm, QuestionForm, RenameTestForm, QuestionSubmissionForm
-from app.models import User, Course, Question, Test, Result
+from app.models import User, Course, Question, Test, Submission, Result
 from flask_login import current_user, login_user, login_required, LoginManager
 from app.controllers import UserController, CourseController
 
@@ -164,34 +164,30 @@ def toggle_live(course_id, test_id):
 def edit_question(course_id, test_id, question_id):
     course = Course.query.filter_by(id=course_id).first()
     test = Test.query.filter_by(id=test_id).first()
-    question = Question.query.filter_by(id=question_id).first()
+    q = Question.query.filter_by(id=question_id).first()
     form = QuestionForm()
 
     if form.delete.data:
-        db.session.delete(question)
+        db.session.delete(q)
         db.session.commit()
 
         return redirect(url_for('edit_test', course_id=course_id,
                                 test_id=test_id))
 
-    print(question_id)
-    print(question.question_type)
-    print(question.question_string)
-    print(question.mark_alloc)
-
     if form.validate_on_submit():
         if form.save.data:
-            question.test_id = test_id
-            question.question_type = int(form.question_type.data)
-            question.question_string = repr(
+            q.test_id = test_id
+            q.question_type = int(form.question_type.data)
+            q.question_string = repr(
                 form.description.data.encode())[2:-1]
-            question.code_string = repr(form.code_string.data.encode())[2:-1]
-            question.mcq_1 = form.mcq_1.data
-            question.mcq_2 = form.mcq_2.data
-            question.mcq_3 = form.mcq_3.data
-            question.mcq_4 = form.mcq_4.data
-            question.answer = form.solution.data
-            question.mark_alloc = form.mark_alloc.data
+            q.code_string = repr(form.code_string.data.encode())[2:-1]
+            q.mcq_1 = form.mcq_1.data
+            q.mcq_2 = form.mcq_2.data
+            q.mcq_3 = form.mcq_3.data
+            q.mcq_4 = form.mcq_4.data
+            q.mcq_answer = form.mcq_solution.data
+            q.answer = form.solution.data
+            q.mark_alloc = form.mark_alloc.data
             db.session.commit()
 
             return redirect(url_for('edit_test', course_id=course_id,
@@ -224,6 +220,7 @@ def new_question(course_id, test_id):
         q.mcq_2 = form.mcq_2.data
         q.mcq_3 = form.mcq_3.data
         q.mcq_4 = form.mcq_4.data
+        q.mcq_answer = form.mcq_solution.data
         q.answer = form.solution.data
         q.mark_alloc = form.mark_alloc.data
 
@@ -243,3 +240,30 @@ def take_test(course_id, test_id):
     form = QuestionSubmissionForm()
 
     return render_template('take-test.html', course=course, test=test, questions=questions, form=form)
+
+
+@app.route('/student/<course_id>/<test_id>/<question_id>/submit', methods=['POST'])
+@login_required
+def new_submission(course_id, test_id, question_id):
+    q = Question.query.filter_by(id=question_id).first()
+    # sub = Submission.query.filter_by(question_id=question_id).first()
+    sub = Submission()
+    sub.user_id = current_user.id
+    sub.question_id = question_id
+
+    # mcq_options = q.get_mcq_options()
+
+    form = QuestionSubmissionForm()
+    if form.validate_on_submit():
+        print('~~~~~~~~ submission form validated')
+        if q.question_type == 1:
+            sub.output_sub = form.output_q_answer.data
+        elif q.question_type == 2:
+            sub.mcq_sub = form.mcq_answer.data
+        elif q.question_type == 3:
+            sub.code_sub = form.code_answer.data
+
+        db.session.add(sub)
+        db.session.commit()
+
+    return redirect(url_for('take_test', course_id=course_id, test_id=test_id))
