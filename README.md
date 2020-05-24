@@ -6,13 +6,15 @@
 
 ---
 
-> # **CITS3403/CITS5504 - Agile Web Development — Final Project**
+> # **CITS3403/CITS5504 - Agile Web Development - Final Project**
+> # <p align="center"> **Semester 1, 2020** </p>
 
 ## **Development Team:**
 
 | **Johnny Barrett** | **Ivy Bui** | **Jesse Carter** | **Cesar Gonzalez** |
 | :---: |:---:| :---:|:---:|
 | -     | -   | -    | -   |
+
 --- 
 
 ## Table of Contents
@@ -22,6 +24,7 @@
 - [Design Process](#design-process) 
 - [How to Use](#how-to-use)
 - [How to Install from localhost](#how-to-install-from-localhost)
+- [How to Test](#how-to-test)
 - [License](#license)
 
 
@@ -41,7 +44,7 @@ For this reason we decided to develop **Unicode**, so that professors as well as
 
 **Unicode** is an online quiz platform for educational institutions that allows admin/teachers users to create and evaluate coding related tests and users/students to take tests and see results. It is design to provide a friendly experience for studens and teachers without compromising the level of complexity required for developing our coding learning experience.
 
-**Unicode** provides the ability to not only test our theorical knowledge of but also our technical abilities. Teachers/admin have the ability to decide to use from three different questions assestement types: 
+**Unicode** provides the ability to not only test our theorical knowledge of but also our technical abilities. Teachers/admin have the ability to select from three different questions assesment types: 
 
 - **_Output_**: Based on a code function provided by the teacher, the student should answer the expected output (automated marking)
 - **_MCQ_**: Based on a writen question or provided code, the student must select the best answer out of 4 posible options(automated marking)
@@ -124,7 +127,9 @@ We decided to use MVC(model view controller) Arquitecture for our project. The *
 ## **How to Use**
 
 ### For Admin(Teachers) Profile:
-
+<details>
+  <summary markdown="span">Instructions for admin, click me to expand</summary>
+  
   - *_Login_*: 
     - Fill up Login form using email and password
     - Click `Login`
@@ -161,8 +166,14 @@ We decided to use MVC(model view controller) Arquitecture for our project. The *
       
   - *_Publish Test Results_*:
       - Pending
+      
+</details>
 
 ### For Students Profile:
+
+<details>
+  <summary markdown="span">Instructions for students, click me to expand</summary>
+  
   - *_Registration_* (for new users only): 
     - Click on `Sign up`
     - Fill up registration form 
@@ -179,11 +190,15 @@ We decided to use MVC(model view controller) Arquitecture for our project. The *
     
   - *_View Results_*: 
     - Pending
-
+</details>
 
 <a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
 
 ## **How to Install from localhost**
+
+<details>
+  <summary markdown="span">Installation instructions, click me to expand</summary>
+
 1. Clone repository using `https://github.com/johnnybarrels/agile-proj2.git`
 2. Install requirements:
 
@@ -213,10 +228,8 @@ $ flask db upgrade
   - Import the function and execute
   
   ```python
-  from app.db_tools import purge_and_load
-  
+  from app.db_tools import purge_and_load 
   purge_and_load()
-  
   exit() 
   ```
   
@@ -226,7 +239,31 @@ $ flask db upgrade
 $ flask run
 ```
 
+</details>
+
 <a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
+
+## How to Test Unicode
+
+### unittest:
+
+For testing password hashing and test creation.
+
+  - To use just type on the terminal the following command:
+  
+```shell
+python -m Tests/unittest
+```
+  - 
+
+
+### sytemtest:
+
+Using selenium to test our app with firefox web browser
+ - Test for student login
+ - Test for admin login
+ - Test for student registration and login
+ 
 
 ## License
 
