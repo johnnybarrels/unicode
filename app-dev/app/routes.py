@@ -125,13 +125,21 @@ def take_test(course_id, test_id):
     return TestController.take_test(course_id, test_id)
 
 
-@app.route('/student/<course_id>/<test_id>/<question_id>/submit_test', methods=['POST'])
-@login_required
-def submit_test(course_id, test_id):
-    return TestController.submit_test(course_id, test_id)
+# @app.route('/student/<course_id>/<test_id>/<question_id>/submit_test', methods=['POST'])
+# @login_required
+# def submit_test(course_id, test_id):
+#     return TestController.submit_test(course_id, test_id)
 
 
 @app.route('/student/<course_id>/<test_id>/<question_id>/submit', methods=['POST'])
 @login_required
 def new_submission(course_id, test_id, question_id):
     return TestController.new_submission(course_id, test_id, question_id)
+
+
+@app.route('/student/<course_id>/<test_id>/submit', methods=['POST'])
+@login_required
+def submit_test(course_id, test_id):
+    # print('\n\n~~~~~~~~~~~~ YOOOOOOOOOOOOO ~~~~~~~~~~~~~~\n\n')
+    # print('\n\n~~~~~~~~~~~~ YOOOOOOOOOOOOO ~~~~~~~~~~~~~~\n\n')
+    return TestController.submit_test(course_id, test_id)

@@ -48,21 +48,21 @@ class UserController():
 
     def course_view(course_id):
         course = Course.query.filter_by(id=course_id).first()
-        tests = Test.query.filter_by(course_id=course_id)
+        tests = course.tests
 
         form = NewTestForm()
         rename_test_form = RenameTestForm()
-        course_users = User.get_users(course_id)
+        course_users = course.get_users()
 
         new_test_form = NewTestForm()
         course_form = NewCourseForm()
         add_student_form = AddStudentToCourseForm()
 
         if current_user.is_admin:
-            return render_template('admin-course.html', add_student_form=add_student_form, 
-                                    rename_test_form=rename_test_form, course_users=course_users, 
-                                    course_form=course_form, new_test_form=new_test_form, course=course, 
-                                    tests=tests)
+            return render_template('admin-course.html', add_student_form=add_student_form,
+                                   rename_test_form=rename_test_form, course_users=course_users,
+                                   course_form=course_form, new_test_form=new_test_form, course=course,
+                                   tests=tests)
 
         else:
             live_tests = [test for test in tests if test.is_live]
@@ -85,8 +85,9 @@ class UserController():
             # If submitted email is already in db
             if User.query.filter_by(email=user.email).first() is not None:
 
-                flash('Email is already registered')
-                return redirect(url_for('register'))
+                flash('Email is already registered!')
+                flash('Please log in below')
+                return redirect(url_for('login'))
 
             user.set_password(form.password.data)
 
@@ -103,13 +104,10 @@ class UserController():
 
 class CourseController():
 
-    def get_tests():
-        tests = Test.query.filter_by()
-
     def create_test(course_id):
         form = NewTestForm()
         course = Course.query.filter_by(id=course_id).first()
-        tests = Test.query.filter_by(course_id=course_id)
+        tests = course.tests
         if form.validate_on_submit():
             test = Test()
             test.name = form.test_name.data
@@ -136,6 +134,7 @@ class CourseController():
             db.session.commit()
 
             return redirect(url_for('admin_portal'))
+
         return redirect(url_for('admin_portal', course_form=course_form))
 
     def add_student(course_id):
@@ -174,7 +173,6 @@ class CourseController():
         pass
 
 
-
 class TestController():
 
     def create_test():
@@ -192,7 +190,10 @@ class TestController():
     def show_test(course_id, test_id):
         course = Course.query.filter_by(id=course_id).first()
         test = Test.query.filter_by(id=test_id).first()
-        results = Result.query.filter_by(test_id=test.id).all()
+        users = course.get_users()
+        # submissions = test.get_all_submissions()
+
+        submitted_users = test.get_submitted_users()
 
         rename_test_form = RenameTestForm()
         course_form = NewCourseForm()
@@ -200,13 +201,13 @@ class TestController():
         return render_template('admin-test-view.html', course=course,
                                course_form=course_form, test=test,
                                rename_test_form=rename_test_form,
-                               results=results)
+                               submitted_users=submitted_users)   # results=results
 
     def edit_test_view(course_id, test_id):
-        
+
         course = Course.query.filter_by(id=course_id).first()
         test = Test.query.filter_by(id=test_id).first()
-        questions = Question.query.filter_by(test_id=test.id).all()
+        questions = test.questions
 
         form = QuestionForm()
         course_form = NewCourseForm()
@@ -270,7 +271,6 @@ class TestController():
                 return redirect(url_for('edit_test_view', course_id=course_id,
                                         test_id=test_id))
 
-
     def new_question(course_id, test_id):
         form = QuestionForm()
 
@@ -298,7 +298,7 @@ class TestController():
     def take_test(course_id, test_id):
         course = Course.query.filter_by(id=course_id).first()
         test = Test.query.filter_by(id=test_id).first()
-        questions = Question.query.filter_by(test_id=test.id).all()
+        questions = test.questions
 
         form = QuestionSubmissionForm()
 
@@ -310,13 +310,11 @@ class TestController():
         if not sub:  # if existing submission exists
             sub = Submission()
             sub.user_id = current_user.id
+            sub.test_id = test_id
             sub.question_id = question_id
-
-        # mcq_options = q.get_mcq_options()
 
         form = QuestionSubmissionForm()
         if form.validate_on_submit():
-            print('~~~~~~~~ submission form validated')
             if q.question_type == 1:
                 sub.output_sub = form.output_answer.data
             elif q.question_type == 2:
@@ -329,7 +327,15 @@ class TestController():
 
         return redirect(url_for('take_test', course_id=course_id, test_id=test_id))
 
-    def submit_test(course_id, test_id, user_id):
-        course = Course.query.filter_by(id=course_id).first()
-        test = Test.query.filter_by(id=test_id).first() 
-        return 1 
+    def submit_test(course_id, test_id):
+        test = Test.query.filter_by(id=test_id).first()
+        questions = test.questions  # Question.query.filter_by(test_id=test_id)
+        submissions = test.get_user_submissions(current_user.id)
+
+        for submission in submissions:
+            submission.auto_mark()
+
+        if not any([q.question_type == 3 for q in questions]):
+            test.needs_marking = False
+
+        return redirect(url_for('course_view', course_id=course_id))

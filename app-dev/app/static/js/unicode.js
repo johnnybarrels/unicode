@@ -43,8 +43,8 @@ $(window).ready(function () {
     $(".dropdown-toggle").dropdown();
 
     // Always making the first nav tab and pane active on load
-    $('.nav-item').first().addClass('active');
-    $('.tab-pane').first().addClass('active show');
+    // $('.nav-item').first().addClass('active');
+    // $('.tab-pane').first().addClass('active show');
 
     // function returnToPreviousPage() {
     //     window.history.back();

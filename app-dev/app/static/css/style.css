@@ -481,6 +481,23 @@ a:hover {
   line-height: 38px;
 }
 
+#solution-mcq, #mcq_solution {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#solution-mcq li, #mcq_solution li {
+  float: left;
+  margin-right: 22px;
+}
+
+#solution-mcq li label, #mcq_solution li label {
+  /* font-family: 'DM Sans', sans-serif; */
+  margin-left: 5px;
+}
+
 #question-description-one {
   height: 190px;
 }
@@ -597,10 +614,11 @@ a:hover {
   resize: none;
   background-color: white;
   border: none;
+  height: 100%;
 }
 
 .static-description-1, .static-description-2 {
-  height: 30%
+  height: 50%;
 }
 
 .static-description-3 {

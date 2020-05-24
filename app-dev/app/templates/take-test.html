@@ -5,8 +5,11 @@
 <div class="row mx-2">
   <h1 class="page-heading">{{ course.name }} - {{ test.name }}</h1>
   <div class="test-submit-btns mr-5">
-    <button id="submit-test" class="btn test-submit-btn">Submit test<i
-        class="fas fa-arrow-alt-circle-right"></i></button>
+    <form action="{{ url_for('submit_test', course_id=course.id, test_id=test.id) }}"
+      onsubmit="return confirm('Are you sure you would like to submit your test?')" method="POST">
+      <button type="submit" id="submit-test" class="btn test-submit-btn">Submit test
+        <i class="fas fa-arrow-alt-circle-right"></i></button>
+    </form>
   </div>
 </div>
 
@@ -36,7 +39,7 @@
           <div class="col-5">
             <div class="form-group q-description-{{ loop.index }} static-description-{{ question.question_type }} mb-4">
               <h4 class="subheading mb-2">Question</h4>
-              {{ form.description(id="static-description", class="form-control") }}
+              {{ form.description(id="static-description", class="form-control mb-2") }}
               <script>
                 $('.q-description-{{ loop.index }} #static-description').html('{{ question.question_string }}').attr('disabled', 'disabled');
               </script>
@@ -62,20 +65,15 @@
                 {% endfor %}
               </ol>
               {% set mcq_sub = question.get_user_submission(current_user.id).mcq_sub %}
-
-              {% if mcq_sub %}
               <script>
-                // DOESN'T WORK
-                if ("{{mcq_sub}}" == 'a') { $('mcq-1').prop('checked', true); }
-                else if ("{{mcq_sub}}" == 'b') { $('mcq-2').prop('checked', true); }
-                else if ("{{mcq_sub}}" == 'c') { $('mcq-3').prop('checked', true); }
-                else if ("{{mcq_sub}}" == 'd') { $('mcq-4').prop('checked', true); };
+                if ("{{mcq_sub}}" == 'a') { $('#mcq-1').prop('checked', true); }
+                else if ("{{mcq_sub}}" == 'b') { $('#mcq-2').prop('checked', true); }
+                else if ("{{mcq_sub}}" == 'c') { $('#mcq-3').prop('checked', true); }
+                else if ("{{mcq_sub}}" == 'd') { $('#mcq-4').prop('checked', true); };
               </script>
-              {% endif %}
               {% endif %}
             </div>
 
-            <!--  -->
             <div class="question-btns">
               <button class="btn purple-btn">Save answer</button>
             </div>

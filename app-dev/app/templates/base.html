@@ -48,8 +48,7 @@
             aria-hidden="true">&times;</span>
         </button>
         <div class="modal-body">
-          <form id="createCourseForm" action="{{ url_for('create_course') }}" method='post' name='create_course'
-            onsubmit="return confirm('Are you sure??')">
+          <form id="createCourseForm" action="{{ url_for('create_course') }}" method='post' name='create_course'>
             {{ course_form.hidden_tag() }}
             <div class="form-group mb-5">
               <h4 class="modal-subheading">Course Name</h4>
