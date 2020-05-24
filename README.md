@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/logos/logo.png?token=ANBLRDVBHRIKZUAMVJAVQTS62H4KI"  width="300" height="200" title="FVCproductions" alt="Unicode_logo">
+  <img name="logo" src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/logos/logo.png?token=ANBLRDVBHRIKZUAMVJAVQTS62H4KI"  width="300" height="200" title="FVCproductions" alt="Unicode_logo">
 </p>
 
 
@@ -8,7 +8,7 @@
 
 > # **CITS3403/CITS5504 - Agile Web Development — Final Project**
 
-> ## **Development Team:**
+## **Development Team:**
 
 | **Johnny Barrett** | **Ivy Bui** | **Jesse Carter** | **Cesar Gonzalez** |
 | :---: |:---:| :---:|:---:|
@@ -48,8 +48,6 @@ Another important functionality of **Unicode** is the ability of the admin to or
 
 We decided to use MVC(model view controller) Arquitecture for our project. The *model* refers to an object referencing an entity in a database, the *view* is how that object is presented to the user and the *controller* is a linking class that builds the model from the database, prepares the view based on the model, and the updates and saves the models back to the database.
 
-> - **_User Stories:_**
-
 | # | User | User Story | Story Point |
 | --- | :---: | --- | :---: |
 | 1 | `Admin` | I want to be able to create coding tests | 1 |
@@ -68,8 +66,6 @@ We decided to use MVC(model view controller) Arquitecture for our project. The *
 | 14 | `Student` | I want to see the solutions the tests (after) | 9 |
 
 
-> - **_Model Views:_**
-
 | User | View |
 | :---: | :--- | 
 | `All` | Login | 
@@ -86,14 +82,14 @@ We decided to use MVC(model view controller) Arquitecture for our project. The *
 | `Student` | Test result view |
 
 
-> - **_Wireframes_**
+- **_Wireframes_**
 <p>
   <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/Wireframes.png?token=ANBLRDWVNLZ7QNXSDACNYKC62JKDA"  width="1000" height="300" title="FVCproductions" alt="color">
 </p>
 
 
 
-> - **_Color pallets_**
+- **_Color pallets_**
 <p>
   <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/Color_Palette.png?token=ANBLRDSBFD5S4ITZ3B7XB3262JGD2"  width="500" height="400" title="FVCproductions" alt="color">
 </p>
@@ -101,7 +97,7 @@ We decided to use MVC(model view controller) Arquitecture for our project. The *
 
 ## **How to Use**
 
-> ### For Admin(Teachers) Profile:
+### For Admin(Teachers) Profile:
 
 Login using email address and password
   - *_Create a New Course_*: 
@@ -138,7 +134,7 @@ Login using email address and password
   - *_Publish Test Results_*:
       - Pending
 
-> ### For Students Profile:
+### For Students Profile:
 
 **New user**
   - *_Registration_*: 
@@ -153,13 +149,56 @@ Login using email address and password
   - *_Taking Test_*: 
     - Click on Course
     - Select the test to take
-    - Once test completed Select `Submit`
+    - Once test completed Select `Submit test`
     
   - *_View Results_*: 
     - Pending
 
 
 ## **How to Install from localhost**
+1. Clone repository using `https://github.com/johnnybarrels/agile-proj2.git`
+2. Install requirements:
+
+```shell
+$ pip install -r requirements.txt
+```
+
+3. Make sure you are on the correct working directory for the app:
+
+```shell
+$ cd app-dev
+```
+
+3. Launch Database: 
+
+```shell
+$ flask db init
+$ flask db migrate -m ' ' 
+$ flask db upgrade
+```
+
+4. Populate Database:
+  - We have created python function to automtically populate the database (use flask shell to access python on terminal)
+  ```shell
+  $ flask shell
+  ```
+  - Import the function and execute
+  
+  ```python
+  from app.db_tools import purge_and_load
+  
+  purge_and_load()
+  
+  exit() 
+  ```
+  
+5. launch app:
+
+```shell
+$ flask run
+```
+
+<a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
 
 ## License
 
