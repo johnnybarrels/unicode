@@ -112,6 +112,14 @@ We decided to use MVC(model view controller) Arquitecture for our project. The *
 
 <a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
 
+- **_Database_**
+
+<p align="center">
+  <img src="https://app.lucidchart.com/publicSegments/view/864af6cf-abaa-4ea8-a652-bf29407bf9d4/image.png"  width="800" height="500" title="FVCproductions" alt="color">
+</p>
+
+<a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
+
 
 ## **How to Use**
 
