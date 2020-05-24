@@ -48,12 +48,9 @@ class QuestionForm(FlaskForm):
     mcq_2 = StringField('MCQ Option 2')
     mcq_3 = StringField('MCQ Option 3')
     mcq_4 = StringField('MCQ Option 4')
-    mcq_solution = RadioField('MCQ Solution',
-                              choices=[(c, c+')') for c in 'abcd'],
-                              validate_choice=False)
+    mcq_solution = RadioField('MCQ Solution', choices=[(let, let+')') for let in 'abcd'], validate_choice=False)
     mark_alloc = IntegerField('Allocated mark', validators=[DataRequired()])
-    question_type = HiddenField(
-        'Question Type', default=1, validators=[DataRequired()])
+    question_type = HiddenField('Question Type', default=1, validators=[DataRequired()])
     save = SubmitField('Save')
     delete = SubmitField('Delete')
 
