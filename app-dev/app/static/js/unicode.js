@@ -90,21 +90,9 @@ function newQuestionSelector(qType) {
     }
 };
 
-// Test MCQ radio button selection recording
-function insertValueToHidden(num) {
-    if (num == 1) {
-        $('#mcq-answer').attr('value', 'a')
-    }
-    else if (num == 2) {
-        $('#mcq-answer').attr('value', 'b')
-    }
-    else if (num == 3) {
-        $('#mcq-answer').attr('value', 'c')
-    }
-    else if (num == 4) {
-        $('#mcq-answer').attr('value', 'd')
-    };
-    // $('#mcq_answer').attr('value', selection)
+// Storing value of MCQ radio button submission
+function insertValueToHidden(i) {
+    $('#mcq-answer').attr('value', ['a', 'b', 'c', 'd'][i - 1])
 }
 
 // $('nav-add-tab').click(function () {

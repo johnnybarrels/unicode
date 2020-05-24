@@ -61,10 +61,21 @@
                 {% endif %}
                 {% endfor %}
               </ol>
+              {% set mcq_sub = question.get_user_submission(current_user.id).mcq_sub %}
+
+              {% if mcq_sub %}
+              <script>
+                // DOESN'T WORK
+                if ("{{mcq_sub}}" == 'a') { $('mcq-1').prop('checked', true); }
+                else if ("{{mcq_sub}}" == 'b') { $('mcq-2').prop('checked', true); }
+                else if ("{{mcq_sub}}" == 'c') { $('mcq-3').prop('checked', true); }
+                else if ("{{mcq_sub}}" == 'd') { $('mcq-4').prop('checked', true); };
+              </script>
+              {% endif %}
               {% endif %}
             </div>
 
-
+            <!--  -->
             <div class="question-btns">
               <button class="btn purple-btn">Save answer</button>
             </div>

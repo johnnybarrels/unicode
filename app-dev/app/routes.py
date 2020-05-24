@@ -237,18 +237,7 @@ def take_test(course_id, test_id):
     course = Course.query.filter_by(id=course_id).first()
     test = Test.query.filter_by(id=test_id).first()
     questions = Question.query.filter_by(test_id=test.id).all()
-
-    # Submission.query.join(self).filter(
-    #     (Submission.question_id == self.id)
-    #     & (Submission.user_id == user_id)).first()
-
-    # submissions = Test.get_user_submissions(current_user.id)
-
     form = QuestionSubmissionForm()
-
-    if form.validate_on_submit():
-
-        pass
 
     return render_template('take-test.html', course=course, test=test,
                            questions=questions, form=form)
@@ -259,7 +248,7 @@ def take_test(course_id, test_id):
 def new_submission(course_id, test_id, question_id):
     q = Question.query.filter_by(id=question_id).first()
     sub = Submission.query.filter_by(question_id=question_id).first()
-    if not sub:  # if existing submission exists
+    if not sub:  # if no existing submission exists
         sub = Submission()
         sub.user_id = current_user.id
         sub.question_id = question_id
@@ -267,6 +256,7 @@ def new_submission(course_id, test_id, question_id):
     # mcq_options = q.get_mcq_options()
 
     form = QuestionSubmissionForm()
+
     if form.validate_on_submit():
         print('~~~~~~~~ submission form validated')
         if q.question_type == 1:
