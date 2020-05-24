@@ -599,6 +599,14 @@ a:hover {
   border: none;
 }
 
+.static-description-1, .static-description-2 {
+  height: 30%
+}
+
+.static-description-3 {
+  height: 80%;
+}
+
 .student-tests {
   background-color: #FFFFFF;
   height: 400px;

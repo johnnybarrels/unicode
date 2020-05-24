@@ -178,8 +178,7 @@ def edit_question(course_id, test_id, question_id):
         if form.save.data:
             q.test_id = test_id
             q.question_type = int(form.question_type.data)
-            q.question_string = repr(
-                form.description.data.encode())[2:-1]
+            q.question_string = repr(form.description.data.encode())[2:-1]
             q.code_string = repr(form.code_string.data.encode())[2:-1]
             q.mcq_1 = form.mcq_1.data
             q.mcq_2 = form.mcq_2.data
@@ -227,6 +226,8 @@ def new_question(course_id, test_id):
         db.session.add(q)
         db.session.commit()
 
+    # for field, error in form.errors.items():
+    #     print(f'~~~~~~~~ {field}: {error}')
     return redirect(url_for('edit_test', course_id=course_id, test_id=test_id))
 
 
@@ -237,19 +238,31 @@ def take_test(course_id, test_id):
     test = Test.query.filter_by(id=test_id).first()
     questions = Question.query.filter_by(test_id=test.id).all()
 
+    # Submission.query.join(self).filter(
+    #     (Submission.question_id == self.id)
+    #     & (Submission.user_id == user_id)).first()
+
+    # submissions = Test.get_user_submissions(current_user.id)
+
     form = QuestionSubmissionForm()
 
-    return render_template('take-test.html', course=course, test=test, questions=questions, form=form)
+    if form.validate_on_submit():
+
+        pass
+
+    return render_template('take-test.html', course=course, test=test,
+                           questions=questions, form=form)
 
 
 @app.route('/student/<course_id>/<test_id>/<question_id>/submit', methods=['POST'])
 @login_required
 def new_submission(course_id, test_id, question_id):
     q = Question.query.filter_by(id=question_id).first()
-    # sub = Submission.query.filter_by(question_id=question_id).first()
-    sub = Submission()
-    sub.user_id = current_user.id
-    sub.question_id = question_id
+    sub = Submission.query.filter_by(question_id=question_id).first()
+    if not sub:  # if existing submission exists
+        sub = Submission()
+        sub.user_id = current_user.id
+        sub.question_id = question_id
 
     # mcq_options = q.get_mcq_options()
 
@@ -257,11 +270,11 @@ def new_submission(course_id, test_id, question_id):
     if form.validate_on_submit():
         print('~~~~~~~~ submission form validated')
         if q.question_type == 1:
-            sub.output_sub = form.output_q_answer.data
+            sub.output_sub = form.output_answer.data
         elif q.question_type == 2:
             sub.mcq_sub = form.mcq_answer.data
         elif q.question_type == 3:
-            sub.code_sub = form.code_answer.data
+            sub.code_sub = repr(form.code_answer.data)[1:-1]
 
         db.session.add(sub)
         db.session.commit()

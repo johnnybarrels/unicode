@@ -1,6 +1,7 @@
 from app import db, login
 from flask_login import UserMixin, LoginManager
 from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import current_user
 
 
 @login.user_loader
@@ -63,6 +64,12 @@ class Test(db.Model):
     course_id = db.Column(db.Integer, db.ForeignKey('courses.id'))
     questions = db.relationship('Question', backref='test', lazy=True)
 
+    def get_user_submissions(self, user_id):
+        return Submission.query.join(Question).join(Test).filter(
+            (Submission.question_id == Question.id)
+            & (Question.test_id == self.id)
+            & (Submission.user_id == user_id)).all()
+
     def __repr__(self):
         return f'<Test: {self.name}>'
 
@@ -86,6 +93,11 @@ class Question(db.Model):
     def get_mcq_options(self):
         return [self.mcq_1, self.mcq_2, self.mcq_3, self.mcq_4]
 
+    def get_user_submission(self, user_id):
+        return Submission.query.join(Question).filter(
+            (Submission.question_id == self.id)
+            & (Submission.user_id == user_id)).first()
+
     def __repr__(self):
         return f'<Question: {self.question_string}>'
 
@@ -100,7 +112,7 @@ class Submission(db.Model):
     question_id = db.Column(db.Integer, db.ForeignKey('questions.id'))
 
     def __repr__(self):
-        return f'<Submission: User ID: {self.user_id}, Question ID: {self.question_id}'
+        return f'<Submission: User ID: {self.user_id}, Question ID: {self.question_id}>'
 
 
 class Result(db.Model):

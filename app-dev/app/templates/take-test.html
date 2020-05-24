@@ -34,7 +34,7 @@
 
         <div id="question-content" class="row">
           <div class="col-5">
-            <div class="form-group q-description-{{ loop.index }} mb-4">
+            <div class="form-group q-description-{{ loop.index }} static-description-{{ question.question_type }} mb-4">
               <h4 class="subheading mb-2">Question</h4>
               {{ form.description(id="static-description", class="form-control") }}
               <script>
@@ -45,13 +45,13 @@
             <div class="form-group mb-4">
               {% if question.question_type == 1 %}
               <h4 class="subheading mb-2">Answer</h4>
-              {{ form.output_answer(class="form-control", style="", placeholder="Write your answer here") }}
-              </ol>
+              {{ form.output_answer(class="form-control", placeholder="Write your answer here", value=question.get_user_submission(current_user.id).output_sub) }}
+
               {% elif question.question_type == 2 %}
               {{ form.mcq_answer(id="mcq-answer") }}
               <h4 class="subheading mb-2">Select one option</h4>
               <ol type="a">
-                {% for mcq in [question.mcq_1, question.mcq_2, question.mcq_3, question.mcq_4] %}
+                {% for mcq in question.get_mcq_options() %}
                 {% if mcq %}
                 <li>
                   <input type="radio" id="mcq-{{ loop.index }}" class="mcq-radio ml-2" name="mcq"
@@ -60,7 +60,8 @@
                 </li>
                 {% endif %}
                 {% endfor %}
-                {% endif %}
+              </ol>
+              {% endif %}
             </div>
 
 
@@ -72,6 +73,9 @@
           <div class="col-7 q-code-editor-{{ loop.index }}">
             {% if question.question_type == 3 %}
             {{ form.code_answer(id="editor", class="editor code-editor", **{"data-editor": "python"}) }}
+            <script>
+              $('.q-code-editor-{{ loop.index }} .code-editor').html('{{ question.get_user_submission(current_user.id).code_sub }}')
+            </script>
             {% else %}
             {{ form.code_answer(id="static-editor", class="editor code-editor", **{"data-editor": "python"}) }}
             {% if question.code_string %}
