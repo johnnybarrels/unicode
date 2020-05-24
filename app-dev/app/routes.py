@@ -123,6 +123,7 @@ def toggle_live(course_id, test_id):
 def edit_question(course_id, test_id, question_id):
     return TestController.edit_question(course_id, test_id, question_id)
 
+
 @app.route('/admin/<course_id>/<test_id>/deletequestion/<question_id>', methods=['POST'])
 @login_required
 def delete_question(course_id, test_id, question_id):
@@ -135,20 +136,19 @@ def delete_question(course_id, test_id, question_id):
 def new_question(course_id, test_id):
     return TestController.new_question(course_id, test_id)
 
+
 @app.route('/student/<course_id>/<test_id>/taketest')
 @login_required
 def take_test(course_id, test_id):
     return TestController.take_test(course_id, test_id)
 
 
-@app.route('/student/<course_id>/<test_id>/<question_id>/submit_answer', methods=['POST'])
-@login_required
-def new_submission(course_id, test_id, question_id):
-    return TestController.new_submission(course_id, test_id, question_id)
-
 @app.route('/student/<course_id>/<test_id>/<question_id>/submit_test', methods=['POST'])
 @login_required
 def submit_test(course_id, test_id):
-    course = Course.query.filter_by(id=course_id).first()
-    test = Test.query.filter_by(id=test_id).first() 
-    return 1 
+    return TestController.submit_test(course_id, test_id)
+
+@app.route('/student/<course_id>/<test_id>/<question_id>/submit', methods=['POST'])
+@login_required
+def new_submission(course_id, test_id, question_id):
+    return TestController.new_submission(course_id, test_id, question_id)
