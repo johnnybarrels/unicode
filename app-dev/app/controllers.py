@@ -1,9 +1,9 @@
 from werkzeug.urls import url_parse
 from flask import request
-from app.models import User, Course, Test, Question, Result, enrolments
+from app.models import User, Course, Test, Question, Result, enrolments, Submission
 from app.forms import LoginForm, RegistrationForm, NewTestForm, NewCourseForm, AddStudentToCourseForm
 from app.models import User, Course, Test, Question, Result
-from app.forms import LoginForm, RegistrationForm, NewTestForm, NewCourseForm, RenameTestForm
+from app.forms import LoginForm, RegistrationForm, NewTestForm, NewCourseForm, RenameTestForm, QuestionForm, QuestionSubmissionForm
 from flask import render_template, flash, redirect, url_for, request
 from app import app, db
 from flask_login import current_user, login_user, logout_user, login_required
@@ -59,7 +59,10 @@ class UserController():
         add_student_form = AddStudentToCourseForm()
 
         if current_user.is_admin:
-            return render_template('admin-course.html', add_student_form=add_student_form,           rename_test_form=rename_test_form, course_users=course_users, course_form=course_form, new_test_form=new_test_form, course=course, tests=tests)
+            return render_template('admin-course.html', add_student_form=add_student_form, 
+                                    rename_test_form=rename_test_form, course_users=course_users, 
+                                    course_form=course_form, new_test_form=new_test_form, course=course, 
+                                    tests=tests)
 
         else:
             live_tests = [test for test in tests if test.is_live]
@@ -171,10 +174,164 @@ class CourseController():
         pass
 
 
-"""
+
 class TestController():
 
     def create_test():
         form = NewTestForm()
         pass
-"""
+
+    def delete_test(course_id, test_id):
+        test = Test.query.filter_by(id=test_id).first()
+
+        db.session.delete(test)
+        db.session.commit()
+
+        return redirect(url_for('course_view', course_id=course_id))
+
+    def show_test(course_id, test_id):
+        course = Course.query.filter_by(id=course_id).first()
+        test = Test.query.filter_by(id=test_id).first()
+        results = Result.query.filter_by(test_id=test.id).all()
+
+        rename_test_form = RenameTestForm()
+        course_form = NewCourseForm()
+
+        return render_template('admin-test-view.html', course=course,
+                               course_form=course_form, test=test,
+                               rename_test_form=rename_test_form,
+                               results=results)
+
+    def edit_test_view(course_id, test_id):
+        
+        course = Course.query.filter_by(id=course_id).first()
+        test = Test.query.filter_by(id=test_id).first()
+        questions = Question.query.filter_by(test_id=test.id).all()
+
+        form = QuestionForm()
+        course_form = NewCourseForm()
+
+        return render_template('admin-test-edit.html', course=course,
+                               test=test, questions=questions,
+                               form=form, course_form=course_form)
+
+    def rename_test(course_id, test_id):
+        test = Test.query.filter_by(id=test_id).first()
+        form = RenameTestForm()
+
+        if form.validate_on_submit():
+            test.name = form.new_test_name.data
+            db.session.commit()
+
+            redirect(url_for('test_view', course_id=course_id, test_id=test_id))
+
+        return redirect(url_for('test_view', course_id=course_id, test_id=test_id))
+
+    def toggle_live(course_id, test_id):
+        test = Test.query.filter_by(id=test_id).first()
+
+        if test.is_live:
+            test.is_live = False
+        else:
+            test.is_live = True
+
+        db.session.commit()
+
+        return redirect(url_for('course_view', course_id=course_id))
+
+    def edit_question(course_id, test_id, question_id):
+        course = Course.query.filter_by(id=course_id).first()
+        test = Test.query.filter_by(id=test_id).first()
+        q = Question.query.filter_by(id=question_id).first()
+        form = QuestionForm()
+
+        if form.delete.data:
+            db.session.delete(q)
+            db.session.commit()
+
+            return redirect(url_for('edit_test_view', course_id=course_id,
+                                    test_id=test_id))
+
+        if form.validate_on_submit():
+            if form.save.data:
+                q.test_id = test_id
+                q.question_type = int(form.question_type.data)
+                q.question_string = repr(
+                    form.description.data.encode())[2:-1]
+                q.code_string = repr(form.code_string.data.encode())[2:-1]
+                q.mcq_1 = form.mcq_1.data
+                q.mcq_2 = form.mcq_2.data
+                q.mcq_3 = form.mcq_3.data
+                q.mcq_4 = form.mcq_4.data
+                q.mcq_answer = form.mcq_solution.data
+                q.answer = form.solution.data
+                q.mark_alloc = form.mark_alloc.data
+                db.session.commit()
+
+                return redirect(url_for('edit_test_view', course_id=course_id,
+                                        test_id=test_id))
+
+    def delete_question(course_id, test_id, question_id):
+        q = Question.query.filter_by(id=question_id).first()
+
+        db.session.delete(q)
+        db.session.commit()
+
+        return redirect(url_for('edit_test_view', course_id=course_id, test_id=test_id))
+
+    def new_question(course_id, test_id):
+        form = QuestionForm()
+        if form.validate_on_submit():
+            q = Question()
+            q.test_id = test_id
+            q.question_type = int(form.question_type.data)
+            q.question_string = repr(form.description.data.encode())[2:-1]
+            q.code_string = repr(form.code_string.data.encode())[2:-1]
+            q.mcq_1 = form.mcq_1.data
+            q.mcq_2 = form.mcq_2.data
+            q.mcq_3 = form.mcq_3.data
+            q.mcq_4 = form.mcq_4.data
+            q.mcq_answer = form.mcq_solution.data
+            q.answer = form.solution.data
+            q.mark_alloc = form.mark_alloc.data
+
+            db.session.add(q)
+            db.session.commit()
+
+        return redirect(url_for('edit_test_view', course_id=course_id, test_id=test_id))
+
+    def take_test(course_id, test_id):
+        course = Course.query.filter_by(id=course_id).first()
+        test = Test.query.filter_by(id=test_id).first()
+        questions = Question.query.filter_by(test_id=test.id).all()
+
+        form = QuestionSubmissionForm()
+
+        return render_template('take-test.html', course=course, test=test, questions=questions, form=form)
+
+    def new_submission(course_id, test_id, question_id):
+        q = Question.query.filter_by(id=question_id).first()
+        # sub = Submission.query.filter_by(question_id=question_id).first()
+        sub = Submission()
+        sub.user_id = current_user.id
+        sub.question_id = question_id
+
+        # mcq_options = q.get_mcq_options()
+
+        form = QuestionSubmissionForm()
+        if form.validate_on_submit():
+            print('~~~~~~~~ submission form validated')
+            if q.question_type == 1:
+                sub.output_sub = form.output_answer.data
+            elif q.question_type == 2:
+                sub.mcq_sub = form.mcq_answer.data
+            elif q.question_type == 3:
+                sub.code_sub = form.code_answer.data
+
+            db.session.add(sub)
+            db.session.commit()
+
+        return redirect(url_for('take_test', course_id=course_id, test_id=test_id))
+
+    def submit_test(course_id, test_id, user_id):
+        return 1
