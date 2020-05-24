@@ -135,9 +135,6 @@ class CourseController():
 
             return redirect(url_for('admin_portal'))
         return redirect(url_for('admin_portal', course_form=course_form))
-<<<<<<< HEAD
-        
-=======
 
     def add_student(course_id):
         add_student_form = AddStudentToCourseForm()
@@ -165,7 +162,6 @@ class CourseController():
 
         return redirect(url_for('course_view', course_id=course_id))
 
->>>>>>> 4a97f925c01c46de09bfd0b327af26ca262ed828
     def edit_course():
         pass
 
