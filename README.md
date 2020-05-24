@@ -24,6 +24,9 @@
 - [How to Install from localhost](#how-to-install-from-localhost)
 - [License](#license)
 
+
+<a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
+
 ---
 
 ## **Motivation**
@@ -31,6 +34,8 @@
 One of the biggest challenges faced by Computer Science and Data Science student is the ability to demostrate our coding skills by completing coding test using pen and paper, at the same time, not able to practice on a real life coding platform that provides a more realistic experience when preparing for exams and to improve our coding skills. 
 
 For this reason we decided to develop **Unicode**, so that professors as well as student can improve the learning experience when it comes to learn how to code.
+
+<a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
 
 ## **Description**
 
@@ -43,6 +48,9 @@ For this reason we decided to develop **Unicode**, so that professors as well as
 - **_Write a code_**: Based on the instruction and descriptions provided by the teacherk the student can type down the corresping line of code to achieve the results requested( manual marking)
 
 Another important functionality of **Unicode** is the ability of the admin to organize create tests by course and assign students to different courses. Also, the admin can decide when to enble test to be live(ready to take) for all students enroll in the course.
+
+
+<a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
 
 ## **Design Process**
 
@@ -66,6 +74,8 @@ We decided to use MVC(model view controller) Arquitecture for our project. The *
 | 14 | `Student` | I want to see the solutions the tests (after) | 9 |
 
 
+<a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
+
 | User | View |
 | :---: | :--- | 
 | `All` | Login | 
@@ -82,11 +92,16 @@ We decided to use MVC(model view controller) Arquitecture for our project. The *
 | `Student` | Test result view |
 
 
+<a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
+
+
 - **_Wireframes_**
 <p>
   <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/Wireframes.png?token=ANBLRDWVNLZ7QNXSDACNYKC62JKDA"  width="1000" height="300" title="FVCproductions" alt="color">
 </p>
 
+
+<a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
 
 
 - **_Color pallets_**
@@ -95,18 +110,23 @@ We decided to use MVC(model view controller) Arquitecture for our project. The *
 </p>
 
 
+<a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
+
+
 ## **How to Use**
 
 ### For Admin(Teachers) Profile:
 
-Login using email address and password
+  - *_Login_*: 
+    - Fill up Login form using email and password
+    - Click `Login`
+    
   - *_Create a New Course_*: 
     - Click on `CREATE A NEW COURSE` or "+" icon next to Course
     - Type Course Name
     - Type Course Code
     - Click `Create Course`
-  
-      
+     
   - *_Create a New Test_*: 
     - Select the Course on the right panel
     - Click on `New Test`
@@ -135,16 +155,14 @@ Login using email address and password
       - Pending
 
 ### For Students Profile:
-
-**New user**
-  - *_Registration_*: 
+  - *_Registration_* (for new users only): 
     - Click on `Sign up`
     - Fill up registration form 
     - Click `Register`
     
-**Existing user**
-
-Login using email address and password
+  - *_Login_*: 
+    - Fill up Login form using email and password
+    - Click `Login`
 
   - *_Taking Test_*: 
     - Click on Course
@@ -154,6 +172,8 @@ Login using email address and password
   - *_View Results_*: 
     - Pending
 
+
+<a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
 
 ## **How to Install from localhost**
 1. Clone repository using `https://github.com/johnnybarrels/agile-proj2.git`
