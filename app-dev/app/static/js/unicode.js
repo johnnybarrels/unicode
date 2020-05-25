@@ -10,9 +10,6 @@ $(window).ready(function () {
     $(".fa-caret-square-down").click(function () {
         $("#option-menu").toggle();
     });
-    // $(".fa-times").click(function () {
-    //     document.getElementById("option-menu").style.visibility = "hidden";
-    // });
 
     // Modal button assignments
     $("#new-course-btn").click(function () {

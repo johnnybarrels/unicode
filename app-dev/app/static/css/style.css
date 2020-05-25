@@ -107,7 +107,6 @@ a.nav-child {
   position: absolute;
   left: 0;
   bottom: 0;
-  /* width: 23%; */
   text-align: center;
   padding: 0 30px;
 }
@@ -311,7 +310,6 @@ a .purple-btn:hover {
 #student-list th, #student-list td,  #student-list tr {
   width: 100%;
   display: flex;
-  /* width: 120px; */
 }
 
 #add-student {
@@ -463,6 +461,7 @@ a:hover {
   border-radius: 10px;
   height: 95%;
   position: relative;
+  overflow-y: scroll;
 }
 
 #question-form, #question-content, #test-form {
@@ -490,6 +489,7 @@ a:hover {
   color: white;
   margin: 0 4px;
   font-weight: 500;
+  margin-bottom: 5px;
 }
 .nav-item.nav-link.active {
   background-color: var(--unicode-purple);
@@ -611,11 +611,6 @@ a:hover {
 .edit-test-btn .fas {
   margin: 0 10px 0 0;
 }
-
-/* .dashboard {
-  position: relative;
-  height: 95%;
-} */
 
 .test-results {
   height: 180px;
