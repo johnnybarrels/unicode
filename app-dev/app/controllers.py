@@ -102,6 +102,7 @@ class UserController():
 
         return render_template('register.html', title="Register", form=form)
 
+    
 
 class CourseController():
 

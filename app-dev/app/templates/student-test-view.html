@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="row mx-2">
+  <h1 class="page-heading">{{ course.name }} - {{ test.name }}</h1>
+</div>
+
+<!-- Student hasn't taken test -->
+<div id="no-test-taken" class="row h-100">
+  <div class="col"></div>
+  <div class="col-6 my-auto text-center">
+    <h1 class="portal-msg">YOU HAVE NOT TAKEN
+        THIS TEST YET</h1>
+    <a href="{{ url_for('take_test', course_id=course.id, test_id=test.id) }}">
+        <button id="take-test-btn" class="btn">Take test</button>
+    </a>
+  </div>
+  <div class="col"></div>
+  
+</div>
+
+<!-- Student has taken test but no results yet -->
+<div id="no-test-taken" class="row h-100">
+    <div class="col"></div>
+    <div class="col-6 my-auto text-center">
+      <h1 class="portal-msg">YOUR TEST HAS NOT
+          BEEN MARKED YET</h1>
+    </div>
+    <div class="col"></div>
+  </div>
+
+<!-- Dashboard for if there are test results -->
+<div class="dashboard mx-5">
+    <div class="row my-5">
+      <div class="test-results p-3">
+        Your result
+        <span class="result">your result%</span>
+      </div>
+      <div class="test-results p-3">
+        Test average
+        <span class="result">avg%</span>
+      </div>
+      <div class="test-results p-3">
+        Min mark
+        <span class="result">min%</span>
+      </div>
+      <div class="test-results p-3">
+        Max mark
+        <span class="result">max%</span>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}
