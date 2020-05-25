@@ -56,19 +56,19 @@
   <div class="row my-5">
     <div class="test-results p-3">
       Students completed
-      <span class="result">5 of 11</span>
+      <span class="result">{{ aggregates[0] }} of {{ aggregates[1] }}</span>
     </div>
     <div class="test-results p-3">
       Test average
-      <span class="result">78%</span>
+      <span class="result">{{ aggregates[2] }}</span>
     </div>
     <div class="test-results p-3">
       Min mark
-      <span class="result">57%</span>
+      <span class="result">{{ aggregates[3] }}%</span>
     </div>
     <div class="test-results p-3">
       Max mark
-      <span class="result">89%</span>
+      <span class="result">{{ aggregates[4] }}%</span>
     </div>
   </div>
 
