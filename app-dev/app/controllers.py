@@ -109,7 +109,7 @@ class CourseController():
 
     def aggregate_view():
         courses = Course.query.all()
-
+        tests = Test.query.all()
         return render_template('general-dashboard.html', courses=courses)
 
     def create_test(course_id):
