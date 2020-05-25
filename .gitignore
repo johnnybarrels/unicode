@@ -13,6 +13,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+#stuff
+app-dev/migrations/
+app-dev/db/unicode.db
+
 # C extensions
 *.so
 

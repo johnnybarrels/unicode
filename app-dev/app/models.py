@@ -7,7 +7,7 @@ from flask_login import current_user
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
-
+  
 
 enrolments = db.Table('enrolments',
                       db.Column('user_id', db.Integer, db.ForeignKey(
