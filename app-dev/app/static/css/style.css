@@ -412,6 +412,10 @@ a:hover {
   margin: 15px 0 40px 0;
 }
 
+.modal-title-subheading {
+  font-size: 20px;
+}
+
 .subheading, .modal-subheading {
   font-family: 'Roboto';
   font-weight: bold;
@@ -666,11 +670,11 @@ a:hover {
 }
 
 .static-description-1, .static-description-2 {
-  height: 50%;
+  height: 40%;
 }
 
 .static-description-3 {
-  height: 80%;
+  height: 60%;
 }
 
 .student-tests {
@@ -718,8 +722,16 @@ a:hover {
   width: 50px;
 }
 
+#qtype-3-mark-box {
+  width: 85%;
+}
+
 #mark-out-of {
   display: inline;
+  font-size: 20px;
+  line-height: 38px;
+  margin-left: 5px;
+  margin-bottom: 0;
 }
 
 #take-test-btn {
