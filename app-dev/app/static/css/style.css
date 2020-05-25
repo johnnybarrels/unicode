@@ -709,3 +709,16 @@ a:hover {
 #help-modal-body {
   overflow-y: scroll;
 }
+
+#take-test-btn {
+  height: 70px;
+  width: 220px;
+  margin-top: 30px;
+  font-size: 30px;
+  border-radius: 10px;
+  background-color: var(--unicode-red);
+  color: #FFFFFF;
+  font-weight: bold;
+  font-family: 'Lato', sans-serif;
+  letter-spacing: 1px;
+}
