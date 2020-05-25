@@ -5,8 +5,6 @@ from app.models import User, Course, Question, Test, Submission, Result
 from flask_login import current_user, login_user, login_required, LoginManager
 from app.controllers import UserController, CourseController, TestController
 
-# session.permanent = True  # Allow control over session timeouts
-
 
 @app.route('/', methods=['GET', 'POST'])
 @app.route('/index', methods=['GET', 'POST'])
@@ -30,6 +28,8 @@ def register():
 
 @app.route('/admin')
 def admin_portal():
+    if not current_user.is_admin:
+        return redirect(url_for('student_portal'))
     course_form = NewCourseForm()
     return render_template('admin.html', title='Admin Portal', course_form=course_form)
 
@@ -128,11 +128,7 @@ def take_test(course_id, test_id):
 @app.route('/student/<course_id>/<test_id>/test')
 @login_required
 def student_test_view(course_id, test_id):
-    course = Course.query.filter_by(id=course_id).first()
-    test = Test.query.filter_by(id=test_id).first()
-
-    return render_template('student-test-view.html', course=course, test=test)
-
+    return TestController.show_test(course_id, test_id)
 
 # @app.route('/student/<course_id>/<test_id>/<question_id>/submit_test', methods=['POST'])
 # @login_required
@@ -168,3 +164,8 @@ def mark_submission(course_id, test_id, student_id, submission_id):
 @login_required
 def submit_and_feedback(course_id, test_id, student_id):
     return TestController.submit_and_feedback(course_id, test_id, student_id)
+
+
+@app.route('/aggregateview', methods=['GET'])
+def aggregate_view():
+    return CourseController.aggregate_view()

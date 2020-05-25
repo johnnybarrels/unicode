@@ -105,6 +105,11 @@ class UserController():
 
 class CourseController():
 
+    def aggregate_view():
+        courses = Course.query.all()
+
+        return render_template('general-dashboard.html', courses=courses)
+
     def create_test(course_id):
         form = NewTestForm()
         course = Course.query.filter_by(id=course_id).first()
@@ -197,21 +202,33 @@ class TestController():
         max_mark = test.get_max_mark()
         min_mark = test.get_min_mark()
         test_avg = test.get_average_mark()
-        num_results = test.get_num_results()
-        num_enrolled_students = course.get_num_enrolments()
 
-        aggregates = [num_results, num_enrolled_students,
-                      test_avg, min_mark, max_mark]
+        if current_user.is_admin:
+            num_results = test.get_num_results()
+            num_enrolled_students = course.get_num_enrolments()
 
-        submitted_users = test.get_submitted_users()
+            aggregates = [num_results, num_enrolled_students,
+                          test_avg, min_mark, max_mark]
 
-        rename_test_form = RenameTestForm()
-        course_form = NewCourseForm()
+            submitted_users = test.get_submitted_users()
 
-        return render_template('admin-test-view.html', course=course,
-                               course_form=course_form, test=test,
-                               rename_test_form=rename_test_form,
-                               submitted_users=submitted_users, aggregates=aggregates)   # results=results
+            rename_test_form = RenameTestForm()
+            course_form = NewCourseForm()
+
+            return render_template('admin-test-view.html', course=course,
+                                   course_form=course_form, test=test,
+                                   rename_test_form=rename_test_form,
+                                   submitted_users=submitted_users, aggregates=aggregates)   # results=results
+        else:
+            student_result = test.get_student_result(current_user.id)
+            aggregates = []
+            if student_result:
+                aggregates = [student_result.score,
+                              test_avg, min_mark, max_mark]
+
+            return render_template('student-test-view.html', aggregates=aggregates,
+                                   test=test, course=course,
+                                   student_result=student_result)
 
     def edit_test_view(course_id, test_id):
 
@@ -316,7 +333,7 @@ class TestController():
 
     def new_submission(course_id, test_id, question_id):
         q = Question.query.filter_by(id=question_id).first()
-        sub = Submission.query.filter_by(question_id=question_id).first()
+        sub = q.get_user_submission(current_user.id)
         if not sub:  # if existing submission exists
             sub = Submission()
             sub.user_id = current_user.id
@@ -380,6 +397,8 @@ class TestController():
         submission = Submission.query.filter_by(id=submission_id).first()
         result = Result.query.filter_by(
             test_id=test_id, user_id=student_id).first()
+
+        form = MarkTestForm()
 
         form = MarkTestForm()
 

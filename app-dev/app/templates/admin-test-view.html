@@ -88,38 +88,22 @@
           <td>{{ student.full_name() }}</td>
           <td>
             <a href="{{ url_for('mark_test', course_id=course.id, test_id=test.id, student_id=student.id) }}">
+              {% if student.get_result(test.id).needs_marking %}
               <button class="btn purple-btn">View test</button>
+              {% else %}
+              <button class="btn delete-btn">View test</button>
+              {% endif %}
             </a>
           </td>
         </tr>
-        <!-- Delete section below when get db working -->
-        <!-- <tr>
-          <td>student.name</td>
-          <td><button class="btn purple-btn">See test</button></td>
-        </tr>
-        <tr>
-          <td>student.name</td>
-          <td><button class="btn purple-btn">See test</button></td>
-        </tr>
-        <tr>
-          <td>student.name</td>
-          <td><button class="btn purple-btn">See test</button></td>
-        </tr>
-        <tr>
-          <td>student.name</td>
-          <td><button class="btn purple-btn">See test</button></td>
-        </tr>
-        <tr>
-          <td>student.name</td>
-          <td><button class="btn purple-btn">See test</button></td>
-        </tr> -->
-        <!-- Delete section above when get db working -->
         {% endfor %}
       </tbody>
     </table>
   </div>
 </div>
+
 {% else %}
+
 <!-- No students have taken test -->
 <div id="no-test-taken" class="row h-100">
   <div class="col"></div>

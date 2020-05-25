@@ -14,14 +14,13 @@
       <h2 class="unit-details">{{ course.course_code }}<br>{{ course.name }}</h2>
       <h3 class="test-name">{{ test.name }}</h3>
     </a>
-      {% if test.has_result(current_user.id) %}
+    {% if test.has_result(current_user.id) %}
       <div class="submitted-flag p-1">
         <p>Submitted</p>
       </div>
-      {% endif %}
+    {% endif %}
   </div>
-
-  
+     
   {% endfor %}
 
  
