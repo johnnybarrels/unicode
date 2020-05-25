@@ -11,7 +11,7 @@
 
 | **Johnny Barrett** | **Ivy Bui** | **Jesse Carter** | **Cesar Gonzalez** |
 | :---: |:---:| :---:|:---:|
-| <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/johnny.jpeg?token=ANBLRDQC3LZ7RND2QTJBAE262S5QI" width="100" height="100" />  | <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/Ivy.png?token=ANBLRDQR53OQ4G274BL3HWK62TS4G" width="100" height="100" />| <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/jesse_photo.png?token=ANBLRDWSQTNJKKDOHF3BFE262TTUQ" width="100" height="100" />    | <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/cesar_photo.png?token=ANBLRDQOFBVXJNZAKIHNZC262TTZ6" width="100" height="100" />  |
+| <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/Team_photos/johnny.jpeg?token=ANBLRDTCEU53VE7KN3HKCC262UGAW" width="100" height="100" />  | <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/Team_photos/Ivy.png?token=ANBLRDTDUJ6NDSLKV2FKWBS62UFZI" width="100" height="100" />| <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/Team_photos/jesse_photo.png?token=ANBLRDXVPFXG75QRS4ERLU262UF62" width="100" height="100" />    | <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/Team_photos/cesar_photo.png?token=ANBLRDWIKER7RWJBKC7E6DK62UF4E" width="100" height="100" />  |
 
 
 --- 
@@ -247,8 +247,7 @@ $ flask run
       - At the bottom click `View test`
       - Click on each questions to add manual marks and a/or adjust marks.
       - Click on `Submit and give feedback` add feedback to student and complete the marking
-      
-      
+
   - *_Publish Test Results_*:
       - 
       
@@ -282,7 +281,7 @@ $ flask run
 
 ## How to Test Unicode
 
-First make sure you are in the `app-dev`.
+⚠️ First make sure you are in the `app-dev`.
 
 ### **_unittest_**:
 
