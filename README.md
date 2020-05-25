@@ -109,7 +109,7 @@ We decided to use MVC(model view controller) Arquitecture for our project. The *
 <a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
 
 
-- **_Color pallets_**
+- **_Colour palletes_**
 <p>
   <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/Color_Palette.png?token=ANBLRDSBFD5S4ITZ3B7XB3262JGD2"  width="500" height="400" title="FVCproductions" alt="color">
 </p>
