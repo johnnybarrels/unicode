@@ -90,6 +90,9 @@ follow_redirects=True)
         response = self.register('test', 'test', 'fletcher@realpython.com', 'python101', 'python101')
         self.assertIn(b'Email is already registered!', response.data)
 
+    #def test_password_again():
+
+
 
 
 if __name__=='__main__':
