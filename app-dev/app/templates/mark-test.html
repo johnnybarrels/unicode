@@ -1,10 +1,26 @@
 {% extends "base.html" %}
 
 {% block content %}
-<!-- Show test if haven't taken test OR show "test already taken" OR show results -->
+<!-- Feedback Modal -->
+<div class="modal fade" id="feedback-modal" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <h3 class="modal-title">Feedback <span class="modal-title-subheading">for {{ student.full_name() }}</span></h3>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <div class="modal-body">
+        <p>FEEDBACK FORM HERE</p>
+        <p>Actual submit button</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="row mx-2">
   <h1 class="page-heading">{{ course.name }} - {{ test.name }}: {{ student.full_name() }}</h1>
   <div class="test-submit-btns mr-5">
+    <!-- change action for this submit button -->
     <form action="{{ url_for('submit_test', course_id=course.id, test_id=test.id) }}"
       onsubmit="return confirm('Are you sure you would like to submit these marks?')" method="POST">
       <button type="submit" id="submit-test" class="btn test-submit-btn">Submit and give feedback
@@ -60,14 +76,18 @@
             </div>
 
             {% elif question.question_type == 2 %}
-            <h4 class="subheading mb-2">Student Answer</h4>
-            {{ submission.mcq_sub }}
-            <h4 class="subheading mb-2">Solution</h4>
-            {{ question.mcq_answer }}
+            <div class="mb-4">
+              <h4 class="subheading mb-2">Student Answer</h4>
+              {{ submission.mcq_sub }}
+            </div>
+            <div class="mb-4">
+              <h4 class="subheading mb-2">Solution</h4>
+              {{ question.mcq_answer }}
+            </div>
             {% endif %}
 
             <h4 class="subheading mb-2">Student Mark</h4>
-            <div class="row">
+            <div class="row m-0">
               {{ form.mark(id="student-mark-box", class="form-control", value=submission.score) }}
               <p id="mark-out-of">/ {{ question.mark_alloc }}</p>
             </div>
@@ -76,21 +96,19 @@
 
             <!-- Form for Question type 3 (write code question) -->
             {% else %}
-            <div>
-              <h4 class="subheading">Allocated Mark: {{ question.mark_alloc }}</h4>
               <h4 class="subheading mb-2">Student Mark</h4>
-              {% if submission.needs_marking %}
-              {{ form.mark(class="form-control", placeholder="Give your student a mark") }}
-
-              {% else %}
-              {{ form.mark(class="form-control", value=submission.score) }}
-              <!-- <input type="text" class="form-control" placeholder="Give your student a mark"> -->
-            </div>
+              <div class="row m-0">
+                {% if submission.needs_marking %}
+                  {{ form.mark(id="qtype-3-mark-box", class="form-control", placeholder="Give your student a mark") }}
+                {% else %}
+                  {{ form.mark(class="form-control", value=submission.score) }}
+                {% endif %}
+                <p id="mark-out-of">/ {{ question.mark_alloc }}</p>
+              </div>
+            
             {% endif %}
-            {% endif %}
-            <div>
+            <div class="question-btns">
               {{ form.submit(class="btn purple-btn question-btns") }}
-              <!-- <button class="btn purple-btn">Save mark</button> -->
             </div>
           </div>
 

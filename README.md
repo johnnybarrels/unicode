@@ -11,8 +11,7 @@
 
 | **Johnny Barrett** | **Ivy Bui** | **Jesse Carter** | **Cesar Gonzalez** |
 | :---: |:---:| :---:|:---:|
-| <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/johnny.jpeg?token=ANBLRDQC3LZ7RND2QTJBAE262S5QI" width="100" height="100" />  | | <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/jesse_dog.png?token=ANBLRDQHYZRXG224K2IMJOC62S7D4" width="100" height="100" />    | <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/Cesar_014_1_.jpg?token=ANBLRDTUKHUJO73YS3OMYN262S6GQ" width="100" height="100" />  |
-
+| <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/johnny.jpeg?token=ANBLRDQC3LZ7RND2QTJBAE262S5QI" width="100" height="100" />  | <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/Ivy.png?token=ANBLRDQR53OQ4G274BL3HWK62TS4G" width="100" height="100" />| <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/jesse_photo.png?token=ANBLRDWSQTNJKKDOHF3BFE262TTUQ" width="100" height="100" />    | <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/cesar_photo.png?token=ANBLRDQOFBVXJNZAKIHNZC262TTZ6" width="100" height="100" />  |
 
 
 --- 
