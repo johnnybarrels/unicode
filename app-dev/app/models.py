@@ -59,7 +59,12 @@ class Course(db.Model):
     tests = db.relationship('Test', backref='course', lazy=True)
 
     def get_num_enrolments(self):
-        return len(self.get_users())
+        students = []
+        for user in self.get_users():
+            if user.is_admin:
+                students.append(user)
+       
+        return len(students)            
 
     def get_users(self):
         return User.query.join(enrolments).join(Course).filter(
