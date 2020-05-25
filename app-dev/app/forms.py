@@ -1,4 +1,4 @@
-from wtforms.validators import DataRequired, Email, ValidationError, EqualTo
+from wtforms.validators import DataRequired, Email, ValidationError, EqualTo, NumberRange
 from wtforms.fields.html5 import EmailField
 from wtforms.widgets import HTMLString
 from flask_wtf import FlaskForm
@@ -18,7 +18,8 @@ class RegistrationForm(FlaskForm):
     last_name = StringField('last name', validators=[DataRequired()])
     email = EmailField('email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])
-    password_again = PasswordField('Password', validators=[DataRequired(), EqualTo('password')])
+    password_again = PasswordField('Password', validators=[
+                                   DataRequired(), EqualTo('password', message="Error: Passwords must match")])
     submit = SubmitField('REGISTER')
 
 
@@ -49,7 +50,8 @@ class QuestionForm(FlaskForm):
     mcq_4 = StringField('MCQ Option 4')
     mcq_solution = RadioField('MCQ Solution', choices=[(
         let, let) for let in 'abcd'], validate_choice=False)
-    mark_alloc = IntegerField('Allocated mark', validators=[DataRequired()])
+    mark_alloc = IntegerField('Allocated mark', validators=[
+                              DataRequired(), NumberRange(min=0)])
     question_type = HiddenField(
         'Question Type', default=1, validators=[DataRequired()])
     save = SubmitField('Save')
@@ -67,3 +69,12 @@ class QuestionSubmissionForm(FlaskForm):
     mcq_answer = HiddenField('MCQ Answer')
     code_answer = TextAreaField('Code Answer')
     submit = SubmitField('Submit')
+
+
+class MarkTestForm(FlaskForm):
+    description = TextAreaField('Question Description')
+    output_answer = StringField('Output Question Answer')
+    mcq_answer = HiddenField('MCQ Answer')
+    code_answer = TextAreaField('Code Answer')
+    mark = IntegerField('Mark', validators=[NumberRange(min=0)])
+    submit = SubmitField('Save Mark')

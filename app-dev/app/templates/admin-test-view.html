@@ -50,7 +50,7 @@
   </div>
 </div>
 
-{# if submitted_users #}
+{% if submitted_users %}
 <!-- Dashboard for if there are test results -->
 <div class="dashboard mx-5">
   <div class="row my-5">
@@ -60,7 +60,7 @@
     </div>
     <div class="test-results p-3">
       Test average
-      <span class="result">{{ aggregates[2] }}</span>
+      <span class="result">{{ aggregates[2] }}%</span>
     </div>
     <div class="test-results p-3">
       Min mark
@@ -77,22 +77,23 @@
     <table id="student-list" class="table table-hover">
       <thead>
         <tr>
-          <th scope="col">Name</th>
-          <th scope="col">See test</th>
+          <th>Name</th>
+          <th>View test</th>
         </tr>
       </thead>
       <tbody>
         <!-- add functionality to populate with students in course -->
+        {% for student in test.get_submitted_users() %}
         <tr>
-          <td>student.name</td>
+          <td>{{ student.full_name() }}</td>
           <td>
-            <a href="{{ url_for('mark_test_view', course_id=course.id, test_id=test.id, student_id=25) }}">
-              <button class="btn purple-btn">See test</button>
+            <a href="{{ url_for('mark_test_view', course_id=course.id, test_id=test.id, student_id=student.id) }}">
+              <button class="btn purple-btn">View test</button>
             </a>
           </td>
         </tr>
         <!-- Delete section below when get db working -->
-        <tr>
+        <!-- <tr>
           <td>student.name</td>
           <td><button class="btn purple-btn">See test</button></td>
         </tr>
@@ -111,13 +112,14 @@
         <tr>
           <td>student.name</td>
           <td><button class="btn purple-btn">See test</button></td>
-        </tr>
+        </tr> -->
         <!-- Delete section above when get db working -->
+        {% endfor %}
       </tbody>
     </table>
   </div>
 </div>
-{# else #}
+{% else %}
 <!-- No students have taken test -->
 <div id="no-test-taken" class="row h-100">
   <div class="col"></div>
@@ -127,6 +129,6 @@
   </div>
   <div class="col"></div>
 </div>
-{# endif #}
+{% endif %}
 
 {% endblock %}

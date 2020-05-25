@@ -107,7 +107,6 @@ a.nav-child {
   position: absolute;
   left: 0;
   bottom: 0;
-  /* width: 23%; */
   text-align: center;
   padding: 0 30px;
 }
@@ -311,7 +310,6 @@ a .purple-btn:hover {
 #student-list th, #student-list td,  #student-list tr {
   width: 100%;
   display: flex;
-  /* width: 120px; */
 }
 
 #add-student {
@@ -414,6 +412,10 @@ a:hover {
   margin: 15px 0 40px 0;
 }
 
+.modal-title-subheading {
+  font-size: 20px;
+}
+
 .subheading, .modal-subheading {
   font-family: 'Roboto';
   font-weight: bold;
@@ -463,9 +465,10 @@ a:hover {
   border-radius: 10px;
   height: 95%;
   position: relative;
+  overflow-y: scroll;
 }
 
-#question-form, #question-content, #test-form {
+#question-form, #question-content, #test-form, #mark-test-form {
   height: 100%;
 }
 
@@ -490,9 +493,19 @@ a:hover {
   color: white;
   margin: 0 4px;
   font-weight: 500;
+  margin-bottom: 5px;
 }
 .nav-item.nav-link.active {
   background-color: var(--unicode-purple);
+}
+
+.nav-item.nav-link.needs-marking-True {
+  background-color: #ffb4c3;
+}
+
+.nav-item.nav-link.needs-marking-True:active,
+.nav-item.nav-link.needs-marking-True:focus {
+  background-color: var(--unicode-red);
 }
 
 .question-type-btn {
@@ -514,7 +527,7 @@ a:hover {
 } 
 
 .btn-primary:not(:disabled):not(.disabled).active, 
-.show>.btn-primary.dropdown-toggle {
+.show > .btn-primary.dropdown-toggle {
   background-color: var(--unicode-purple);
 }
 
@@ -612,11 +625,6 @@ a:hover {
   margin: 0 10px 0 0;
 }
 
-/* .dashboard {
-  position: relative;
-  height: 95%;
-} */
-
 .test-results {
   height: 180px;
   width: 20%;
@@ -662,11 +670,11 @@ a:hover {
 }
 
 .static-description-1, .static-description-2 {
-  height: 50%;
+  height: 40%;
 }
 
 .static-description-3 {
-  height: 80%;
+  height: 60%;
 }
 
 .student-tests {
@@ -708,4 +716,33 @@ a:hover {
 
 #help-modal-body {
   overflow-y: scroll;
+}
+
+#student-mark-box {
+  width: 50px;
+}
+
+#qtype-3-mark-box {
+  width: 85%;
+}
+
+#mark-out-of {
+  display: inline;
+  font-size: 20px;
+  line-height: 38px;
+  margin-left: 5px;
+  margin-bottom: 0;
+}
+
+#take-test-btn {
+  height: 70px;
+  width: 220px;
+  margin-top: 30px;
+  font-size: 30px;
+  border-radius: 10px;
+  background-color: var(--unicode-red);
+  color: #FFFFFF;
+  font-weight: bold;
+  font-family: 'Lato', sans-serif;
+  letter-spacing: 1px;
 }

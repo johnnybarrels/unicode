@@ -1,4 +1,5 @@
 $(window).ready(function () {
+
     let sideNavWidth = $('.sidenav').css('width');
     $('.content-container').css('margin-left', sideNavWidth);
 
@@ -10,9 +11,6 @@ $(window).ready(function () {
     $(".fa-caret-square-down").click(function () {
         $("#option-menu").toggle();
     });
-    // $(".fa-times").click(function () {
-    //     document.getElementById("option-menu").style.visibility = "hidden";
-    // });
 
     // Modal button assignments
     $("#new-course-btn").click(function () {
@@ -89,6 +87,31 @@ function newQuestionSelector(qType) {
         $('#new-question-form #question-description').css('height', '280px');
     }
 };
+
+function validatePassword() {
+    var validator = $("#registration-form").validate({
+        rules: {
+            password_again: {
+                equalTo: "#password"
+            }
+        },
+        messages: {
+            password_again: "Passwords do not match"
+        }
+    });
+}
+
+// function validatePassword() {
+//     confirm("are you sure?");
+//     var pswd = $('#password').attr('value');
+//     var pswd_rpt = $('#password_again').attr('value');
+//     if (pswd != pswd_rpt) {
+//         alert("The passwords do not match!");
+//         $('#password_again').focus();
+//         $('#password_again').closest('form').preventDefault();
+//         return;
+//     }
+// }
 
 // Storing value of MCQ radio button submission
 function insertValueToHidden(loop_index, i) {

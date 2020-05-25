@@ -42,7 +42,6 @@ $('.code-editor').each(function () {
             showFoldWidgets: false
         })
 
-
     } else {
         // update the text area before submitting the form
         textarea.closest('form').submit(function () {

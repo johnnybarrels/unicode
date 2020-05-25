@@ -47,6 +47,9 @@ class User(UserMixin, db.Model):
     def has_submitted(self, test_id):
         return self.get_result(test_id) is not None
 
+    def full_name(self):
+        return f'{self.first_name} {self.last_name}'
+
     def __repr__(self):
         return f'<User: {self.email}>'
 
@@ -76,6 +79,9 @@ class Test(db.Model):
     is_live = db.Column(db.Boolean, nullable=False, default=False)
     course_id = db.Column(db.Integer, db.ForeignKey('courses.id'))
     questions = db.relationship('Question', backref='test', lazy=True)
+
+    def total_marks(self):
+        return sum((question.mark_alloc for question in self.questions))
 
     def get_average_mark(self):
         # TODO: EVENTUALLY EXTEND THIS TO WORK WITH RESULTS RATHER THAN SUBMISSIONS
@@ -125,7 +131,7 @@ class Test(db.Model):
 
     def has_result(self, user_id):
         return Result.query.filter_by(user_id=user_id, test_id=self.id).first()
-        
+
     def get_test_results_by_id(self, test_id):
         return Result.query.filter_by(test_id=test_id).all()
 
@@ -181,19 +187,19 @@ class Submission(db.Model):
     question_id = db.Column(db.Integer, db.ForeignKey('questions.id'))
 
     score = db.Column(db.Integer, default=0)
-    # needs_marking = db.Column(db.Boolean, nullable=False, default=True)
+    needs_marking = db.Column(db.Boolean, nullable=False, default=True)
 
     def auto_mark(self):
         q = Question.query.filter_by(id=self.question_id).first()
         if q.question_type == 1:
             if self.output_sub == q.answer:
                 self.score = q.mark_alloc
-                self.needs_marking = False
+            self.needs_marking = False
                 
         elif q.question_type == 2:
             if self.mcq_sub == q.mcq_answer:
                 self.score = q.mark_alloc
-                self.needs_marking = False 
+            self.needs_marking = False 
 
         db.session.commit()
 
@@ -211,6 +217,7 @@ class Result(db.Model):
     test_id = db.Column(db.Integer, db.ForeignKey('tests.id'), nullable=False)
     score = db.Column(db.Integer)
     needs_marking = db.Column(db.Boolean, nullable=False, default=True)
+    feedback = db.Column(db.String(1024))
 
     def __repr__(self):
         return f'<Result {self.result_id}, User{self.user_id}, Test {self.test_id}, Score: {self.score}, Marked? {self.is_marked}>'

@@ -2,8 +2,6 @@
   <img name="logo" src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/logos/logo.png?token=ANBLRDVBHRIKZUAMVJAVQTS62H4KI"  width="300" height="200" title="FVCproductions" alt="Unicode_logo">
 </p>
 
-
-
 ---
 
 > # **CITS3403/CITS5504 - Agile Web Development - Final Project**
@@ -13,7 +11,8 @@
 
 | **Johnny Barrett** | **Ivy Bui** | **Jesse Carter** | **Cesar Gonzalez** |
 | :---: |:---:| :---:|:---:|
-| -     | -   | -    | -   |
+| <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/johnny.jpeg?token=ANBLRDQC3LZ7RND2QTJBAE262S5QI" width="100" height="100" />  | <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/Ivy.png?token=ANBLRDQR53OQ4G274BL3HWK62TS4G" width="100" height="100" />| <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/jesse_photo.png?token=ANBLRDWSQTNJKKDOHF3BFE262TTUQ" width="100" height="100" />    | <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/cesar_photo.png?token=ANBLRDQOFBVXJNZAKIHNZC262TTZ6" width="100" height="100" />  |
+
 
 --- 
 
@@ -22,9 +21,11 @@
 - [Motivation](#motivation)
 - [Description](#description)
 - [Design Process](#design-process) 
-- [How to Use](#how-to-use)
 - [How to Install from localhost](#how-to-install-from-localhost)
-- [How to Test](#how-to-test)
+- [How to Use](#how-to-use)
+- [How to Test](#how-to-test-unicode)
+- [Limitations](#limitations)
+- [What is Next](#what-is-next)
 - [License](#license)
 
 
@@ -118,88 +119,45 @@ We decided to use MVC(model view controller) Arquitecture for our project. The *
 - **_Database_**
 
 <p align="center">
-  <img src="https://app.lucidchart.com/publicSegments/view/864af6cf-abaa-4ea8-a652-bf29407bf9d4/image.png"  width="800" height="500" title="FVCproductions" alt="color">
+  <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/Unicode%20database.png?token=ANBLRDUQKIWDZXYOVX7N4R262S5MA"  width="800" height="500" title="FVCproductions" alt="color">
 </p>
 
 <a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
 
 
-## **How to Use**
-
-### For Admin(Teachers) Profile:
-<details>
-  <summary markdown="span">Instructions for admin, click me to expand</summary>
-  
-  - *_Login_*: 
-    - Fill up Login form using email and password
-    - Click `Login`
-    
-  - *_Create a New Course_*: 
-    - Click on `CREATE A NEW COURSE` or "+" icon next to Course
-    - Type Course Name
-    - Type Course Code
-    - Click `Create Course`
-     
-  - *_Create a New Test_*: 
-    - Select the Course on the right panel
-    - Click on `New Test`
-    - Type Test name
-    - Click `Create Test`
-    - Click on the new created test
-      - (Optional) Click on dropdown to rename, delete or edit test
-    - Click on`Edit Test`
-    - Click on `Add +` to add a new question
-    - Select the type of questions (*Output, MCQ or Write a code*)
-    - Type the Question on the `Description` field
-    - Type `Solution`
-    - Type the `Allocated mark` for the question
-    - Click `Save` (or `Clear` to restart the questions)
-    - Once finishing creating the questions, click the course name on the righ panel
-    - Click `Not Live` to make sure test live
-    
-  - *_Add Students to Course_*:
-      - Once on the Course View, Click `Manage students`
-      - Type the Student number
-      
-  - *_Marking Test_*:
-      - Pending
-      
-  - *_Publish Test Results_*:
-      - Pending
-      
-</details>
-
-### For Students Profile:
-
-<details>
-  <summary markdown="span">Instructions for students, click me to expand</summary>
-  
-  - *_Registration_* (for new users only): 
-    - Click on `Sign up`
-    - Fill up registration form 
-    - Click `Register`
-    
-  - *_Login_*: 
-    - Fill up Login form using email and password
-    - Click `Login`
-
-  - *_Taking Test_*: 
-    - Click on Course
-    - Select the test to take
-    - Once test completed Select `Submit test`
-    
-  - *_View Results_*: 
-    - Pending
-</details>
-
-<a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
-
 ## **How to Install from localhost**
 
 <details>
-  <summary markdown="span">Installation instructions, click me to expand</summary>
+  <summary markdown="span">Instructions for installation in localhost, click me to expand</summary>
 
 1. Clone repository using `https://github.com/johnnybarrels/agile-proj2.git`
+
+```shell
+$ git clone https://github.com/johnnybarrels/agile-proj2.git
+```
+
+2. Change working directory to agile-proj2:
+```
+$ cd agile-proj2
+```
+
+3. Create virtual enviroment and activate venv:
+
+```shell
+$ python -m venv venv
+
+# To activate:
+$ source venv/bin/activate
+```
+or
+
+```shell
+$ python3 -m venv venv
+
+# To activate:
+$ source venv/bin/activate
+```
+
 2. Install requirements:
 
 ```shell
@@ -243,27 +201,117 @@ $ flask run
 
 <a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
 
+## **How to Use**
+
+### For Admin(Teachers) Profile:
+<details>
+  <summary markdown="span">Instructions for admin, click me to expand</summary>
+  
+  - *_Login_*: 
+    - Fill up Login form using email and password
+    - Click `Login`
+    
+  - *_Create a New Course_*: 
+    - Click on `CREATE A NEW COURSE` or "+" icon next to Course
+    - Type Course Name
+    - Type Course Code
+    - Click `Create Course`
+     
+  - *_Create a New Test_*: 
+    - Select the Course on the right panel
+    - Click on `New Test`
+    - Type Test name
+    - Click `Create Test`
+    - Click on the new created test
+      - (Optional) Click on dropdown to rename, delete or edit test
+    - Click on`Edit Test`
+    - Click on `Add +` to add a new question
+    - Select the type of questions (*Output, MCQ or Write a code*)
+    - Type the Question on the `Description` field
+    - Type `Solution`
+    - Type the `Allocated mark` for the question
+    - Click `Save` (or `Clear` to restart the questions)
+    - Once finshes, click `Save and return`
+    - Once finishing creating the questions, click the course name on the righ panel
+    - Click `Not Live` to make sure test live
+    
+  - *_Add Students to Course_*:
+      - Once on the Course View, Click `Manage students`
+      - Type the Student number
+
+  - *_Delete Students from Course_*:
+      - Once on the Course View, Click `Manage students`
+      - Look for the student email and click "x"
+      
+  - *_Marking Test_*:
+      - Pending
+      
+  - *_Publish Test Results_*:
+      - Pending
+      
+</details>
+
+### For Students Profile:
+
+<details>
+  <summary markdown="span">Instructions for students, click me to expand</summary>
+  
+  - *_Registration_* (for new users only): 
+    - Click on `Sign up`
+    - Fill up registration form 
+    - Click `Register`
+    
+  - *_Login_*: 
+    - Fill up Login form using email and password
+    - Click `Login`
+
+  - *_Taking Test_*: 
+    - Click on Course
+    - Select the test to take
+    - Once test completed Select `Submit test`
+    
+  - *_View Results_*: 
+    - Pending
+    
+</details>
+
+<a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
+
 ## How to Test Unicode
 
-### unittest:
+First make sure you are in the `app-dev`.
+
+### **_unittest_**:
 
 For testing password hashing and test creation.
 
   - To use just type on the terminal the following command:
   
 ```shell
-python -m Tests/unittest
+python -m Tests.unittest
 ```
-  - 
 
 
-### sytemtest:
+### **_sytemtest_**:
+
+⚠️ Please make sure to run system test last and to manually change the Config object to `TestConfing` in the `__init__.py` overwrite existing to avoid ovewriting existing database.
 
 Using selenium to test our app with firefox web browser
  - Test for student login
  - Test for admin login
  - Test for student registration and login
  
+```shell
+python -m Tests.system
+```
+
+
+<a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
+ 
+## **Limitations**
+ 
+## **What is Next**
+
 
 ## License
 
