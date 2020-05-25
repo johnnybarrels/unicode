@@ -254,7 +254,7 @@ a .purple-btn:hover {
 }
 
 #student-list {
-  width: 90%;
+  width: 95%;
   margin: 0 auto;
   display: block;
   color: var(--unicode-main-text-colour);
@@ -287,9 +287,10 @@ a .purple-btn:hover {
   height: 250px;
 }
   
-#student-list th, #student-list tr, #student-list td {
+#student-list th, #student-list td,  #student-list tr {
   width: 100%;
   display: flex;
+  /* width: 120px; */
 }
 
 #add-student {
@@ -416,6 +417,25 @@ a:hover {
   margin: 40px 30% 0 30%;
 }
 
+#manage-modal-content {
+  width: 800px;
+  height: 500px;
+}
+
+#add-student {
+  width: 78%;
+  margin-left: 15px;
+}
+
+#add-student {
+  width: 78%;
+  margin-left: 15px;
+}
+
+#add-student, #student-list {
+  font-family: 'Roboto';
+}
+
 /* Admin New Question specific styles*/
 .new-question {
   background-color: white;
@@ -496,6 +516,9 @@ a:hover {
 #solution-mcq li label, #mcq_solution li label {
   /* font-family: 'DM Sans', sans-serif; */
   margin-left: 5px;
+}
+#question-description {
+  height: 190px;
 }
 
 #question-description-one {

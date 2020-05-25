@@ -80,7 +80,7 @@ function newQuestionSelector(qType) {
         $('#solution-textbox').hide();
         $('#solution-mcq').show()
         $('#question-type').attr('value', 2);
-        $('#new-question-form #question-description').css('height', '130px');
+        $('#new-question-form #question-description').css('height', '50px');
     }
     else if (qType == 3) {
         $('#new-question-mcq').hide();
