@@ -247,8 +247,7 @@ $ flask run
       - At the bottom click `View test`
       - Click on each questions to add manual marks and a/or adjust marks.
       - Click on `Submit and give feedback` add feedback to student and complete the marking
-      
-      
+
   - *_Publish Test Results_*:
       - 
       
@@ -286,7 +285,7 @@ First make sure you are in the `app-dev`.
 
 ### **_unittest_**:
 
-For testing password hashing and test creation.
+⚠️ For testing password hashing and test creation.
 
   - To use just type on the terminal the following command:
   
