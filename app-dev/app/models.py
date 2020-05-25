@@ -2,7 +2,7 @@ from app import db, login
 from flask_login import UserMixin, LoginManager
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import current_user
-
+from statistics import stdev
 
 @login.user_loader
 def load_user(id):
@@ -64,7 +64,7 @@ class Course(db.Model):
     def get_num_enrolments(self):
         students = []
         for user in self.get_users():
-            if user.is_admin:
+            if not user.is_admin:
                 students.append(user)
        
         return len(students)            
@@ -86,7 +86,24 @@ class Test(db.Model):
     questions = db.relationship('Question', backref='test', lazy=True)
 
     def total_marks(self):
-        return sum((question.mark_alloc for question in self.questions))
+        total = sum((question.mark_alloc for question in self.questions))
+        
+        if total:
+            return total
+        else:
+            return 1
+
+    def get_std_dev(self):
+        all_res = self.get_test_results()
+        marks = []        
+
+        for res in all_res:
+            marks.append(res.score)
+
+        if len(marks) > 1:
+            return round(stdev(marks), 2)            
+        else:
+            return 0
 
     def get_average_mark(self):
         # TODO: EVENTUALLY EXTEND THIS TO WORK WITH RESULTS RATHER THAN SUBMISSIONS
@@ -95,8 +112,9 @@ class Test(db.Model):
 
         for res in all_res:
             total += res.score
-
-        return total / max(len(all_res), 1)
+        print(total)
+        print(self.total_marks())
+        return round((total / max(len(all_res), 1)) / self.total_marks() * 100, 2)
 
     def get_max_mark(self):
         # TODO: EVENTUALLY EXTEND THIS TO WORK WITH RESULTS RATHER THAN SUBMISSIONS
@@ -104,7 +122,7 @@ class Test(db.Model):
         all_res.sort(key=lambda r: r.score, reverse=True)
 
         if all_res:
-            return all_res[0].score
+            return round((all_res[0].score) / self.total_marks() * 100, 2)
         else:
             return 0
 
@@ -113,7 +131,7 @@ class Test(db.Model):
         all_res.sort(key=lambda r: r.score)
 
         if all_res:
-            return all_res[0].score
+            return round(all_res[0].score / self.total_marks() * 100, 2)
         else:
             return 0
 

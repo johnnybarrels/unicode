@@ -208,7 +208,7 @@ class TestController():
             num_enrolled_students = course.get_num_enrolments()
 
             aggregates = [num_results, num_enrolled_students,
-                          test_avg, min_mark, max_mark]
+                          test_avg, max_mark, min_mark]
 
             submitted_users = test.get_submitted_users()
 
@@ -223,8 +223,9 @@ class TestController():
             student_result = test.get_student_result(current_user.id)
             aggregates = []
             if student_result:
-                aggregates = [student_result.score,
-                              test_avg, min_mark, max_mark]
+                student_perc = student_result.score / test.total_marks() 
+                aggregates = [student_perc,
+                              test_avg, max_mark, min_mark]
 
             return render_template('student-test-view.html', aggregates=aggregates,
                                    test=test, course=course,
