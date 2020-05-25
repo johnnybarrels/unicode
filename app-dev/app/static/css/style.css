@@ -505,6 +505,18 @@ a.nav-child {
   font-family: 'Roboto';
 }
 
+#add-student {
+  width: 78%;
+  margin-left: 15px;
+}
+
+#add-student {
+  width: 234px;
+  margin-right: 5px;
+  width: 78%;
+  margin-left: 15px;
+}
+
 /* Feedback modal */
 #feedback-modal-content {
   width: 700px;
@@ -522,18 +534,6 @@ a.nav-child {
 
 .feedback-submit {
   width: 100px;
-}
-
-#add-student {
-  width: 78%;
-  margin-left: 15px;
-}
-
-#add-student {
-  width: 234px;
-  margin-right: 5px;
-  width: 78%;
-  margin-left: 15px;
 }
 
 /* Admin new question specific styles*/
