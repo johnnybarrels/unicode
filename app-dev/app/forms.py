@@ -50,7 +50,8 @@ class QuestionForm(FlaskForm):
     mcq_4 = StringField('MCQ Option 4')
     mcq_solution = RadioField('MCQ Solution', choices=[(
         let, let) for let in 'abcd'], validate_choice=False)
-    mark_alloc = IntegerField('Allocated mark', validators=[DataRequired(), NumberRange(min=0)])
+    mark_alloc = IntegerField('Allocated mark', validators=[
+                              DataRequired(), NumberRange(min=0)])
     question_type = HiddenField(
         'Question Type', default=1, validators=[DataRequired()])
     save = SubmitField('Save')
@@ -77,4 +78,3 @@ class MarkTestForm(FlaskForm):
     code_answer = TextAreaField('Code Answer')
     mark = IntegerField('Mark', validators=[NumberRange(min=0)])
     submit = SubmitField('Save Mark')
-
