@@ -79,13 +79,15 @@
               {% if question.question_type == 1 %}
               {{ form.solution(class="form-control", value=question.answer) }}
               {% elif question.question_type == 2 %}
-              {{ form.mcq_solution(value=question.mcq_answer) }}
+              <div class="existing-mcq-{{ loop.index }}">
+                {{ form.mcq_solution(value=question.mcq_answer) }}
+              </div>
               {% endif %}
             </div>
             {% set mcq_sol = question.mcq_answer %}
             <script>
-              var mcq_sol = $('#mcq_solution').attr('value');
-              $('#mcq_solution input').each(function () {
+              var mcq_sol = "{{ question.mcq_answer }}"
+              $('.existing-mcq-{{ loop.index }} #mcq_solution input').each(function () {
                 var option = $(this);
                 if (option.attr('value') == mcq_sol) {
                   option.prop('checked', true);
