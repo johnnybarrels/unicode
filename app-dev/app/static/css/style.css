@@ -501,10 +501,11 @@ a.nav-child {
   height: 500px;
 }
 
-<<<<<<< HEAD
 #add-student, #student-list {
   font-family: 'Roboto';
-=======
+}
+
+/* Feedback modal */
 #feedback-modal-content {
   width: 700px;
   height: 550px;
@@ -526,7 +527,6 @@ a.nav-child {
 #add-student {
   width: 78%;
   margin-left: 15px;
->>>>>>> bbb4814dd4dc61ee5f2d1768e85f38b8199cd7ac
 }
 
 #add-student {

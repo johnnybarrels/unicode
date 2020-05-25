@@ -30,6 +30,7 @@ def register():
 def admin_portal():
     if not current_user.is_admin:
         return redirect(url_for('student_portal'))
+
     course_form = NewCourseForm()
     return render_template('admin.html', title='Admin Portal', course_form=course_form)
 
@@ -44,78 +45,99 @@ def student_portal():
 def course_view(course_id):
     return UserController.course_view(course_id)
 
-    # return CourseController().show_tests()
-
 
 @app.route('/course_view/<course_id>/addstudent', methods=['POST'])
 @login_required
 def add_student_course(course_id):
+    if not current_user.is_admin:
+        return redirect(url_for('student_portal'))
     return CourseController.add_student(course_id)
 
 
 @app.route('/course_view/<course_id>/removestudent/<student_id>', methods=['POST'])
 def remove_student_course(course_id, student_id):
+    if not current_user.is_admin:
+        return redirect(url_for('student_portal'))
     return CourseController.remove_student(course_id, student_id)
 
 
 @app.route('/admin/<course_id>/createtest', methods=['POST'])
 @login_required
 def create_test(course_id):
+    if not current_user.is_admin:
+        return redirect(url_for('student_portal'))
     return CourseController.create_test(course_id)
 
 
 @app.route('/admin/newcourse', methods=['POST'])
 @login_required
 def create_course():
-    print('hello')
+    if not current_user.is_admin:
+        return redirect(url_for('student_portal'))
     return CourseController.create_course()
 
 
 @app.route('/admin/<course_id>/deletetest/<test_id>', methods=['GET'])
 @login_required
 def delete_test(course_id, test_id):
+    if not current_user.is_admin:
+        return redirect(url_for('student_portal'))
     return TestController.delete_test(course_id, test_id)
 
 
 @app.route('/admin/<course_id>/<test_id>')
 @login_required
 def test_view(course_id, test_id):
+    if not current_user.is_admin:
+        return redirect(url_for('student_portal'))
     return TestController.show_test(course_id, test_id)
 
 
 @app.route('/admin/<course_id>/<test_id>/edit', methods=['GET'])
 @login_required
 def edit_test_view(course_id, test_id):
+    if not current_user.is_admin:
+        return redirect(url_for('student_portal'))
     return TestController.edit_test_view(course_id, test_id)
 
 
 @app.route('/admin/<course_id>/<test_id>/rename', methods=['POST'])
 @login_required
 def rename_test(course_id, test_id):
+    if not current_user.is_admin:
+        return redirect(url_for('student_portal'))
     return TestController.rename_test(course_id, test_id)
 
 
 @app.route('/admin/<course_id>/<test_id>/makelive', methods=['POST'])
 @login_required
 def toggle_live(course_id, test_id):
+    if not current_user.is_admin:
+        return redirect(url_for('student_portal'))
     return TestController.toggle_live(course_id, test_id)
 
 
 @app.route('/admin/<course_id>/<test_id>/edit_question/<question_id>', methods=['POST'])
 @login_required
 def edit_question(course_id, test_id, question_id):
+    if not current_user.is_admin:
+        return redirect(url_for('student_portal'))
     return TestController.edit_question(course_id, test_id, question_id)
 
 
 @app.route('/admin/<course_id>/<test_id>/deletequestion/<question_id>', methods=['POST'])
 @login_required
 def delete_question(course_id, test_id, question_id):
+    if not current_user.is_admin:
+        return redirect(url_for('student_portal'))
     return TestController.delete_question(course_id, test_id, question_id)
 
 
 @app.route('/admin/<course_id>/<test_id>/newquestion', methods=['POST'])
 @login_required
 def new_question(course_id, test_id):
+    if not current_user.is_admin:
+        return redirect(url_for('student_portal'))
     return TestController.new_question(course_id, test_id)
 
 
@@ -129,11 +151,6 @@ def take_test(course_id, test_id):
 @login_required
 def student_test_view(course_id, test_id):
     return TestController.show_test(course_id, test_id)
-
-# @app.route('/student/<course_id>/<test_id>/<question_id>/submit_test', methods=['POST'])
-# @login_required
-# def submit_test(course_id, test_id):
-#     return TestController.submit_test(course_id, test_id)
 
 
 @app.route('/student/<course_id>/<test_id>/<question_id>/submit', methods=['POST'])
