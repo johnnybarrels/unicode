@@ -137,6 +137,9 @@ class Test(db.Model):
     def get_test_results(self):
         return Result.query.filter_by(test_id=self.id).all()
 
+    def get_student_result(self, user_id):
+        return Result.query.filter_by(test_id=self.id, user_id=user_id).first()
+
     def __repr__(self):
         return f'<Test: {self.name}>'
 
@@ -216,6 +219,10 @@ class Result(db.Model):
     test_id = db.Column(db.Integer, db.ForeignKey('tests.id'), nullable=False)
     score = db.Column(db.Integer)
     needs_marking = db.Column(db.Boolean, nullable=False, default=True)
+
+    def get_mark(user_id, test_id):
+        return Result.query.filter((user_id == user_id)&(test_id == test_id)).first().score
+
 
     def __repr__(self):
         return f'<Result {self.result_id}, User{self.user_id}, Test {self.test_id}, Score: {self.score}, Marked? {self.is_marked}>'

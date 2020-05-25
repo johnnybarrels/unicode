@@ -128,11 +128,7 @@ def take_test(course_id, test_id):
 @app.route('/student/<course_id>/<test_id>/test')
 @login_required
 def student_test_view(course_id, test_id):
-    course = Course.query.filter_by(id=course_id).first()
-    test = Test.query.filter_by(id=test_id).first()
-
-    return render_template('student-test-view.html', course=course, test=test)
-
+    return TestController.show_test( course_id, test_id ) 
 
 # @app.route('/student/<course_id>/<test_id>/<question_id>/submit_test', methods=['POST'])
 # @login_required

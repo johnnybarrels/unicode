@@ -198,20 +198,32 @@ class TestController():
         max_mark = test.get_max_mark()
         min_mark = test.get_min_mark()
         test_avg = test.get_average_mark()
-        num_results = test.get_num_results()        
-        num_enrolled_students = course.get_num_enrolments()
-
-        aggregates = [num_results, num_enrolled_students, test_avg, min_mark, max_mark]
-
-        submitted_users = test.get_submitted_users()
         
-        rename_test_form = RenameTestForm()
-        course_form = NewCourseForm()
+        if current_user.is_admin:
+            num_results = test.get_num_results()        
+            num_enrolled_students = course.get_num_enrolments()
 
-        return render_template('admin-test-view.html', course=course,
-                               course_form=course_form, test=test,
-                               rename_test_form=rename_test_form,
-                               submitted_users=submitted_users, aggregates=aggregates)   # results=results
+            aggregates = [num_results, num_enrolled_students, test_avg, min_mark, max_mark]
+
+            submitted_users = test.get_submitted_users()
+             
+            rename_test_form = RenameTestForm()
+            course_form = NewCourseForm()
+
+            return render_template('admin-test-view.html', course=course,
+                                   course_form=course_form, test=test,
+                                   rename_test_form=rename_test_form,
+                                   submitted_users=submitted_users, aggregates=aggregates)   # results=results
+        else:
+            student_result = test.get_student_result(current_user.id)
+            aggregates=[]
+            if student_result:
+                aggregates = [student_result.score, test_avg, min_mark, max_mark]
+
+            return render_template('student-test-view.html', aggregates=aggregates,
+                                    test=test, course=course,
+                                    student_result=student_result)
+                                        
 
     def edit_test_view(course_id, test_id):
 
