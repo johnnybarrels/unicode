@@ -92,6 +92,7 @@ class Test(db.Model):
             return total
         else:
             return 1
+
     def get_std_dev(self):
         all_res = self.get_test_results()
         marks = []        
@@ -100,7 +101,7 @@ class Test(db.Model):
             marks.append(res.score)
 
         if len(marks) > 1:
-            return stdev(marks)            
+            return round(stdev(marks), 2)            
         else:
             return 0
 
@@ -113,7 +114,7 @@ class Test(db.Model):
             total += res.score
         print(total)
         print(self.total_marks())
-        return (total / max(len(all_res), 1)) / self.total_marks() * 100
+        return round((total / max(len(all_res), 1)) / self.total_marks() * 100, 2)
 
     def get_max_mark(self):
         # TODO: EVENTUALLY EXTEND THIS TO WORK WITH RESULTS RATHER THAN SUBMISSIONS
@@ -121,7 +122,7 @@ class Test(db.Model):
         all_res.sort(key=lambda r: r.score, reverse=True)
 
         if all_res:
-            return (all_res[0].score) / self.total_marks() * 100
+            return round((all_res[0].score) / self.total_marks() * 100, 2)
         else:
             return 0
 
@@ -130,7 +131,7 @@ class Test(db.Model):
         all_res.sort(key=lambda r: r.score)
 
         if all_res:
-            return all_res[0].score / self.total_marks() * 100
+            return round(all_res[0].score / self.total_marks() * 100, 2)
         else:
             return 0
 
