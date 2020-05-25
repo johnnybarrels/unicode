@@ -1,18 +1,20 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/logos/logo.png?token=ANBLRDVBHRIKZUAMVJAVQTS62H4KI"  width="300" height="200" title="FVCproductions" alt="Unicode_logo">
+  <img name="logo" src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/logos/logo.png?token=ANBLRDVBHRIKZUAMVJAVQTS62H4KI"  width="300" height="200" title="FVCproductions" alt="Unicode_logo">
 </p>
 
 
 
 ---
 
-> # **CITS3403/CITS5504 - Agile Web Development — Final Project**
+> # **CITS3403/CITS5504 - Agile Web Development - Final Project**
+> # <p align="center"> **Semester 1, 2020** </p>
 
-> ## **Development Team:**
+## **Development Team:**
 
 | **Johnny Barrett** | **Ivy Bui** | **Jesse Carter** | **Cesar Gonzalez** |
 | :---: |:---:| :---:|:---:|
 | -     | -   | -    | -   |
+
 --- 
 
 ## Table of Contents
@@ -22,7 +24,11 @@
 - [Design Process](#design-process) 
 - [How to Use](#how-to-use)
 - [How to Install from localhost](#how-to-install-from-localhost)
+- [How to Test](#how-to-test)
 - [License](#license)
+
+
+<a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
 
 ---
 
@@ -32,11 +38,13 @@ One of the biggest challenges faced by Computer Science and Data Science student
 
 For this reason we decided to develop **Unicode**, so that professors as well as student can improve the learning experience when it comes to learn how to code.
 
+<a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
+
 ## **Description**
 
 **Unicode** is an online quiz platform for educational institutions that allows admin/teachers users to create and evaluate coding related tests and users/students to take tests and see results. It is design to provide a friendly experience for studens and teachers without compromising the level of complexity required for developing our coding learning experience.
 
-**Unicode** provides the ability to not only test our theorical knowledge of but also our technical abilities. Teachers/admin have the ability to decide to use from three different questions assestement types: 
+**Unicode** provides the ability to not only test our theorical knowledge of but also our technical abilities. Teachers/admin have the ability to select from three different questions assesment types: 
 
 - **_Output_**: Based on a code function provided by the teacher, the student should answer the expected output (automated marking)
 - **_MCQ_**: Based on a writen question or provided code, the student must select the best answer out of 4 posible options(automated marking)
@@ -44,11 +52,12 @@ For this reason we decided to develop **Unicode**, so that professors as well as
 
 Another important functionality of **Unicode** is the ability of the admin to organize create tests by course and assign students to different courses. Also, the admin can decide when to enble test to be live(ready to take) for all students enroll in the course.
 
+
+<a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
+
 ## **Design Process**
 
 We decided to use MVC(model view controller) Arquitecture for our project. The *model* refers to an object referencing an entity in a database, the *view* is how that object is presented to the user and the *controller* is a linking class that builds the model from the database, prepares the view based on the model, and the updates and saves the models back to the database.
-
-> - **_User Stories:_**
 
 | # | User | User Story | Story Point |
 | --- | :---: | --- | :---: |
@@ -68,7 +77,7 @@ We decided to use MVC(model view controller) Arquitecture for our project. The *
 | 14 | `Student` | I want to see the solutions the tests (after) | 9 |
 
 
-> - **_Model Views:_**
+<a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
 
 | User | View |
 | :---: | :--- | 
@@ -86,31 +95,51 @@ We decided to use MVC(model view controller) Arquitecture for our project. The *
 | `Student` | Test result view |
 
 
-> - **_Wireframes_**
+<a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
+
+
+- **_Wireframes_**
 <p>
   <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/Wireframes.png?token=ANBLRDWVNLZ7QNXSDACNYKC62JKDA"  width="1000" height="300" title="FVCproductions" alt="color">
 </p>
 
 
+<a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
 
-> - **_Color pallets_**
+
+- **_Color pallets_**
 <p>
   <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/Color_Palette.png?token=ANBLRDSBFD5S4ITZ3B7XB3262JGD2"  width="500" height="400" title="FVCproductions" alt="color">
 </p>
 
 
+<a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
+
+- **_Database_**
+
+<p align="center">
+  <img src="https://app.lucidchart.com/publicSegments/view/864af6cf-abaa-4ea8-a652-bf29407bf9d4/image.png"  width="800" height="500" title="FVCproductions" alt="color">
+</p>
+
+<a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
+
+
 ## **How to Use**
 
-> ### For Admin(Teachers) Profile:
-
-Login using email address and password
+### For Admin(Teachers) Profile:
+<details>
+  <summary markdown="span">Instructions for admin, click me to expand</summary>
+  
+  - *_Login_*: 
+    - Fill up Login form using email and password
+    - Click `Login`
+    
   - *_Create a New Course_*: 
     - Click on `CREATE A NEW COURSE` or "+" icon next to Course
     - Type Course Name
     - Type Course Code
     - Click `Create Course`
-  
-      
+     
   - *_Create a New Test_*: 
     - Select the Course on the right panel
     - Click on `New Test`
@@ -137,29 +166,104 @@ Login using email address and password
       
   - *_Publish Test Results_*:
       - Pending
+      
+</details>
 
-> ### For Students Profile:
+### For Students Profile:
 
-**New user**
-  - *_Registration_*: 
+<details>
+  <summary markdown="span">Instructions for students, click me to expand</summary>
+  
+  - *_Registration_* (for new users only): 
     - Click on `Sign up`
     - Fill up registration form 
     - Click `Register`
     
-**Existing user**
-
-Login using email address and password
+  - *_Login_*: 
+    - Fill up Login form using email and password
+    - Click `Login`
 
   - *_Taking Test_*: 
     - Click on Course
     - Select the test to take
-    - Once test completed Select `Submit`
+    - Once test completed Select `Submit test`
     
   - *_View Results_*: 
     - Pending
+</details>
 
+<a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
 
 ## **How to Install from localhost**
+
+<details>
+  <summary markdown="span">Installation instructions, click me to expand</summary>
+
+1. Clone repository using `https://github.com/johnnybarrels/agile-proj2.git`
+2. Install requirements:
+
+```shell
+$ pip install -r requirements.txt
+```
+
+3. Make sure you are on the correct working directory for the app:
+
+```shell
+$ cd app-dev
+```
+
+3. Launch Database: 
+
+```shell
+$ flask db init
+$ flask db migrate -m ' ' 
+$ flask db upgrade
+```
+
+4. Populate Database:
+  - We have created python function to automtically populate the database (use flask shell to access python on terminal)
+  ```shell
+  $ flask shell
+  ```
+  - Import the function and execute
+  
+  ```python
+  from app.db_tools import purge_and_load 
+  purge_and_load()
+  exit() 
+  ```
+  
+5. launch app:
+
+```shell
+$ flask run
+```
+
+</details>
+
+<a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
+
+## How to Test Unicode
+
+### unittest:
+
+For testing password hashing and test creation.
+
+  - To use just type on the terminal the following command:
+  
+```shell
+python -m Tests/unittest
+```
+  - 
+
+
+### sytemtest:
+
+Using selenium to test our app with firefox web browser
+ - Test for student login
+ - Test for admin login
+ - Test for student registration and login
+ 
 
 ## License
 

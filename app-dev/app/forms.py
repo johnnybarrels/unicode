@@ -2,7 +2,7 @@ from wtforms.validators import DataRequired, Email, ValidationError, EqualTo
 from wtforms.fields.html5 import EmailField
 from wtforms.widgets import HTMLString
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, IntegerField, HiddenField, RadioField, Field
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextAreaField, IntegerField, HiddenField, RadioField, Field, SelectField
 
 
 class LoginForm(FlaskForm):
@@ -47,8 +47,11 @@ class QuestionForm(FlaskForm):
     mcq_2 = StringField('MCQ Option 2')
     mcq_3 = StringField('MCQ Option 3')
     mcq_4 = StringField('MCQ Option 4')
+    mcq_solution = RadioField('MCQ Solution', choices=[(
+        let, let) for let in 'abcd'], validate_choice=False)
     mark_alloc = IntegerField('Allocated mark', validators=[DataRequired()])
-    question_type = HiddenField('Question Type', default=1, validators=[DataRequired()])
+    question_type = HiddenField(
+        'Question Type', default=1, validators=[DataRequired()])
     save = SubmitField('Save')
     delete = SubmitField('Delete')
 
@@ -59,6 +62,8 @@ class AddStudentToCourseForm(FlaskForm):
 
 
 class QuestionSubmissionForm(FlaskForm):
-    output_q_answer = StringField('Output Question Answer')
+    description = TextAreaField('Question Description')
+    output_answer = StringField('Output Question Answer')
     mcq_answer = HiddenField('MCQ Answer')
     code_answer = TextAreaField('Code Answer')
+    submit = SubmitField('Submit')

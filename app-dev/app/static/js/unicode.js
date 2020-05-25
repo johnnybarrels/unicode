@@ -43,22 +43,42 @@ $(window).ready(function () {
     $(".dropdown-toggle").dropdown();
 
     // Always making the first nav tab and pane active on load
-    $('.nav-item').first().addClass('active');
-    $('.tab-pane').first().addClass('active show');
+    // $('.nav-item').first().addClass('active');
+    // $('.tab-pane').first().addClass('active show');
+
+    // function returnToPreviousPage() {
+    //     window.history.back();
+    // }
+
+    // $('#createCourseForm').submit(function () {
+    //     if (confirm("Are you sure?" == false)) {
+    //         returnToPreviousPage()
+    //     }
+    // });
 
 });
+
+// function confirmForm() {
+//     if (!confirm("Are you sure?")) {
+//         return false
+//     }
+// }
 
 // Admin new question type selector
 function newQuestionSelector(qType) {
     if (qType == 1) {
         $('#new-question-mcq').hide();
         $('#new-question-solution').show();
+        $('#solution-textbox').show();
+        $('#solution-mcq').hide()
         $('#question-type').attr('value', 1);
         $('#new-question-form #question-description').css('height', '190px');
     }
     else if (qType == 2) {
         $('#new-question-mcq').show();
         $('#new-question-solution').show();
+        $('#solution-textbox').hide();
+        $('#solution-mcq').show()
         $('#question-type').attr('value', 2);
         $('#new-question-form #question-description').css('height', '130px');
     }
@@ -70,9 +90,9 @@ function newQuestionSelector(qType) {
     }
 };
 
-// Test MCQ radio button selectiong recording -- NOT WORKING
-function insertValueToHidden(selection) {
-    $('#mcq_answer').attr('value', selection)
+// Storing value of MCQ radio button submission
+function insertValueToHidden(i) {
+    $('#mcq-answer').attr('value', ['a', 'b', 'c', 'd'][i - 1])
 }
 
 // $('nav-add-tab').click(function () {

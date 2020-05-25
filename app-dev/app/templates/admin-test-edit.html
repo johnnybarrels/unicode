@@ -22,7 +22,7 @@
       </a>
       {% endfor %}
 
-      <a class="nav-item nav-link" id="nav-add-tab" data-toggle="tab" href="#new-question" role="tab"
+      <a class="nav-item nav-link active" id="nav-add-tab" data-toggle="tab" href="#new-question" role="tab"
         aria-controls="new-question" aria-selected="true">Add
         <i class="fas fa-plus"></i>
       </a>
@@ -38,6 +38,8 @@
       <form id="question-form" method="POST"
         action="{{ url_for('edit_question', question_id=question.id, course_id=course.id, test_id=test.id) }}">
         {{ form.csrf_token() }}
+
+        {{ form.question_type(value=question.question_type) }}
 
         <div id="question-content" class="row">
           <div class="col-6">
@@ -57,7 +59,7 @@
 
             {% if question.question_type == 2 %}
             <div class="form-group mb-4">
-              <h4 class="subheading">Multiple Choice Options</h4>
+              <h4 class="subheading mb-2">Multiple Choice Options</h4>
               <div class="row">
                 <div class="col-6">
                   {{ form.mcq_1(class="form-control mb-1", value=question.mcq_1) }}
@@ -74,8 +76,26 @@
             {% if question.question_type != 3 %}
             <div class="form-group mb-4">
               <h4 class="subheading">{{ form.solution.label }}</h4>
+              {% if question.question_type == 1 %}
               {{ form.solution(class="form-control", value=question.answer) }}
+              {% elif question.question_type == 2 %}
+              {{ form.mcq_solution(value=question.mcq_answer) }}
+              {% endif %}
             </div>
+            {% set mcq_sol = question.mcq_answer %}
+            <script>
+              var mcq_sol = $('#mcq_solution').attr('value');
+              $('#mcq_solution input').each(function () {
+                var option = $(this);
+                if (option.attr('value') == mcq_sol) {
+                  option.prop('checked', true);
+                }
+              });
+              // if ("{{mcq_sol}}" == 'a') { $('#mcq_solution-0').prop('checked', true); }
+              // else if ("{{mcq_sol}}" == 'b') { $('#mcq_solution-1').prop('checked', true); }
+              // else if ("{{mcq_sol}}" == 'c') { $('#mcq_solution-2').prop('checked', true); }
+              // else if ("{{mcq_sol}}" == 'd') { $('#mcq_solution-3').prop('checked', true); };
+            </script>
             {% endif %}
             <div class="form-group mb-4">
               <h4 class="subheading">{{ form.mark_alloc.label }}</h4>
@@ -120,7 +140,7 @@
 
 
     <!-- New Question (Add +) tab -->
-    <div class="tab-pane fade h-100" id="new-question" role="tabpanel" aria-labelledby="nav-add-tab">
+    <div class="tab-pane fade h-100 active show" id="new-question" role="tabpanel" aria-labelledby="nav-add-tab">
 
       <div class="row mb-3 mx-0">
         <h4 id="q-type" class="subheading justify-content-center">Question type </h4>
@@ -140,7 +160,7 @@
         </div>
       </div>
 
-      <!-- New question form (Add+ tab) -->
+      <!-- New question form -->
       <form id="new-question-form" method="POST"
         action="{{ url_for('new_question', course_id=course.id, test_id=test.id) }}">
         {{ form.csrf_token() }}
@@ -155,8 +175,8 @@
               {{ form.description(id="question-description", class="form-control", style="resize: none;", placeholder="eg. What does this function do?") }}
             </div>
 
-            <div id="new-question-mcq" class="form-group mb-4" style="display: none;">
-              <h4 class="subheading">Multiple Choice Options</h4>
+            <div id="new-question-mcq" class="form-group" style="display: none;">
+              <h4 class="subheading mb-2">Multiple Choice Options</h4>
               <div class="row">
                 <div class="col-6">
                   {{ form.mcq_1(class="form-control mb-1", placeholder='a)') }}
@@ -169,9 +189,10 @@
               </div>
             </div>
 
-            <div id="new-question-solution" class="form-group mb-4">
+            <div id="new-question-solution" class="form-group">
               <h4 class="subheading">{{ form.solution.label }}</h4>
-              {{ form.solution(class="form-control", placeholder='What is the correct solution?') }}
+              {{ form.solution(id="solution-textbox", class="form-control", placeholder='What is the correct solution?') }}
+              {{ form.mcq_solution(id="solution-mcq", style="display: none;") }}
             </div>
 
             <div class="form-group mb-4">
