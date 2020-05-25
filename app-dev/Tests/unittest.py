@@ -20,7 +20,6 @@ class UserModelTest(unittest.TestCase):
         db.create_all()
         u = User(id = 1, email='test@test.com', first_name='testfirst', last_name='testlast' )
         db.session.add(u)
-        db.session.add(admin)
         db.session.commit()
 
 
@@ -86,11 +85,6 @@ follow_redirects=True)
         self.register('test', 'test', 'fletcher@realpython.com', 'python101', 'python101')
         response = self.register('test', 'test', 'fletcher@realpython.com', 'python101', 'python101')
         self.assertIn(b'Email is already registered!', response.data)
-
-    #def test_password_again():
-
-
-
 
 if __name__=='__main__':
     unittest.main(verbosity=2)
