@@ -50,6 +50,47 @@ body.active > *:not(.sidenav):not(.topbar) {
   -ms-transition: 0.3 -moz-filter linear;
 }
 
+/* General styling */
+a {
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+.fas {
+  margin-left: 10px;
+}
+
+/* Main button used */
+.purple-btn {
+  background-color: var(--unicode-purple);
+  color: white;
+  font-weight: 600;
+}
+
+a .purple-btn:hover {
+  background-color: #8790F5;
+  color: white;
+}
+
+/* Message for landing pages */
+.portal-msg {
+  text-align: center;
+  color: var(--unicode-mid-grey2);
+}
+
+/* Page heading for all pages */
+.page-heading {
+  font-size: 18px;
+  color: var(--unicode-mid-grey1);
+  text-align: start;
+  line-height: 35px;
+  margin-bottom: 0;
+}
+
 /* Side navbar and topbar shown on every page */
 .sidenav {
 	height: 100%;
@@ -59,7 +100,7 @@ body.active > *:not(.sidenav):not(.topbar) {
 	z-index: 1;
 	top: 0;
 	left: 0;
-	background-color: #323A45;
+  background-color: var(--unicode-dark-grey);
 	overflow-x: hidden;
 	padding: 20px 20px 0px 30px;
 }
@@ -69,7 +110,7 @@ body.active > *:not(.sidenav):not(.topbar) {
 	text-decoration: none;
 	font-size: 16px;
 	line-height: 19px;
-	color: #8593A5;
+  color: var(--unicode-main-text-colour);
 	display: block;
 }
 
@@ -90,6 +131,13 @@ body.active > *:not(.sidenav):not(.topbar) {
 	text-transform: uppercase;
 	font-weight: bold;
 }
+
+/* Help styling */
+#help {
+  /* cursor: pointer; */
+  width: 60px;
+}
+
 
 a.nav-child {
   margin-left: 10px;
@@ -139,7 +187,6 @@ a.nav-child {
 
 #logout-icon {
   color: var(--unicode-main-text-colour);
-  margin-left: 10px;
 }
 
 #logout-icon:hover {
@@ -154,77 +201,21 @@ a.nav-child {
   transition: background-color 0.5s linear;
 }
 
-/* Message for landing pages */
-.portal-msg {
-  text-align: center;
-  color: var(--unicode-mid-grey2);
-}
-
 /* New course button for admin landing page */
 #new-course-btn {
   display: inline; 
 }
 
-/* Main button used */
-.purple-btn {
-  background-color: var(--unicode-purple);
-  color: white;
-  font-weight: 600;
-}
-
-a .purple-btn:hover {
-  background-color: #8790F5;
-  color: white;
-}
-
-.create-test {
-  background-color: white;
-  width: 40%;
-  height: 60%;
-  position: absolute;
-  top: 50%;
-  left: 60%;
-  display:none;
-}
-
-.delete-btn {
-  background-color: var(--unicode-red);
-  color: white;
-  font-weight: 600;
-}
-
-.admin-btns, .test-submit-btns {
-  position: absolute;
-  right: 0;
-  font-size: 14px;
-}
-
-#new-test-btn {
-  margin-right: 5px;
-}
-
 /* Course view specific styles */
-.page-heading {
-  font-size: 18px;
-  color: var(--unicode-mid-grey1);
-  text-align: start;
-  line-height: 35px;
-  margin-bottom: 0;
-}
-
 .all-tests {
   padding: 20px 40px;
 }
 
 .test {
   height: 175px;
-  /* width: 28%; */
   width: 300px;
-  /* min-width: 300px; */
   background-color: #FFFFFF;
   margin: 0 2.5%;
-  /* margin: 0 auto; -> nicer for responsive */
-  /* padding: 15px 15px; */
   position: relative;
   transition: background-color 0.5s linear;
   padding: 15px;
@@ -234,24 +225,8 @@ a .purple-btn:hover {
   background-color: rgb(0, 0, 0, 0.3);
 }
 
-
-.submitted-test .submitted-flag {
-  position: absolute;
-  bottom: 15px;
-  background-color: var(--unicode-red);
-  width: 100%;
-  height: 20%;
-  margin: -15px;
-  /* padding-right: 10px; */
-  /* padding: 5px; */
-}
-
-.submitted-test .submitted-flag p {
-  position: absolute;
-  left: 0;
-  color: white;
-  font-size: 1.2em;
-  margin-left: 8px;
+#test-link:hover {
+  color: var(--unicode-purple);
 }
 
 .unit-details {
@@ -263,47 +238,14 @@ a .purple-btn:hover {
   font-size: 18px;
 }
 
-#student-list {
-  width: 95%;
-  margin: 0 auto;
-  display: block;
-  color: var(--unicode-main-text-colour);
+/* Course view specific styles - admin view */
+.admin-btns, .test-submit-btns {
+  position: absolute;
+  right: 0;
+  font-size: 14px;
 }
 
-.student-tests #student-list {
-  width: 95%;
-  margin-top: 10px;
-}
-
-#student-list thead {
-  position: relative;
-  display: block;
-  width: 100%;
-}
-
-
-#student-list tbody {
-  display: block;
-  position: relative;
-  overflow-y: scroll;
-  width: 100%;
-}
-
-.modal-body #student-list tbody {
-  height: 125px;
-}
-
-.student-tests #student-list tbody {
-  height: 250px;
-}
-  
-#student-list th, #student-list td,  #student-list tr {
-  width: 100%;
-  display: flex;
-}
-
-#add-student {
-  width: 234px;
+#new-test-btn {
   margin-right: 5px;
 }
 
@@ -322,17 +264,18 @@ a .purple-btn:hover {
   color: var(--unicode-red)
 }
 
-a {
-  color: inherit;
+/* Course view specific styles - admin view (option dropdown menu) */
+#option-btn {
+  background-color: var(--unicode-pale-purple);
+  border: none;
+  float: right;
+  height: 30px;
+  width: 30px;
 }
 
-a:hover {
-  text-decoration: none;
-  color: inherit;
-}
-
-#test-link:hover {
-  color: var(--unicode-purple);
+#option-btn:focus {
+  box-shadow: none;
+  background-color: var(--unicode-purple);
 }
 
 #option-title {
@@ -361,264 +304,30 @@ a:hover {
   cursor: pointer;
 }
 
-#option-btn {
-  background-color: var(--unicode-pale-purple);
-  border: none;
-  float: right;
-  height: 30px;
-  width: 30px;
-}
-
-#option-btn:focus {
-  box-shadow: none;
-  background-color: var(--unicode-purple);
-}
-
 .option-item .fas {
   margin-right: 8px;
 }
 
-/* Modals */
-.modal {
+/* Course view specific styles - student view */
+.submitted-test .submitted-flag {
   position: absolute;
-  z-index: 99999;   
-}
-
-.modal-content {
-  width: 570px;
-  height: 485px;
-  border-radius: 6px;
-  padding: 15px 15px; 
-  margin: 0 auto;
-}
-
-.modal-title {
-  font-family: 'DM Sans';
-  font-size: 54px;
-  font-weight: bold;
-  line-height: 70px;
-  color: var(--unicode-mid-grey1);
-  text-align: center;
-  margin: 15px 0 40px 0;
-}
-
-.modal-title-subheading {
-  font-size: 20px;
-}
-
-.subheading, .modal-subheading {
-  font-family: 'Roboto';
-  font-weight: bold;
-  font-size: 18px;
-  line-height: 21px;
-  color: var(--unicode-mid-grey1);
-}
-
-.subheading {
-  margin-bottom: 0px;
-}
-
-.close {
-  position: absolute; 
-  right: 3%;
-  padding: 5px 5px;
-}
-
-#create-btn {
-  border-radius: 7px;
-  width: 40%;
-  margin: 40px 30% 0 30%;
-}
-
-#manage-modal-content {
-  width: 800px;
-  height: 500px;
-}
-
-#feedback-modal-content {
-  width: 700px;
-  height: 550px;
-}
-
-#feedback-subheading {
-  color: var(--unicode-mid-grey1);
-  font-weight: 500;
-}
-
-#feedback-textarea {
-  height: 300px;
-}
-
-.feedback-submit {
-  width: 100px;
-}
-
-#add-student {
-  width: 78%;
-  margin-left: 15px;
-}
-
-#add-student {
-  width: 78%;
-  margin-left: 15px;
-}
-
-#add-student, #student-list {
-  font-family: 'Roboto';
-}
-
-/* Admin New Question specific styles*/
-.new-question {
-  background-color: white;
-  border-radius: 10px;
-  height: 95%;
-  position: relative;
-  overflow-y: scroll;
-}
-
-#question-form, #question-content, #test-form, #mark-test-form {
-  height: 100%;
-}
-
-#new-question-form {
-  height: 92%;
-}
-
-.question-btns {
-  position: absolute;
-  bottom: 0px;
-}
-
-.caret-off::before {
-  display: none;
-}
-.caret-off::after {
-  display: none;
-}
-
-.nav-item.nav-link{
-  background-color: var(--unicode-pale-purple);
-  color: white;
-  margin: 0 4px;
-  font-weight: 500;
-  margin-bottom: 5px;
-}
-.nav-item.nav-link.active {
-  background-color: var(--unicode-purple);
-}
-
-.nav-item.nav-link.needs-marking-True {
-  background-color: #ffb4c3;
-}
-
-.nav-item.nav-link.needs-marking-True:active,
-.nav-item.nav-link.needs-marking-True:focus {
+  bottom: 15px;
   background-color: var(--unicode-red);
-}
-
-.question-type-btn {
-  background-color: var(--unicode-pale-purple);
-  margin-right: 5px;
-  border-radius: 4px;
-  width: 88px;
-  border: none;
-  color: #FFFFFF;
-}
-
-.question-type-btn:hover, 
-.question-type-btn:active, 
-.question-type-btn:focus, 
-.question-type-btn:focus:active,
-.btn.active {
-  background-color: var(--unicode-purple);
-  color: #FFFFFF;
-} 
-
-.btn-primary:not(:disabled):not(.disabled).active, 
-.show > .btn-primary.dropdown-toggle {
-  background-color: var(--unicode-purple);
-}
-
-#q-type {
-  line-height: 38px;
-}
-
-#solution-mcq, #mcq_solution {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
-
-#solution-mcq li, #mcq_solution li {
-  float: left;
-  margin-right: 22px;
-}
-
-#solution-mcq li label, #mcq_solution li label {
-  /* font-family: 'DM Sans', sans-serif; */
-  margin-left: 5px;
-}
-#question-description {
-  height: 190px;
-}
-
-#question-description-one {
-  height: 190px;
-}
-
-#question-description-three {
-  height: 280px;
-}
-
-#new-question-form #question-description {
-  height: 190px;
-}
-
-#add-question-description-one {
-  height: 150px;
-}
-
-#add-question-description-three {
-  height: 190px;
-}
-
-.tab-content {
-  position: relative;
-  height: 90%;
-}
-
-/* #question-content {
-  position: relative;
-  height: 90%;
-} */
-
-
-/* ACE Code Editor */
-.ace_editor {
   width: 100%;
-  height: 100%;
-  border-radius: 5px;
-  font-family: Menlo;
-  font-size: 15px;
+  height: 20%;
+  margin: -15px;
+}
+
+.submitted-test .submitted-flag p {
+  position: absolute;
+  left: 0;
+  color: white;
+  font-size: 1.2em;
+  margin-left: 8px;
 }
 
 
-.code-editor {
-  width: 300px;
-  height: 600px;
-}
-
-.editor-container {
-  position: relative;
-}
-
-.side-panel {
-  background-color: #2A2B30;
-  color: #cecece;
-  border-radius: 5px;
-}
-
+/* Test view page - admin */
 #edit-test-btns {
   position: absolute; 
   right: 5%;
@@ -633,6 +342,21 @@ a:hover {
   margin: 0 10px 0 0;
 }
 
+/* Test view page - student */
+#take-test-btn {
+  height: 70px;
+  width: 220px;
+  margin-top: 30px;
+  font-size: 30px;
+  border-radius: 10px;
+  background-color: var(--unicode-red);
+  color: #FFFFFF;
+  font-weight: bold;
+  font-family: 'Lato', sans-serif;
+  letter-spacing: 1px;
+}
+
+/* Test view page - dashboard */
 .test-results {
   height: 180px;
   width: 20%;
@@ -670,6 +394,292 @@ a:hover {
   }
 }
 
+.result {
+  display: block;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+  height: 100%;
+  margin-top: 30px;
+}
+
+.student-tests, .student-feedback {
+  background-color: #FFFFFF;
+  height: 400px;
+}
+
+/* Table for all students in the course */
+#student-list {
+  width: 95%;
+  margin: 0 auto;
+  display: block;
+  color: var(--unicode-main-text-colour);
+}
+
+#student-list thead {
+  position: relative;
+  display: block;
+  width: 100%;
+}
+
+#student-list tbody {
+  display: block;
+  position: relative;
+  overflow-y: scroll;
+  width: 100%;
+}
+  
+#student-list th, #student-list td,  #student-list tr {
+  width: 100%;
+  display: flex;
+}
+
+/* Student list table styling for admin test view page */
+.student-tests #student-list {
+  width: 95%;
+  margin-top: 10px;
+}
+
+.student-tests #student-list tbody {
+  height: 250px;
+}
+
+/* Student list table styling for modal on admin course page */
+.modal-body #student-list tbody {
+  height: 125px;
+}
+
+/* Modals */
+.modal {
+  position: absolute;
+  z-index: 99999;   
+}
+
+.modal-content {
+  width: 570px;
+  height: 485px;
+  border-radius: 6px;
+  padding: 15px 15px; 
+  margin: 0 auto;
+}
+
+.close {
+  position: absolute; 
+  right: 3%;
+  padding: 5px 5px;
+}
+
+.modal-title {
+  font-family: 'DM Sans';
+  font-size: 54px;
+  font-weight: bold;
+  line-height: 70px;
+  color: var(--unicode-mid-grey1);
+  text-align: center;
+  margin: 15px 0 40px 0;
+}
+
+.modal-title-subheading {
+  font-size: 20px;
+}
+
+.subheading, .modal-subheading {
+  font-family: 'Roboto';
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 21px;
+  color: var(--unicode-mid-grey1);
+}
+
+.subheading {
+  margin-bottom: 0px;
+}
+
+/* 'Manage students' modal */
+#manage-modal-content {
+  width: 800px;
+  height: 500px;
+}
+
+#add-student, #student-list {
+  font-family: 'Roboto';
+}
+
+#add-student {
+  width: 78%;
+  margin-left: 15px;
+}
+
+#add-student {
+  width: 234px;
+  margin-right: 5px;
+  width: 78%;
+  margin-left: 15px;
+}
+
+/* Feedback modal */
+#feedback-modal-content {
+  width: 700px;
+  height: 550px;
+}
+
+#feedback-subheading {
+  color: var(--unicode-mid-grey1);
+  font-weight: 500;
+}
+
+#feedback-textarea {
+  height: 300px;
+}
+
+.feedback-submit {
+  width: 100px;
+}
+
+/* Admin new question specific styles*/
+.new-question {
+  background-color: white;
+  border-radius: 10px;
+  height: 95%;
+  position: relative;
+  overflow-y: scroll;
+}
+
+#question-form, #question-content, #test-form, #mark-test-form {
+  height: 100%;
+}
+
+#new-question-form {
+  height: 92%;
+}
+
+.question-btns {
+  position: absolute;
+  bottom: 0px;
+}
+
+.delete-btn {
+  background-color: var(--unicode-red);
+  color: white;
+  font-weight: 600;
+}
+
+.nav-item.nav-link{
+  background-color: var(--unicode-pale-purple);
+  color: white;
+  margin: 0 4px;
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.nav-item.nav-link.active {
+  background-color: var(--unicode-purple);
+}
+
+.nav-item.nav-link.needs-marking-True {
+  background-color: #ffb4c3;
+}
+
+.nav-item.nav-link.needs-marking-True:active,
+.nav-item.nav-link.needs-marking-True:focus {
+  background-color: var(--unicode-red);
+}
+
+.caret-off::before {
+  display: none;
+}
+
+.caret-off::after {
+  display: none;
+}
+
+.question-type-btn {
+  background-color: var(--unicode-pale-purple);
+  margin-right: 5px;
+  border-radius: 4px;
+  width: 88px;
+  border: none;
+  color: #FFFFFF;
+}
+
+.question-type-btn:hover, 
+.question-type-btn:active, 
+.question-type-btn:focus, 
+.question-type-btn:focus:active,
+.btn.active {
+  background-color: var(--unicode-purple);
+  color: #FFFFFF;
+} 
+
+.btn-primary:not(:disabled):not(.disabled).active, 
+.show > .btn-primary.dropdown-toggle {
+  background-color: var(--unicode-purple);
+}
+
+#q-type {
+  line-height: 38px;
+}
+
+.tab-content {
+  position: relative;
+  height: 90%;
+}
+
+#solution-mcq, #mcq_solution {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#solution-mcq li, #mcq_solution li {
+  float: left;
+  margin-right: 22px;
+}
+
+#solution-mcq li label, #mcq_solution li label {
+  margin-left: 5px;
+}
+
+#question-description, 
+#question-description-one,
+#new-question-form #question-description,
+#add-question-description-three {
+  height: 190px;
+}
+
+#question-description-three {
+  height: 280px;
+}
+
+#add-question-description-one {
+  height: 150px;
+}
+
+/* ACE Code Editor */
+.ace_editor {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  font-family: Menlo;
+  font-size: 15px;
+}
+
+.code-editor {
+  width: 300px;
+  height: 600px;
+}
+
+.editor-container {
+  position: relative;
+}
+
+.side-panel {
+  background-color: #2A2B30;
+  color: #cecece;
+  border-radius: 5px;
+}
+
+/* Static descriptions for taking and marking test view */
 #static-description {
   resize: none;
   background-color: white;
@@ -685,47 +695,14 @@ a:hover {
   height: 60%;
 }
 
-.student-tests, .student-feedback {
-  background-color: #FFFFFF;
-  height: 400px;
-}
-
+/* Take test view */
 .test-submit-btn {
   background-color: var(--unicode-red);
   color: white;
   font-weight: bold;
 }
 
-.result {
-  display: block;
-  font-size: 30px;
-  font-weight: bold;
-  text-align: center;
-  height: 100%;
-  margin-top: 30px;
-}
-
-.results-graph {
-  background-color: #FFFFFF;
-}
-
-#help {
-  letter-spacing: 2px;
-	text-transform: uppercase;
-  font-weight: bold;
-  cursor: pointer;
-  width: 60px;
-}
-
-#help-modal-content {
-  width: 800px;
-  height: 600px;
-}
-
-#help-modal-body {
-  overflow-y: scroll;
-}
-
+/* Mark test view */
 #student-mark-box {
   width: 50px;
 }
@@ -742,15 +719,21 @@ a:hover {
   margin-bottom: 0;
 }
 
-#take-test-btn {
-  height: 70px;
-  width: 220px;
-  margin-top: 30px;
-  font-size: 30px;
-  border-radius: 10px;
-  background-color: var(--unicode-red);
-  color: #FFFFFF;
-  font-weight: bold;
-  font-family: 'Lato', sans-serif;
-  letter-spacing: 1px;
+
+
+
+.create-test {
+  background-color: white;
+  width: 40%;
+  height: 60%;
+  position: absolute;
+  top: 50%;
+  left: 60%;
+  display:none;
+}
+
+#create-btn {
+  border-radius: 7px;
+  width: 40%;
+  margin: 40px 30% 0 30%;
 }

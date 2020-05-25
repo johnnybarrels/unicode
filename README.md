@@ -5,7 +5,7 @@
 ---
 
 > # **CITS3403/CITS5504 - Agile Web Development - Final Project**
-> # <p align="center"> **Semester 1, 2020** </p>
+> **Semester 1, 2020**
 
 ## **Development Team:**
 
