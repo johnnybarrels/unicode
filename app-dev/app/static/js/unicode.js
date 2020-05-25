@@ -58,31 +58,12 @@ $(window).ready(function () {
         $("#manage-students-modal").modal("show");
     });
 
-    /* 
-    $("#help").click(function () {
-        $("#help-modal").modal("show");
-    }); */
-
-    // Admin test dropdown
     $(".dropdown-toggle").dropdown();
 
     $('#submit-and-feedback-btn').click(function () {
         $('#feedback-modal').modal('show')
     })
 
-    // Always making the first nav tab and pane active on load
-    // $('.nav-item').first().addClass('active');
-    // $('.tab-pane').first().addClass('active show');
-
-    // function returnToPreviousPage() {
-    //     window.history.back();
-    // }
-
-    // $('#createCourseForm').submit(function () {
-    //     if (confirm("Are you sure?" == false)) {
-    //         returnToPreviousPage()
-    //     }
-    // });
 
 });
 
