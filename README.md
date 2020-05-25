@@ -185,9 +185,8 @@ $ flask db upgrade
   - Import the function and execute
   
   ```python
-  from app.db_tools import purge_and_load 
-  purge_and_load()
-  exit() 
+purge() 
+exit()
   ```
   
 5. launch app:
