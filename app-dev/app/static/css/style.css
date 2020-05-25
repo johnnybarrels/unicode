@@ -564,6 +564,11 @@ a.nav-child {
   font-weight: 600;
 }
 
+#marked-btn:hover {
+  color: white;
+  background-color: #ff88a0;
+}
+
 .nav-item.nav-link{
   background-color: var(--unicode-pale-purple);
   color: white;

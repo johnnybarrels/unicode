@@ -422,8 +422,11 @@ class TestController():
 
         form = FeedbackForm()
         if form.validate_on_submit():
-            result.feedback = repr(form.feedback.data)[1:-1]
+            result.feedback = form.feedback.data
             result.score = sum((sub.score for sub in submissions))
+            if not any(sub.needs_marking for sub in submissions):
+                result.needs_marking = False
+
             db.session.commit()
 
         return redirect(url_for('test_view', course_id=course_id, test_id=test_id))
