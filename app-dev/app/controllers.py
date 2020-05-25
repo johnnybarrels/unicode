@@ -334,8 +334,9 @@ class TestController():
 
         for submission in submissions:
             submission.auto_mark()
+        
 
-        if not any([q.question_type == 3 for q in questions]):
-            test.needs_marking = False
+        # if not any([q.question_type == 3 for q in questions]):
+        #     submission.needs_marking = False
 
         return redirect(url_for('course_view', course_id=course_id))
