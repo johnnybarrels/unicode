@@ -107,6 +107,11 @@ class UserController():
 
 class CourseController():
 
+    def aggregate_view():
+        courses = Course.query.all()
+
+        return render_template('general-dashboard.html', courses=courses)
+
     def create_test(course_id):
         form = NewTestForm()
         course = Course.query.filter_by(id=course_id).first()
@@ -396,9 +401,12 @@ class TestController():
         student = User.query.filter_by(id=student_id).first()
         submission = Submission.query.filter_by(id=submission_id).first()
 
+        form = MarkTestForm()
+ 
         if form.validate_on_submit():
             submission.score = form.mark.data
             subission.needs_marking = False
             db.session.commit()
 
-        
+        return redirect(url_for('mark_test', course_id=course_id, test_id=test_id, student_id=student_id))        
+
