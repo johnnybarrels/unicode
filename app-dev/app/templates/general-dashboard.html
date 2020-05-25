@@ -38,33 +38,6 @@
 </head>
 
 <body>
-  <!-- Add course modal -->
-  {% if current_user.is_admin %}
-  <div class="modal fade" id="new-course-modal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <h3 class="modal-title">Create a Course</h3>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"> <span
-            aria-hidden="true">&times;</span>
-        </button>
-        <div class="modal-body">
-          <form id="createCourseForm" action="{{ url_for('create_course') }}" method='post' name='create_course'>
-            {{ course_form.hidden_tag() }}
-            <div class="form-group mb-5">
-              <h4 class="modal-subheading">Course Name</h4>
-              {{ course_form.course_name( class="form-control", placeholder="Course Name") }}
-            </div>
-            <div class="form-group">
-              <h4 class="modal-subheading">Course Code</h4>
-              {{ course_form.course_code( class="form-control", placeholder="Course Code") }}
-            </div>
-            {{ course_form.submit(id="create-course-btn", class="btn purple-btn") }}
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-  {% endif %}
 
   <!-- Help modal -->
   <div id="help-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
@@ -83,39 +56,9 @@
     </div>
   </div>
 
-
   <!-- SideBar -->
   <div class="sidenav">
     <img id="logo-horiz" src="{{ url_for('static', filename='img/UniCode-colour-horiz.png') }}" alt="UniCode logo">
-    <div class="nav-parent" style="margin-left:15px;">
-      {% if current_user.is_admin %}
-      <div class="row">
-        <a href="{{ url_for('admin_portal') }}">Courses</a>
-
-        <a id="new-course-icon" href="#">
-          <i id="nav-indicator" class="fas fa-plus-circle"></i>
-        </a>
-      </div>
-      {% else %}
-      <div class="row">
-        <a href="{{ url_for('student_portal') }}">Courses</a>
-      </div>
-      {% endif %}
-
-    </div>
-
-
-    {% if current_user.courses %}
-    {% for course in current_user.courses %}
-    <a class="nav-child" href="{{ url_for('course_view', course_id=course.id) }}">{{ course.name }}<span
-        id="nav-indicator" class="material-icons">chevron_right</span></a>
-    {% endfor %}
-    {% endif %}
-
-    <div class="nav-parent mt-4">
-      <a href="#" id="help">Help</a>
-    </div>
-
     <div class="footer">
       <p>&copy; 2020 UniCode. All Rights Reserved <br>Designed by Johnny Barrett, Ivy Bui, Jesse Carter, and Cesar
         Gonzalez</p>
@@ -124,7 +67,7 @@
   </div>
 
   <div class="topbar">
-    <p id="user-name">{{ current_user.first_name }} {{ current_user.last_name }}
+    <p id="user-name">Return to login page
       <a href="{{ (url_for('logout')) }}" style="color: #8593A5;">
         <i id="logout-icon" class="fas fa-sign-out-alt"></i>
       </a>
@@ -132,14 +75,32 @@
   </div>
 
   <div class="content-container p-5">
-    {% block content %} {% endblock %}
+    <table id="results-list" class="table table-hover">
+        <thead>
+          <tr>
+            <th>Course</th>
+            <th>Test</th>
+            <th>Average Mark</th>
+            <th>Min Mark</th>
+            <th>Max Mark</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- add functionality to populate table with all tests and results -->
+          <tr>
+            <td>course_name</td>
+            <td>test_name</td>
+            <td>avg_mark</td>
+            <td>min_mark</td>
+            <td>max_mark</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    
   </div>
 
 
-
-  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/ace/1.1.3/ace.js"></script>
-
-  <script src="{{ url_for('static', filename='js/ace-editor.js') }}"></script>
 
 </body>
 
