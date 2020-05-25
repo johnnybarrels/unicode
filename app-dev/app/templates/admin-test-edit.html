@@ -6,7 +6,7 @@
   <h1 class="page-heading">{{ course.name }} - {{ test.name }}</h1>
   <div class="admin-btns mr-5">
     <a href="{{ url_for('test_view', course_id=course.id, test_id=test.id) }}">
-      <button class="btn purple-btn">Save and return<i class="fas fa-arrow-alt-circle-right"></i></button>
+      <button class="btn purple-btn">Return<i class="fas fa-arrow-alt-circle-right"></i></button>
     </a>
   </div>
 </div>
@@ -200,7 +200,7 @@
               {{ form.mark_alloc(class="form-control", placeholder='Please provide an integer mark value (eg. 5, 10)') }}
             </div>
             <!-- <div class="row mt-5"></div> -->
-            <div class="question-btns">
+            <div class="question-btns mb-2">
               {{ form.save(class="btn purple-btn") }}
               <button class="btn delete-btn">Clear</button>
             </div>

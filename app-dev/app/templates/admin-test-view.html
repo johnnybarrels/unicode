@@ -50,25 +50,25 @@
   </div>
 </div>
 
-{% if submitted_users %}
+{# if submitted_users #}
 <!-- Dashboard for if there are test results -->
 <div class="dashboard mx-5">
   <div class="row my-5">
     <div class="test-results p-3">
       Students completed
-      <span class="result">5 of 11</span>
+      <span class="result">{{ aggregates[0] }} of {{ aggregates[1] }}</span>
     </div>
     <div class="test-results p-3">
       Test average
-      <span class="result">78%</span>
+      <span class="result">{{ aggregates[2] }}</span>
     </div>
     <div class="test-results p-3">
       Min mark
-      <span class="result">57%</span>
+      <span class="result">{{ aggregates[3] }}%</span>
     </div>
     <div class="test-results p-3">
       Max mark
-      <span class="result">89%</span>
+      <span class="result">{{ aggregates[4] }}%</span>
     </div>
   </div>
 
@@ -85,7 +85,11 @@
         <!-- add functionality to populate with students in course -->
         <tr>
           <td>student.name</td>
-          <td><button class="btn purple-btn">See test</button></td>
+          <td>
+            <a href="{{ url_for('mark_test_view', course_id=course.id, test_id=test.id, student_id=25) }}">
+              <button class="btn purple-btn">See test</button>
+            </a>
+          </td>
         </tr>
         <!-- Delete section below when get db working -->
         <tr>
@@ -113,7 +117,7 @@
     </table>
   </div>
 </div>
-{% else %}
+{# else #}
 <!-- No students have taken test -->
 <div id="no-test-taken" class="row h-100">
   <div class="col"></div>
@@ -123,6 +127,6 @@
   </div>
   <div class="col"></div>
 </div>
-{% endif %}
+{# endif #}
 
 {% endblock %}

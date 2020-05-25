@@ -51,19 +51,6 @@
               {{ form.output_answer(class="form-control", placeholder="Write your answer here", value=question.get_user_submission(current_user.id).output_sub) }}
 
               {% elif question.question_type == 2 %}
-              {{ form.mcq_answer(id="mcq-answer") }}
-              <h4 class="subheading mb-2">Select one option</h4>
-              <ol type="a">
-                {% for mcq in question.get_mcq_options() %}
-                {% if mcq %}
-                <li>
-                  <input type="radio" id="mcq-{{ loop.index }}" class="mcq-radio ml-2" name="mcq"
-                    onchange='insertValueToHidden("{{ loop.index }}")'>
-                  <label for="mcq-{{ loop.index }}" class="ml-2">{{ mcq }}</label>
-                </li>
-                {% endif %}
-                {% endfor %}
-              </ol>
               {% set mcq_sub = question.get_user_submission(current_user.id).mcq_sub %}
               <script>
                 if ("{{mcq_sub}}" == 'a') { $('#mcq-1').prop('checked', true); }
@@ -71,6 +58,22 @@
                 else if ("{{mcq_sub}}" == 'c') { $('#mcq-3').prop('checked', true); }
                 else if ("{{mcq_sub}}" == 'd') { $('#mcq-4').prop('checked', true); };
               </script>
+              <div id="mcq-form-{{ loop.index }}"> 
+                {{ form.mcq_answer(id="mcq-answer") }}
+              </div>
+              <h4 class="subheading mb-2">Select one option</h4>
+              <ol type="a">
+                {% set outer_loop_index = loop.index %}
+                {% for mcq in question.get_mcq_options() %}
+                {% if mcq %}
+                <li>
+                  <input type="radio" id="mcq-{{ loop.index }}" class="mcq-radio ml-2" name="mcq"
+                    onchange='insertValueToHidden({{ outer_loop_index }}, "{{ loop.index }}")'>
+                  <label for="mcq-{{ loop.index }}" class="ml-2">{{ mcq }}</label>
+                </li>
+                {% endif %}
+                {% endfor %}
+              </ol>
               {% endif %}
             </div>
 
@@ -106,5 +109,19 @@
   </div>
 
 </div>
+
+
+<!-- <div id="test-already-taken" class="row h-100">
+  <div class="col"></div>
+  <div class="col-6 my-auto text-center">
+    <h1 class="portal-msg">YOU HAVE ALREADY
+      TAKEN THIS TEST</h1>
+  </div>
+  <div class="col"></div>
+</div>
+
+<div>
+  <p>Dashboard of results for if test already taken</p>
+</div> -->
 
 {% endblock %}

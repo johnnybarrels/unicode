@@ -41,14 +41,11 @@ class User(UserMixin, db.Model):
             (Submission.test_id == test_id)
         ).all()
 
-    def has_submitted(self, test_id):
-        return self.get_test_submissions(test_id) is not None
+    def get_result(self, test_id):
+        return Result.query.filter_by(user_id=self.id, test_id=test_id).first()
 
-    # def get_users(course_id):
-    #     course = Course.query.filter_by(id=course_id).first()
-    #     course_enrolments = User.query.join(enrolments).join(
-    #         Course).filter((enrolments.c.course_id == course.id)).all()
-    #     return course_enrolments
+    def has_submitted(self, test_id):
+        return self.get_result(test_id) is not None
 
     def __repr__(self):
         return f'<User: {self.email}>'
@@ -60,6 +57,9 @@ class Course(db.Model):
     name = db.Column(db.String(64))
     course_code = db.Column(db.String(32))
     tests = db.relationship('Test', backref='course', lazy=True)
+
+    def get_num_enrolments(self):
+        return len(self.get_users())
 
     def get_users(self):
         return User.query.join(enrolments).join(Course).filter(
@@ -76,7 +76,38 @@ class Test(db.Model):
     is_live = db.Column(db.Boolean, nullable=False, default=False)
     course_id = db.Column(db.Integer, db.ForeignKey('courses.id'))
     questions = db.relationship('Question', backref='test', lazy=True)
-    needs_marking = db.Column(db.Boolean, nullable=False, default=True)
+
+    def get_average_mark(self):
+        # TODO: EVENTUALLY EXTEND THIS TO WORK WITH RESULTS RATHER THAN SUBMISSIONS
+        all_res = self.get_test_results()
+        total = 0
+        
+        for res in all_res:
+            total += res.score
+        
+        return total / max( len(all_res), 1 )    
+
+    def get_max_mark(self):
+        # TODO: EVENTUALLY EXTEND THIS TO WORK WITH RESULTS RATHER THAN SUBMISSIONS
+        all_res = self.get_test_results()
+        all_res.sort(key=lambda r: r.score, reverse=True)
+
+        if all_res:
+            return all_res[0].score
+        else:
+            return 0
+
+    def get_min_mark(self):
+        all_res = self.get_test_results()
+        all_res.sort(key=lambda r: r.score)
+
+        if all_res:
+            return all_res[0].score
+        else:
+            return 0
+
+    def get_num_results(self):
+        return len(self.get_test_results())
 
     def get_submitted_users(self):
         return User.query.join(Submission).join(Test).filter(
@@ -91,6 +122,15 @@ class Test(db.Model):
     def get_all_submissions(self):
         return Submission.query.join(Test).filter(
             Submission.test_id == self.id).all()
+
+    def has_result(self, user_id):
+        return Result.query.filter_by(user_id=user_id, test_id=self.id).first()
+        
+    def get_test_results_by_id(self, test_id):
+        return Result.query.filter_by(test_id=test_id).all()
+
+    def get_test_results(self):
+        return Result.query.filter_by(test_id=self.id).all()
 
     def __repr__(self):
         return f'<Test: {self.name}>'
@@ -113,6 +153,7 @@ class Question(db.Model):
     question_type = db.Column(db.Integer, nullable=False, default=1)
     submissions = db.relationship('Submission', backref='question', lazy=True)
 
+ 
     def get_mcq_options(self):
         return [self.mcq_1, self.mcq_2, self.mcq_3, self.mcq_4]
 
@@ -121,7 +162,7 @@ class Question(db.Model):
             (Submission.question_id == self.id)
             & (Submission.user_id == user_id)).first()
 
-    def get_all_submissions(self, user_id):
+    def get_all_submissions(self):
         return Submission.query.join(Question).filter(
             Submission.question_id == self.id).all()
 
@@ -140,18 +181,24 @@ class Submission(db.Model):
     question_id = db.Column(db.Integer, db.ForeignKey('questions.id'))
 
     score = db.Column(db.Integer, default=0)
+    # needs_marking = db.Column(db.Boolean, nullable=False, default=True)
 
     def auto_mark(self):
         q = Question.query.filter_by(id=self.question_id).first()
         if q.question_type == 1:
             if self.output_sub == q.answer:
                 self.score = q.mark_alloc
+                self.needs_marking = False
                 
         elif q.question_type == 2:
             if self.mcq_sub == q.mcq_answer:
                 self.score = q.mark_alloc
+                self.needs_marking = False 
 
         db.session.commit()
+
+    def get_question(self):
+        return Question.query.filter_by(id=self.question_id).first()
 
     def __repr__(self):
         return f'<Submission: User ID: {self.user_id}, Question ID: {self.question_id}>'
