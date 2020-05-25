@@ -36,6 +36,8 @@
       <form id="mark-test-form" method="POST"
         action="{{ url_for('mark_submission', course_id=course.id, test_id=test.id, student_id=student.id, submission_id=submission.id) }}">
 
+        {{ form.hidden_tag() }}
+
         <div id="question-content" class="row">
           <div class="col-5">
             <div class="form-group q-description-{{ loop.index }} static-description-{{ question.question_type }} mb-4">

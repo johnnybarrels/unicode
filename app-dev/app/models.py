@@ -7,7 +7,7 @@ from flask_login import current_user
 @login.user_loader
 def load_user(id):
     return User.query.get(int(id))
-  
+
 
 enrolments = db.Table('enrolments',
                       db.Column('user_id', db.Integer, db.ForeignKey(
@@ -87,11 +87,11 @@ class Test(db.Model):
         # TODO: EVENTUALLY EXTEND THIS TO WORK WITH RESULTS RATHER THAN SUBMISSIONS
         all_res = self.get_test_results()
         total = 0
-        
+
         for res in all_res:
             total += res.score
-        
-        return total / max( len(all_res), 1 )    
+
+        return total / max(len(all_res), 1)
 
     def get_max_mark(self):
         # TODO: EVENTUALLY EXTEND THIS TO WORK WITH RESULTS RATHER THAN SUBMISSIONS
@@ -132,9 +132,6 @@ class Test(db.Model):
     def has_result(self, user_id):
         return Result.query.filter_by(user_id=user_id, test_id=self.id).first()
 
-    def get_test_results_by_id(self, test_id):
-        return Result.query.filter_by(test_id=test_id).all()
-
     def get_test_results(self):
         return Result.query.filter_by(test_id=self.id).all()
 
@@ -159,7 +156,6 @@ class Question(db.Model):
     question_type = db.Column(db.Integer, nullable=False, default=1)
     submissions = db.relationship('Submission', backref='question', lazy=True)
 
- 
     def get_mcq_options(self):
         return [self.mcq_1, self.mcq_2, self.mcq_3, self.mcq_4]
 
@@ -195,16 +191,19 @@ class Submission(db.Model):
             if self.output_sub == q.answer:
                 self.score = q.mark_alloc
             self.needs_marking = False
-                
+
         elif q.question_type == 2:
             if self.mcq_sub == q.mcq_answer:
                 self.score = q.mark_alloc
-            self.needs_marking = False 
+            self.needs_marking = False
 
         db.session.commit()
 
     def get_question(self):
         return Question.query.filter_by(id=self.question_id).first()
+
+    def get_result(self):
+        return Result.query.filter_by()
 
     def __repr__(self):
         return f'<Submission: User ID: {self.user_id}, Question ID: {self.question_id}>'
@@ -220,4 +219,4 @@ class Result(db.Model):
     feedback = db.Column(db.String(1024))
 
     def __repr__(self):
-        return f'<Result {self.result_id}, User{self.user_id}, Test {self.test_id}, Score: {self.score}, Marked? {self.is_marked}>'
+        return f'<Result {self.id}, User{self.user_id}, Test {self.test_id}, Score: {self.score}>'

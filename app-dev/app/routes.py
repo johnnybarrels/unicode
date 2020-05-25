@@ -154,7 +154,7 @@ def submit_test(course_id, test_id):
 
 @app.route('/admin/<course_id>/<test_id>/<student_id>')
 @login_required
-def mark_test_view(course_id, test_id, student_id):
+def mark_test(course_id, test_id, student_id):
     return TestController.mark_test(course_id, test_id, student_id)
 
 
@@ -162,5 +162,4 @@ def mark_test_view(course_id, test_id, student_id):
 @login_required
 def mark_submission(course_id, test_id, student_id, submission_id):
     return TestController.mark_submission(course_id, test_id, student_id, submission_id)
-
 
