@@ -91,8 +91,10 @@ function newQuestionSelector(qType) {
 };
 
 // Storing value of MCQ radio button submission
-function insertValueToHidden(i) {
-    $('#mcq-answer').attr('value', ['a', 'b', 'c', 'd'][i - 1])
+function insertValueToHidden(loop_index, i) {
+    mcq_index_str = "#mcq-form-" + loop_index.toString() + " #mcq-answer";
+    console.log(mcq_index_str);
+    $(mcq_index_str).attr('value', ['a', 'b', 'c', 'd'][i - 1])
 }
 
 // $('nav-add-tab').click(function () {

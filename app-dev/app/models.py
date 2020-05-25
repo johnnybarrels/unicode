@@ -76,7 +76,6 @@ class Test(db.Model):
     is_live = db.Column(db.Boolean, nullable=False, default=False)
     course_id = db.Column(db.Integer, db.ForeignKey('courses.id'))
     questions = db.relationship('Question', backref='test', lazy=True)
-    needs_marking = db.Column(db.Boolean, nullable=False, default=True)
 
     def get_submitted_users(self):
         return User.query.join(Submission).join(Test).filter(
@@ -140,16 +139,19 @@ class Submission(db.Model):
     question_id = db.Column(db.Integer, db.ForeignKey('questions.id'))
 
     score = db.Column(db.Integer, default=0)
+    needs_marking = db.Column(db.Boolean, nullable=False, default=True)
 
     def auto_mark(self):
         q = Question.query.filter_by(id=self.question_id).first()
         if q.question_type == 1:
             if self.output_sub == q.answer:
                 self.score = q.mark_alloc
+                self.needs_marking = False
                 
         elif q.question_type == 2:
             if self.mcq_sub == q.mcq_answer:
                 self.score = q.mark_alloc
+                self.needs_marking = False 
 
         db.session.commit()
 
