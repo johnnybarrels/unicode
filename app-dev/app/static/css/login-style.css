@@ -2,10 +2,6 @@ body {
   font-family: 'DM Sans', sans-serif;
 }
 
-.login-items > div{
-  /* border: 2px solid white; */
-}
-
 .login-items h1{
   font-family: 'Montserrat', sans-serif;
   color: white;
@@ -64,7 +60,6 @@ body {
   top: 79%;
   width: 100%;
   text-align: center;
-  /*margin-left: 30px;*/
 }
 
 #sign-up a {
