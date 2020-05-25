@@ -361,7 +361,6 @@ class TestController():
         course = Course.query.filter_by(id=course_id).first()
         test = Test.query.filter_by(id=test_id).first()
         questions = test.questions
-        #users = course.get_users()
         student = User.query.filter_by(id=student_id).first()
 
         submissions = test.get_user_submissions(student_id)
@@ -395,3 +394,17 @@ class TestController():
 
         return redirect(url_for('mark_test', course_id=course_id, test_id=test_id,
                                 student_id=student_id))
+
+    def submit_and_feedback(course_id, test_id, student_id):
+        test = Test.query.filter_by(id=test_id).first()
+        result = Result.query.filter_by(
+            test_id=test_id, user_id=student_id).first()
+        submissions = test.get_user_submissions(student_id)
+
+        form = FeedbackForm()
+        if form.validate_on_submit():
+            result.feedback = repr(form.feedback.data)[1:-1]
+            result.score = sum((sub.score for sub in submissions))
+            db.session.commit()
+
+        return redirect(url_for('test_view', course_id=course_id, test_id=test_id))

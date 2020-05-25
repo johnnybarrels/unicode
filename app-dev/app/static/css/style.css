@@ -445,6 +445,24 @@ a:hover {
   height: 500px;
 }
 
+#feedback-modal-content {
+  width: 700px;
+  height: 550px;
+}
+
+#feedback-subheading {
+  color: var(--unicode-mid-grey1);
+  font-weight: 500;
+}
+
+#feedback-textarea {
+  height: 300px;
+}
+
+.feedback-submit {
+  width: 100px;
+}
+
 #add-student {
   width: 78%;
   margin-left: 15px;

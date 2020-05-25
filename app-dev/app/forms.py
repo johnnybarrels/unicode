@@ -80,4 +80,4 @@ class MarkTestForm(FlaskForm):
 
 class FeedbackForm(FlaskForm):
     feedback = TextAreaField('Feedback')
-    submit = SubmitField('Submit marks')
+    submit = SubmitField('Submit')
