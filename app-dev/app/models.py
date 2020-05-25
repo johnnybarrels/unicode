@@ -77,6 +77,25 @@ class Test(db.Model):
     course_id = db.Column(db.Integer, db.ForeignKey('courses.id'))
     questions = db.relationship('Question', backref='test', lazy=True)
 
+    def get_average_mark(self):
+        # TODO: EVENTUALLY EXTEND THIS TO WORK WITH RESULTS RATHER THAN SUBMISSIONS
+        all_res = self.get_test_results()
+        total = 0
+        for res in all_res:
+            total += res.score
+        
+        return total / max( len(all_res), 1 )    
+
+    def get_max_mark(self):
+        # TODO: EVENTUALLY EXTEND THIS TO WORK WITH RESULTS RATHER THAN SUBMISSIONS
+        all_res = self.get_test_results()
+        all_res.sort(key=lambda r: r.score, reverse=True)
+
+        if all_res:
+            return all_res[0].score
+        else:
+            return 0
+
     def get_submitted_users(self):
         return User.query.join(Submission).join(Test).filter(
             Submission.test_id == self.id
@@ -90,6 +109,12 @@ class Test(db.Model):
     def get_all_submissions(self):
         return Submission.query.join(Test).filter(
             Submission.test_id == self.id).all()
+
+    def get_test_results_by_id(self, test_id):
+        return Result.query.filter_by(test_id=test_id).all()
+
+    def get_test_results(self):
+        return Result.query.filter_by(test_id=self.id).all()
 
     def __repr__(self):
         return f'<Test: {self.name}>'
@@ -112,6 +137,7 @@ class Question(db.Model):
     question_type = db.Column(db.Integer, nullable=False, default=1)
     submissions = db.relationship('Submission', backref='question', lazy=True)
 
+ 
     def get_mcq_options(self):
         return [self.mcq_1, self.mcq_2, self.mcq_3, self.mcq_4]
 
@@ -120,7 +146,7 @@ class Question(db.Model):
             (Submission.question_id == self.id)
             & (Submission.user_id == user_id)).first()
 
-    def get_all_submissions(self, user_id):
+    def get_all_submissions(self):
         return Submission.query.join(Question).filter(
             Submission.question_id == self.id).all()
 
@@ -166,6 +192,7 @@ class Result(db.Model):
     test_id = db.Column(db.Integer, db.ForeignKey('tests.id'), nullable=False)
     score = db.Column(db.Integer)
     needs_marking = db.Column(db.Boolean, nullable=False, default=True)
+
 
     def __repr__(self):
         return f'<Result {self.result_id}, User{self.user_id}, Test {self.test_id}, Score: {self.score}, Marked? {self.is_marked}>'

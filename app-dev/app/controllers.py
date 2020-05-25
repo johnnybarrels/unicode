@@ -334,7 +334,9 @@ class TestController():
 
         for submission in submissions:
             submission.auto_mark()
-        
+       
+        print(test.get_average_mark())
+        print(test.get_max_mark()) 
 
         # if not any([q.question_type == 3 for q in questions]):
         #     submission.needs_marking = False
