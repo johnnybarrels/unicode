@@ -445,7 +445,7 @@ a:hover {
   position: relative;
 }
 
-#question-form, #question-content, #test-form {
+#question-form, #question-content, #test-form, #mark-test-form {
   height: 100%;
 }
 
@@ -475,6 +475,15 @@ a:hover {
   background-color: var(--unicode-purple);
 }
 
+.nav-item.nav-link.needs-marking-True {
+  background-color: #ffb4c3;
+}
+
+.nav-item.nav-link.needs-marking-True:active,
+.nav-item.nav-link.needs-marking-True:focus {
+  background-color: var(--unicode-red);
+}
+
 .question-type-btn {
   background-color: var(--unicode-pale-purple);
   margin-right: 5px;
@@ -494,7 +503,7 @@ a:hover {
 } 
 
 .btn-primary:not(:disabled):not(.disabled).active, 
-.show>.btn-primary.dropdown-toggle {
+.show > .btn-primary.dropdown-toggle {
   background-color: var(--unicode-purple);
 }
 
@@ -685,4 +694,12 @@ a:hover {
 
 #help-modal-body {
   overflow-y: scroll;
+}
+
+#student-mark-box {
+  width: 50px;
+}
+
+#mark-out-of {
+  display: inline;
 }

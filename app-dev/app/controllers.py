@@ -1,11 +1,9 @@
-from werkzeug.urls import url_parse
+from app import app, db
+# from werkzeug.urls import url_parse
 from flask import request
 from app.models import User, Course, Test, Question, Result, enrolments, Submission
-from app.forms import LoginForm, RegistrationForm, NewTestForm, NewCourseForm, AddStudentToCourseForm
-from app.models import User, Course, Test, Question, Result
-from app.forms import LoginForm, RegistrationForm, NewTestForm, NewCourseForm, RenameTestForm, QuestionForm, QuestionSubmissionForm
+from app.forms import LoginForm, RegistrationForm, NewTestForm, NewCourseForm, RenameTestForm, QuestionForm, QuestionSubmissionForm, AddStudentToCourseForm, MarkTestForm
 from flask import render_template, flash, redirect, url_for, request
-from app import app, db
 from flask_login import current_user, login_user, logout_user, login_required
 
 
@@ -79,6 +77,7 @@ class UserController():
 
         if form.validate_on_submit():
 
+
             user = User(first_name=form.first_name.data,
                         last_name=form.last_name.data, email=form.email.data,
                         is_admin=0)
@@ -100,6 +99,8 @@ class UserController():
 
             return redirect(url_for('login'))
 
+        # for error, message in form.errors.items():
+        #     flash(message)
         return render_template('register.html', title="Register", form=form)
 
 
@@ -328,6 +329,7 @@ class TestController():
 
         return redirect(url_for('take_test', course_id=course_id, test_id=test_id))
 
+
     def submit_test(course_id, test_id):
         test = Test.query.filter_by(id=test_id).first()
         user_id = current_user.id
@@ -354,7 +356,7 @@ class TestController():
     def mark_test(course_id, test_id, student_id):
         course = Course.query.filter_by(id=course_id).first()
         test = Test.query.filter_by(id=test_id).first()
-        question = test.questions
+        questions = test.questions
         #users = course.get_users()
         student = User.query.filter_by(id=student_id).first()
 
@@ -362,7 +364,23 @@ class TestController():
 
         course_form = NewCourseForm()
 
+        form = MarkTestForm()
+
         return render_template('mark-test.html', course=course,
                                 course_form=course_form, student=student, 
-                                test=test, questions=question,
-                                submissions=submissions)
+                                test=test, questions=questions,
+                                submissions=submissions, form=form)
+
+
+    def mark_submission(course_id, test_id, student_id, submission_id):
+        course = Course.query.filter_by(id=course_id).first()
+        test = Test.query.filter_by(id=test_id).first()
+        student = User.query.filter_by(id=student_id).first()
+        submission = Submission.query.filter_by(id=submission_id).first()
+
+        if form.validate_on_submit():
+            submission.score = form.mark.data
+            subission.needs_marking = False
+            db.session.commit()
+
+        

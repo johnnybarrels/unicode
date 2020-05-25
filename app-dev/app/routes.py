@@ -140,8 +140,6 @@ def new_submission(course_id, test_id, question_id):
 @app.route('/student/<course_id>/<test_id>/submit', methods=['POST'])
 @login_required
 def submit_test(course_id, test_id):
-    # print('\n\n~~~~~~~~~~~~ YOOOOOOOOOOOOO ~~~~~~~~~~~~~~\n\n')
-    # print('\n\n~~~~~~~~~~~~ YOOOOOOOOOOOOO ~~~~~~~~~~~~~~\n\n')
     return TestController.submit_test(course_id, test_id)
 
 
@@ -149,3 +147,11 @@ def submit_test(course_id, test_id):
 @login_required
 def mark_test_view(course_id, test_id, student_id):
     return TestController.mark_test(course_id, test_id, student_id)
+
+
+@app.route('/admin/<course_id>/<test_id>/<student_id>/<submission_id>', methods=['POST'])
+@login_required
+def mark_submission(course_id, test_id, student_id, submission_id):
+    return TestController.mark_submission(course_id, test_id, student_id, submission_id)
+
+
