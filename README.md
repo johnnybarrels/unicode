@@ -281,11 +281,11 @@ $ flask run
 
 ## How to Test Unicode
 
-First make sure you are in the `app-dev`.
+⚠️ First make sure you are in the `app-dev`.
 
 ### **_unittest_**:
 
-⚠️ For testing password hashing and test creation.
+For testing password hashing and test creation.
 
   - To use just type on the terminal the following command:
   
