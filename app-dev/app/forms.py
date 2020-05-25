@@ -73,8 +73,11 @@ class QuestionSubmissionForm(FlaskForm):
 
 class MarkTestForm(FlaskForm):
     description = TextAreaField('Question Description')
-    output_answer = StringField('Output Question Answer')
-    mcq_answer = HiddenField('MCQ Answer')
     code_answer = TextAreaField('Code Answer')
     mark = IntegerField('Mark', validators=[NumberRange(min=0)])
     submit = SubmitField('Save Mark')
+
+
+class FeedbackForm(FlaskForm):
+    feedback = TextAreaField('Feedback')
+    submit = SubmitField('Submit')

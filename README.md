@@ -5,13 +5,13 @@
 ---
 
 > # **CITS3403/CITS5504 - Agile Web Development - Final Project**
-> # <p align="center"> **Semester 1, 2020** </p>
+> **Semester 1, 2020**
 
 ## **Development Team:**
 
 | **Johnny Barrett** | **Ivy Bui** | **Jesse Carter** | **Cesar Gonzalez** |
 | :---: |:---:| :---:|:---:|
-| <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/johnny.jpeg?token=ANBLRDQC3LZ7RND2QTJBAE262S5QI" width="100" height="100" />  | <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/Ivy.png?token=ANBLRDQR53OQ4G274BL3HWK62TS4G" width="100" height="100" />| <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/jesse_photo.png?token=ANBLRDWSQTNJKKDOHF3BFE262TTUQ" width="100" height="100" />    | <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/cesar_photo.png?token=ANBLRDQOFBVXJNZAKIHNZC262TTZ6" width="100" height="100" />  |
+| <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/Team_photos/johnny.jpeg?token=ANBLRDTCEU53VE7KN3HKCC262UGAW" width="100" height="100" />  | <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/Team_photos/Ivy.png?token=ANBLRDTDUJ6NDSLKV2FKWBS62UFZI" width="100" height="100" />| <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/Team_photos/jesse_photo.png?token=ANBLRDXVPFXG75QRS4ERLU262UF62" width="100" height="100" />    | <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/Team_photos/cesar_photo.png?token=ANBLRDWIKER7RWJBKC7E6DK62UF4E" width="100" height="100" />  |
 
 
 --- 
@@ -24,7 +24,6 @@
 - [How to Install from localhost](#how-to-install-from-localhost)
 - [How to Use](#how-to-use)
 - [How to Test](#how-to-test-unicode)
-- [Limitations](#limitations)
 - [What is Next](#what-is-next)
 - [License](#license)
 
@@ -218,21 +217,20 @@ $ flask run
     - Click `Create Course`
      
   - *_Create a New Test_*: 
-    - Select the Course on the right panel
+    - Select the Course on the left panel
     - Click on `New Test`
     - Type Test name
     - Click `Create Test`
     - Click on the new created test
       - (Optional) Click on dropdown to rename, delete or edit test
     - Click on`Edit Test`
-    - Click on `Add +` to add a new question
     - Select the type of questions (*Output, MCQ or Write a code*)
-    - Type the Question on the `Description` field
+    - Type the Question on the `Description` field (for the write a code type of questions use the code field to typer your coding question)
     - Type `Solution`
     - Type the `Allocated mark` for the question
     - Click `Save` (or `Clear` to restart the questions)
-    - Once finshes, click `Save and return`
-    - Once finishing creating the questions, click the course name on the righ panel
+    - Once finished, click `Return`
+    - Once finishing creating the questions, click the course name on the left panel
     - Click `Not Live` to make sure test live
     
   - *_Add Students to Course_*:
@@ -244,10 +242,14 @@ $ flask run
       - Look for the student email and click "x"
       
   - *_Marking Test_*:
-      - Pending
-      
+      - Click on the test you want to mark within the course
+      - Here you can see how many students have taken the test and some statistics, including the mark of the automatic marked questions
+      - At the bottom click `View test`
+      - Click on each questions to add manual marks and a/or adjust marks.
+      - Click on `Submit and give feedback` add feedback to student and complete the marking
+
   - *_Publish Test Results_*:
-      - Pending
+      - 
       
 </details>
 
@@ -271,7 +273,7 @@ $ flask run
     - Once test completed Select `Submit test`
     
   - *_View Results_*: 
-    - Pending
+    - Click on submitted test and see result at the bottom of the page
     
 </details>
 
@@ -279,7 +281,7 @@ $ flask run
 
 ## How to Test Unicode
 
-First make sure you are in the `app-dev`.
+⚠️ First make sure you are in the `app-dev`.
 
 ### **_unittest_**:
 
@@ -290,7 +292,13 @@ For testing password hashing and test creation.
 ```shell
 python -m Tests.unittest
 ```
-
+### unittes will test the following:
+  
+  - Password hashing `test_set_pw` and `test_set_pw2`
+  - Main page login `test_main_page`
+  - Test the registration module `test_users_can_register`
+  - Test that only registered users can login `test_users_cannot_unless_registered`
+  - Test that there are not duplicate registration `test_duplicate_user_registration_throws_error`
 
 ### **_sytemtest_**:
 
@@ -305,13 +313,31 @@ Using selenium to test our app with firefox web browser
 python -m Tests.system
 ```
 
+### systemtest will test the following:
+
+  - Login page for students `test_login_user`
+  - Login page for admin `test_login_admin`
+  - Test complete new user registration system `test_user_registration`
+
 
 <a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
  
-## **Limitations**
- 
 ## **What is Next**
 
+We believe that UniCode have inmense potential to keep growing to become an even more robust educational tool for students and teachers. We have identify the following potential enhancement that could be impletmented in the future:
+
+  - Include automated code validation to assist students to validate code syntax before submission
+ 
+  - Enable integration with university database to promote customize solutions based on University requirements for each students
+  
+  - Enable sending automatic results to student via email
+  
+  - Add the ability of fuzzy matching for questions such as what is the outcome of the code.
+  
+  - Ability to classify and cluster questions and tests's difficulty levels independently
+  
+  - Implement advance statistical techniques analyse the results of the test on different difficulties tier to maximise the learning evolution
+  
 
 ## License
 

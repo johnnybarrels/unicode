@@ -88,7 +88,11 @@
           <td>{{ student.full_name() }}</td>
           <td>
             <a href="{{ url_for('mark_test', course_id=course.id, test_id=test.id, student_id=student.id) }}">
+              {% if student.get_result(test.id).needs_marking %}
               <button class="btn purple-btn">View test</button>
+              {% else %}
+              <button class="btn delete-btn">View test</button>
+              {% endif %}
             </a>
           </td>
         </tr>

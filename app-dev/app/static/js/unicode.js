@@ -66,6 +66,10 @@ $(window).ready(function () {
     // Admin test dropdown
     $(".dropdown-toggle").dropdown();
 
+    $('#submit-and-feedback-btn').click(function () {
+        $('#feedback-modal').modal('show')
+    })
+
     // Always making the first nav tab and pane active on load
     // $('.nav-item').first().addClass('active');
     // $('.tab-pane').first().addClass('active show');

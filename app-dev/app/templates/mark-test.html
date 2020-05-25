@@ -3,15 +3,25 @@
 {% block content %}
 <!-- Feedback Modal -->
 <div class="modal fade" id="feedback-modal" tabindex="-1" role="dialog" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <h3 class="modal-title">Feedback <span class="modal-title-subheading">for {{ student.full_name() }}</span></h3>
+  <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+    <div id="feedback-modal-content" class="modal-content">
+      <h3 class="modal-title mb-0">Feedback</h3>
+      <div id="feedback-subheading" class="modal-title-subheading mt-0 mb-4 text-center">for
+        {{ student.full_name() }}</div>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
       <div class="modal-body">
-        <p>FEEDBACK FORM HERE</p>
-        <p>Actual submit button</p>
+        <form action="{{ url_for('submit_and_feedback', course_id=course.id, test_id=test.id, student_id=student.id) }}"
+          method="POST">
+          {{ form.hidden_tag() }}
+          <div class="form-group mb-4">
+            {{ feedback_form.feedback(id="feedback-textarea", class="form-control", style="resize: none;", placeholder="eg. Good work !!") }}
+          </div>
+          <div class="row justify-content-center mb-2">
+            {{ feedback_form.submit(class="btn purple-btn feedback-submit") }}
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -21,8 +31,7 @@
   <h1 class="page-heading">{{ course.name }} - {{ test.name }}: {{ student.full_name() }}</h1>
   <div class="test-submit-btns mr-5">
     <!-- change action for this submit button -->
-    <form action="{{ url_for('submit_test', course_id=course.id, test_id=test.id) }}"
-      onsubmit="return confirm('Are you sure you would like to submit these marks?')" method="POST">
+    <form action="#" id="submit-and-feedback-btn" onsubmit="" method="GET">
       <button type="submit" id="submit-test" class="btn test-submit-btn">Submit and give feedback
         <i class="fas fa-arrow-alt-circle-right"></i></button>
     </form>
@@ -51,6 +60,8 @@
 
       <form id="mark-test-form" method="POST"
         action="{{ url_for('mark_submission', course_id=course.id, test_id=test.id, student_id=student.id, submission_id=submission.id) }}">
+
+        {{ form.hidden_tag() }}
 
         <div id="question-content" class="row">
           <div class="col-5">
@@ -94,16 +105,16 @@
 
             <!-- Form for Question type 3 (write code question) -->
             {% else %}
-              <h4 class="subheading mb-2">Student Mark</h4>
-              <div class="row m-0">
-                {% if submission.needs_marking %}
-                  {{ form.mark(id="qtype-3-mark-box", class="form-control", placeholder="Give your student a mark") }}
-                {% else %}
-                  {{ form.mark(class="form-control", value=submission.score) }}
-                {% endif %}
-                <p id="mark-out-of">/ {{ question.mark_alloc }}</p>
-              </div>
-            
+            <h4 class="subheading mb-2">Student Mark</h4>
+            <div class="row m-0">
+              {% if submission.needs_marking %}
+              {{ form.mark(id="qtype-3-mark-box", class="form-control", placeholder="Give your student a mark") }}
+              {% else %}
+              {{ form.mark(id="qtype-3-mark-box", class="form-control", value=submission.score) }}
+              {% endif %}
+              <p id="mark-out-of">/ {{ question.mark_alloc }}</p>
+            </div>
+
             {% endif %}
             <div class="question-btns">
               {{ form.submit(class="btn purple-btn question-btns") }}
