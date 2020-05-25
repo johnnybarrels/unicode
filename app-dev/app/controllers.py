@@ -342,3 +342,19 @@ class TestController():
         #     submission.needs_marking = False
 
         return redirect(url_for('course_view', course_id=course_id))
+
+    def mark_test(course_id, test_id, student_id):
+        course = Course.query.filter_by(id=course_id).first()
+        test = Test.query.filter_by(id=test_id).first()
+        question = test.questions
+        #users = course.get_users()
+        student = User.query.filter_by(id=student_id).first()
+
+        submissions = test.get_user_submissions(student_id)
+
+        course_form = NewCourseForm()
+
+        return render_template('mark-test.html', course=course,
+                                course_form=course_form, student=student, 
+                                test=test, questions=question,
+                                submissions=submissions)
