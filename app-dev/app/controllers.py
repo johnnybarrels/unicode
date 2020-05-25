@@ -2,7 +2,7 @@ from app import app, db
 # from werkzeug.urls import url_parse
 from flask import request
 from app.models import User, Course, Test, Question, Result, enrolments, Submission
-from app.forms import LoginForm, RegistrationForm, NewTestForm, NewCourseForm, RenameTestForm, QuestionForm, QuestionSubmissionForm, AddStudentToCourseForm, MarkTestForm
+from app.forms import LoginForm, RegistrationForm, NewTestForm, NewCourseForm, RenameTestForm, QuestionForm, QuestionSubmissionForm, AddStudentToCourseForm, MarkTestForm, FeedbackForm
 from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
 
@@ -77,7 +77,6 @@ class UserController():
 
         if form.validate_on_submit():
 
-
             user = User(first_name=form.first_name.data,
                         last_name=form.last_name.data, email=form.email.data,
                         is_admin=0)
@@ -103,7 +102,6 @@ class UserController():
         #     flash(message)
         return render_template('register.html', title="Register", form=form)
 
-    
 
 class CourseController():
 
@@ -204,15 +202,16 @@ class TestController():
         max_mark = test.get_max_mark()
         min_mark = test.get_min_mark()
         test_avg = test.get_average_mark()
-        
+
         if current_user.is_admin:
-            num_results = test.get_num_results()        
+            num_results = test.get_num_results()
             num_enrolled_students = course.get_num_enrolments()
 
-            aggregates = [num_results, num_enrolled_students, test_avg, min_mark, max_mark]
+            aggregates = [num_results, num_enrolled_students,
+                          test_avg, min_mark, max_mark]
 
             submitted_users = test.get_submitted_users()
-             
+
             rename_test_form = RenameTestForm()
             course_form = NewCourseForm()
 
@@ -222,14 +221,14 @@ class TestController():
                                    submitted_users=submitted_users, aggregates=aggregates)   # results=results
         else:
             student_result = test.get_student_result(current_user.id)
-            aggregates=[]
+            aggregates = []
             if student_result:
-                aggregates = [student_result.score, test_avg, min_mark, max_mark]
+                aggregates = [student_result.score,
+                              test_avg, min_mark, max_mark]
 
             return render_template('student-test-view.html', aggregates=aggregates,
-                                    test=test, course=course,
-                                    student_result=student_result)
-                                        
+                                   test=test, course=course,
+                                   student_result=student_result)
 
     def edit_test_view(course_id, test_id):
 
@@ -334,7 +333,7 @@ class TestController():
 
     def new_submission(course_id, test_id, question_id):
         q = Question.query.filter_by(id=question_id).first()
-        sub = Submission.query.filter_by(question_id=question_id).first()
+        sub = q.get_user_submission(current_user.id)
         if not sub:  # if existing submission exists
             sub = Submission()
             sub.user_id = current_user.id
@@ -355,7 +354,6 @@ class TestController():
 
         return redirect(url_for('take_test', course_id=course_id, test_id=test_id))
 
-
     def submit_test(course_id, test_id):
         test = Test.query.filter_by(id=test_id).first()
         user_id = current_user.id
@@ -370,7 +368,7 @@ class TestController():
         result = Result(user_id=user_id, test_id=test_id, score=total)
         db.session.add(result)
         db.session.commit()
-       
+
         if not any([q.question_type == 3 for q in questions]):
             result.needs_marking = False
 
@@ -380,33 +378,52 @@ class TestController():
         course = Course.query.filter_by(id=course_id).first()
         test = Test.query.filter_by(id=test_id).first()
         questions = test.questions
-        #users = course.get_users()
         student = User.query.filter_by(id=student_id).first()
 
         submissions = test.get_user_submissions(student_id)
 
         course_form = NewCourseForm()
+        feedback_form = FeedbackForm()
 
         form = MarkTestForm()
 
         return render_template('mark-test.html', course=course,
-                                course_form=course_form, student=student, 
-                                test=test, questions=questions,
-                                submissions=submissions, form=form)
-
+                               course_form=course_form, student=student,
+                               test=test, questions=questions,
+                               submissions=submissions, form=form,
+                               feedback_form=feedback_form)
 
     def mark_submission(course_id, test_id, student_id, submission_id):
-        course = Course.query.filter_by(id=course_id).first()
-        test = Test.query.filter_by(id=test_id).first()
-        student = User.query.filter_by(id=student_id).first()
         submission = Submission.query.filter_by(id=submission_id).first()
+        result = Result.query.filter_by(
+            test_id=test_id, user_id=student_id).first()
 
         form = MarkTestForm()
- 
+
+        form = MarkTestForm()
+
         if form.validate_on_submit():
+            score_diff = form.mark.data - submission.score
             submission.score = form.mark.data
-            subission.needs_marking = False
+            submission.needs_marking = False
+
+            result.score += score_diff
+
             db.session.commit()
 
-        return redirect(url_for('mark_test', course_id=course_id, test_id=test_id, student_id=student_id))        
+        return redirect(url_for('mark_test', course_id=course_id, test_id=test_id,
+                                student_id=student_id))
 
+    def submit_and_feedback(course_id, test_id, student_id):
+        test = Test.query.filter_by(id=test_id).first()
+        result = Result.query.filter_by(
+            test_id=test_id, user_id=student_id).first()
+        submissions = test.get_user_submissions(student_id)
+
+        form = FeedbackForm()
+        if form.validate_on_submit():
+            result.feedback = repr(form.feedback.data)[1:-1]
+            result.score = sum((sub.score for sub in submissions))
+            db.session.commit()
+
+        return redirect(url_for('test_view', course_id=course_id, test_id=test_id))

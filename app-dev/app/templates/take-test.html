@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-<!-- Show test if haven't taken test OR show "test already taken" OR show results -->
+<!-- Show test if haven't taken test OR show "test already taken" OR show results if marked -->
 <div class="row mx-2">
   <h1 class="page-heading">{{ course.name }} - {{ test.name }}</h1>
   <div class="test-submit-btns mr-5">
@@ -58,7 +58,7 @@
                 else if ("{{mcq_sub}}" == 'c') { $('#mcq-3').prop('checked', true); }
                 else if ("{{mcq_sub}}" == 'd') { $('#mcq-4').prop('checked', true); };
               </script>
-              <div id="mcq-form-{{ loop.index }}"> 
+              <div id="mcq-form-{{ loop.index }}">
                 {{ form.mcq_answer(id="mcq-answer") }}
               </div>
               <h4 class="subheading mb-2">Select one option</h4>
