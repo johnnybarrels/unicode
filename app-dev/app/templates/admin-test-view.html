@@ -63,11 +63,11 @@
       <span class="result">{{ aggregates[2] }}%</span>
     </div>
     <div class="test-results p-3">
-      Min mark
+      Max mark
       <span class="result">{{ aggregates[3] }}%</span>
     </div>
     <div class="test-results p-3">
-      Max mark
+      Min mark
       <span class="result">{{ aggregates[4] }}%</span>
     </div>
   </div>
@@ -89,9 +89,9 @@
           <td>
             <a href="{{ url_for('mark_test', course_id=course.id, test_id=test.id, student_id=student.id) }}">
               {% if student.get_result(test.id).needs_marking %}
-              <button class="btn purple-btn">View test</button>
+              <button id="marked-btn" class="btn delete-btn">View test</button>
               {% else %}
-              <button class="btn delete-btn">View test</button>
+              <button class="btn purple-btn">View test</button>
               {% endif %}
             </a>
           </td>

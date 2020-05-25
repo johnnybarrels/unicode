@@ -83,6 +83,7 @@
             <th>Average Mark</th>
             <th>Min Mark</th>
             <th>Max Mark</th>
+            <th>Std. Dev</th>
           </tr>
         </thead>
         <tbody>
@@ -95,6 +96,7 @@
             <td>{{ test.get_average_mark() }}</td>
             <td>{{ test.get_min_mark() }}</td>
             <td>{{ test.get_max_mark() }}</td>
+            <td>{{ test.get_std_dev() }}</td>
           </tr>
         {% endfor %}
         {% endfor %}

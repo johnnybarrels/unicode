@@ -31,10 +31,13 @@
   <h1 class="page-heading">{{ course.name }} - {{ test.name }}: {{ student.full_name() }}</h1>
   <div class="test-submit-btns mr-5">
     <!-- change action for this submit button -->
-    <form action="#" id="submit-and-feedback-btn" onsubmit="" method="GET">
-      <button type="submit" id="submit-test" class="btn test-submit-btn">Submit and give feedback
-        <i class="fas fa-arrow-alt-circle-right"></i></button>
-    </form>
+    <!-- <form action="#" id="submit-and-feedback-btn" onsubmit="" method="GET"> -->
+    <a id="submit-and-feedback-btn">
+      <button type="submit" id="submit-test" class="btn test-submit-btn">
+        Submit and give feedback <i class="fas fa-arrow-alt-circle-right"></i>
+      </button>
+    </a>
+    <!-- </form> -->
   </div>
 </div>
 
