@@ -58,6 +58,9 @@ class Course(db.Model):
     course_code = db.Column(db.String(32))
     tests = db.relationship('Test', backref='course', lazy=True)
 
+    def get_num_enrolments(self):
+        return len(self.get_users())
+
     def get_users(self):
         return User.query.join(enrolments).join(Course).filter(
             enrolments.c.course_id == self.id).all()
@@ -78,6 +81,7 @@ class Test(db.Model):
         # TODO: EVENTUALLY EXTEND THIS TO WORK WITH RESULTS RATHER THAN SUBMISSIONS
         all_res = self.get_test_results()
         total = 0
+        
         for res in all_res:
             total += res.score
         
@@ -92,6 +96,18 @@ class Test(db.Model):
             return all_res[0].score
         else:
             return 0
+
+    def get_min_mark(self):
+        all_res = self.get_test_results()
+        all_res.sort(key=lambda r: r.score)
+
+        if all_res:
+            return all_res[0].score
+        else:
+            return 0
+
+    def get_num_results(self):
+        return len(self.get_test_results())
 
     def get_submitted_users(self):
         return User.query.join(Submission).join(Test).filter(

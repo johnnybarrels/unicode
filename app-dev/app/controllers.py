@@ -194,15 +194,23 @@ class TestController():
         users = course.get_users()
         # submissions = test.get_all_submissions()
 
-        submitted_users = test.get_submitted_users()
+        max_mark = test.get_max_mark()
+        min_mark = test.get_min_mark()
+        test_avg = test.get_average_mark()
+        num_results = test.get_num_results()        
+        num_enrolled_students = course.get_num_enrolments()
 
+        aggregates = [num_results, num_enrolled_students, test_avg, min_mark, max_mark]
+
+        submitted_users = test.get_submitted_users()
+        
         rename_test_form = RenameTestForm()
         course_form = NewCourseForm()
 
         return render_template('admin-test-view.html', course=course,
                                course_form=course_form, test=test,
                                rename_test_form=rename_test_form,
-                               submitted_users=submitted_users)   # results=results
+                               submitted_users=submitted_users, aggregates=aggregates)   # results=results
 
     def edit_test_view(course_id, test_id):
 
@@ -343,9 +351,6 @@ class TestController():
         db.session.add(result)
         db.session.commit()
        
-        print(test.get_average_mark())
-        print(test.get_max_mark()) 
-
         if not any([q.question_type == 3 for q in questions]):
             result.needs_marking = False
 
