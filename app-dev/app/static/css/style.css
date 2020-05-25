@@ -667,7 +667,7 @@ a:hover {
   height: 60%;
 }
 
-.student-tests {
+.student-tests, .student-feedback {
   background-color: #FFFFFF;
   height: 400px;
 }
