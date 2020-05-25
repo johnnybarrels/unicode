@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<form class="login-form mx-auto text-center" style="background-color: white" method="POST" action="">
+<form id="registration-form" class="login-form mx-auto text-center" style="background-color: white" method="POST" action="" onsubmit="comparePasswords()">
   {{ form.hidden_tag() }}
   <p id="sign-in-title">Register</p>
   <div class="my-4">
@@ -36,7 +36,7 @@
       {{ form.password_again(class_="form-control", placeholder='Repeat Password') }}
     </div>
 
-    {{ form.submit(id="login-btn", class_="btn btn-light") }}
+    {{ form.submit(id="login-btn", class_="btn btn-light", onclick="validatePassword()") }}
     <p id="sign-up"> Already registered? <a href="/index"><b>Log In</b></a> </p>
   </div>
 </form>

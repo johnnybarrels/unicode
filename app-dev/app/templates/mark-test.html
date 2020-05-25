@@ -3,15 +3,23 @@
 {% block content %}
 <!-- Show test if haven't taken test OR show "test already taken" OR show results -->
 <div class="row mx-2">
-  <h1 class="page-heading">{{ course.name }} - {{ test.name }}: {{ student.first_name }} {{ student.last_name }}  </h1>
+  <h1 class="page-heading">{{ course.name }} - {{ test.name }}: {{ student.full_name() }}</h1>
+  <div class="test-submit-btns mr-5">
+    <form action="{{ url_for('submit_test', course_id=course.id, test_id=test.id) }}"
+      onsubmit="return confirm('Are you sure you would like to submit these marks?')" method="POST">
+      <button type="submit" id="submit-test" class="btn test-submit-btn">Submit and give feedback
+        <i class="fas fa-arrow-alt-circle-right"></i></button>
+    </form>
+  </div>
 </div>
 
 <div class="container new-question my-3 py-3">
   <div id="question-nav" class="row mx-1">
     <div id="take-test-nav-tab" class="nav nav-pills" role="tablist">
       {% for question in questions %}
-      <a class="nav-item nav-link" id="question-{{ loop.index }}-tab" data-toggle="tab"
-        href="#question-{{ loop.index }}" role="tab" aria-controls="question-{{ loop.index }}"
+      {% set submission = question.get_user_submission(student.id) %}
+      <a class="nav-item nav-link needs-marking-{{ submission.needs_marking }}" id="question-{{ loop.index }}-tab"
+        data-toggle="tab" href="#question-{{ loop.index }}" role="tab" aria-controls="question-{{ loop.index }}"
         aria-selected="false">Question
         {{ loop.index }}
       </a>
@@ -21,69 +29,80 @@
 
   <div class="tab-content m-3" id="nav-tabContent">
     {% for question in questions %}
+    {% set submission = question.get_user_submission(student.id) %}
     <div class="tab-pane fade h-100" id="question-{{ loop.index }}" role="tabpanel"
       aria-labelledby="question-{{ loop.index }}-tab">
 
-      <form id="mark-test-form"> 
-          <!-- method="POST"
-        action="{{ url_for('new_submission', course_id=course.id, test_id=test.id, question_id=question.id) }}" -->
-        
+      <form id="mark-test-form" method="POST"
+        action="{{ url_for('mark_submission', course_id=course.id, test_id=test.id, student_id=student.id, submission_id=submission.id) }}">
+
         <div id="question-content" class="row">
           <div class="col-5">
             <div class="form-group q-description-{{ loop.index }} static-description-{{ question.question_type }} mb-4">
               <h4 class="subheading mb-2">Question</h4>
-              {{ question.question_string }}
+              {{ form.description(id="static-description", class="form-control mb-2") }}
               <script>
                 $('.q-description-{{ loop.index }} #static-description').html('{{ question.question_string }}').attr('disabled', 'disabled');
               </script>
             </div>
-            <div>
-                {% if question.question_type == 1 %}
-                    <h4 class="subheading mb-2">Student Answer</h4>
-                    {{ question.get_user_submission(student.id).output_sub }}
-                    <h4 class="subheading mb-2">Solution</h4>
-                    {{ question.answer }}
-                    <h4 class="subheading">Allocated Mark: {{ question.mark_alloc }}</h4>
-                    <h4 class="subheading">Score: {{ question.get_user_submission(student.id).score }}</h4>
-                {% elif question.question_type == 2 %}
-                    <h4 class="subheading mb-2">Student Answer</h4>
-                    {{ question.get_user_submission(student.id).mcq_sub }}
-                    <h4 class="subheading mb-2">Solution</h4>
-                    {{ question.mcq_answer }}
-                    <h4 class="subheading">Allocated Mark: {{ question.mark_alloc }}</h4>
-                    <h4 class="subheading">Score: {{ question.get_user_submission(student.id).score }}</h4>
-                {% endif %}
-                
+
+            {% if question.question_type != 3 %}
+            {% if question.question_type == 1 %}
+            <div class="form-group mb-4">
+              <h4 class="subheading mb-2">Student Answer</h4>
+              {{ submission.output_sub }}
+            </div>
+            <div class="form-group mb-4">
+              <h4 class="subheading mb-2">Solution</h4>
+              {{ question.answer }}
             </div>
 
-            <!-- Form for score (q type 3) -->
-            {% if question.question_type == 3 %}
-            <div>
-                <h4 class="subheading">Allocated Mark: {{ question.mark_alloc }}</h4>
-                <input type="text" class="form-control" placeholder="Give your student a mark">
-            </div>
-            <div>
-                <button class="btn purple-btn">Save answer</button>
-              </div>
+            {% elif question.question_type == 2 %}
+            <h4 class="subheading mb-2">Student Answer</h4>
+            {{ submission.mcq_sub }}
+            <h4 class="subheading mb-2">Solution</h4>
+            {{ question.mcq_answer }}
             {% endif %}
 
+            <h4 class="subheading mb-2">Student Mark</h4>
+            <div class="row">
+              {{ form.mark(id="student-mark-box", class="form-control", value=submission.score) }}
+              <p id="mark-out-of">/ {{ question.mark_alloc }}</p>
+            </div>
+            </h4>
 
+
+            <!-- Form for Question type 3 (write code question) -->
+            {% else %}
+            <div>
+              <h4 class="subheading">Allocated Mark: {{ question.mark_alloc }}</h4>
+              <h4 class="subheading mb-2">Student Mark</h4>
+              {% if submission.needs_marking %}
+              {{ form.mark(class="form-control", placeholder="Give your student a mark") }}
+
+              {% else %}
+              {{ form.mark(class="form-control", value=submission.score) }}
+              <!-- <input type="text" class="form-control" placeholder="Give your student a mark"> -->
+            </div>
+            {% endif %}
+            {% endif %}
+            <div>
+              {{ form.submit(class="btn purple-btn question-btns") }}
+              <!-- <button class="btn purple-btn">Save mark</button> -->
+            </div>
           </div>
 
           <div class="col-7 q-code-editor-{{ loop.index }}">
-            {% if question.question_type == 3 %}
-                {{ question.get_user_submission(student.id).code_sub }}
-                <script>
-                $('.q-code-editor-{{ loop.index }} .code-editor').html('{{ question.get_user_submission(current_user.id).code_sub }}')
-                </script>
-            {% else %}
-                {{ question.code_string }}
-                <script>
-                $('.q-code-editor-{{ loop.index }} #static-editor').html('{{ question.code_string }}')
-                </script>
-            {% endif %}
+            {{ form.code_answer(id="static-editor", class="editor code-editor", **{"data-editor": "python"}) }}
+            <script>
+              if ("{{ question.question_type }}" == 3) {
+                $('.q-code-editor-{{ loop.index }} .code-editor').html('{{ submission.code_sub }}');
+              }
+              else {
+                $('.q-code-editor-{{ loop.index }} .code-editor').html('{{ question.code_string }}');
+              }
+            </script>
           </div>
-
         </div>
       </form>
     </div>
