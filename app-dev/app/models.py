@@ -41,14 +41,11 @@ class User(UserMixin, db.Model):
             (Submission.test_id == test_id)
         ).all()
 
-    def has_submitted(self, test_id):
-        return self.get_test_submissions(test_id) is not None
+    def get_result(self, test_id):
+        return Result.query.filter_by(user_id=self.id, test_id=test_id).first()
 
-    # def get_users(course_id):
-    #     course = Course.query.filter_by(id=course_id).first()
-    #     course_enrolments = User.query.join(enrolments).join(
-    #         Course).filter((enrolments.c.course_id == course.id)).all()
-    #     return course_enrolments
+    def has_submitted(self, test_id):
+        return self.get_result(test_id) is not None
 
     def __repr__(self):
         return f'<User: {self.email}>'
@@ -90,6 +87,9 @@ class Test(db.Model):
     def get_all_submissions(self):
         return Submission.query.join(Test).filter(
             Submission.test_id == self.id).all()
+
+    def has_result(self, user_id):
+        return Result.query.filter_by(user_id=user_id, test_id=self.id).first()
 
     def __repr__(self):
         return f'<Test: {self.name}>'
@@ -139,7 +139,7 @@ class Submission(db.Model):
     question_id = db.Column(db.Integer, db.ForeignKey('questions.id'))
 
     score = db.Column(db.Integer, default=0)
-    needs_marking = db.Column(db.Boolean, nullable=False, default=True)
+    # needs_marking = db.Column(db.Boolean, nullable=False, default=True)
 
     def auto_mark(self):
         q = Question.query.filter_by(id=self.question_id).first()
@@ -155,6 +155,9 @@ class Submission(db.Model):
 
         db.session.commit()
 
+    def get_question(self):
+        return Question.query.filter_by(id=self.question_id).first()
+
     def __repr__(self):
         return f'<Submission: User ID: {self.user_id}, Question ID: {self.question_id}>'
 
@@ -166,6 +169,8 @@ class Result(db.Model):
     test_id = db.Column(db.Integer, db.ForeignKey('tests.id'), nullable=False)
     score = db.Column(db.Integer)
     needs_marking = db.Column(db.Boolean, nullable=False, default=True)
+
+
 
     def __repr__(self):
         return f'<Result {self.result_id}, User{self.user_id}, Test {self.test_id}, Score: {self.score}, Marked? {self.is_marked}>'

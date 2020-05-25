@@ -66,6 +66,7 @@ class UserController():
 
         else:
             live_tests = [test for test in tests if test.is_live]
+
             return render_template('student-course.html', course=course, tests=live_tests)
 
     def logout():
@@ -329,14 +330,20 @@ class TestController():
 
     def submit_test(course_id, test_id):
         test = Test.query.filter_by(id=test_id).first()
+        user_id = current_user.id
         questions = test.questions  # Question.query.filter_by(test_id=test_id)
-        submissions = test.get_user_submissions(current_user.id)
+        submissions = test.get_user_submissions(user_id)
 
+        total = 0
         for submission in submissions:
             submission.auto_mark()
-        
+            total += submission.score
 
-        # if not any([q.question_type == 3 for q in questions]):
-        #     submission.needs_marking = False
+        result = Result(user_id=user_id, test_id=test_id, score=total)
+        db.session.add(result)
+        db.session.commit()
+
+        if not any([q.question_type == 3 for q in questions]):
+            result.needs_marking = False
 
         return redirect(url_for('course_view', course_id=course_id))
