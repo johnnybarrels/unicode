@@ -87,6 +87,7 @@
         </thead>
         <tbody>
           <!-- add functionality to populate table with all tests and results -->
+        <% for course in courses %>
           <tr>
             <td>course_name</td>
             <td>test_name</td>
@@ -94,7 +95,7 @@
             <td>min_mark</td>
             <td>max_mark</td>
           </tr>
-          {% endfor %}
+        <% for test in course.tests %>
         </tbody>
       </table>
     
