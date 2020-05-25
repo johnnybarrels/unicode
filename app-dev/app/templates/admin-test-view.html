@@ -87,39 +87,19 @@
         <tr>
           <td>{{ student.full_name() }}</td>
           <td>
-            <a href="{{ url_for('mark_test_view', course_id=course.id, test_id=test.id, student_id=student.id) }}">
+            <a href="{{ url_for('mark_test', course_id=course.id, test_id=test.id, student_id=student.id) }}">
               <button class="btn purple-btn">View test</button>
             </a>
           </td>
         </tr>
-        <!-- Delete section below when get db working -->
-        <!-- <tr>
-          <td>student.name</td>
-          <td><button class="btn purple-btn">See test</button></td>
-        </tr>
-        <tr>
-          <td>student.name</td>
-          <td><button class="btn purple-btn">See test</button></td>
-        </tr>
-        <tr>
-          <td>student.name</td>
-          <td><button class="btn purple-btn">See test</button></td>
-        </tr>
-        <tr>
-          <td>student.name</td>
-          <td><button class="btn purple-btn">See test</button></td>
-        </tr>
-        <tr>
-          <td>student.name</td>
-          <td><button class="btn purple-btn">See test</button></td>
-        </tr> -->
-        <!-- Delete section above when get db working -->
         {% endfor %}
       </tbody>
     </table>
   </div>
 </div>
+
 {% else %}
+
 <!-- No students have taken test -->
 <div id="no-test-taken" class="row h-100">
   <div class="col"></div>

@@ -7,6 +7,7 @@
 </div>
 
 <!-- Student hasn't taken test -->
+{# if not student_result #}
 <div id="no-test-taken" class="row h-100">
   <div class="col"></div>
   <div class="col-6 my-auto text-center">
@@ -16,9 +17,9 @@
         <button id="take-test-btn" class="btn">Take test</button>
     </a>
   </div>
-  <div class="col"></div>
-  
+  <div class="col"></div>  
 </div>
+{# elif student_result.needs_marking  #}
 
 <!-- Student has taken test but no results yet -->
 <div id="no-test-taken" class="row h-100">
@@ -30,27 +31,33 @@
     <div class="col"></div>
   </div>
 
+{# else #}
 <!-- Dashboard for if there are test results -->
 <div class="dashboard mx-5">
-    <div class="row my-5">
-      <div class="test-results p-3">
-        Your result
-        <span class="result">your result%</span>
-      </div>
-      <div class="test-results p-3">
-        Test average
-        <span class="result">avg%</span>
-      </div>
-      <div class="test-results p-3">
-        Min mark
-        <span class="result">min%</span>
-      </div>
-      <div class="test-results p-3">
-        Max mark
-        <span class="result">max%</span>
-      </div>
+  <div class="row my-5">
+    <div class="test-results p-3">
+      Your result
+      <span class="result">{{ aggregates[0] }} %</span>
+    </div>
+    <div class="test-results p-3">
+      Test Average
+      <span class="result"> {{ aggregates[1] }} </span>
+    </div>
+    <div class="test-results p-3">
+      Maximum
+      <span class="result"> {{ aggregates[2] }}</span>
+    </div>
+    <div class="test-results p-3">
+      Minimum
+      <span class="result"> {{ aggregates[3] }}</span>
     </div>
   </div>
 
+  <div class="student-feedback p-4">
+    <h4 class="subheading">Test feedback</h4>
+      <p>see feedback</p>
+  </div>
+</div>
+{# endif #}
 
 {% endblock %}

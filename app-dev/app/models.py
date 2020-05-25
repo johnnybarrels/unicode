@@ -62,7 +62,12 @@ class Course(db.Model):
     tests = db.relationship('Test', backref='course', lazy=True)
 
     def get_num_enrolments(self):
-        return len(self.get_users())
+        students = []
+        for user in self.get_users():
+            if user.is_admin:
+                students.append(user)
+       
+        return len(students)            
 
     def get_users(self):
         return User.query.join(enrolments).join(Course).filter(
@@ -137,6 +142,9 @@ class Test(db.Model):
 
     def get_test_results(self):
         return Result.query.filter_by(test_id=self.id).all()
+
+    def get_student_result(self, user_id):
+        return Result.query.filter_by(test_id=self.id, user_id=user_id).first()
 
     def __repr__(self):
         return f'<Test: {self.name}>'
@@ -218,6 +226,10 @@ class Result(db.Model):
     score = db.Column(db.Integer)
     needs_marking = db.Column(db.Boolean, nullable=False, default=True)
     feedback = db.Column(db.String(1024))
+
+    def get_mark(user_id, test_id):
+        return Result.query.filter((user_id == user_id)&(test_id == test_id)).first().score
+
 
     def __repr__(self):
         return f'<Result {self.result_id}, User{self.user_id}, Test {self.test_id}, Score: {self.score}, Marked? {self.is_marked}>'

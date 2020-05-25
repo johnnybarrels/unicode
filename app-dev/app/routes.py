@@ -128,11 +128,7 @@ def take_test(course_id, test_id):
 @app.route('/student/<course_id>/<test_id>/test')
 @login_required
 def student_test_view(course_id, test_id):
-    course = Course.query.filter_by(id=course_id).first()
-    test = Test.query.filter_by(id=test_id).first()
-
-    return render_template('student-test-view.html', course=course, test=test)
-
+    return TestController.show_test( course_id, test_id ) 
 
 # @app.route('/student/<course_id>/<test_id>/<question_id>/submit_test', methods=['POST'])
 # @login_required
@@ -154,7 +150,7 @@ def submit_test(course_id, test_id):
 
 @app.route('/admin/<course_id>/<test_id>/<student_id>')
 @login_required
-def mark_test_view(course_id, test_id, student_id):
+def mark_test(course_id, test_id, student_id):
     return TestController.mark_test(course_id, test_id, student_id)
 
 
@@ -163,4 +159,6 @@ def mark_test_view(course_id, test_id, student_id):
 def mark_submission(course_id, test_id, student_id, submission_id):
     return TestController.mark_submission(course_id, test_id, student_id, submission_id)
 
-
+@app.route('/aggregateview', methods=['GET'])
+def aggregate_view():
+   return CourseController.aggregate_view() 
