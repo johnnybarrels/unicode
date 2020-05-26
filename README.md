@@ -43,7 +43,7 @@
 
 One of the biggest challenges faced by Computer Science, Data Science and Software Engineering students is the inability to demostrate our true coding ability during tests and exams, as we exhaustedly try to make sure the indentation on our hand-written linked list class defintion is correct. Instead of plain old pen and paper, why not allow students to be assessed on a more realistic platform, removing the hassle of the scribble, and providing some of the staple creature comforts like syntax highlighting? (and yes, we remembered to turn AutoComplete off)!
 
-For this reason we decided to develop **Unicode**, so that students and professors alike can enjoy the experience of learning and teaching how to code just a little bit more!
+For this reason we decided to develop **UniCode**, so that students and professors alike can enjoy the experience of learning and teaching how to code just a little bit more!
 
 <a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
 
@@ -57,7 +57,7 @@ For this reason we decided to develop **Unicode**, so that students and professo
 - **_MCQ_**: Based on a written question and/or provided code, the student must select the best answer out of up to 4 possible options. (automated marking)
 - **_Code_**: This is where the students get to have the most fun. Based on the question description provided by the teacher, the student can use the code editor to write their class, function or method, or whatever has been asked of them! These questions are flagged for manual marking by the teacher (we hope to have an in-browser code interpreter in the future)!
 
-Another important functionality of **Unicode** is the ability of the teacher to organise all of their tests and students into their respective courses, choosing which tests to display to students and when.
+Another important functionality of **UniCode** is the ability of the teacher to organise all of their tests and students into their respective courses, choosing which tests to display to students and when.
 
 
 <a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
