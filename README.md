@@ -51,7 +51,7 @@ For this reason we decided to develop **UniCode**, so that students and professo
 
 **UniCode** is an online test/exam platform for educational institutions that allows administrator users (teachers) to create and evaluate coding related tests, and for users/students to sit these tests and see results. It is designed to provide a friendly experience for studens and teachers without compromising the level of complexity required for developing the coding learning experience.
 
-**UniCode** provides the ability to not only test students' theoretical knowledge of but also their technical abilities. Teachers have the ability to select from three different questions assesment types: 
+**UniCode** provides the ability to not only test students' theoretical knowledge but also their technical abilities. Teachers have the ability to select from three different questions assesment types: 
 
 - **_Output_**: Based on an excerpt of code provided by the teacher, the student is required to enter the expected output. (automated marking).
 - **_MCQ_**: Based on a written question and/or provided code, the student must select the best answer out of up to 4 possible options. (automated marking)
