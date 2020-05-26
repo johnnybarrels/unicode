@@ -18,13 +18,20 @@
 
 ## Table of Contents
 
-- [Motivation](#motivation)
-- [Description](#description)
-- [Design Process](#design-process) 
-- [How to Install from localhost](#how-to-install-from-localhost)
-- [How to Use](#how-to-use)
-- [How to Test](#how-to-test-unicode)
-- [What is Next](#what-is-next)
+- [**Development Team:**](#development-team)
+- [Table of Contents](#table-of-contents)
+- [**Motivation**](#motivation)
+- [**Description**](#description)
+- [**Design Process**](#design-process)
+- [**How to Install from localhost**](#how-to-install-from-localhost)
+- [**How to Use**](#how-to-use)
+  - [For Admin(Teachers) Profile:](#for-adminteachers-profile)
+  - [For Students Profile:](#for-students-profile)
+- [How to Test UniCode](#how-to-test-unicode)
+  - [**_unittest_**:](#unittest)
+  - [**_sytemtest_**:](#sytemtest)
+  - [systemtest will test the following:](#systemtest-will-test-the-following)
+- [**What's Next?**](#whats-next)
 - [License](#license)
 
 
@@ -34,30 +41,32 @@
 
 ## **Motivation**
 
-One of the biggest challenges faced by Computer Science and Data Science student is the ability to demostrate our coding skills by completing coding test using pen and paper, at the same time, not able to practice on a real life coding platform that provides a more realistic experience when preparing for exams and to improve our coding skills. 
+One of the biggest challenges faced by Computer Science, Data Science and Software Engineering students is the inability to demostrate our true coding ability during tests and exams, as we exhaustedly try to make sure the indentation on our hand-written linked list class defintion is correct. Instead of plain old pen and paper, why not allow students to be assessed on a more realistic platform, removing the hassle of the scribble, and providing some of the staple creature comforts like syntax highlighting? (and yes, we remembered to turn AutoComplete off)!
 
-For this reason we decided to develop **Unicode**, so that professors as well as student can improve the learning experience when it comes to learn how to code.
+For this reason we decided to develop **Unicode**, so that students and professors alike can enjoy the experience of learning and teaching how to code just a little bit more!
 
 <a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
 
 ## **Description**
 
-**Unicode** is an online quiz platform for educational institutions that allows admin/teachers users to create and evaluate coding related tests and users/students to take tests and see results. It is design to provide a friendly experience for studens and teachers without compromising the level of complexity required for developing our coding learning experience.
+**Unicode** is an online test/exam platform for educational institutions that allows administrator users (teachers) to create and evaluate coding related tests, and for users/students to sit these tests and see results. It is designed to provide a friendly experience for studens and teachers without compromising the level of complexity required for developing the coding learning experience.
 
-**Unicode** provides the ability to not only test our theorical knowledge of but also our technical abilities. Teachers/admin have the ability to select from three different questions assesment types: 
+**Unicode** provides the ability to not only test students' theorical knowledge of but also their technical abilities. Teachers have the ability to select from three different questions assesment types: 
 
-- **_Output_**: Based on a code function provided by the teacher, the student should answer the expected output (automated marking)
-- **_MCQ_**: Based on a writen question or provided code, the student must select the best answer out of 4 posible options(automated marking)
-- **_Write a code_**: Based on the instruction and descriptions provided by the teacherk the student can type down the corresping line of code to achieve the results requested( manual marking)
+- **_Output_**: Based on an excerpt of code provided by the teacher, the student is required to enter the expected output. (automated marking).
+- **_MCQ_**: Based on a written question and/or provided code, the student must select the best answer out of up to 4 possible options. (automated marking)
+- **_Code_**: This is where the students get to have the most fun. Based on the question description provided by the teacher, the student can use the code editor to write their class, function or method, or whatever has been asked of them! These questions are flagged for manual marking by the teacher (we hope to have an in-browser code interpreter in the future)!
 
-Another important functionality of **Unicode** is the ability of the admin to organize create tests by course and assign students to different courses. Also, the admin can decide when to enble test to be live(ready to take) for all students enroll in the course.
+Another important functionality of **Unicode** is the ability of the teacher to organise all of their tests and students into their respective courses, choosing which tests to display to students and when.
 
 
 <a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
 
 ## **Design Process**
 
-We decided to use MVC(model view controller) Arquitecture for our project. The *model* refers to an object referencing an entity in a database, the *view* is how that object is presented to the user and the *controller* is a linking class that builds the model from the database, prepares the view based on the model, and the updates and saves the models back to the database.
+Unicode is built using the MVC (model view controller) architecture. The *model* refers to an object referencing an entity in a database, the *view* is how that object is presented to the user, and the *controller* is a linking class that builds the model from the database, prepares the view based on the model, displays it to the user, and takes user input and adjusts the model and database accordingly.
+
+The user stories developed were:
 
 | # | User | User Story | Story Point |
 | --- | :---: | --- | :---: |
@@ -79,6 +88,7 @@ We decided to use MVC(model view controller) Arquitecture for our project. The *
 
 <a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
 
+And so the corresponding views were:
 | User | View |
 | :---: | :--- | 
 | `All` | Login | 
@@ -107,7 +117,7 @@ We decided to use MVC(model view controller) Arquitecture for our project. The *
 <a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
 
 
-- **_Color pallets_**
+- **_Color palettes_**
 <p>
   <img src="https://raw.githubusercontent.com/johnnybarrels/agile-proj2/master/design/Color_Palette.png?token=ANBLRDSBFD5S4ITZ3B7XB3262JGD2"  width="500" height="400" title="FVCproductions" alt="color">
 </p>
@@ -127,20 +137,14 @@ We decided to use MVC(model view controller) Arquitecture for our project. The *
 ## **How to Install from localhost**
 
 <details>
-  <summary markdown="span">Instructions for installation in localhost, click me to expand</summary>
+  <summary markdown="span">Instructions for installation in localhost (click me to expand) </summary>
 
-1. Clone repository using `https://github.com/johnnybarrels/agile-proj2.git`
-
-```shell
-$ git clone https://github.com/johnnybarrels/agile-proj2.git
-```
-
-2. Change working directory to agile-proj2:
+1. Unzip agile-proj2.zip and cd to directory:
 ```
 $ cd agile-proj2
 ```
 
-3. Create virtual enviroment and activate venv:
+2. Create virtual enviroment and activate venv:
 
 ```shell
 $ python -m venv venv
@@ -157,43 +161,33 @@ $ python3 -m venv venv
 $ source venv/bin/activate
 ```
 
-2. Install requirements:
+3. Install requirements:
 
 ```shell
 $ pip install -r requirements.txt
 ```
 
-3. Make sure you are on the correct working directory for the app:
+4. Change to the app development directory:
 
 ```shell
 $ cd app-dev
 ```
 
-3. Launch Database: 
-
-```shell
-$ flask db init
-$ flask db migrate -m ' ' 
-$ flask db upgrade
-```
-
-4. Populate Database:
-  - We have created python function to automtically populate the database (use flask shell to access python on terminal)
-  ```shell
-  $ flask shell
-  ```
-  - Import the function and execute
-  
-  ```python
-purge() 
-exit()
-  ```
-  
-5. launch app:
+5. Launch Flask server:
 
 ```shell
 $ flask run
 ```
+
+Note: for whatever reason, the required package `python-dotenv` can play up straight after installation. If you receive an ImportError from this package after running `flask run`, do the following:
+```shell
+$ cd ..
+$ deactivate
+$ source venv/bin/activate
+$ cd app-dev
+$ flask run
+```
+This should resolve the issue!
 
 </details>
 
@@ -206,7 +200,11 @@ $ flask run
   <summary markdown="span">Instructions for admin, click me to expand</summary>
   
   - *_Login_*: 
-    - Fill up Login form using email and password
+    - Fill out Login form using one of the provided administrator accounts:
+      - tim@french.com
+      - tom@smoker.com
+      - haolin@wu.com
+    - The password for each of these accounts is simply: password
     - Click `Login`
     
   - *_Create a New Course_*: 
@@ -223,90 +221,90 @@ $ flask run
     - Click on the new created test
       - (Optional) Click on dropdown to rename, delete or edit test
     - Click on`Edit Test`
-    - Select the type of questions (*Output, MCQ or Write a code*)
-    - Type the Question on the `Description` field (for the write a code type of questions use the code field to typer your coding question)
-    - Type `Solution`
-    - Type the `Allocated mark` for the question
-    - Click `Save` (or `Clear` to restart the questions)
-    - Once finished, click `Return`
-    - Once finishing creating the questions, click the course name on the left panel
-    - Click `Not Live` to make sure test live
+    - Select the type of questions (*Output, MCQ or Code*)
+    - Type the Question on the `Description` field
+    - For "Output" and "MCQ" questions, use the code editor on the right to provide the code you would like the students to see
+    - For "Code" questions, leave this field blank for students to fill out
+    - Enter the `Solution` (for "Output" and "MCQ" questions)
+    - Enter the `Allocated mark` for the question
+    - Click `Save` (or `Clear` to restart the question)
+    - Once finished, click `Return ->`
+    - If you would like for your students to be able to sit a test, click on the course name in the sidenav, find the test and click the `Live` toggle button (which will by default show `Not Live`)
     
   - *_Add Students to Course_*:
       - Once on the Course View, Click `Manage students`
-      - Type the Student number
+      - Enter the email of the student you wish to add
+      - Note: at the current stage of development, only students who have already registered to UniCode can be added to a course
 
-  - *_Delete Students from Course_*:
+  - *_Remove Students from Course_*:
       - Once on the Course View, Click `Manage students`
       - Look for the student email and click "x"
       
   - *_Marking Test_*:
       - Click on the test you want to mark within the course
-      - Here you can see how many students have taken the test and some statistics, including the mark of the automatic marked questions
-      - At the bottom click `View test`
-      - Click on each questions to add manual marks and a/or adjust marks.
-      - Click on `Submit and give feedback` add feedback to student and complete the marking
-
-  - *_Publish Test Results_*:
-      - 
+      - If the test has student submissions, you will now see some test statistics, including the mark of the automatic marked questions
+      - In the "Mark Tests" section toward the bottom. you will see all the students who have submitted the test
+      - Students whose test still requires marking display a red `Mark Test` button, click this to mark the test
+      - Again, questions that require manual marking ("Code" questions) will display in red
+      - Optionally, view the other questions as well, that have been automatically marked. Feel free to adjust the automatically assigned marks
+      - When finished, click on `Submit and give feedback ->` to submit the result and optionally provide the student some feedback
       
 </details>
 
 ### For Students Profile:
 
-<details>
-  <summary markdown="span">Instructions for students, click me to expand</summary>
+Instructions for students, click me to expand
   
-  - *_Registration_* (for new users only): 
-    - Click on `Sign up`
-    - Fill up registration form 
+  - *_Registration_*: 
+    - At the bottom of the Login form on the Home page, click `Sign up`
+    - Fill out the registration form with your student email
     - Click `Register`
     
   - *_Login_*: 
-    - Fill up Login form using email and password
+    - Fill out Login form using email and password
     - Click `Login`
 
   - *_Taking Test_*: 
     - Click on Course
     - Select the test to take
-    - Once test completed Select `Submit test`
+    - Fill out the answer for each question
+    - Once you are happy with your answers, click the red `Submit test` and confirm
     
   - *_View Results_*: 
-    - Click on submitted test and see result at the bottom of the page
+    - Click on a test you have submitted (which will display a red 'Submitted' banner)
+    - View your result, some summary statistics for the test, and the teacher's feedback (if any)
     
-</details>
 
 <a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
 
-## How to Test Unicode
+## How to Test UniCode
 
-⚠️ First make sure you are in the `app-dev`.
+⚠️ Firstly, ensure you are in the `app-dev` folder:
+```shell
+$ cd app-dev
+```
 
 ### **_unittest_**:
 
-For testing password hashing and test creation.
-
-  - To use just type on the terminal the following command:
+Tests:  
+  - Password hashing: `test_set_pw` and `test_set_pw2`
+  - Main page login: `test_main_page`
+  - Registration module `test_users_can_register`
+  - Test that only registered users can login `test_users_cannot_unless_registered`
+  - Test that there are not duplicate registration `test_duplicate_user_registration_throws_error`  
+  
+To run these tests, simply run:
   
 ```shell
-python -m Tests.unittest
+$ python -m Tests.unittest
 ```
-### unittes will test the following:
-  
-  - Password hashing `test_set_pw` and `test_set_pw2`
-  - Main page login `test_main_page`
-  - Test the registration module `test_users_can_register`
-  - Test that only registered users can login `test_users_cannot_unless_registered`
-  - Test that there are not duplicate registration `test_duplicate_user_registration_throws_error`
+in your terminal.
 
 ### **_sytemtest_**:
 
-⚠️ Please make sure to run system test last and to manually change the Config object to `TestConfing` in the `__init__.py` overwrite existing to avoid ovewriting existing database.
+⚠️ Please make sure to run system test last.
 
-Using selenium to test our app with firefox web browser
- - Test for student login
- - Test for admin login
- - Test for student registration and login
+To run the systemtests, in `__init__.py`, manually change the Config object to `TestConfing`. This line has been commented for you. This prevents the test from overwriting the existing database.
  
 ```shell
 python -m Tests.system
@@ -314,28 +312,28 @@ python -m Tests.system
 
 ### systemtest will test the following:
 
-  - Login page for students `test_login_user`
-  - Login page for admin `test_login_admin`
-  - Test complete new user registration system `test_user_registration`
+  - Login page for students: `test_login_user`
+  - Login page for admin: `test_login_admin`
+  - New user registration and login: `test_user_registration`
 
 
 <a name="bottom" href="https://github.com/johnnybarrels/agile-proj2#logo"><img align="right" border="0" src="https://raw.githubusercontent.com/CCOSTAN/Home-AssistantConfig/master/config/www/custom_ui/floorplan/images/branding/up_arrow.png" width="22" ></a>
  
-## **What is Next**
+## **What's Next?**
 
-We believe that UniCode have inmense potential to keep growing to become an even more robust educational tool for students and teachers. We have identify the following potential enhancement that could be impletmented in the future:
+We believe that **UniCode** has immense potential to keep growing to become an even more robust educational tool for students and teachers. As all developers know, development never ends, and as such here's a list of where we're at and what the next steps might be:
 
-  - Include automated code validation to assist students to validate code syntax before submission
- 
-  - Enable integration with university database to promote customize solutions based on University requirements for each students
-  
-  - Enable sending automatic results to student via email
-  
-  - Add the ability of fuzzy matching for questions such as what is the outcome of the code.
-  
-  - Ability to classify and cluster questions and tests's difficulty levels independently
-  
-  - Implement advance statistical techniques analyse the results of the test on different difficulties tier to maximise the learning evolution
+  - Increased language support (currently only Python)
+  - Allow multiple teachers to administrate the same course
+  - Fuzzy matching for 'Output' question submissions, potentially raising a 'needs marking' flag if a provided answer is close to the given solution
+  - Allow teachers to save questions to use again later, and potentially share with other teachers!
+  - Keeping students up to date with their marks and tests via email
+  - Integration with educational institution's database
+  - And the big goal for now: _get code running in the browser !!!_
+
+<br>
+
+**UniCode**: Because nobody likes writing code with a pen and pad
   
 
 ## License
