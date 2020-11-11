@@ -1,8 +1,6 @@
 <p align="center">
-  <img name="logo" src="design/logos/logo.png"  width="300" height="200" title="FVCproductions" alt="Unicode_logo">
+  <img name="logo" src="design/logos/logo.png"  width="300" height="200" alt="Unicode_logo">
 </p>
-
----
 
 # UniCode
 
