@@ -1,5 +1,4 @@
 from app import app, db
-# from werkzeug.urls import url_parse
 from flask import request
 from app.models import User, Course, Test, Question, Result, enrolments, Submission
 from app.forms import LoginForm, RegistrationForm, NewTestForm, NewCourseForm, RenameTestForm, QuestionForm, QuestionSubmissionForm, AddStudentToCourseForm, MarkTestForm, FeedbackForm
@@ -12,7 +11,7 @@ class UserController():
     def login():
 
         form = LoginForm()
-        if form.validate_on_submit():  # POST request (user clicks on Login button)
+        if form.validate_on_submit():
             # Check that user is in db and that password is correct
             user = User.query.filter_by(email=form.email.data).first()
             if user is None or not user.check_password(form.password.data):
@@ -21,17 +20,9 @@ class UserController():
 
             login_user(user)
 
-            # Handling the case where a user who is not logged in requests a specific page
-            # next_page = request.args.get('next')
-            # if not next_page or url_parse(next_page).netloc != '':
-            #     return redirect(url_for('login'))
-
-            # return redirect(next_page)
-
             if user.is_admin:
                 return redirect(url_for('admin_portal'))
             else:
-                # return render_template('student.html')
                 return redirect(url_for('student_portal'))
 
         # for GET request (browser loading page)
@@ -64,7 +55,6 @@ class UserController():
 
         else:
             live_tests = [test for test in tests if test.is_live]
-
             return render_template('student-course.html', course=course, tests=live_tests)
 
     def logout():
@@ -98,8 +88,6 @@ class UserController():
 
             return redirect(url_for('login'))
 
-        # for error, message in form.errors.items():
-        #     flash(message)
         return render_template('register.html', title="Register", form=form)
 
 
@@ -107,7 +95,6 @@ class CourseController():
 
     def aggregate_view():
         courses = Course.query.all()
-        tests = Test.query.all()
         return render_template('general-dashboard.html', courses=courses)
 
     def create_test(course_id):
@@ -124,7 +111,6 @@ class CourseController():
 
             return redirect(url_for('course_view', course_id=course.id))
 
-        # TODO: proper input validation - diff return values? flash something? done on frontend?
         return redirect(url_for('course_view', course_id=course.id))
 
     def create_course():
@@ -169,15 +155,6 @@ class CourseController():
 
         return redirect(url_for('course_view', course_id=course_id))
 
-    def edit_course():
-        pass
-
-    def delete_course():
-        pass
-
-    def rename_course():
-        pass
-
 
 class TestController():
 
@@ -197,7 +174,6 @@ class TestController():
         course = Course.query.filter_by(id=course_id).first()
         test = Test.query.filter_by(id=test_id).first()
         users = course.get_users()
-        # submissions = test.get_all_submissions()
 
         max_mark = test.get_max_mark()
         min_mark = test.get_min_mark()
@@ -223,11 +199,12 @@ class TestController():
             student_result = test.get_student_result(current_user.id)
             aggregates = []
             if student_result:
-                student_perc = student_result.score / test.total_marks() 
+                student_perc = round(student_result.score / test.total_marks() * 100, 2)
                 aggregates = [student_perc,
                               test_avg, max_mark, min_mark]
 
-            return render_template('student-test-view.html', aggregates=aggregates,
+            return render_template('student-test-view.html',
+                                   aggregates=aggregates,
                                    test=test, course=course,
                                    student_result=student_result)
 
@@ -319,8 +296,6 @@ class TestController():
             db.session.add(q)
             db.session.commit()
 
-        # for field, error in form.errors.items():
-        #     print(f'~~~~~~~~ {field}: {error}')
         return redirect(url_for('edit_test_view', course_id=course_id, test_id=test_id))
 
     def take_test(course_id, test_id):
@@ -335,7 +310,7 @@ class TestController():
     def new_submission(course_id, test_id, question_id):
         q = Question.query.filter_by(id=question_id).first()
         sub = q.get_user_submission(current_user.id)
-        if not sub:  # if existing submission exists
+        if not sub:  # if no existing submission exists
             sub = Submission()
             sub.user_id = current_user.id
             sub.test_id = test_id
@@ -408,6 +383,8 @@ class TestController():
             submission.score = form.mark.data
             submission.needs_marking = False
 
+            # incrementally storing scores in case a teacher
+            # doesn't finish marking a student's test
             result.score += score_diff
 
             db.session.commit()

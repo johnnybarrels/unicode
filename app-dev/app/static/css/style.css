@@ -198,7 +198,7 @@ a.nav-child {
   height: 92%;
   z-index: 1;
   background-color: var(--unicode-pale);
-  transition: background-color 0.5s linear;
+  /* transition: background-color 0.5s linear; */
 }
 
 /* New course button for admin landing page */
@@ -217,7 +217,7 @@ a.nav-child {
   background-color: #FFFFFF;
   margin: 0 2.5%;
   position: relative;
-  transition: background-color 0.5s linear;
+  /* transition: background-color 0.5s linear; */
   padding: 15px;
 }
 

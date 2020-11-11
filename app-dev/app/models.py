@@ -25,7 +25,6 @@ class User(UserMixin, db.Model):
     first_name = db.Column(db.String(32))
     last_name = db.Column(db.String(32))
     is_admin = db.Column(db.Boolean, nullable=False, default=False)
-    # student_id = db.Column(db.Integer, index=True)
     courses = db.relationship('Course', secondary=enrolments, lazy='subquery',
                               backref=db.backref('users', lazy=True))
 
@@ -106,7 +105,6 @@ class Test(db.Model):
             return 0
 
     def get_average_mark(self):
-        # TODO: EVENTUALLY EXTEND THIS TO WORK WITH RESULTS RATHER THAN SUBMISSIONS
         all_res = self.get_test_results()
         total = 0
 
@@ -117,7 +115,6 @@ class Test(db.Model):
         return round((total / max(len(all_res), 1)) / self.total_marks() * 100, 2)
 
     def get_max_mark(self):
-        # TODO: EVENTUALLY EXTEND THIS TO WORK WITH RESULTS RATHER THAN SUBMISSIONS
         all_res = self.get_test_results()
         all_res.sort(key=lambda r: r.score, reverse=True)
 
@@ -140,8 +137,7 @@ class Test(db.Model):
 
     def get_submitted_users(self):
         return User.query.join(Submission).join(Test).filter(
-            Submission.test_id == self.id
-        ).all()
+            Submission.test_id == self.id).all()
 
     def get_user_submissions(self, user_id):
         return Submission.query.join(Test).filter(

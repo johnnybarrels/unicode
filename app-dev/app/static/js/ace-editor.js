@@ -49,14 +49,3 @@ $('.code-editor').each(function () {
         });
     }
 });
-
-    // Old ACE method:
-    // Works on anything with class="editor"
-
-    // var editor;
-    // $('.editor').each(function (index) {
-    //     editor = ace.edit(this);
-    //     editor.setTheme("ace/theme/tomorrow_night_eighties");
-    //     editor.session.setMode("ace/mode/python");
-    // });
-

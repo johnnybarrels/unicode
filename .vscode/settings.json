@@ -1,7 +1,10 @@
 {
-    "python.pythonPath": "venv/bin/python3",
+    "python.pythonPath": "/Users/jb/Coding/UniCode/unicode/venv/bin/python3",
     "python.linting.enabled": true,
     "python.autoComplete.extraPaths": [
         "./app-dev"
-    ]
+    ],
+    "python.linting.pylintEnabled": false,
+    "python.linting.flake8Enabled": false,
+    "python.linting.pycodestyleEnabled": true
 }

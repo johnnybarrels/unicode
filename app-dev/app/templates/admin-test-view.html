@@ -82,14 +82,13 @@
         </tr>
       </thead>
       <tbody>
-        <!-- add functionality to populate with students in course -->
         {% for student in test.get_submitted_users() %}
         <tr>
           <td>{{ student.full_name() }}</td>
           <td>
             <a href="{{ url_for('mark_test', course_id=course.id, test_id=test.id, student_id=student.id) }}">
               {% if student.get_result(test.id).needs_marking %}
-              <button id="marked-btn" class="btn delete-btn">View test</button>
+              <button id="marked-btn" class="btn delete-btn">Mark test</button>
               {% else %}
               <button class="btn purple-btn">View test</button>
               {% endif %}

@@ -1,8 +1,8 @@
 # VS Code stuff
-# .vscode/
+.vscode/
 
 # db stuff
-app-dev/migrations/
+# app-dev/migrations/
 app-dev/db/unicode.db
 
 # macOS stuff
@@ -12,10 +12,6 @@ app-dev/db/unicode.db
 __pycache__/
 *.py[cod]
 *$py.class
-
-#stuff
-app-dev/migrations/
-app-dev/db/unicode.db
 
 # C extensions
 *.so

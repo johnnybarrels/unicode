@@ -7,4 +7,4 @@ from app.db_tools import purge_and_load
 def make_shell_context():
     return {'db': db, 'User': User, 'Course': Course,
             'Test': Test, 'Question': Question, 'Submission': Submission, 'Result': Result,
-            'purge': purge_and_load}
+            'purge_and_load': purge_and_load}
