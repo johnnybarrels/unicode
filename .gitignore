@@ -2,7 +2,7 @@
 .vscode/
 
 # db stuff
-# app-dev/migrations/
+app-dev/migrations/
 app-dev/db/unicode.db
 
 # macOS stuff
