@@ -1,1 +1,1 @@
-web: gunicorn run app-dev/app
+web: cd app-dev; gunicorn unicode:app
