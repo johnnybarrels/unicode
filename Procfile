@@ -1,1 +1,1 @@
-web: cd app-dev; python app/db_create.py; gunicorn unicode:app
+web: cd app-dev; flask db init; gunicorn unicode:app
