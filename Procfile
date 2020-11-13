@@ -1,1 +1,1 @@
-web: cd app-dev; flask db upgrade; gunicorn unicode:app
+web: cd app-dev; gunicorn unicode:app
